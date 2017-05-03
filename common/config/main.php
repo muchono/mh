@@ -1,5 +1,5 @@
 <?php
-return [
+$config = [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
         'cache' => [
@@ -7,3 +7,12 @@ return [
         ],
     ],
 ];
+
+if (YII_ENV_DEV) {
+	$config['bootstrap'][] = 'gii';
+	$config['modules']['gii'] = [
+		'class' => 'yii\gii\Module',
+	];
+}
+
+return $config;
