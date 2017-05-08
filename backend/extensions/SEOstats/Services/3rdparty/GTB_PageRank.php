@@ -534,27 +534,57 @@ class GTB_Request extends GTB_PageRank
    * @return    string      Returns string, containing the curl result.
    */
   private static function GetWithCurl($url) {
-      $ua = \SEOstats\Helper\HttpRequest::getUserAgent();
-      $curlopt_proxy = \SEOstats\Helper\HttpRequest::getProxy();
-      $curlopt_proxyuserpwd = \SEOstats\Helper\HttpRequest::getProxyUserPwd();
-
-	  $ch  = curl_init($url);
-      curl_setopt($ch,CURLOPT_USERAGENT,$ua);
-      if($curlopt_proxy) {
-          curl_setopt($ch, CURLOPT_PROXY, $curlopt_proxy);
-      }
-      if($curlopt_proxyuserpwd) {
-          curl_setopt($ch, CURLOPT_PROXYUSERPWD, $curlopt_proxyuserpwd);
-      }
-      curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
-      curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,5);
-      curl_setopt($ch,CURLOPT_FOLLOWLOCATION,1);
-      curl_setopt($ch,CURLOPT_MAXREDIRS,2);
-      curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
-      $str = curl_exec($ch);
-      curl_close($ch);
-      return $str;
+    
+    $ch  = curl_init($url);  
+    $str =  self::CurlRedirectExec($ch, $redirects);
+    curl_close($ch);
+    return $str;
+    /*
+	
+	curl_setopt($ch,CURLOPT_USERAGENT,'' );
+	curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+	curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,5);
+	curl_setopt($ch,CURLOPT_FOLLOWLOCATION,1);
+	curl_setopt($ch,CURLOPT_MAXREDIRS,2);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	$str = curl_exec($ch);
+	curl_close($ch);
+	return $str;*/
   }
+  
+  private static function CurlRedirectExec($ch, &$redirects, $curlopt_header = false) {
+        curl_setopt($ch, CURLOPT_HEADER, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_USERAGENT,'' );
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT,5);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        
+        $data = curl_exec($ch);
+
+        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        if ($http_code == 301 || $http_code == 302) {
+            list($header) = explode("\r\n\r\n", $data, 2);
+
+            $matches = array();
+            preg_match("/(Location:|URI:)[^(\n)]*/", $header, $matches);
+            $url = trim(str_replace($matches[1], "", $matches[0]));
+
+            $url_parsed = parse_url($url);
+            if (isset($url_parsed)) {
+                curl_setopt($ch, CURLOPT_URL, $url);
+                $redirects++;
+                return self::CurlRedirectExec($ch, $redirects, $curlopt_header);
+            }
+        }
+
+        if ($curlopt_header) {
+            return $data;
+        } else {
+            list(, $body) = explode("\r\n\r\n", $data, 2);
+            return $body;
+        }
+    }  
+  
 }
 /** GTB_Exception     GTB_PageRank exception class.
  *  @package          GTB_PageRank

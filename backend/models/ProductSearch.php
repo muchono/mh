@@ -18,7 +18,7 @@ class ProductSearch extends Product
     public function rules()
     {
         return [
-            [['id', 'status', 'orders'], 'integer'],
+            [['id', 'status', 'order'], 'integer'],
             [['title'], 'safe'],
             [['price'], 'number'],
         ];
@@ -48,6 +48,7 @@ class ProductSearch extends Product
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=> ['defaultOrder' => ['order'=>SORT_ASC, 'id'=>SORT_ASC]],
         ]);
 
         $this->load($params);
@@ -63,7 +64,6 @@ class ProductSearch extends Product
             'id' => $this->id,
             'price' => $this->price,
             'status' => $this->status,
-            'orders' => $this->orders,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title]);

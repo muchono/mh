@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ProductSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -21,16 +22,32 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'rowOptions' => function ($model, $key, $index, $grid) {
+            return ['data-sortable-id' => $model->id];
+        },
+               
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
+            ['class' => \kotchuprik\sortable\grid\Column::className()],
             'title',
             'price',
-            'status',
-            'orders',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'attribute'=>'status',
+                'value' => function ($data) {
+                    return $data->getStatusName();
+                },
+                'filter' => $searchModel::$statuses,
+            ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+            ],
+        ],
+                        
+        'options' => [
+            'data' => [
+                'sortable-widget' => 1,
+                'sortable-url' => \yii\helpers\Url::toRoute(['sorting']),
+            ]
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\ProductHref;
+use backend\models\ProductHrefCategory;
 
 /**
- * ProductHrefSearch represents the model behind the search form about `backend\models\ProductHref`.
+ * ProductHrefCategorySearch represents the model behind the search form about `backend\models\ProductHrefCategory`.
  */
-class ProductHrefSearch extends ProductHref
+class ProductHrefCategorySearch extends ProductHrefCategory
 {
     /**
      * @inheritdoc
@@ -18,9 +18,8 @@ class ProductHrefSearch extends ProductHref
     public function rules()
     {
         return [
-            [['id', 'product_id', 'status', 'alexa_rank'], 'integer'],
-            [['url', 'about'], 'safe'],
-            [['da_rank'], 'number'],
+            [['id'], 'integer'],
+            [['title'], 'safe'],
         ];
     }
 
@@ -42,12 +41,13 @@ class ProductHrefSearch extends ProductHref
      */
     public function search($params)
     {
-        $query = ProductHref::find();
+        $query = ProductHrefCategory::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=> ['defaultOrder' => ['title'=>SORT_ASC]],
         ]);
 
         $this->load($params);
@@ -61,15 +61,15 @@ class ProductHrefSearch extends ProductHref
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'product_id' => $this->product_id,
-            'status' => $this->status,
-            'alexa_rank' => $this->alexa_rank,
-            'da_rank' => $this->da_rank,
         ]);
 
-        $query->andFilterWhere(['like', 'url', $this->url])
-            ->andFilterWhere(['like', 'about', $this->about]);
+        $query->andFilterWhere(['like', 'title', $this->title]);
 
         return $dataProvider;
+    }
+    
+    static public function getArray()
+    {
+        return yii\helpers\ArrayHelper::map(ProductHrefCategory::find()->select(['id','title'])->asArray()->all(), 'id', 'title');
     }
 }

@@ -3,18 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Product;
-use backend\models\ProductSearch;
+use backend\models\ProductHrefCategory;
+use backend\models\ProductHrefCategorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-use himiklab\sortablegrid\SortableGridAction;
-
 /**
- * ProductController implements the CRUD actions for Product model.
+ * ProductHrefCategoryController implements the CRUD actions for ProductHrefCategory model.
  */
-class ProductController extends Controller
+class ProductHrefCategoryController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,37 +28,23 @@ class ProductController extends Controller
             ],
         ];
     }
-    
-    /**
-     * @inheritdoc
-     */    
-    public function actions()
-    {
-        return [
-            'sorting' => [
-                'class' => \kotchuprik\sortable\actions\Sorting::className(),
-                'query' => Product::find(),
-            ],
-        ];
-    }
 
     /**
-     * Lists all Product models.
+     * Lists all ProductHrefCategory models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ProductSearch();
+        $searchModel = new ProductHrefCategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single Product model.
+     * Displays a single ProductHrefCategory model.
      * @param string $id
      * @return mixed
      */
@@ -72,13 +56,13 @@ class ProductController extends Controller
     }
 
     /**
-     * Creates a new Product model.
+     * Creates a new ProductHrefCategory model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Product();
+        $model = new ProductHrefCategory();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'id' => $model->id]);
@@ -90,7 +74,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Updates an existing Product model.
+     * Updates an existing ProductHrefCategory model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
@@ -109,7 +93,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Deletes an existing Product model.
+     * Deletes an existing ProductHrefCategory model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
@@ -122,15 +106,15 @@ class ProductController extends Controller
     }
 
     /**
-     * Finds the Product model based on its primary key value.
+     * Finds the ProductHrefCategory model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return Product the loaded model
+     * @return ProductHrefCategory the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Product::findOne($id)) !== null) {
+        if (($model = ProductHrefCategory::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

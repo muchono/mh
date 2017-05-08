@@ -7,7 +7,8 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\ProductHrefSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Product Hrefs';
+$this->title = 'Product Links';
+$this->params['breadcrumbs'][] = ['label' => $searchModel->getProduct()->title, 'url' => ['product/update', 'id' => $searchModel->getProduct()->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-href-index">
@@ -16,16 +17,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Product Href', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Product Link', ['create', 'product_id' => $searchModel->getProduct()->id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Link Categories', ['product-href-category/index'], ['class' => 'btn btn-success', 'target' => '_blank']) ?>
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'product_id',
             'title',
             'url:url',
             'status',
@@ -35,7 +34,10 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'da_rank',
             // 'about:ntext',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+            ],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

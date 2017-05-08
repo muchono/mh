@@ -1,24 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.4.15.5
--- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1:3306
--- Generation Time: May 04, 2017 at 09:54 PM
--- Server version: 5.5.48
--- PHP Version: 5.4.45
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
---
--- Database: `mh`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `migration`
---
 
 CREATE TABLE IF NOT EXISTS `migration` (
   `version` varchar(180) NOT NULL,
@@ -47,12 +26,6 @@ CREATE TABLE IF NOT EXISTS `product` (
   `orders` int(11) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `product`
---
-
-INSERT INTO `product` (`id`, `title`, `price`, `status`, `orders`) VALUES
-(1, 'Title', 11, 11, 324);
 
 -- --------------------------------------------------------
 
@@ -82,14 +55,14 @@ CREATE TABLE IF NOT EXISTS `product_guide` (
 CREATE TABLE IF NOT EXISTS `product_href` (
   `id` int(11) unsigned NOT NULL,
   `product_id` int(11) unsigned NOT NULL,
-  `title` varchar(255) NOT NULL,
+  `category_id` int(11) unsigned NOT NULL,
   `url` varchar(255) NOT NULL,
   `status` int(2) unsigned NOT NULL DEFAULT '0',
-  `traffic` bigint(20) NOT NULL DEFAULT '0',
-  `google_pr` int(2) unsigned NOT NULL DEFAULT '0',
   `alexa_rank` int(11) unsigned NOT NULL DEFAULT '0',
   `da_rank` float NOT NULL DEFAULT '0',
-  `about` text
+  `about` text,
+  `example_url` varchar(255) NOT NULL,
+  `type_links` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -120,6 +93,19 @@ INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_res
 --
 -- Indexes for dumped tables
 --
+CREATE TABLE IF NOT EXISTS `product_href_category` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `product_href_to_category` (
+  `product_id` int(11) unsigned NOT NULL,
+  `category_id` int(11) unsigned NOT NULL,
+  KEY `product_id` (`product_id`),
+  KEY `category_id` (`category_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 --
 -- Indexes for table `migration`

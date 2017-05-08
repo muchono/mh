@@ -12,7 +12,6 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . '../extensions/SEOstats' . DIRECTOR
  *
  * @property string $id
  * @property string $product_id
- * @property string $title
  * @property string $url
  * @property string $status
  * @property string $traffic
@@ -23,6 +22,36 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . '../extensions/SEOstats' . DIRECTOR
  */
 class ProductHref extends \yii\db\ActiveRecord
 {
+    /**
+     *
+     * @string Categories
+     */
+    public $categories;
+    
+    /**
+     * statuses values
+     */
+    public static $link_types = array(
+        'follow' => 'Follow',
+        'nofollow' => 'Nofollow',
+        'redirect' => 'Redirect',
+        'nolinks' => 'No Links',
+    );
+    
+    /**
+     * statuses values
+     */
+    public static $statuses = array(
+        0 => 'Disabled',
+        1 => 'Active',
+    );
+    
+    /**
+     * Base Product
+     * @var Product 
+     */
+    private $product = null;
+    
     /**
      * @inheritdoc
      */
@@ -37,11 +66,12 @@ class ProductHref extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'title', 'url'], 'required'],
-            [['product_id', 'status', 'traffic', 'google_pr', 'alexa_rank'], 'integer'],
+            [['product_id', 'url', 'example_url','type_links','categories'], 'required'],
+            [['product_id', 'status', 'alexa_rank'], 'integer'],
             [['da_rank'], 'number'],
             [['about'], 'string'],
             [['title', 'url'], 'string', 'max' => 255],
+            [['example_url', 'url'], 'url'],
         ];
     }
 
@@ -53,17 +83,36 @@ class ProductHref extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'product_id' => 'Product ID',
-            'title' => 'Title',
-            'url' => 'Url',
+            'categories' => 'Categories',
+            'url' => 'URL',
+            'example_url' => 'Example URL',
             'status' => 'Status',
-            'traffic' => 'Traffic',
-            'google_pr' => 'Google Pr',
-            'alexa_rank' => 'Alexa Rank',
-            'da_rank' => 'Da Rank',
-            'about' => 'About',
+            'alexa_rank' => 'Alexa',
+            'da_rank' => 'DA',
+            'about' => 'Details',
+            'type_links' => 'Type Links',
         ];
     }
-	
+    
+    /**
+     * Get categories
+     * @return array
+     */
+    public function getCategories()
+    {
+        return $this->hasMany(ProductHrefCategory::className(), ['id' => 'category_id'])
+                    ->viaTable('product_href_to_category', ['product_id' => 'id']);
+    }
+    
+    /**
+     * Get current product
+     * @return Product
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+    
 	public function getStats()
 	{
             $seostats = new \SEOstats\SEOstats;
@@ -72,6 +121,17 @@ class ProductHref extends \yii\db\ActiveRecord
             $this->alexa_rank = \SEOstats\Services\Alexa::getGlobalRank();
             $this->da_rank = round(\SEOstats\Services\Mozscape::getDomainAuthority(), 2);
             
-            print_r($this);
+            print $this->alexa_rank;
+            print '<br/>';
+            print $this->da_rank;
+            //print_r($this);
 	}
+    
+    /**
+     * Set product
+     */
+    public function setProduct(Product $product)
+    {
+        $this->product = $product;
+    }
 }

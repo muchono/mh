@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
+use backend\models\Product;
 use backend\models\ProductHref;
 use backend\models\ProductHrefSearch;
 use yii\web\Controller;
@@ -14,6 +15,29 @@ use yii\filters\VerbFilter;
  */
 class ProductHrefController extends Controller
 {
+    /**
+     * Base Product
+     * @var Product 
+     */
+    private $product = null;
+    /**
+     * @inheritdoc
+     */
+    public function beforeAction($action)
+    {
+        $r = true;
+        if (in_array($action->id, array('index', 'create'))
+                && (empty(Yii::$app->request->queryParams['product_id'])
+                || (($this->product = Product::findOne(Yii::$app->request->queryParams['product_id'])) 
+                        === null))) {
+            
+             $this->redirect(['product/index']);
+             $r = false;
+        }
+        
+        return $r ? parent::beforeAction($action) : $r;
+    }
+    
     /**
      * @inheritdoc
      */
@@ -36,10 +60,9 @@ class ProductHrefController extends Controller
     public function actionIndex()
     {
         $searchModel = new ProductHrefSearch();
+        $searchModel->setProduct($this->product);
+        
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $searchModel->getStats();
-        print('OK');
-        exit;
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -66,10 +89,12 @@ class ProductHrefController extends Controller
     public function actionCreate()
     {
         $model = new ProductHref();
-
+        $model->setProduct($this->product);
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['update', 'id' => $model->id]);
         } else {
+            $model->status = 1;
             return $this->render('create', [
                 'model' => $model,
             ]);
@@ -108,6 +133,8 @@ class ProductHrefController extends Controller
         return $this->redirect(['index']);
     }
 
+
+    
     /**
      * Finds the ProductHref model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

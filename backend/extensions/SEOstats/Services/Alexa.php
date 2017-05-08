@@ -184,19 +184,12 @@ class Alexa extends SEOstats
             "//*[@id='traffic-rank-content']/div/span[2]/div[2]/span/span/div/strong",
         ));
 
-        $node3 = self::parseDomByXpaths($xpath, array(
-            "//*[@id='traffic-rank-content']/div/span[2]/div[2]/span/span/h4/a/@href",
-            "//*[@id='traffic-rank-content']/div/span[2]/div[2]/span/span/h4/strong/a/@href",
-        ));
-
         if (!is_null($node2) && $node2->item(0)) {
             $rank = self::retInt(strip_tags($node2->item(0)->nodeValue));
-            $country_code = str_replace("/topsites/countries/", "", $node3->item(0)->nodeValue);
             if ($node1->item(0) && 0 != $rank) {
                 return array(
                     'rank' => $rank,
                     'country' => $node1->item(0)->nodeValue,
-                    'country_code' => $country_code,
                 );
             }
         }
@@ -209,7 +202,7 @@ class Alexa extends SEOstats
         $xpath = self::_getXPath($url);
 
         $queryList = array(
-            "//section[@id='linksin-panel-content']/div/span/div/span",
+            "//section[@class='row-fluid panel-wrapper '][6]/section/div/span/div/span",
             "//*[@id='linksin_div']/section/div/div[1]/span"
         );
 

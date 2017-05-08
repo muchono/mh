@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use himiklab\sortablegrid\SortableGridBehavior;
 
 /**
  * This is the model class for table "product".
@@ -11,10 +12,18 @@ use Yii;
  * @property string $title
  * @property double $price
  * @property string $status
- * @property string $orders
+ * @property string $order
  */
 class Product extends \yii\db\ActiveRecord
 {
+    /**
+     * statuses values
+     */
+    public static $statuses = array(
+        0 => 'Disabled',
+        1 => 'Active',
+    );
+    
     /**
      * @inheritdoc
      */
@@ -31,7 +40,7 @@ class Product extends \yii\db\ActiveRecord
         return [
             [['title', 'price'], 'required'],
             [['price'], 'number'],
-            [['status', 'orders'], 'integer'],
+            [['status', 'order'], 'integer'],
             [['title'], 'string', 'max' => 255],
         ];
     }
@@ -46,7 +55,40 @@ class Product extends \yii\db\ActiveRecord
             'title' => 'Title',
             'price' => 'Price',
             'status' => 'Status',
-            'orders' => 'Orders',
+            'order' => 'Order',
+        ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        if ($insert) {
+            $this->status = 1;
+        }
+        return parent::beforeSave($insert);
+    }
+    
+    /**
+     * Get Status Name
+     * @return string
+     */
+    public function getStatusName()
+    {
+        return self::$statuses[$this->status];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'sortable' => [
+                'class' => \kotchuprik\sortable\behaviors\Sortable::className(),
+                'query' => self::find(),
+            ],
         ];
     }
 }

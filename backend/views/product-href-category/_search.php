@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\ProductSearch */
+/* @var $model backend\models\ProductHrefCategorySearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="product-search">
+<div class="product-href-category-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -18,12 +18,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'id') ?>
 
     <?= $form->field($model, 'title') ?>
-
-    <?= $form->field($model, 'price') ?>
-
-    <?= $form->field($model, 'status') ?>
-
-    <?= $form->field($model, 'order') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
