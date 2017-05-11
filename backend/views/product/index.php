@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        //'filterModel' => $searchModel,
         'rowOptions' => function ($model, $key, $index, $grid) {
             return ['data-sortable-id' => $model->id];
         },

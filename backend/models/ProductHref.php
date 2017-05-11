@@ -3,6 +3,10 @@
 namespace backend\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
+use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
+//use lhs\Yii2SaveRelationsBehavior\SaveRelationsTrait;
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . '../extensions/SEOstats' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
@@ -19,15 +23,11 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . '../extensions/SEOstats' . DIRECTOR
  * @property string $alexa_rank
  * @property double $da_rank
  * @property string $about
+ * @property string $example_url
+ * @property string $type_links
  */
 class ProductHref extends \yii\db\ActiveRecord
 {
-    /**
-     *
-     * @string Categories
-     */
-    public $categories;
-    
     /**
      * statuses values
      */
@@ -66,12 +66,13 @@ class ProductHref extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'url', 'example_url','type_links','categories'], 'required'],
+            [['product_id', 'url', 'example_url','type_links', 'categories'], 'required'],
             [['product_id', 'status', 'alexa_rank'], 'integer'],
             [['da_rank'], 'number'],
             [['about'], 'string'],
-            [['title', 'url'], 'string', 'max' => 255],
+            [[ 'url'], 'string', 'max' => 255],
             [['example_url', 'url'], 'url'],
+            [['categories'], 'safe'],
         ];
     }
 
@@ -94,6 +95,20 @@ class ProductHref extends \yii\db\ActiveRecord
         ];
     }
     
+    
+    /**
+     * @inheritdoc
+     */    
+    public function behaviors()
+    {
+        return [
+            'saveRelations' => [
+                'class'     => SaveRelationsBehavior::className(),
+                'relations' => ['categories']
+            ],
+        ];
+    }    
+    
     /**
      * Get categories
      * @return array
@@ -101,7 +116,16 @@ class ProductHref extends \yii\db\ActiveRecord
     public function getCategories()
     {
         return $this->hasMany(ProductHrefCategory::className(), ['id' => 'category_id'])
-                    ->viaTable('product_href_to_category', ['product_id' => 'id']);
+                    ->via('hREFCategories');
+    }
+    
+    /**
+     * Get categories
+     * @return array
+     */
+    public function getHREFCategories()
+    {
+        return $this->hasMany(ProductHrefToCategory::className(), ['product_id' => 'id']);
     }
     
     /**
@@ -134,4 +158,11 @@ class ProductHref extends \yii\db\ActiveRecord
     {
         $this->product = $product;
     }
+    
+    public function transactions()
+    {
+        return [
+            self::SCENARIO_DEFAULT => self::OP_ALL,
+        ];
+    }    
 }

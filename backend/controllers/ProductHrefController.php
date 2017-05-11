@@ -26,7 +26,7 @@ class ProductHrefController extends Controller
     public function beforeAction($action)
     {
         $r = true;
-        if (in_array($action->id, array('index', 'create'))
+        if (!in_array($action->id, array('update', 'delete'))
                 && (empty(Yii::$app->request->queryParams['product_id'])
                 || (($this->product = Product::findOne(Yii::$app->request->queryParams['product_id'])) 
                         === null))) {
@@ -112,7 +112,7 @@ class ProductHrefController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -128,9 +128,13 @@ class ProductHrefController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $product_id = $model->product_id;
+        
+        $model->getHREFCategories()->delete();
+        $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['index', 'product_id' => $product_id]);
     }
 
 

@@ -42,13 +42,13 @@ class ProductSearch extends Product
      */
     public function search($params)
     {
-        $query = Product::find();
+        $query = Product::find()->orderBy('order');
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort'=> ['defaultOrder' => ['order'=>SORT_ASC, 'id'=>SORT_ASC]],
+            'sort'=> false,
         ]);
 
         $this->load($params);

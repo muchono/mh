@@ -7,8 +7,8 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\ProductHrefSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Product Links';
-$this->params['breadcrumbs'][] = ['label' => $searchModel->getProduct()->title, 'url' => ['product/update', 'id' => $searchModel->getProduct()->id]];
+$this->title = 'Links';
+$this->params['breadcrumbs'][] = ['label' => $searchModel->product->title, 'url' => ['product/update', 'id' => $searchModel->getProduct()->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-href-index">
@@ -22,10 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'title',
             'url:url',
             'status',
             // 'traffic',

@@ -18,13 +18,16 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 -- Table structure for table `product`
 --
 
-CREATE TABLE IF NOT EXISTS `product` (
-  `id` int(11) unsigned NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `price` float unsigned NOT NULL,
-  `status` int(2) unsigned NOT NULL DEFAULT '0',
-  `orders` int(11) unsigned NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+CREATE TABLE `product` (
+ `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+ `title` varchar(255) NOT NULL,
+ `price` float unsigned NOT NULL,
+ `status` int(2) unsigned NOT NULL DEFAULT '0',
+ `order` smallint(6) NOT NULL,
+ PRIMARY KEY (`id`),
+ KEY `status` (`status`),
+ KEY `price` (`price`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8
 
 
 -- --------------------------------------------------------
@@ -53,16 +56,17 @@ CREATE TABLE IF NOT EXISTS `product_guide` (
 --
 
 CREATE TABLE IF NOT EXISTS `product_href` (
-  `id` int(11) unsigned NOT NULL,
+  `id` int(11)  unsigned NOT NULL AUTO_INCREMENT,
   `product_id` int(11) unsigned NOT NULL,
-  `category_id` int(11) unsigned NOT NULL,
   `url` varchar(255) NOT NULL,
   `status` int(2) unsigned NOT NULL DEFAULT '0',
   `alexa_rank` int(11) unsigned NOT NULL DEFAULT '0',
   `da_rank` float NOT NULL DEFAULT '0',
   `about` text,
   `example_url` varchar(255) NOT NULL,
-  `type_links` varchar(50) NOT NULL
+  `type_links` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `status` (`product_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

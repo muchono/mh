@@ -60,15 +60,9 @@ class ProductHrefSearch extends ProductHref
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'product_id' => $this->product_id,
             'status' => $this->status,
-            'alexa_rank' => $this->alexa_rank,
-            'da_rank' => $this->da_rank,
+            'product_id' => $this->product->id,
         ]);
-
-        $query->andFilterWhere(['like', 'url', $this->url])
-            ->andFilterWhere(['like', 'about', $this->about]);
 
         return $dataProvider;
     }

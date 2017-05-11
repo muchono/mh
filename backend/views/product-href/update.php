@@ -5,9 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\ProductHref */
 
-$this->title = 'Update Product Href: ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Product Hrefs', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
+$this->title = 'Link: ' . $model->url ;
+$this->params['breadcrumbs'][] = ['label' => 'Product Links', 'url' => ['index','product_id' => $model->product_id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="product-href-update">

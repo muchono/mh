@@ -15,13 +15,14 @@ use backend\models\ProductHrefCategorySearch;
 </p>
 <div class="product-href-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php 
+    $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'product_id')->hiddenInput(['maxlength' => true, 'value' => $model->getProduct()->id])->label(false); ?>
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
     
-    <?= $form->field($model, 'categories[]')->dropDownList(ProductHrefCategorySearch::getArray(), ['multiple'=>true,'size'=>10])?>
+    <?= $form->field($model, 'categories')->dropDownList(ProductHrefCategorySearch::getArray(), ['multiple'=>true,'size'=>10])?>
 
     <?= $form->field($model, 'type_links')->dropDownList(ProductHref::$link_types, ['size'=>4])?>
     
