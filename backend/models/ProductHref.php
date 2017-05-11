@@ -95,6 +95,21 @@ class ProductHref extends \yii\db\ActiveRecord
         ];
     }
     
+    /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        if ($insert) {
+            $seostats = new \SEOstats\SEOstats;
+
+            $seostats->setUrl($this->url);
+            
+            $this->alexa_rank = \SEOstats\Services\Alexa::getGlobalRank();
+            $this->da_rank = round(\SEOstats\Services\Mozscape::getDomainAuthority(), 2);
+        }
+        return parent::beforeSave($insert);
+    }
     
     /**
      * @inheritdoc
@@ -129,6 +144,15 @@ class ProductHref extends \yii\db\ActiveRecord
     }
     
     /**
+     * Get link type
+     * @return string Link type name
+     */
+    public function getLinkType()
+    {
+        return self::$link_types[$this->type_links];
+    }
+    
+    /**
      * Get current product
      * @return Product
      */
@@ -137,20 +161,15 @@ class ProductHref extends \yii\db\ActiveRecord
         return $this->product;
     }
     
-	public function getStats()
-	{
-            $seostats = new \SEOstats\SEOstats;
-
-            $seostats->setUrl('http://google.com');
-            $this->alexa_rank = \SEOstats\Services\Alexa::getGlobalRank();
-            $this->da_rank = round(\SEOstats\Services\Mozscape::getDomainAuthority(), 2);
-            
-            print $this->alexa_rank;
-            print '<br/>';
-            print $this->da_rank;
-            //print_r($this);
-	}
     
+    /**
+     * Get Status Name
+     * @return string
+     */
+    public function getStatusName()
+    {
+        return self::$statuses[$this->status];
+    }    
     /**
      * Set product
      */

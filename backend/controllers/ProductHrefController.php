@@ -6,6 +6,8 @@ use Yii;
 use backend\models\Product;
 use backend\models\ProductHref;
 use backend\models\ProductHrefSearch;
+use backend\models\ProductHrefToCategory;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -92,7 +94,7 @@ class ProductHrefController extends Controller
         $model->setProduct($this->product);
         
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->id]);
+            return $this->redirect(['index', 'product_id' => $model->product_id]);
         } else {
             $model->status = 1;
             return $this->render('create', [
@@ -131,7 +133,7 @@ class ProductHrefController extends Controller
         $model = $this->findModel($id);
         $product_id = $model->product_id;
         
-        $model->getHREFCategories()->delete();
+        ProductHrefToCategory::deleteAll(['product_id' => $id]);
         $model->delete();
 
         return $this->redirect(['index', 'product_id' => $product_id]);

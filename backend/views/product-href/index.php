@@ -25,12 +25,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'url:url',
-            'status',
-            // 'traffic',
-            // 'google_pr',
-            // 'alexa_rank',
-            // 'da_rank',
+             'alexa_rank',
+             'da_rank',
+            [
+                'attribute'=>'type_links',
+                'value' => function ($data) {
+                    return $data->getLinkType();
+                }
+            ],            
             // 'about:ntext',
+            [
+                'attribute'=>'status',
+                'headerOptions' => ['style' => 'width:50px'],
+                'value' => function ($data) {
+                    return $data->getStatusName();
+                },
+            ],           
 
             [
                 'class' => 'yii\grid\ActionColumn',
