@@ -39,12 +39,20 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{update} {links} {delete} ',
+                'template' => '{update} {links} {guide} {delete} ',
                 'buttons' => [
                     'links' => function ($url, $model) {
                         return \yii\helpers\Html::a('<span class="glyphicon glyphicon-link"></span>',
                             yii\helpers\Url::to(['product-href/index', 'product_id' => $model['id']]), [
                                 'title' => Yii::t('yii', 'Links'),
+                                'data-pjax' => 0,
+                            ]);
+                    },                
+                    'guide' => function ($url, $model) {
+                        return \yii\helpers\Html::a('<span class="glyphicon glyphicon-th-list"></span>',
+                            yii\helpers\Url::to(['product-href/index', 'product_id' => $model['id']]), [
+                                'title' => Yii::t('yii', 'Guide'),
+                                'data-pjax' => 0,
                             ]);
                     },                
                 ],

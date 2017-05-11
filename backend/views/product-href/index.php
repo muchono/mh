@@ -8,6 +8,7 @@ use yii\widgets\Pjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Links';
+$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['product/index']];
 $this->params['breadcrumbs'][] = ['label' => $searchModel->product->title, 'url' => ['product/update', 'id' => $searchModel->getProduct()->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
