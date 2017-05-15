@@ -15,6 +15,29 @@ use yii\filters\VerbFilter;
 class ProductGuideController extends Controller
 {
     /**
+     * Base Product
+     * @var Product 
+     */
+    private $product = null;
+    /**
+     * @inheritdoc
+     */
+    public function beforeAction($action)
+    {
+        $r = true;
+        if (!in_array($action->id, array('update', 'delete'))
+                && (empty(Yii::$app->request->queryParams['product_id'])
+                || (($this->product = Product::findOne(Yii::$app->request->queryParams['product_id'])) 
+                        === null))) {
+            
+             $this->redirect(['product/index']);
+             $r = false;
+        }
+        
+        return $r ? parent::beforeAction($action) : $r;
+    }
+    
+    /**
      * @inheritdoc
      */
     public function behaviors()
@@ -36,6 +59,7 @@ class ProductGuideController extends Controller
     public function actionIndex()
     {
         $searchModel = new ProductGuideSearch();
+        $searchModel->setProduct($this->product);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -64,7 +88,8 @@ class ProductGuideController extends Controller
     public function actionCreate()
     {
         $model = new ProductGuide();
-
+        $model->setProduct($this->product);
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

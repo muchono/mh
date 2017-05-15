@@ -2,12 +2,15 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use backend\models\Product;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\ProductHref */
 
-$this->title = 'Link: ' . $model->url ;
-$this->params['breadcrumbs'][] = ['label' => 'Product Links', 'url' => ['index','product_id' => $model->product_id]];
+$this->title = 'URL: ' . $model->url ;
+$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['product/index']];
+$this->params['breadcrumbs'][] = ['label' => Product::findOne($model->product_id)->title, 'url' => ['product/update', 'id' => $model->product_id]];
+$this->params['breadcrumbs'][] = ['label' => 'List', 'url' => ['index','product_id' => $model->product_id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="product-href-update">

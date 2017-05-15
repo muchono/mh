@@ -21,19 +21,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title') ?>
 
-    <?= $form->field($model, 'url') ?>
-
     <?= $form->field($model, 'status') ?>
 
-    <?php // echo $form->field($model, 'traffic') ?>
-
-    <?php // echo $form->field($model, 'google_pr') ?>
-
-    <?php // echo $form->field($model, 'alexa_rank') ?>
-
-    <?php // echo $form->field($model, 'da_rank') ?>
-
-    <?php // echo $form->field($model, 'about') ?>
+    <?= $form->field($model, 'about') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

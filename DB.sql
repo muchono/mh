@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 11 2017 г., 13:49
+-- Время создания: Май 15 2017 г., 12:37
 -- Версия сервера: 5.5.50
 -- Версия PHP: 5.4.45
 
@@ -52,19 +52,33 @@ CREATE TABLE IF NOT EXISTS `product` (
   `price` float unsigned NOT NULL,
   `status` int(2) unsigned NOT NULL DEFAULT '0',
   `order` smallint(6) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `product`
 --
 
 INSERT INTO `product` (`id`, `title`, `price`, `status`, `order`) VALUES
-(8, 'Guest Posting Marketing', 2000, 1, 2),
+(8, 'Guest Posting Marketing', 2000, 1, 1),
 (9, 'Q&A Link Building Techniques', 1000, 1, 5),
-(11, 'Forum Link Building Techniques', 1000, 1, 1),
-(14, 'Forum Link Building Techniques', 2300, 1, 3),
-(15, 'Guest Posting Marketing 2', 2345, 1, 0),
-(16, 'Forum Link Building Techniques 2', 1750, 1, 4);
+(11, 'Forum Link Building Techniques', 655.99, 1, 0),
+(14, 'Forum Link Building Techniques', 2300, 1, 2),
+(15, 'Guest Posting Marketing 2', 2345, 1, 4),
+(16, 'Forum Link Building Techniques 2', 1750, 1, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `product_guide`
+--
+
+CREATE TABLE IF NOT EXISTS `product_guide` (
+  `id` int(11) unsigned NOT NULL,
+  `product_id` int(11) unsigned NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `status` int(2) unsigned NOT NULL DEFAULT '0',
+  `about` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -82,7 +96,17 @@ CREATE TABLE IF NOT EXISTS `product_href` (
   `about` text,
   `example_url` varchar(255) NOT NULL,
   `type_links` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `product_href`
+--
+
+INSERT INTO `product_href` (`id`, `product_id`, `url`, `status`, `alexa_rank`, `da_rank`, `about`, `example_url`, `type_links`) VALUES
+(1, 15, 'http://korrespondent.net/', 1, 2933, 67.31, '', 'http://www.yiiframework.com/do', 'nolinks'),
+(2, 15, 'http://auto.ria.com/', 1, 0, 60.62, 'Details', 'http://www.yiiframework.com/do', 'redirect'),
+(3, 11, 'http://auto.ria.com/', 1, 0, 60.62, 'sasdfasdf', 'http://www.yiiframework.com/do', 'redirect'),
+(4, 11, 'http://korrespondent.net/', 1, 2942, 67.31, 'dsfgsdfgsdfg', 'http://www.yiiframework.com/do', 'nolinks');
 
 -- --------------------------------------------------------
 
@@ -115,6 +139,19 @@ CREATE TABLE IF NOT EXISTS `product_href_to_category` (
   `product_id` int(11) unsigned NOT NULL,
   `category_id` int(11) unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `product_href_to_category`
+--
+
+INSERT INTO `product_href_to_category` (`product_id`, `category_id`) VALUES
+(1, 2),
+(2, 3),
+(3, 1),
+(3, 2),
+(3, 3),
+(3, 4),
+(4, 3);
 
 -- --------------------------------------------------------
 
@@ -160,6 +197,12 @@ ALTER TABLE `product`
   ADD KEY `price` (`price`);
 
 --
+-- Индексы таблицы `product_guide`
+--
+ALTER TABLE `product_guide`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `product_href`
 --
 ALTER TABLE `product_href`
@@ -196,12 +239,12 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT для таблицы `product_href`
 --
 ALTER TABLE `product_href`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT для таблицы `product_href_category`
 --

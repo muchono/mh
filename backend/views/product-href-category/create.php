@@ -8,7 +8,7 @@ use yii\helpers\Html;
 
 $this->title = 'Create Category';
 $this->params['breadcrumbs'] = [];
-$this->params['breadcrumbs'][] = ['label' => 'Product Links Categories', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Product URLs Categories', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-href-category-create">

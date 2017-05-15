@@ -31,12 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'product_id',
             'title',
-            'url:url',
             'status',
-            'traffic',
-            'google_pr',
-            'alexa_rank',
-            'da_rank',
             'about:ntext',
         ],
     ]) ?>

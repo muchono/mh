@@ -10,16 +10,17 @@ use Yii;
  * @property string $id
  * @property string $product_id
  * @property string $title
- * @property string $url
  * @property string $status
- * @property string $traffic
- * @property string $google_pr
- * @property string $alexa_rank
- * @property double $da_rank
  * @property string $about
  */
 class ProductGuide extends \yii\db\ActiveRecord
 {
+    /**
+     * Base Product
+     * @var Product 
+     */
+    private $product = null;
+    
     /**
      * @inheritdoc
      */
@@ -29,16 +30,24 @@ class ProductGuide extends \yii\db\ActiveRecord
     }
 
     /**
+     * Get current product
+     * @return Product
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+    
+    /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'product_id', 'title', 'url'], 'required'],
-            [['id', 'product_id', 'status', 'traffic', 'google_pr', 'alexa_rank'], 'integer'],
-            [['da_rank'], 'number'],
+            [['id', 'product_id', 'title'], 'required'],
+            [['id', 'product_id', 'status'], 'integer'],
             [['about'], 'string'],
-            [['title', 'url'], 'string', 'max' => 255],
+            [['title'], 'string', 'max' => 255],
         ];
     }
 
@@ -51,13 +60,16 @@ class ProductGuide extends \yii\db\ActiveRecord
             'id' => 'ID',
             'product_id' => 'Product ID',
             'title' => 'Title',
-            'url' => 'Url',
             'status' => 'Status',
-            'traffic' => 'Traffic',
-            'google_pr' => 'Google Pr',
-            'alexa_rank' => 'Alexa Rank',
-            'da_rank' => 'Da Rank',
             'about' => 'About',
         ];
     }
+    
+    /**
+     * Set product
+     */
+    public function setProduct(Product $product)
+    {
+        $this->product = $product;
+    }    
 }

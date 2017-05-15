@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel backend\models\ProductHrefSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Links';
+$this->title = 'List';
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['product/index']];
 $this->params['breadcrumbs'][] = ['label' => $searchModel->product->title, 'url' => ['product/update', 'id' => $searchModel->getProduct()->id]];
 $this->params['breadcrumbs'][] = $this->title;
@@ -18,8 +18,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Product Link', ['create', 'product_id' => $searchModel->getProduct()->id], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Link Categories', ['product-href-category/index'], ['class' => 'btn btn-success', 'target' => '_blank']) ?>
+        <?= Html::a('Add URL', ['create', 'product_id' => $searchModel->getProduct()->id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('URL Categories', ['product-href-category/index'], ['class' => 'btn btn-success', 'target' => '_blank']) ?>
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,

@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel backend\models\ProductHrefCategorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Product Links Categories';
+$this->title = 'Product URLs Categories';
 $this->params['breadcrumbs'] = array();
 ?>
 <div class="product-href-category-index">

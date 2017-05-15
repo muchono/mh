@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model backend\models\ProductHrefCategory */
 
 $this->title = 'Update Category: ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Links Categories', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="product-href-category-update">

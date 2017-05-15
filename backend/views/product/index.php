@@ -42,15 +42,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{update} {links} {guide} {delete} ',
                 'buttons' => [
                     'links' => function ($url, $model) {
-                        return \yii\helpers\Html::a('<span class="glyphicon glyphicon-link"></span>',
+                        return \yii\helpers\Html::a('<span class="glyphicon glyphicon-th-list"></span>',
                             yii\helpers\Url::to(['product-href/index', 'product_id' => $model['id']]), [
-                                'title' => Yii::t('yii', 'Links'),
+                                'title' => Yii::t('yii', 'List'),
                                 'data-pjax' => 0,
                             ]);
                     },                
                     'guide' => function ($url, $model) {
-                        return \yii\helpers\Html::a('<span class="glyphicon glyphicon-th-list"></span>',
-                            yii\helpers\Url::to(['product-href/index', 'product_id' => $model['id']]), [
+                        return \yii\helpers\Html::a('<span class="glyphicon glyphicon-user"></span>',
+                            yii\helpers\Url::to(['product-guide/index', 'product_id' => $model['id']]), [
                                 'title' => Yii::t('yii', 'Guide'),
                                 'data-pjax' => 0,
                             ]);

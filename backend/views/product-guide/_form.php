@@ -18,17 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'traffic')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'google_pr')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'alexa_rank')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'da_rank')->textInput() ?>
 
     <?= $form->field($model, 'about')->textarea(['rows' => 6]) ?>
 

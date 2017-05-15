@@ -16,26 +16,21 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Product Guide', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Guide Item', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
+            ['class' => \kotchuprik\sortable\grid\Column::className()],
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'product_id',
             'title',
-            'url:url',
-            'status',
-            // 'traffic',
-            // 'google_pr',
-            // 'alexa_rank',
-            // 'da_rank',
-            // 'about:ntext',
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
+        'options' => [
+            'data' => [
+                'sortable-widget' => 1,
+                'sortable-url' => \yii\helpers\Url::toRoute(['sorting']),
+            ]
+        ],    
     ]); ?>
 <?php Pjax::end(); ?></div>

@@ -18,9 +18,8 @@ class ProductGuideSearch extends ProductGuide
     public function rules()
     {
         return [
-            [['id', 'product_id', 'status', 'traffic', 'google_pr', 'alexa_rank'], 'integer'],
-            [['title', 'url', 'about'], 'safe'],
-            [['da_rank'], 'number'],
+            [['id', 'product_id', 'status'], 'integer'],
+            [['title', 'about'], 'safe'],
         ];
     }
 
@@ -63,14 +62,9 @@ class ProductGuideSearch extends ProductGuide
             'id' => $this->id,
             'product_id' => $this->product_id,
             'status' => $this->status,
-            'traffic' => $this->traffic,
-            'google_pr' => $this->google_pr,
-            'alexa_rank' => $this->alexa_rank,
-            'da_rank' => $this->da_rank,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'url', $this->url])
             ->andFilterWhere(['like', 'about', $this->about]);
 
         return $dataProvider;

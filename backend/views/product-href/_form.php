@@ -10,9 +10,7 @@ use backend\models\ProductHrefCategorySearch;
 /* @var $model backend\models\ProductHref */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-<p>
-    <?= Html::a('Link Categories', ['product-href-category/index'], ['class' => 'btn btn-success', 'target' => '_blank']) ?>
-</p>
+
 <div class="product-href-form">
 
     <?php 
@@ -22,7 +20,9 @@ use backend\models\ProductHrefCategorySearch;
 
     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
     
-    <?= $form->field($model, 'categories')->dropDownList(ProductHrefCategorySearch::getArray(), ['multiple'=>true,'size'=>10])?>
+    <?= $form->field($model, 'categories')->dropDownList(ProductHrefCategorySearch::getArray(), ['multiple'=>true,'size'=>10, 'template' => 'sdfg'])->label('Categories ('.
+            Html::a('add/edit', ['product-href-category/index'], ['target' => '_blank'])
+    .')');?>
 
     <?= $form->field($model, 'type_links')->dropDownList(ProductHref::$link_types, ['size'=>4])?>
     
