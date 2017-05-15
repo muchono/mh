@@ -6,8 +6,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\ProductGuide */
 
-$this->title = 'Create Product Guide';
-$this->params['breadcrumbs'][] = ['label' => 'Product Guides', 'url' => ['index']];
+$this->title = 'Create Guide Item';
+$this->params['breadcrumbs'][] = ['label' => $model->getProduct()->title, 'url' => ['product/update', 'id' => $model->getProduct()->id]];
+$this->params['breadcrumbs'][] = ['label' => 'Guide', 'url' => ['index', 'product_id' => $model->getProduct()->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-guide-create">

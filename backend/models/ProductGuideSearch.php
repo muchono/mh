@@ -18,7 +18,7 @@ class ProductGuideSearch extends ProductGuide
     public function rules()
     {
         return [
-            [['id', 'product_id', 'status'], 'integer'],
+            [['id', 'product_id', 'status', 'order'], 'integer'],
             [['title', 'about'], 'safe'],
         ];
     }
@@ -41,7 +41,7 @@ class ProductGuideSearch extends ProductGuide
      */
     public function search($params)
     {
-        $query = ProductGuide::find();
+        $query = ProductGuide::find()->orderBy('order');
 
         // add conditions that should always apply here
 
@@ -60,7 +60,7 @@ class ProductGuideSearch extends ProductGuide
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'product_id' => $this->product_id,
+            'product_id' => $this->product->id,
             'status' => $this->status,
         ]);
 

@@ -201,6 +201,8 @@ ALTER TABLE `product`
 --
 ALTER TABLE `product_guide`
   ADD PRIMARY KEY (`id`);
+  
+ALTER TABLE `product_guide`  ADD `order`  smallint(6) NOT NULL;
 
 --
 -- Индексы таблицы `product_href`

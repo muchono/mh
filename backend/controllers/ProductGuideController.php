@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
+use backend\models\Product;
 use backend\models\ProductGuide;
 use backend\models\ProductGuideSearch;
 use yii\web\Controller;
@@ -22,10 +23,26 @@ class ProductGuideController extends Controller
     /**
      * @inheritdoc
      */
+    
+    
+    /**
+     * @inheritdoc
+     */    
+    public function actions()
+    {
+        return [
+            'sorting' => [
+                'class' => \kotchuprik\sortable\actions\Sorting::className(),
+                'query' => ProductGuide::find(),
+            ],
+        ];
+    }
+
+    
     public function beforeAction($action)
     {
         $r = true;
-        if (!in_array($action->id, array('update', 'delete'))
+        if (!in_array($action->id, array('update', 'delete', 'sorting'))
                 && (empty(Yii::$app->request->queryParams['product_id'])
                 || (($this->product = Product::findOne(Yii::$app->request->queryParams['product_id'])) 
                         === null))) {
@@ -60,6 +77,7 @@ class ProductGuideController extends Controller
     {
         $searchModel = new ProductGuideSearch();
         $searchModel->setProduct($this->product);
+        
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -91,7 +109,7 @@ class ProductGuideController extends Controller
         $model->setProduct($this->product);
         
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'product_id' => $model->product_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -110,7 +128,7 @@ class ProductGuideController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -126,9 +144,12 @@ class ProductGuideController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $product_id = $model->product_id;
+        
+        $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['index', 'product_id' => $product_id]);
     }
 
     /**

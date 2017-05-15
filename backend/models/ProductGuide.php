@@ -12,6 +12,7 @@ use Yii;
  * @property string $title
  * @property string $status
  * @property string $about
+ * @property string $order
  */
 class ProductGuide extends \yii\db\ActiveRecord
 {
@@ -44,8 +45,8 @@ class ProductGuide extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'product_id', 'title'], 'required'],
-            [['id', 'product_id', 'status'], 'integer'],
+            [['product_id', 'title', 'about'], 'required'],
+            [['id', 'product_id', 'status', 'order'], 'integer'],
             [['about'], 'string'],
             [['title'], 'string', 'max' => 255],
         ];
@@ -62,6 +63,7 @@ class ProductGuide extends \yii\db\ActiveRecord
             'title' => 'Title',
             'status' => 'Status',
             'about' => 'About',
+            'order' => 'Order',
         ];
     }
     
@@ -71,5 +73,18 @@ class ProductGuide extends \yii\db\ActiveRecord
     public function setProduct(Product $product)
     {
         $this->product = $product;
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'sortable' => [
+                'class' => \kotchuprik\sortable\behaviors\Sortable::className(),
+                'query' => self::find(),
+            ],
+        ];
     }    
 }

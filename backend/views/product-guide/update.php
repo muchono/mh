@@ -1,13 +1,15 @@
 <?php
 
 use yii\helpers\Html;
-
+use backend\models\Product;
 /* @var $this yii\web\View */
 /* @var $model backend\models\ProductGuide */
 
-$this->title = 'Update Product Guide: ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Product Guides', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
+$this->title = 'Update Guide Item: ' . $model->title;
+
+$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['product/index']];
+$this->params['breadcrumbs'][] = ['label' => Product::findOne($model->product_id)->title, 'url' => ['product/update', 'id' => $model->product_id]];
+$this->params['breadcrumbs'][] = ['label' => 'Guide', 'url' => ['index','product_id' => $model->product_id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="product-guide-update">
