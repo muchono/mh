@@ -19,7 +19,8 @@
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "kotchuprik/yii2-sortable-widgets": "^2.0",
-        "la-haute-societe/yii2-save-relations-behavior": "^1.2"
+        "la-haute-societe/yii2-save-relations-behavior": "^1.2",
+        "2amigos/yii2-tinymce-widget": "~1.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
