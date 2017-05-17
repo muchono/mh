@@ -9,6 +9,8 @@ use backend\models\ProductGuideSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
+use yii\helpers\Json;
 
 /**
  * ProductGuideController implements the CRUD actions for ProductGuide model.
@@ -42,7 +44,7 @@ class ProductGuideController extends Controller
     public function beforeAction($action)
     {
         $r = true;
-        if (!in_array($action->id, array('update', 'delete', 'sorting'))
+        if (!in_array($action->id, array('update', 'delete', 'sorting', 'upload-image', 'get-image'))
                 && (empty(Yii::$app->request->queryParams['product_id'])
                 || (($this->product = Product::findOne(Yii::$app->request->queryParams['product_id'])) 
                         === null))) {
@@ -69,6 +71,48 @@ class ProductGuideController extends Controller
         ];
     }
 
+    /**
+     * Upload Image
+     */
+    public function actionUploadImage()
+    {
+        if (!empty($_FILES)) {
+            reset ($_FILES);
+            $temp = current($_FILES);
+            if (is_uploaded_file($temp['tmp_name'])){
+                // Sanitize input
+                if (preg_match("/([^\w\s\d\-_~,;:\[\]\(\).])|([\.]{2,})/", $temp['name'])) {
+                    header("HTTP/1.0 500 Invalid file name.");
+                    return;
+                }
+
+                // Verify extension
+                if (!in_array(strtolower(pathinfo($temp['name'], PATHINFO_EXTENSION)), array("gif", "jpg", "png"))) {
+                    header("HTTP/1.0 500 Invalid extension.");
+                    return;
+                }
+                $fname = microtime(1) . '.' . pathinfo($temp['name'], PATHINFO_EXTENSION);
+                move_uploaded_file($temp['tmp_name'], Yii::getAlias('@common/content/images/') . $fname);
+
+                echo Json::encode(array('location' => Url::to(['product-guide/get-image', 'id' => $fname])));
+            } else {
+              header("HTTP/1.0 500 Server Error");
+            }        
+        }
+    }
+    
+    
+    /**
+     * Get Image
+     */
+    public function actionGetImage()
+    {
+        $f = Yii::getAlias('@common/content/images/') . Yii::$app->request->get('id');
+        if (is_file($f)) {
+            echo file_get_contents($f);
+        }
+    }
+    
     /**
      * Lists all ProductGuide models.
      * @return mixed
