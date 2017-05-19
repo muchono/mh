@@ -7,6 +7,7 @@ use backend\models\Product;
 use backend\models\ProductHref;
 use backend\models\ProductHrefSearch;
 use backend\models\ProductHrefToCategory;
+use yii\filters\AccessControl;
 
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -46,6 +47,15 @@ class ProductHrefController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],            
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
