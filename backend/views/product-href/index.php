@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use yii\widgets\ActiveForm;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ProductHrefSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -18,35 +20,37 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Add URL', ['create', 'product_id' => $searchModel->getProduct()->id], ['class' => 'btn btn-success']) ?>
         <?= Html::a('URL Categories', ['product-href-category/index'], ['class' => 'btn btn-success', 'target' => '_blank']) ?>
     </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+    
+<?php //Pjax::begin(); ?>    
+<?php $form = ActiveForm::begin(); ?>
+<?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'url:url',
-             'alexa_rank',
-             'da_rank',
             [
-                'attribute'=>'type_links',
-                'value' => function ($data) {
-                    return $data->getLinkType();
+                'class' => 'yii\grid\SerialColumn',
+                'contentOptions' => ['style' => 'vertical-align: middle;'],
+            ],
+            [
+                'content' => function ($model, $key, $index, $column) {
+                   return $this->render('_form', [
+                        'model' => $model,
+                    ]);
                 }
             ],            
-            // 'about:ntext',
-            [
-                'attribute'=>'status',
-                'headerOptions' => ['style' => 'width:50px'],
-                'value' => function ($data) {
-                    return $data->getStatusName();
-                },
-            ],           
-
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{update} {delete}',
+                'template' => '{delete}',
+                'contentOptions' => ['style' => 'vertical-align: middle;'],
             ],
         ],
     ]); ?>
-<?php Pjax::end(); ?></div>
+    
+    <div class="form-group">
+        <?= Html::submitButton('+ Add One More', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('SUBMIT UPDATE', ['class' => 'btn btn-primary pull-right']) ?>
+    </div>
+<?php ActiveForm::end(); ?>
+<?php //Pjax::end(); ?>
+</div>

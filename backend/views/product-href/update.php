@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use backend\models\Product;
 
+
 /* @var $this yii\web\View */
 /* @var $model backend\models\ProductHref */
 

@@ -15,25 +15,22 @@ use backend\models\ProductHrefCategorySearch;
 
     <?php 
     $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'product_id')->hiddenInput(['maxlength' => true, 'value' => $model->getProduct()->id])->label(false); ?>
-
-    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
     
-    <?= $form->field($model, 'categories')->dropDownList(ProductHrefCategorySearch::getArray(), ['multiple'=>true,'size'=>10, 'template' => 'sdfg'])->label('Categories ('.
-            Html::a('add/edit', ['product-href-category/index'], ['target' => '_blank'])
-    .')');?>
-
-    <?= $form->field($model, 'type_links')->dropDownList(ProductHref::$link_types, ['size'=>4])?>
-    
-    <?= $form->field($model, 'about')->textarea(['rows' => 6]) ?>
-    
-    <?= $form->field($model, 'example_url')->textInput(['maxlength' => true]) ?>
-    
-    <?= $form->field($model, 'status')->dropDownList(ProductHref::$statuses)?>
-
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+   <div class="row">
+        <?= $form->field($model, 'product_id')->hiddenInput(['maxlength' => true, 'value' => $model->product_id])->label(false); ?>       
+        <div class="col-md-3">
+            <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'example_url')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-md-4">
+        <?= $form->field($model, 'about')->textarea(['style' => 'height:108px']) ?>   
+        </div>
+        <div class="col-md-3">
+        <?= $form->field($model, 'categories')->dropDownList(ProductHrefCategorySearch::getArray(), ['multiple'=>true,'size'=>5, 'template' => 'sdfg']);?>           
+        </div>
+        <div class="col-md-2">
+        <?= $form->field($model, 'type_links')->dropDownList(ProductHref::$link_types, ['size'=>5])?>
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>
