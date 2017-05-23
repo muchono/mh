@@ -46,6 +46,9 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 -- Структура таблицы `product`
 --
 
+ALTER TABLE product ADD short_title varchar(255) NOT NULL;
+ALTER TABLE product ADD full_title varchar(1000) NOT NULL;
+
 CREATE TABLE IF NOT EXISTS `product` (
   `id` int(11) unsigned NOT NULL,
   `title` varchar(255) NOT NULL,

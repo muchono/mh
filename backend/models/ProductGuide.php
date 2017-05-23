@@ -60,7 +60,7 @@ class ProductGuide extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'product_id' => 'Product ID',
-            'title' => 'Title',
+            'title' => 'Sub Title',
             'status' => 'Status',
             'about' => 'About',
             'order' => 'Order',
