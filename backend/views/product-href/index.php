@@ -33,9 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style' => 'vertical-align: middle;'],
             ],
             [
-                'content' => function ($model, $key, $index, $column) {
-                   return $this->render('_form', [
+                'content' => function ($model, $key, $index, $column) use ($form) {
+                    return $this->render('_form', [
                         'model' => $model,
+                        'form' => $form,
                     ]);
                 }
             ],            

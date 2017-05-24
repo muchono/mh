@@ -8,6 +8,7 @@ use backend\models\ProductHref;
 use backend\models\ProductHrefSearch;
 use backend\models\ProductHrefToCategory;
 use yii\filters\AccessControl;
+use yii\data\ArrayDataProvider;
 
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -18,6 +19,7 @@ use yii\filters\VerbFilter;
  */
 class ProductHrefController extends Controller
 {
+    protected $form;
     /**
      * Base Product
      * @var Product 
@@ -74,7 +76,30 @@ class ProductHrefController extends Controller
         $searchModel = new ProductHrefSearch();
         $searchModel->setProduct($this->product);
         
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if (Yii::$app->request->post()) {
+            $hrefs = [];
+            foreach(Yii::$app->request->post()['hrefs'] as $id=>$info) {
+                //$info['id'] = $id;
+                //$info[ProductHref::className()] = $info;
+                print_r($info);
+                exit;                
+                $model = new ProductHref();
+                $model->load($info);
+                $model->id = $id;
+                
+                print_r($model);
+                exit;
+                $model->save();
+                $hrefs[] = $model;
+            }
+            
+            $dataProvider = new ArrayDataProvider([
+                'allModels' => $hrefs,
+            ]);            
+        } else {
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        }
+        
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
