@@ -5,7 +5,7 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\ProductGuide;
+use common\models\ProductGuide;
 
 /**
  * ProductGuideSearch represents the model behind the search form about `backend\models\ProductGuide`.

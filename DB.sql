@@ -159,10 +159,10 @@ INSERT INTO `product_href_to_category` (`product_id`, `category_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `user`
+-- Структура таблицы `user_backend`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE IF NOT EXISTS `user_backend` (
   `id` int(11) NOT NULL,
   `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `auth_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
@@ -175,10 +175,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Дамп данных таблицы `user`
+-- Дамп данных таблицы `user_backend`
 --
 
-INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`) VALUES
+INSERT INTO `user_backend` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'admin', '', '$2y$13$C0fkgk3txcpzrEcgo.sUzuMnRW8lXJ6RDrYL1.o/Tem7iO5Wm4VJS', NULL, '', 10, 1493838079, 1493838079);
 
 --
@@ -228,9 +228,9 @@ ALTER TABLE `product_href_to_category`
   ADD KEY `category_id` (`category_id`);
 
 --
--- Индексы таблицы `user`
+-- Индексы таблицы `user_backend`
 --
-ALTER TABLE `user`
+ALTER TABLE `user_backend`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `email` (`email`),
@@ -256,9 +256,9 @@ ALTER TABLE `product_href`
 ALTER TABLE `product_href_category`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT для таблицы `user`
+-- AUTO_INCREMENT для таблицы `user_backend`
 --
-ALTER TABLE `user`
+ALTER TABLE `user_backend`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

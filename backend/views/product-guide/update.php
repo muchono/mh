@@ -1,9 +1,9 @@
 <?php
 
 use yii\helpers\Html;
-use backend\models\Product;
+use common\models\Product;
 /* @var $this yii\web\View */
-/* @var $model backend\models\ProductGuide */
+/* @var $model common\models\ProductGuide */
 
 $this->title = 'Update Guide Item: ' . $model->title;
 

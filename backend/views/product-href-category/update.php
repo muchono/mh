@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\ProductHrefCategory */
+/* @var $model common\models\ProductHrefCategory */
 
 $this->title = 'Update Category: ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];

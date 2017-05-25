@@ -6,10 +6,10 @@ use yii\widgets\Pjax;
 use yii\widgets\ActiveForm;
 use yii\data\ArrayDataProvider;
 
-use backend\models\ProductHref;
+use common\models\ProductHref;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\ProductHrefSearch */
+/* @var $searchModel common\models\ProductHrefSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'List';

@@ -7,7 +7,7 @@ use yii\helpers\Url;
 use dosamigos\tinymce\TinyMce;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\ProductGuide */
+/* @var $model common\models\ProductGuide */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

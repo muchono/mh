@@ -3,7 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\ProductHrefCategory;
+use common\models\ProductHrefCategory;
 use backend\models\ProductHrefCategorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

@@ -2,12 +2,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use backend\models\ProductHref;
-use backend\models\ProductHrefCategorySearch;
+use common\models\ProductHref;
+use common\models\ProductHrefCategorySearch;
 
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\ProductHref */
+/* @var $model common\models\ProductHref */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

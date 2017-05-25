@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\ProductGuide */
+/* @var $model common\models\ProductGuide */
 
 $this->title = 'Create Guide Item';
 $this->params['breadcrumbs'][] = ['label' => $model->getProduct()->title, 'url' => ['product/update', 'id' => $model->getProduct()->id]];

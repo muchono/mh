@@ -3,10 +3,10 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Product;
-use backend\models\ProductHref;
+use common\models\Product;
+use common\models\ProductHref;
 use backend\models\ProductHrefSearch;
-use backend\models\ProductHrefToCategory;
+use common\models\ProductHrefToCategory;
 use yii\filters\AccessControl;
 use yii\data\ArrayDataProvider;
 

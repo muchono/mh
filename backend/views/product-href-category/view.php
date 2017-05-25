@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\ProductHrefCategory */
+/* @var $model common\models\ProductHrefCategory */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Product Href Categories', 'url' => ['index']];
