@@ -77,24 +77,48 @@ class ProductHrefController extends Controller
         $searchModel->setProduct($this->product);
         
         if (Yii::$app->request->post()) {
+            $valid = true;
             $hrefs = [];
-            foreach(Yii::$app->request->post()['hrefs'] as $id=>$info) {
-                //$info['id'] = $id;
-                //$info[ProductHref::className()] = $info;
-                print_r($info);
-                exit;                
-                $model = new ProductHref();
-                $model->load($info);
-                $model->id = $id;
-                
-                print_r($model);
-                exit;
-                $model->save();
-                $hrefs[] = $model;
+            $post = Yii::$app->request->post();
+            /**
+             * update data
+             */
+            if (!empty($post['hrefs'])) {
+                foreach($post['hrefs'] as $id=>$info) {
+                    $model = $this->findModel($id);
+                    $model->load(array('ProductHref' => $info));
+
+                    if (!$model->save()) {
+                        $valid = false;
+                    }
+                    $hrefs[$id] = $model;
+                }
+            }
+            
+            /**
+             * add new data
+             */
+            if (!empty($post['new'])) {
+                foreach($post['new'] as $info) {
+                    $model = new ProductHref;
+                    $model->load(array('ProductHref' => $info));
+                    $model->status = 1;
+                    $model->product_id = $this->product->id;
+                    if ($model->save()) {
+                        $hrefs[$model->id] = $model;
+                    } else {
+                        $valid = false;
+                        $hrefs[] = $model;
+                    }
+                }
+            }
+            if ($valid) {
+                return $this->redirect(['index', 'product_id' => $this->product->id]);
             }
             
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $hrefs,
+                'pagination' => false,
             ]);            
         } else {
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -118,44 +142,6 @@ class ProductHrefController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new ProductHref model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new ProductHref();
-        $model->setProduct($this->product);
-        
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index', 'product_id' => $model->product_id]);
-        } else {
-            $model->status = 1;
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Updates an existing ProductHref model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
-     * @return mixed
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }
 
     /**
      * Deletes an existing ProductHref model.
@@ -170,8 +156,6 @@ class ProductHrefController extends Controller
         
         ProductHrefToCategory::deleteAll(['product_id' => $id]);
         $model->delete();
-
-        return $this->redirect(['index', 'product_id' => $product_id]);
     }
 
 
