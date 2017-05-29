@@ -8,7 +8,7 @@ use yii\behaviors\BlameableBehavior;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 //use lhs\Yii2SaveRelationsBehavior\SaveRelationsTrait;
 
-require_once __DIR__ . DIRECTORY_SEPARATOR . '../extensions/SEOstats' . DIRECTORY_SEPARATOR . 'bootstrap.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . '../../backend/extensions/SEOstats' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
 
 /**

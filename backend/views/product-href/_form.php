@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\ProductHref;
-use common\models\ProductHrefCategorySearch;
+use backend\models\ProductHrefCategorySearch;
 
 
 /* @var $this yii\web\View */

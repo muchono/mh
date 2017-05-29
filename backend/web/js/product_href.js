@@ -17,8 +17,11 @@ $().ready(function(){
 
 function updateNumeration() {
     $i = 1;
+    if ($('#block_hrefs table tr td:first-child').length) {
+        $('.empty').closest('tr').remove();
+    }
     $('#block_hrefs table tr td:first-child').each(function(){
         $(this).html($i);
-        $i = $i + 1;
+        $i = $i + 1;            
     });
 }
