@@ -1,4 +1,5 @@
 <?php
+
 namespace common\models;
 
 use Yii;
@@ -8,25 +9,35 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
 /**
- * User model
+ * This is the model class for table "user".
  *
- * @property integer $id
- * @property string $username
+ * @property string $id
+ * @property string $auth_key
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $email
- * @property string $auth_key
- * @property integer $status
+ * @property string $phone
+ * @property string $name
+ * @property string $subscribe
+ * @property string $active
+ * @property string $password
+ * @property integer $registration_confirmed
  * @property integer $created_at
  * @property integer $updated_at
- * @property string $password write-only password
  */
-class User extends ActiveRecord implements IdentityInterface
+class User extends \yii\db\ActiveRecord
 {
     const STATUS_DELETED = 0;
-    const STATUS_ACTIVE = 10;
-
-
+    const STATUS_ACTIVE = 1;
+    
+    /**
+     * statuses values
+     */
+    public static $statuses = array(
+        0 => 'Disabled',
+        1 => 'Active',
+    );
+    
     /**
      * @inheritdoc
      */
@@ -38,30 +49,68 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
+    public function beforeSave($insert)
+    {
+        $this->password = Yii::$app->security->generatePasswordHash($password);
+        return parent::beforeSave($insert);
+    }
+    
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [
             TimestampBehavior::className(),
         ];
     }
-
+    
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            [['email', 'name'], 'required'],
+            [['email'], 'email'],
+            [['email'], 'unique'],
+            [['subscribe', 'active', 'registration_confirmed', 'created_at', 'updated_at'], 'integer'],
+            [['auth_key'], 'string', 'max' => 32],
+            [['password_hash', 'password_reset_token', 'email', 'phone', 'name'], 'string', 'max' => 255],
+            [['password'], 'string', 'max' => 50],
+            [['password_reset_token'], 'unique'],
+            ['active', 'in', 'range' => array_keys(self::$statuses)],
         ];
     }
 
     /**
      * @inheritdoc
      */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'auth_key' => 'Auth Key',
+            'password_hash' => 'Password Hash',
+            'password_reset_token' => 'Password Reset Token',
+            'email' => 'Email',
+            'phone' => 'Phone',
+            'name' => 'Name',
+            'subscribe' => 'Subscribe',
+            'active' => 'Active',
+            'password' => 'Password',
+            'registration_confirmed' => 'Registration Confirmed',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+        ];
+    }
+    
+   /**
+     * @inheritdoc
+     */
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['id' => $id, 'active' => self::STATUS_ACTIVE]);
     }
 
     /**
@@ -80,7 +129,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findByUsername($username)
     {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['username' => $username, 'active' => self::STATUS_ACTIVE]);
     }
 
     /**
@@ -97,7 +146,7 @@ class User extends ActiveRecord implements IdentityInterface
 
         return static::findOne([
             'password_reset_token' => $token,
-            'status' => self::STATUS_ACTIVE,
+            'active' => self::STATUS_ACTIVE,
         ]);
     }
 
@@ -133,6 +182,15 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->auth_key;
     }
+    
+    /**
+     * Get Status Name
+     * @return string
+     */
+    public function getStatusName()
+    {
+        return self::$statuses[$this->active];
+    }    
 
     /**
      * @inheritdoc

@@ -139,7 +139,7 @@ class UserBackend extends ActiveRecord implements IdentityInterface
      */
     public function getIsGuest()
     {
-        return parent::getIsGuest() || $this->staus != self::STATUS_ACTIVE;
+        return parent::getIsGuest() || $this->status != self::STATUS_ACTIVE;
     }
 
     /**
