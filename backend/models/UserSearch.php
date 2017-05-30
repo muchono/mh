@@ -63,8 +63,7 @@ class UserSearch extends User
             'subscribe' => $this->subscribe,
             'active' => $this->active,
             'registration_confirmed' => $this->registration_confirmed,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'DATE(created_at)' => $this->created_at,
         ]);
 
         $query->andFilterWhere(['like', 'auth_key', $this->auth_key])

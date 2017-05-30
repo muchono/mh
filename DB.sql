@@ -1,3 +1,28 @@
+CREATE TABLE IF NOT EXISTS `order` (
+  `id` int(11) unsigned NOT NULL,
+  `created_at` int(11) NOT NULL,
+  `status` int(2) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `total` float NOT NULL DEFAULT '0',
+  `payment_method` varchar(50) NOT NULL,
+  `payment_status` int(2) unsigned NOT NULL,
+  `transaction_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `status` (`status`),
+  KEY `created_at` (`created_at`)
+);
+
+CREATE TABLE IF NOT EXISTS `order_to_product` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) unsigned NOT NULL,
+  `product_id` int(11) unsigned NOT NULL,
+  `price` float NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `order_id` (`order_id`,`product_id`),
+);
+
+
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `auth_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL,  

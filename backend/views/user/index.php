@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use yii\jui\DatePicker;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -31,7 +33,38 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => $searchModel::$statuses,
             ],
-             'created_at:date',
+                        
+
+	
+/*
+ [
+            'attribute' => 'updated_at',
+            'value' => 'updated_at',
+            },
+            'filter' => \yii\jui\DatePicker::widget([
+                    'model'=>$searchModel,
+                    'attribute'=>'updated_at',
+                    'language' => 'ru',
+                    'dateFormat' => 'dd-MM-yyyy',
+                ]),
+            'format' => 'html',
+        ],
+*/
+                        
+            [
+                'attribute' => 'created_at',
+                'format' => ['date', 'php:d/m/Y'],
+                'filter' => DatePicker::widget([
+                    'language' => 'en',
+                    'model' => $searchModel,
+                    'attribute' => 'created_at',
+                    'clientOptions' => [
+                        'dateFormat' => 'dd/mm/yy',
+                    ],
+                ]),
+                // this is meaningless
+                'format' => ['date', 'php:d/m/Y'],
+            ],
             [
                 'class' => 'yii\grid\ActionColumn',
                 'headerOptions' => ['style' => 'width:150px'],
