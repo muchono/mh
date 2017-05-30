@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+<?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -33,37 +33,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => $searchModel::$statuses,
             ],
-                        
-
-	
-/*
- [
-            'attribute' => 'updated_at',
-            'value' => 'updated_at',
-            },
-            'filter' => \yii\jui\DatePicker::widget([
-                    'model'=>$searchModel,
-                    'attribute'=>'updated_at',
-                    'language' => 'ru',
-                    'dateFormat' => 'dd-MM-yyyy',
-                ]),
-            'format' => 'html',
-        ],
-*/
-                        
             [
                 'attribute' => 'created_at',
-                'format' => ['date', 'php:d/m/Y'],
                 'filter' => DatePicker::widget([
-                    'language' => 'en',
+                    //'language' => 'en',
+                    'dateFormat' => 'dd-MM-yyyy',
                     'model' => $searchModel,
                     'attribute' => 'created_at',
+                    'options' => ['class' => 'form-control'],
                     'clientOptions' => [
-                        'dateFormat' => 'dd/mm/yy',
+                        'dateFormat' => 'dd-MM-yyyy',
                     ],
                 ]),
                 // this is meaningless
-                'format' => ['date', 'php:d/m/Y'],
+                'format' => ['date', 'php:d-m-Y'],
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
@@ -73,4 +56,4 @@ $this->params['breadcrumbs'][] = $this->title;
             ], 
         ],
     ]); ?>
-<?php Pjax::end(); ?></div>
+</div>

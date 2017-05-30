@@ -12,6 +12,7 @@ use himiklab\sortablegrid\SortableGridBehavior;
  * @property string $title
  * @property string $short_title
  * @property string $full_title
+ * @property string $link_name
  * @property double $price
  * @property string $status
  * @property string $order
@@ -40,10 +41,10 @@ class Product extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'price', 'short_title', 'full_title'], 'required'],
+            [['title', 'price', 'short_title', 'full_title', 'link_name'], 'required'],
             [['price'], 'number'],
             [['status', 'order'], 'integer'],
-            [['title', 'short_title'], 'string', 'max' => 255],
+            [['title', 'short_title', 'link_name'], 'string', 'max' => 255],
             [['full_title'], 'string', 'max' => 1000],
         ];
     }
@@ -61,6 +62,7 @@ class Product extends \yii\db\ActiveRecord
             'price' => 'Price',
             'status' => 'Status',
             'order' => 'Order',
+            'link_name' => 'Link Name',
         ];
     }
     

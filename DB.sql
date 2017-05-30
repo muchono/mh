@@ -1,3 +1,5 @@
+ALTER TABLE product ADD link_name varchar(255) NOT NULL;
+
 CREATE TABLE IF NOT EXISTS `order` (
   `id` int(11) unsigned NOT NULL,
   `created_at` int(11) NOT NULL,

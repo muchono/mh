@@ -18,8 +18,9 @@ class UserSearch extends User
     public function rules()
     {
         return [
-            [['id', 'subscribe', 'active', 'registration_confirmed', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'subscribe', 'active', 'registration_confirmed'], 'integer'],
             [['auth_key', 'password_hash', 'password_reset_token', 'email', 'phone', 'name', 'password'], 'safe'],
+            [['created_at', 'updated_at'], 'date', 'format'=>'dd-MM-yyyy', 'message'=>'{attribute} must be DD-MM-YYYY format.'],
         ];
     }
 
@@ -42,7 +43,6 @@ class UserSearch extends User
     public function search($params)
     {
         $query = User::find();
-
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -53,7 +53,7 @@ class UserSearch extends User
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+            //$query->where('0=1');
             return $dataProvider;
         }
 
@@ -63,8 +63,12 @@ class UserSearch extends User
             'subscribe' => $this->subscribe,
             'active' => $this->active,
             'registration_confirmed' => $this->registration_confirmed,
-            'DATE(created_at)' => $this->created_at,
+            
         ]);
+        
+        $query->andFilterWhere(['like', 
+            "(date_format(FROM_UNIXTIME(`created_at`), '%d-%m-%Y %h:%i:%s %p' ))",
+            $this->created_at]);
 
         $query->andFilterWhere(['like', 'auth_key', $this->auth_key])
             ->andFilterWhere(['like', 'password_hash', $this->password_hash])
