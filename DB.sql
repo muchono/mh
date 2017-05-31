@@ -1,8 +1,32 @@
+CREATE TABLE IF NOT EXISTS `discount` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `date_from` int(11) NOT NULL,
+  `date_to` int(11) NOT NULL,  
+  `title` varchar(255) NOT NULL,
+  `status` int(2) unsigned NOT NULL,
+  `percent` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `date_from` (`date_from`),
+  KEY `date_to` (`date_to`)
+);
+
+CREATE TABLE IF NOT EXISTS `discount_to_product` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `discount_id` int(11) unsigned NOT NULL,
+  `product_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+
+ALTER TABLE order_to_product ADD discount float NOT NULL DEFAULT '0';
+ALTER TABLE order_to_product ADD discount_id int(11) unsigned NOT NULL DEFAULT '0';
+
 ALTER TABLE product ADD link_name varchar(255) NOT NULL;
 
 CREATE TABLE IF NOT EXISTS `order` (
-  `id` int(11) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `created_at` int(11) NOT NULL,
+  `updated_at` int(11) NOT NULL,  
   `status` int(2) unsigned NOT NULL,
   `user_id` int(11) unsigned NOT NULL,
   `total` float NOT NULL DEFAULT '0',
@@ -21,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `order_to_product` (
   `product_id` int(11) unsigned NOT NULL,
   `price` float NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  KEY `order_id` (`order_id`,`product_id`),
+  KEY `order_id` (`order_id`,`product_id`)
 );
 
 

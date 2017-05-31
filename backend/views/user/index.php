@@ -36,17 +36,18 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'created_at',
                 'filter' => DatePicker::widget([
-                    //'language' => 'en',
-                    'dateFormat' => 'dd-MM-yyyy',
+                    'language' => 'en',
+                    //'dateFormat' => 'dd-MM-yyyy',
                     'model' => $searchModel,
                     'attribute' => 'created_at',
                     'options' => ['class' => 'form-control'],
                     'clientOptions' => [
-                        'dateFormat' => 'dd-MM-yyyy',
+                        'dateFormat' => 'dd-mm-yy',
                     ],
                 ]),
                 // this is meaningless
                 'format' => ['date', 'php:d-m-Y'],
+                'headerOptions' => ['style' => 'width:118px'],                                
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
