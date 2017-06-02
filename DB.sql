@@ -1,3 +1,6 @@
+ALTER TABLE discount ADD file1 varchar(255) NOT NULL DEFAULT '';
+ALTER TABLE discount ADD file2 varchar(255) NOT NULL DEFAULT '';
+
 CREATE TABLE IF NOT EXISTS `discount` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `date_from` int(11) NOT NULL,

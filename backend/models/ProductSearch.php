@@ -70,4 +70,9 @@ class ProductSearch extends Product
 
         return $dataProvider;
     }
+    
+    static public function getArray()
+    {
+        return yii\helpers\ArrayHelper::map(Product::find()->select(['id','title'])->asArray()->all(), 'id', 'title');
+    }    
 }

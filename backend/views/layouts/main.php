@@ -41,7 +41,7 @@ AppAsset::register($this);
     } else {
         //$menuItems[] = ['label' => 'Home', 'url' => ['/site/index']];
         $menuItems[] = ['label' => 'Products', 'url' => ['/product/index']];
-        $menuItems[] = ['label' => 'Discount', 'url' => ['/discount/index']];
+        $menuItems[] = ['label' => 'Discounts', 'url' => ['/discount/index']];
         $menuItems[] = ['label' => 'Users', 'url' => ['/user/index']];
         $menuItems[] = ['label' => 'Orders', 'url' => ['/order/index']];
         
