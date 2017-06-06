@@ -3,18 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Discount;
-use backend\models\DiscountSearch;
+use common\models\PostCategory;
+use backend\models\PostCategorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
-use yii\filters\AccessControl;
 
 /**
- * DiscountController implements the CRUD actions for Discount model.
+ * PostCategoryController implements the CRUD actions for PostCategory model.
  */
-class DiscountController extends Controller
+class PostCategoryController extends Controller
 {
     /**
      * @inheritdoc
@@ -22,15 +20,6 @@ class DiscountController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],             
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -41,12 +30,12 @@ class DiscountController extends Controller
     }
 
     /**
-     * Lists all Discount models.
+     * Lists all PostCategory models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new DiscountSearch();
+        $searchModel = new PostCategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -56,7 +45,7 @@ class DiscountController extends Controller
     }
 
     /**
-     * Displays a single Discount model.
+     * Displays a single PostCategory model.
      * @param string $id
      * @return mixed
      */
@@ -68,30 +57,25 @@ class DiscountController extends Controller
     }
 
     /**
-     * Creates a new Discount model.
+     * Creates a new PostCategory model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Discount();
+        $model = new PostCategory();
 
-        if ($model->load(Yii::$app->request->post())) { 
-            $model->imageFile1 = UploadedFile::getInstance($model, 'imageFile1'); 
-            $model->imageFile2 = UploadedFile::getInstance($model, 'imageFile2');              
-            if ($model->save()) {
-                $model->saveFiles();
-                return $this->redirect(['update', 'id' => $model->id]);
-            }
-        } 
-        
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**
-     * Updates an existing Discount model.
+     * Updates an existing PostCategory model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
@@ -100,24 +84,17 @@ class DiscountController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post())) {
-            $model->imageFile1 = UploadedFile::getInstance($model, 'imageFile1'); 
-            $model->imageFile2 = UploadedFile::getInstance($model, 'imageFile2');            
-            if ($model->save()) {
-                $model->saveFiles();
-                return $this->redirect(['update', 'id' => $model->id]);
-            }
-        } 
-        
-        
-        $model->modifyDatesView();
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**
-     * Deletes an existing Discount model.
+     * Deletes an existing PostCategory model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
@@ -130,15 +107,15 @@ class DiscountController extends Controller
     }
 
     /**
-     * Finds the Discount model based on its primary key value.
+     * Finds the PostCategory model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return Discount the loaded model
+     * @return PostCategory the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Discount::findOne($id)) !== null) {
+        if (($model = PostCategory::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

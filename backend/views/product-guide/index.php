@@ -30,6 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => \kotchuprik\sortable\grid\Column::className()],
             'title',
             [
+                'attribute' => 'categories',
+                'filter' => common\models\FaqCategory::find()->select('title,id')->indexBy('id')->column(),
+            ],
+            [
                 'class' => 'yii\grid\ActionColumn',
                 'headerOptions' => ['style' => 'width:150px'],
                 'template' => '{update} {delete}',
@@ -41,6 +45,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'sortable-widget' => 1,
                 'sortable-url' => \yii\helpers\Url::toRoute(['sorting']),
             ]
-        ],   
+        ],
     ]); ?>
 <?php Pjax::end(); ?></div>

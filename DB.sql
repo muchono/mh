@@ -1,3 +1,83 @@
+CREATE TABLE IF NOT EXISTS `post` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `content` text,
+  `meta_description` varchar(500) NOT NULL DEFAULT '',
+  `meta_keywords` varchar(500) NOT NULL DEFAULT '',
+  `url_anckor` varchar(100) NOT NULL DEFAULT '',
+  `views` int(10) unsigned NOT NULL DEFAULT '0',
+  `created_at` int(11) NOT NULL,
+  `updated_at` int(11) NOT NULL,
+  `sent` tinyint(1) NOT NULL DEFAULT '0',
+  `active` int(1) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `views` (`views`),
+  KEY `url_anckor` (`url_anckor`)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `post_category`
+--
+
+CREATE TABLE IF NOT EXISTS `post_category` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `post_to_category`
+--
+
+CREATE TABLE IF NOT EXISTS `post_to_category` (
+  `post_id` int(11) unsigned NOT NULL,
+  `category_id` int(11) unsigned NOT NULL,
+  KEY `post_id` (`post_id`),
+  KEY `category_id` (`category_id`)
+);
+
+CREATE TABLE IF NOT EXISTS `faq` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `answer` text NOT NULL,
+  `popular_question` tinyint(1) DEFAULT '0',
+  `order` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `faq_category`
+--
+
+CREATE TABLE IF NOT EXISTS `faq_category` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `faq_to_category`
+--
+
+CREATE TABLE IF NOT EXISTS `faq_to_category` (
+  `faq_id` int(11) unsigned NOT NULL,
+  `category_id` int(11) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`),
+  KEY `faq_id` (`faq_id`),
+  KEY `category_id` (`category_id`)
+);
+
+
 ALTER TABLE discount ADD file1 varchar(255) NOT NULL DEFAULT '';
 ALTER TABLE discount ADD file2 varchar(255) NOT NULL DEFAULT '';
 
