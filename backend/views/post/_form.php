@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use dosamigos\tinymce\TinyMce;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Post */
@@ -25,7 +26,7 @@ use dosamigos\tinymce\TinyMce;
     
     
     <?php if (!$model->isNewRecord) {?>
-        <?= Html::img(Url::to('@frontent/web/images/blog/').$model->image, ['style' => 'max-width:500px'])?>
+        <?= Html::img(Yii::$app->urlManagerFrontend->createUrl('').'images/blog/'.$model->image, ['style' => 'max-width:500px'])?>
     <?php }?> 
     <?= $form->field($model, 'imageFile')->fileInput() ?>    
 

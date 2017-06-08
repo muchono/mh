@@ -123,7 +123,7 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getImagesRootDir()
     {
-        return Yii::getAlias('@webroot') . '/images/blog/';
+        return Yii::getAlias('@frontend') . '/web/images/blog/';
     }
     
     /**

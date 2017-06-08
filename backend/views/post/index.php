@@ -23,20 +23,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
+            [
+                'attribute' => 'created_at',
+                'filter' => yii\jui\DatePicker::widget([
+                    'language' => 'en',
+                    //'dateFormat' => 'dd-MM-yyyy',
+                    'model' => $searchModel,
+                    'attribute' => 'created_at',
+                    'options' => ['class' => 'form-control'],
+                    'clientOptions' => [
+                        'dateFormat' => 'dd-mm-yy',
+                    ],
+                ]),
+                // this is meaningless
+                'format' => ['date', 'php:d-m-Y'],
+                'headerOptions' => ['style' => 'width:118px'],                                
+            ],             
             'title',
-            'image',
-            'content:ntext',
-            'meta_description',
-            // 'meta_keywords',
-            // 'url_anckor:url',
-            // 'views',
-            // 'created_at',
-            // 'updated_at',
-            // 'sent',
-            // 'active',
 
             [
                 'class' => 'yii\grid\ActionColumn',

@@ -70,7 +70,10 @@ class PostController extends Controller
         if ($model->load(Yii::$app->request->post())) { 
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile'); 
             if ($model->save()) {
-                $this->imageFile->saveAs($model->imagesRootDir.'main_'.$model->id . '.' . $model->imageFile->extension);
+                $model->image = 'main_'.$model->id . '.' . $model->imageFile->extension;
+                $model->imageFile->saveAs($model->imagesRootDir.$model->image);
+                $model->save(false, array('image'));
+
                 return $this->redirect(['update', 'id' => $model->id]);
             }
         }
@@ -89,14 +92,21 @@ class PostController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        
+        if ($model->load(Yii::$app->request->post())) { 
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile'); 
+            if ($model->save()) {
+                $model->image = 'main_'.$model->id . '.' . $model->imageFile->extension;
+                $model->imageFile->saveAs($model->imagesRootDir.$model->image);
+                $model->save(false, array('image'));
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+                return $this->redirect(['update', 'id' => $model->id]);
+            }
         }
+        
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**

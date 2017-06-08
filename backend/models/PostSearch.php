@@ -20,8 +20,9 @@ class PostSearch extends Post
     public function rules()
     {
         return [
-            [['id', 'views', 'created_at', 'updated_at', 'sent', 'active'], 'integer'],
+            [['id', 'views', 'sent', 'active'], 'integer'],
             [['title', 'image', 'content', 'meta_description', 'meta_keywords', 'url_anckor','categories'], 'safe'],
+            [['created_at'], 'date', 'format'=>'dd-MM-yyyy', 'message'=>'{attribute} must be DD-MM-YYYY format.'],            
         ];
     }
 
@@ -49,6 +50,12 @@ class PostSearch extends Post
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ]
+            ],
+            
         ]);
 
         $this->load($params);
@@ -77,12 +84,14 @@ class PostSearch extends Post
         $query->andFilterWhere([
             'id' => $this->id,
             'views' => $this->views,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
             'sent' => $this->sent,
             'active' => $this->active,
         ]);
 
+        $query->andFilterWhere(['like', 
+            "(date_format(FROM_UNIXTIME(`created_at`), '%d-%m-%Y %h:%i:%s %p' ))",
+            $this->created_at]);
+        
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'image', $this->image])
             ->andFilterWhere(['like', 'content', $this->content])
