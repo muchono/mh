@@ -66,4 +66,9 @@ class PostCategorySearch extends PostCategory
 
         return $dataProvider;
     }
+    
+    static public function getArray()
+    {
+        return yii\helpers\ArrayHelper::map(PostCategory::find()->select(['id','title'])->asArray()->all(), 'id', 'title');
+    }        
 }

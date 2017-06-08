@@ -17,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Create Post', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Blog Post Categories', ['post-category/index'], ['class' => 'btn btn-success']) ?>        
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -37,7 +38,11 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'sent',
             // 'active',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'headerOptions' => ['style' => 'width:150px'],
+                'template' => '{update} {delete}',
+            ],
         ],
     ]); ?>
 </div>

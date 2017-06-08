@@ -25,6 +25,18 @@ use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
  */
 class Post extends \yii\db\ActiveRecord
 {
+    public $imageFile;
+     
+    const STATUS_DELETED = 0;
+    const STATUS_ACTIVE = 1;
+    
+    /**
+     * statuses values
+     */
+    public static $statuses = array(
+        0 => 'Disabled',
+        1 => 'Active',
+    );     
     /**
      * @inheritdoc
      */
@@ -39,13 +51,14 @@ class Post extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'image', 'created_at', 'updated_at', 'categories'], 'required'],
-            [['content'], 'string'],
+            [['title', 'categories'], 'required'],
+            [['content', 'image'], 'string'],
             [['views', 'created_at', 'updated_at', 'sent', 'active'], 'integer'],
-            [['title', 'image'], 'string', 'max' => 255],
+            [['title'], 'string', 'max' => 255],
             [['meta_description', 'meta_keywords'], 'string', 'max' => 500],
             [['url_anckor'], 'string', 'max' => 100],
-            [['categories'], 'safe'], 
+            [['categories'], 'safe'],
+            [['imageFile'], 'file', 'skipOnEmpty' => !$this->isNewRecord, 'extensions' => 'png,jpg,jpeg,gif'],
         ];
     }
 
@@ -57,6 +70,7 @@ class Post extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
+            'categories' => 'Categories',
             'image' => 'Image',
             'content' => 'Content',
             'meta_description' => 'Meta Description',
@@ -101,5 +115,23 @@ class Post extends \yii\db\ActiveRecord
     public function getPostCategories()
     {
         return $this->hasMany(PostToCategory::className(), ['post_id' => 'id']);
-    }    
+    }
+    
+    /**
+     * Get Images Directory
+     * @return string
+     */
+    public function getImagesRootDir()
+    {
+        return Yii::getAlias('@webroot') . '/images/blog/';
+    }
+    
+    /**
+     * Get Status Name
+     * @return string
+     */
+    public function getStatusName()
+    {
+        return self::$statuses[$this->status];
+    }   
 }

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use dosamigos\tinymce\TinyMce;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Faq */
@@ -17,7 +18,18 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'categories')->dropDownList(backend\models\FaqCategorySearch::getArray(), ['multiple'=>true,
         'size'=>5]);?>
     
-    <?= $form->field($model, 'answer')->textarea(['rows' => 6]) ?>
+   <?= $form->field($model, 'answer')->widget(TinyMce::className(), [
+    'options' => ['rows' => 26],
+    'language' => 'en_GB',
+    'clientOptions' => [
+        'plugins' => [
+            "advlist autolink lists link charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime media table contextmenu paste "
+        ],
+        'toolbar' => "undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link",
+    ]
+    ]);?>    
 
     
     <div class="form-group">
