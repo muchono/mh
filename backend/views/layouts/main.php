@@ -46,6 +46,9 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Orders', 'url' => ['/order/index']];
         $menuItems[] = ['label' => 'Blog', 'url' => ['/post/index']];
         $menuItems[] = ['label' => 'FAQ', 'url' => ['/faq/index']];
+        $menuItems[] = ['label' => 'Pages Content', 'url' => ['/pages-content/index']];
+        $menuItems[] = ['label' => 'About Us', 'url' => ['/about-us-content/index']];
+        $menuItems[] = ['label' => 'Settings', 'url' => ['/user-backend/update', 'id' => 1]];
         
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')

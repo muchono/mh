@@ -1,3 +1,21 @@
+CREATE TABLE IF NOT EXISTS `about_us_content` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `content` text CHARACTER SET utf8 NOT NULL,
+  `href` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+   PRIMARY KEY (`id`)
+);
+
+CREATE TABLE IF NOT EXISTS `pages_content` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `content` text CHARACTER SET utf8 NOT NULL,
+  `href` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `static` tinyint(1) DEFAULT '0',
+  `submenu` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+);
+
 CREATE TABLE IF NOT EXISTS `post` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,

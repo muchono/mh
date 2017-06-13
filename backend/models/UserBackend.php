@@ -26,7 +26,8 @@ class UserBackend extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
-
+    public $password_confirm;
+    public $password_new;
     /**
      * @inheritdoc
      */
@@ -44,6 +45,13 @@ class UserBackend extends ActiveRecord implements IdentityInterface
             TimestampBehavior::className(),
         ];
     }
+    
+    public function beforeSave($insert) {
+         if ($this->password_new) {
+              $this->setPassword($this->password_new);
+         }
+         return parent::beforeSave($insert);
+    }  
 
     /**
      * @inheritdoc
@@ -51,6 +59,9 @@ class UserBackend extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+            [['username'], 'required'],
+            [['password_new', 'password_confirm'], 'safe'],
+            ['password_new', 'compare', 'compareAttribute' => 'password_confirm'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
