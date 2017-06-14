@@ -7,6 +7,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use common\models\Product;
 
 /**
  * This is the model class for table "user".
@@ -190,7 +191,23 @@ class User extends \yii\db\ActiveRecord
     public function getStatusName()
     {
         return self::$statuses[$this->active];
-    }    
+    }
+    
+    /**
+     * 
+     */
+    static public function getSubscribedGroups()
+    {
+        $users = self::find()->where(['subscribed' => 1])->all();
+        $groups = array(
+            'buyed_all_active' => 0,
+            'buyed_active' => 0,
+            'buyed_not_active' => 0,
+            'nothing_buyed' => 0,
+        );
+        
+        
+    }
 
     /**
      * @inheritdoc
