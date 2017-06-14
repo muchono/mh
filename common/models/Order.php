@@ -22,6 +22,7 @@ use common\models\User;
  */
 class Order extends \yii\db\ActiveRecord
 {
+    const STATUS_ACTIVE = 1;
     /**
      * @inheritdoc
      */

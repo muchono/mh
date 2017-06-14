@@ -43,6 +43,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Products', 'url' => ['/product/index']];
         $menuItems[] = ['label' => 'Discounts', 'url' => ['/discount/index']];
         $menuItems[] = ['label' => 'Users', 'url' => ['/user/index']];
+        $menuItems[] = ['label' => 'Subscribers', 'url' => ['/subscribers/index']];
         $menuItems[] = ['label' => 'Orders', 'url' => ['/order/index']];
         $menuItems[] = ['label' => 'Blog', 'url' => ['/post/index']];
         $menuItems[] = ['label' => 'FAQ', 'url' => ['/faq/index']];

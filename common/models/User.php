@@ -8,6 +8,8 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use common\models\Product;
+use common\models\Order;
+use common\models\OrderToProduct;
 
 /**
  * This is the model class for table "user".
@@ -37,6 +39,16 @@ class User extends \yii\db\ActiveRecord
     public static $statuses = array(
         0 => 'Disabled',
         1 => 'Active',
+    );
+    
+    /**
+     * user's products activity names
+     */
+    public static $productActivityNames = array(
+        'buyed_all_active' => 'All Products Active',
+        'buyed_active' => 'Active Products Exist',
+        'buyed_not_active' => 'Nothing Active',
+        'nothing_buyed' => 'Nothing Buyed',
     );
     
     /**
@@ -194,21 +206,62 @@ class User extends \yii\db\ActiveRecord
     }
     
     /**
-     * 
+     * Get groups of users by products activity
+     * @return array
      */
     static public function getSubscribedGroups()
     {
-        $users = self::find()->where(['subscribed' => 1])->all();
         $groups = array(
-            'buyed_all_active' => 0,
-            'buyed_active' => 0,
-            'buyed_not_active' => 0,
-            'nothing_buyed' => 0,
+            'buyed_all_active' => array(),
+            'buyed_active' => array(),
+            'buyed_not_active' => array(),
+            'nothing_buyed' => array(),
         );
+        $products_ids = Product::find()->select('id')->where(['status' => 1])->asArray()->column();
+        $users = self::find()
+            ->select('user.id, user.email, user.phone,'
+                    . 'COUNT(order.id) orders_count, '
+                    . 'COUNT(order_to_product.product_id) active_products, GROUP_CONCAT(order_to_product.product_id) active_products')
+            ->leftJoin('order', '`order`.`user_id` = `user`.`id` AND (order.created_at + 31536000) > UNIX_TIMESTAMP()')
+            ->leftJoin('order_to_product', '`order_to_product`.`order_id` = `order`.`id`')
+            ->where(['user.subscribe' => 1])
+            ->groupBy(['order.id'])
+            ->asArray()
+            ->all();
         
+        foreach($users as $u) {
+            $active_products = explode(',',$u['active_products']);
+            $all_active = count(array_diff($products_ids, $active_products)) == 0;
+            if ($u['orders_count'] == 0) {
+                $groups['nothing_buyed'][] = $u;
+            } elseif ($all_active) {
+                $groups['buyed_all_active'][] = $u;
+            } elseif (empty($active_products)) {
+                $groups['buyed_not_active'][] = $u;
+            } elseif (!empty($active_products)) {
+                $groups['buyed_active'][] = $u;
+            }
+        }
         
+        return $groups;
     }
 
+    /**
+     * Get array of elements by key
+     * @param array $arr Array to search
+     * @param string $key Key name
+     * @return array
+     */
+    static public function getValues($arr, $key)
+    {
+        $r = [];
+        foreach($arr as $a){
+            $r[] = $a[$key];
+        }
+        
+        return $r;
+    }
+    
     /**
      * @inheritdoc
      */
