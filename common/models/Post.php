@@ -26,6 +26,7 @@ use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 class Post extends \yii\db\ActiveRecord
 {
     public $imageFile;
+    public $imageFileAvatar;
      
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 1;
@@ -52,13 +53,14 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'categories'], 'required'],
-            [['content', 'image'], 'string'],
+            [['content', 'image','author_bio','avatar_image'], 'string'],
             [['views', 'created_at', 'updated_at', 'sent', 'active'], 'integer'],
             [['title'], 'string', 'max' => 255],
             [['meta_description', 'meta_keywords'], 'string', 'max' => 500],
-            [['url_anckor'], 'string', 'max' => 100],
+            [['url_anckor','author_name'], 'string', 'max' => 100],
             [['categories'], 'safe'],
             [['imageFile'], 'file', 'skipOnEmpty' => !$this->isNewRecord, 'extensions' => 'png,jpg,jpeg,gif'],
+            [['imageFileAvatar'], 'file', 'extensions' => 'png,jpg,jpeg,gif'],
         ];
     }
 
@@ -70,10 +72,10 @@ class Post extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
-            'categories' => 'Categories',
+            'categories' => 'Tags',
             'image' => 'Image',
             'content' => 'Content',
-            'meta_description' => 'Meta Description',
+            'meta_description' => 'Post Description',
             'meta_keywords' => 'Meta Keywords',
             'url_anckor' => 'Url Anckor',
             'views' => 'Views',
@@ -81,6 +83,10 @@ class Post extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
             'sent' => 'Sent',
             'active' => 'Active',
+            'author_name' => 'Author Name',
+            'author_bio' => 'Author Bio',
+            'avatar_image' => 'Load Avatar',
+            'imageFileAvatar' => 'Load Avatar',
         ];
     }
     

@@ -8,7 +8,7 @@ use common\models\AboutUsContent;
 /* @var $searchModel backend\models\AboutUsContentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'About Us Contents';
+$this->title = 'How It Works';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="about-us-content-index">

@@ -15,9 +15,6 @@ use dosamigos\tinymce\TinyMce;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'categories')->dropDownList(backend\models\FaqCategorySearch::getArray(), ['multiple'=>true,
-        'size'=>5]);?>
-    
    <?= $form->field($model, 'answer')->widget(TinyMce::className(), [
     'options' => ['rows' => 26],
     'language' => 'en_GB',

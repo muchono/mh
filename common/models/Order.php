@@ -50,8 +50,8 @@ class Order extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'created_at' => 'Created At',
+            'id' => 'Order ID',
+            'created_at' => 'Date',
             'status' => 'Status',
             'user_id' => 'User ID',
             'total' => 'Total',

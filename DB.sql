@@ -1,3 +1,9 @@
+
+ALTER TABLE post ADD `author_name` varchar(100) NOT NULL DEFAULT '';
+ALTER TABLE post ADD `author_bio` text NOT NULL DEFAULT '';
+ALTER TABLE post ADD `avatar_image` varchar(255) NOT NULL;
+
+
 CREATE TABLE IF NOT EXISTS `about_us_content` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '',

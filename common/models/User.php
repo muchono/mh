@@ -46,9 +46,10 @@ class User extends \yii\db\ActiveRecord
      */
     public static $productActivityNames = array(
         'buyed_all_active' => 'All Products Active',
-        'buyed_active' => 'Active Products Exist',
-        'buyed_not_active' => 'Nothing Active',
-        'nothing_buyed' => 'Nothing Buyed',
+        'buyed_all_not_active' => 'All Products Expired',
+        'buyed_active' => 'One Product Active',
+        'buyed_not_active' => 'One Product Expired',
+        'nothing_buyed' => 'Leads',
     );
     
     /**
@@ -213,29 +214,43 @@ class User extends \yii\db\ActiveRecord
     {
         $groups = array(
             'buyed_all_active' => array(),
+            'buyed_all_not_active' => array(),
             'buyed_active' => array(),
             'buyed_not_active' => array(),
             'nothing_buyed' => array(),
         );
         $products_ids = Product::find()->select('id')->where(['status' => 1])->asArray()->column();
         $users = self::find()
-            ->select('user.id, user.email, user.phone,'
-                    . 'COUNT(order.id) orders_count, '
-                    . 'COUNT(order_to_product.product_id) active_products, GROUP_CONCAT(order_to_product.product_id) active_products')
+            ->select('user.id, user.name, user.email, user.phone,'
+                    . 'GROUP_CONCAT(order.id) active_orders, '
+                    . 'GROUP_CONCAT(o2.id) not_active_orders, '
+                    . 'COUNT(order_to_product.product_id) active_products, '
+                    . 'GROUP_CONCAT(op2.product_id) not_active_products, '
+                    . 'GROUP_CONCAT(order_to_product.product_id) active_products')
             ->leftJoin('order', '`order`.`user_id` = `user`.`id` AND (order.created_at + 31536000) > UNIX_TIMESTAMP()')
             ->leftJoin('order_to_product', '`order_to_product`.`order_id` = `order`.`id`')
+            
+            ->leftJoin('order as o2', 'o2.`user_id` = `user`.`id` AND (o2.created_at + 31536000) < UNIX_TIMESTAMP()')
+            ->leftJoin('order_to_product op2', 'op2.`order_id` = o2.`id`')
             ->where(['user.subscribe' => 1])
-            ->groupBy(['order.id'])
+            ->groupBy(['user.id'])
             ->asArray()
             ->all();
-        
+
         foreach($users as $u) {
             $active_products = explode(',',$u['active_products']);
-            $all_active = count(array_diff($products_ids, $active_products)) == 0;
-            if ($u['orders_count'] == 0) {
+            
+            
+            $all_active = count(array_diff($products_ids, array_unique($active_products))) == 0;
+
+            $not_active_products = explode(',',$u['not_active_products']);
+            $all_not_active = count(array_diff($products_ids, array_unique($not_active_products))) == 0;
+            if (empty($u['active_orders']) && empty($u['not_active_orders'])) {
                 $groups['nothing_buyed'][] = $u;
             } elseif ($all_active) {
                 $groups['buyed_all_active'][] = $u;
+            } elseif ($all_not_active) {
+                $groups['buyed_all_not_active'][] = $u;
             } elseif (empty($active_products)) {
                 $groups['buyed_not_active'][] = $u;
             } elseif (!empty($active_products)) {
@@ -256,7 +271,11 @@ class User extends \yii\db\ActiveRecord
     {
         $r = [];
         foreach($arr as $a){
-            $r[] = $a[$key];
+            if ($key == 'email') {
+                $r[] = $a['name'].' <'.$a[$key].'>';
+            } else {
+                $r[] = $a[$key];
+            }
         }
         
         return $r;

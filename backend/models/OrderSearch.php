@@ -17,7 +17,8 @@ class OrderSearch extends Order
      * @inheritdoc
      */
     
-    public $user;
+    public $user_name;
+    public $user_email;
     public $products;
     
     public function rules()
@@ -25,7 +26,7 @@ class OrderSearch extends Order
         return [
             [['id', 'status', 'user_id', 'payment_status', 'transaction_id'], 'integer'],
             [['total'], 'number'],
-            [['payment_method', 'user', 'products'], 'safe'],
+            [['payment_method', 'user_name', 'user_email','products'], 'safe'],
             [['created_at', 'updated_at'], 'date', 'format'=>'dd-MM-yyyy', 'message'=>'{attribute} must be DD-MM-YYYY format.'],
         ];
     }
@@ -62,7 +63,7 @@ class OrderSearch extends Order
             return $dataProvider;
         }
         
-        if (!empty($this->user)) {
+        if (!empty($this->user_name) || !empty($this->user_email)) {
             $query->joinWith(['user']);
         }
         // add conditions that should always apply here
@@ -96,7 +97,8 @@ class OrderSearch extends Order
             $this->created_at]
         );
 
-        $query->andFilterWhere(['like', 'user.name', $this->user]);
+        $query->andFilterWhere(['like', 'user.name', $this->user_name]);
+        $query->andFilterWhere(['like', 'user.email', $this->user_email]);
         $query->andFilterWhere(['like', 'payment_method', $this->payment_method]);
 
         return $dataProvider;

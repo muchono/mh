@@ -16,8 +16,6 @@ use yii\helpers\Url;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'meta_description')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'meta_keywords')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'url_anckor')->textInput(['maxlength' => true]) ?>
@@ -32,6 +30,8 @@ use yii\helpers\Url;
 
     <?= $form->field($model, 'categories')->dropDownList(backend\models\PostCategorySearch::getArray(), ['multiple'=>true,
         'size'=>5]);?>    
+
+    <?= $form->field($model, 'meta_description')->textInput(['maxlength' => true]) ?>
     
     <?= $form->field($model, 'content')->widget(TinyMce::className(), [
      'options' => ['rows' => 26],
@@ -45,6 +45,24 @@ use yii\helpers\Url;
          'toolbar' => "undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link",
      ]
      ]);?>      
+    
+    <?= $form->field($model, 'author_name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'author_bio')->widget(TinyMce::className(), [
+     'options' => ['rows' => 16],
+     'language' => 'en_GB',
+     'clientOptions' => [
+         'plugins' => [
+             "advlist autolink lists link charmap print preview anchor",
+             "searchreplace visualblocks code fullscreen",
+             "insertdatetime media table contextmenu paste "
+         ],
+         'toolbar' => "undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link",
+     ]
+     ]);?>
+    <?php if (!$model->isNewRecord) {?>
+        <?= Html::img(Yii::$app->urlManagerFrontend->createUrl('').'images/blog/'.$model->avatar_image, ['style' => 'max-width:500px'])?>
+    <?php }?>     
+    <?= $form->field($model, 'imageFileAvatar')->fileInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

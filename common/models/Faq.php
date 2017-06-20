@@ -32,7 +32,7 @@ class Faq extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'answer', 'categories'], 'required'],
+            [['title', 'answer'], 'required'],
             [['answer'], 'string'],
             [['popular_question', 'order'], 'integer'],
             [['title'], 'string', 'max' => 255],
@@ -48,7 +48,7 @@ class Faq extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'categories' => 'Categories',            
-            'title' => 'Title',
+            'title' => 'Question',
             'answer' => 'Answer',
             'popular_question' => 'Popular Question',
             'order' => 'Order',

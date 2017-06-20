@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Create Post', ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('Blog Post Categories', ['post-category/index'], ['class' => 'btn btn-success']) ?>        
+        <?= Html::a('Blog Post Tags', ['post-category/index'], ['class' => 'btn btn-success']) ?>        
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

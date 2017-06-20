@@ -16,24 +16,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create FAQ Item', ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a('FAQ Categories', ['faq-category/index'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create FAQ Question', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             'title',
-            [
-                'attribute' => 'categories',
-                'filter' => common\models\FaqCategory::find()->select('title,id')->indexBy('id')->column(),
-                'content' => function ($model, $key, $index, $column) {
-                    return $this->render('_index_categories', [
-                        'model' => $model,
-                    ]);
-                },
-                'headerOptions' => ['style' => 'width:40%'],                
-            ],            
             [
                 'class' => 'yii\grid\ActionColumn',
                 'headerOptions' => ['style' => 'width:150px'],

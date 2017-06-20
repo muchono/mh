@@ -67,12 +67,17 @@ class PostController extends Controller
         $model = new Post();
 
 
-        if ($model->load(Yii::$app->request->post())) { 
+        if ($model->load(Yii::$app->request->post())) {
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile'); 
+            $model->imageFileAvatar = UploadedFile::getInstance($model, 'imageFileAvatar'); 
             if ($model->save()) {
                 $model->image = 'main_'.$model->id . '.' . $model->imageFile->extension;
                 $model->imageFile->saveAs($model->imagesRootDir.$model->image);
-                $model->save(false, array('image'));
+                if ($model->imageFileAvatar) {
+                    $model->avatar_image = 'avatar_'.$model->id . '.' . $model->imageFileAvatar->extension;
+                    $model->imageFileAvatar->saveAs($model->imagesRootDir.$model->avatar_image);                    
+                }
+                $model->save(false, array('image', 'avatar_image'));
 
                 return $this->redirect(['update', 'id' => $model->id]);
             }
@@ -95,12 +100,18 @@ class PostController extends Controller
         
         if ($model->load(Yii::$app->request->post())) { 
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile'); 
+            $model->imageFileAvatar = UploadedFile::getInstance($model, 'imageFileAvatar');             
             if ($model->save()) {
                 if ($model->imageFile) {
                     $model->image = 'main_'.$model->id . '.' . $model->imageFile->extension;
                     $model->imageFile->saveAs($model->imagesRootDir.$model->image);
                     $model->save(false, array('image'));
                 }
+                if ($model->imageFileAvatar) {
+                    $model->avatar_image = 'main_'.$model->id . '.' . $model->imageFileAvatar->extension;
+                    $model->imageFileAvatar->saveAs($model->imagesRootDir.$model->avatar_image);
+                    $model->save(false, array('image', 'avatar_image'));
+                }             
 
                 return $this->redirect(['update', 'id' => $model->id]);
             }

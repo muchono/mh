@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\PostCategory */
 
-$this->title = 'Update Post Category: ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Post Categories', 'url' => ['index']];
+$this->title = 'Update Post Tag: ' . $model->title;
+$this->params['breadcrumbs'][] = ['label' => 'Post Tags', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="post-category-update">

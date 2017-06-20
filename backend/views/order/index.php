@@ -22,6 +22,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             [
+                'attribute' => 'id',
+                'headerOptions' => ['style' => 'width: 200px'],
+            ],
+            [
                 'attribute' => 'created_at',
                 'filter' => DatePicker::widget([
                     'language' => 'en',
@@ -38,12 +42,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['style' => 'width:118px'],                
             ],
             [
-                'attribute' => 'user',
+                'attribute' => 'user_name',
                 'content' => function ($model, $key, $index, $column) {
                     return Html::a($model->user->name, ['user/update', 'id' => $model->user->id], ['target' => '_blank']);
                 },
                 'headerOptions' => ['style' => 'width:20%'],
             ],
+            [
+                'attribute' => 'user_email',
+                'content' => function ($model, $key, $index, $column) {
+                    return $model->user->email;
+                },
+            ],                        
             [
                 'attribute' => 'products',
                 'filter' => Product::find()->select('title,id')->indexBy('id')->column(),
@@ -52,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'model' => $model,
                     ]);
                 },
-                'headerOptions' => ['style' => 'width:40%'],                
+                'headerOptions' => ['style' => 'width:35%'],                
             ],            
             'total',
             [
@@ -61,6 +71,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     return 'PayPal';
                 },
             ],
+            [
+                'attribute' => 'Invoice',
+                'content' => function ($model, $key, $index, $column) {
+                    return Html::a('<span class="glyphicon glyphicon-download-alt"></span>', ['invoice/get', 'id' => $model->id], ['target' => '_blank']);
+                },
+
+            ],                        
             //['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
