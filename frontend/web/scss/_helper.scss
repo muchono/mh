@@ -1,0 +1,283 @@
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.img-fluid {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.table {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.cell {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.pull-left {
+  float: left !important;
+}
+
+.pull-right {
+  float: right !important;
+}
+
+.pull-center {
+  float: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.align-left {
+  float: left !important;
+  margin: 6px 20px 15px 0 !important;
+}
+
+.align-right {
+  float: right !important;
+  margin: 6px 0 15px 20px !important;
+}
+
+.align-center {
+  margin: 0 0 15px !important;
+  img {
+    margin: 0 auto;
+  }
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.ib {
+  display: inline-block;
+}
+
+.vat {
+  vertical-align: top;
+}
+
+.fixed {
+  position: fixed;
+}
+
+video {
+  width: 100% !important;
+  height: auto !important;
+}
+
+.video-wrap {
+  position: relative;
+  padding-bottom: 54%; /* 16:9 56.25% */
+  padding-top: 25px;
+  height: 0;
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.maestro-ic {
+  @include sprite($maestro-ic);
+  display: inline-block;
+}
+.visa-ic {
+  @include sprite($visa-ic);
+  display: inline-block;
+}
+.ae-ic {
+  @include sprite($ae-ic);
+  display: inline-block;
+}
+.paypal-ic {
+  @include sprite($paypal-ic);
+  display: inline-block;
+}
+.bitcoin-ic {
+  @include sprite($bitcoin-ic);
+  display: inline-block;
+}
+.webmoney-ic {
+  @include sprite($webmoney-ic);
+  display: inline-block;
+}
+
+.pgn-prev {
+  @include sprite($pgn-prev);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.pgn-next {
+  @include sprite($pgn-next);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.alert-ic-1 {
+  @include sprite($alert-ic-1);
+  display: inline-block;
+}
+
+.icon-1 {
+  @include sprite($icon-1);
+  display: inline-block;
+}
+
+.icon-2 {
+  @include sprite($icon-2);
+  display: inline-block;
+}
+
+.icon-3 {
+  @include sprite($icon-3);
+  display: inline-block;
+}
+
+.icon-4 {
+  @include sprite($icon-4);
+  display: inline-block;
+}
+
+.icon-5 {
+  @include sprite($icon-5);
+  display: inline-block;
+  vertical-align: top;
+}
+
+.icon-8 {
+  @include sprite($icon-8);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.icon-9 {
+  @include sprite($icon-9);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.icon-10 {
+  @include sprite($icon-10);
+  display: inline-block;
+  vertical-align: top;
+}
+
+.icon-11 {
+  @include sprite($icon-11);
+  display: inline-block;
+  vertical-align: top;
+}
+
+.icon-12 {
+  @include sprite($icon-12);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.icon-13 {
+  @include sprite($icon-13);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.icon-14 {
+  @include sprite($icon-14);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+// .pay-1-ic {
+//   @include sprite($pay-1-ic);
+//   display: inline-block;
+//   vertical-align: middle;
+// }
+
+// .pay-2-ic {
+//   @include sprite($pay-2-ic);
+//   display: inline-block;
+//   vertical-align: middle;
+// }
+
+// .pay-3-ic {
+//   @include sprite($pay-3-ic);
+//   display: inline-block;
+//   vertical-align: middle;
+// }
+
+// .pay-4-ic {
+//   @include sprite($pay-4-ic);
+//   display: inline-block;
+//   vertical-align: middle;
+// }
+
+.fb {
+  @include sprite($fb);
+  display: inline-block;
+  vertical-align: top;
+
+  &:hover {
+    @include sprite($fb-ac);
+  }
+}
+
+.tw {
+  @include sprite($tw);
+  display: inline-block;
+  vertical-align: top;
+
+  &:hover {
+    @include sprite($tw-ac);
+  }
+}
+
+.gp {
+  @include sprite($gp);
+  display: inline-block;
+  vertical-align: top;
+
+  &:hover {
+    @include sprite($gp-ac);
+  }
+}
+
+.pt {
+  @include sprite($pt);
+  display: inline-block;
+  vertical-align: top;
+
+  &:hover {
+    @include sprite($pt-ac);
+  }
+}
