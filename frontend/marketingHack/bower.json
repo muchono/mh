@@ -1,0 +1,25 @@
+{
+  "name": "DasHost",
+  "description": "",
+  "main": "index.html",
+  "authors": [
+    "Artem Artemenko"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "reset-css": "~2.0.2011012602",
+    "magnific-popup": "~1.0.0",
+    "imagesloaded": "~3.2.0",
+    "slick-carousel": "~1.5.9",
+    "bourbon": "~4.3.4"
+  }
+}
