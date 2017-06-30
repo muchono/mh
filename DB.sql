@@ -1,3 +1,6 @@
+ALTER TABLE about_us_content ADD `author_name` varchar(255) NOT NULL DEFAULT '';
+ALTER TABLE about_us_content ADD `author_bio` varchar(255) NOT NULL DEFAULT '';
+ALTER TABLE about_us_content ADD `image` varchar(255) NOT NULL;
 
 ALTER TABLE post ADD `author_name` varchar(100) NOT NULL DEFAULT '';
 ALTER TABLE post ADD `author_bio` text NOT NULL DEFAULT '';

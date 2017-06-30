@@ -38,93 +38,48 @@ $this->title = 'My Yii Application';
           <p class="bs-head__text">Each product consists of <strong>Guide</strong> + <strong>Digital Subscription</strong> for 1 year.</p>
         </div>
         <div class="bs-list">
+          <?php foreach($products as $p) {?>
           <div class="bs-list__item">
             <div class="product">
               <div class="pd__head">
-                <div class="pd__text-1">Guest posts marketing</div>
-                <h3 class="title-2">158 Popular Forums</h3>
-                <div class="pd__text-2">where you can get quality backlinks without fear of being banned by moderators. Alongside with this constantly updated list you will find out:</div>
-                <i class="icon-1"></i>
+                <div class="pd__text-1"><?=$p->short_title?></div>
+                <h3 class="title-2"><?=$p->title?></h3>
+                <div class="pd__text-2"><?=$p->full_title?></div>
+                <i class="icon-<?=($p->priceFinal) ? 1 : 2?>"></i>
               </div>
               <div class="pd__content">
                 <ul class="list-1">
-                  <li>How to get traffic and backlinks on popular forums?</li>
-                  <li>How to place links and do not look like spammer?</li>
-                  <li>Which links on forums do work and which one not and why?</li>
-                  <li>How to make big traffic from forums?</li>
-                  <li>Where and how to find new forums?</li>
+                <?php foreach($p->guide as $g) {?>
+                  <li><?=$g->title?></li>
+                <?php }?>
                 </ul>
                 <a href="" class="pd__more">Learn more</a>
               </div>
               <div class="pd__foot">
-                <div class="pd__foot-item">
-                </div>
-                <div class="pd-try">
-                  <span class="pd-try__price">$95</span>
-                  <span class="pd-try__add">
-                    <i class="icon-3"></i>
-                  </span>
-                  <a href="" class="btn-sm-1">try demo</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="bs-list__item">
-            <div class="product">
-              <div class="pd__head">
-                <div class="pd__text-1">Q&amp;A websites Link Building Techniques </div>
-                <h3 class="title-2">45 Best Q&amp;A Websites</h3>
-                <div class="pd__text-2">where you can get quality backlinks without fear of being banned by moderators. Alongside with this constantly updated list you will find out:</div>
-                <i class="icon-2"></i>
-              </div>
-              <div class="pd__content">
-                <ul class="list-1">
-                  <li>How to get traffic and backlinks on popular forums?</li>
-                  <li>How to place links and do not look like spammer?</li>
-                  <li>Which links on forums do work and which one not and why?</li>
-                  <li>How to make big traffic from forums?</li>
-                  <li>Where and how to find new forums?</li>
-                </ul>
-                <a href="" class="pd__more">Learn more</a>
-              </div>
-              <div class="pd__foot">
+                <?php if (!$p->priceFinal){?>
                 <div class="pd-on">
                   FREE Now
                 </div>
-                <div class="pd-try">
-                  <span class="pd-try__price pd-try__price--discount">$95</span>
-                  <a href="" class="btn-sm-2">Get Free  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="bs-list__item">
-            <div class="product">
-              <div class="pd__head">
-                <div class="pd__text-1">Guest posts marketing</div>
-                <h3 class="title-2">207 Guest Posts Websites</h3>
-                <div class="pd__text-2">where you can get quality backlinks without fear of being banned by moderators. Alongside with this constantly updated list you will find out:</div>
-                <i class="icon-1"></i>
-              </div>
-              <div class="pd__content">
-                <ul class="list-1">
-                  <li>How to get traffic and backlinks on popular forums?</li>
-                  <li>How to place links and do not look like spammer?</li>
-                  <li>Which links on forums do work and which one not and why?</li>
-                  <li>How to make big traffic from forums?</li>
-                  <li>Where and how to find new forums?</li>
-                </ul>
-                <a href="" class="pd__more">Learn more</a>
-              </div>
-              <div class="pd__foot">
+                <?php } elseif ($p->discount){?>
                 <div class="pd-off">
-                  <strong>25<sup>%</sup></strong>
+                  <strong><?=$p->discount->percent?><sup>%</sup></strong>
                   Discount
                 </div>
+                <?php } else {?>                  
+                <div class="pd__foot-item">
+                </div>
+                <?php }?>
+                  
                 <div class="pd-try">
-                  <span class="pd-try__price pd-try__price--discount">$95</span>
-                  <span class="pd-try__discount-price">$71,25</span>
-                  <span class="pd-try__add">
+                  <?php if ($p->discount){?>
+                  <span class="pd-try__price pd-try__price--discount">$<?=$p->price?></span>
+                      <?php if ($p->priceFinal){?>
+                  <span class="pd-try__discount-price">$<?=$p->priceFinal?></span>
+                      <?php }?>
+                  <?php } else {?>
+                  <span class="pd-try__price">$<?=$p->priceFinal?></span>
+                  <?php } ?>
+                  <span class="pd-try__add">                
                     <i class="icon-3"></i>
                   </span>
                   <a href="" class="btn-sm-1">try demo</a>
@@ -132,97 +87,7 @@ $this->title = 'My Yii Application';
               </div>
             </div>
           </div>
-          <div class="bs-list__item">
-            <div class="product">
-              <div class="pd__head">
-                <div class="pd__text-1">video Marketing</div>
-                <h3 class="title-2">74 Best Free Video Hosts</h3>
-                <div class="pd__text-2">where you can get quality backlinks without fear of being banned by moderators. Alongside with this constantly updated list you will find out:</div>
-                <i class="icon-1"></i>
-              </div>
-              <div class="pd__content">
-                <ul class="list-1">
-                  <li>How to get traffic and backlinks on popular forums?</li>
-                  <li>How to place links and do not look like spammer?</li>
-                  <li>Which links on forums do work and which one not and why?</li>
-                  <li>How to make big traffic from forums?</li>
-                  <li>Where and how to find new forums?</li>
-                </ul>
-                <a href="" class="pd__more">Learn more</a>
-              </div>
-              <div class="pd__foot">
-                <div class="pd-off">
-                  <strong>25<sup>%</sup></strong>
-                  Discount
-                </div>
-                <div class="pd-try">
-                  <span class="pd-try__price pd-try__price--discount">$95</span>
-                  <span class="pd-try__discount-price">$71,25</span>
-                  <span class="pd-try__add">
-                    <i class="icon-3"></i>
-                  </span>
-                  <a href="" class="btn-sm-1">try demo</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="bs-list__item">
-            <div class="product">
-              <div class="pd__head">
-                <div class="pd__text-1">Infographic marketing</div>
-                <h3 class="title-2">370 Infographic Websites</h3>
-                <div class="pd__text-2">where you can get quality backlinks without fear of being banned by moderators. Alongside with this constantly updated list you will find out:</div>
-                <i class="icon-1"></i>
-              </div>
-              <div class="pd__content">
-                <ul class="list-1">
-                  <li>How to get traffic and backlinks on popular forums?</li>
-                  <li>How to place links and do not look like spammer?</li>
-                  <li>Which links on forums do work and which one not and why?</li>
-                  <li>How to make big traffic from forums?</li>
-                  <li>Where and how to find new forums?</li>
-                </ul>
-                <a href="" class="pd__more">Learn more</a>
-              </div>
-              <div class="pd__foot">
-                <div class="pd__available">Available</div>
-              </div>
-            </div>
-          </div>
-          <div class="bs-list__item">
-            <div class="product">
-              <div class="pd__head">
-                <div class="pd__text-1">Guest posts marketing</div>
-                <h3 class="title-2">207 Guest Posts Websites</h3>
-                <div class="pd__text-2">where you can get quality backlinks without fear of being banned by moderators. Alongside with this constantly updated list you will find out:</div>
-                <i class="icon-1"></i>
-              </div>
-              <div class="pd__content">
-                <ul class="list-1">
-                  <li>How to get traffic and backlinks on popular forums?</li>
-                  <li>How to place links and do not look like spammer?</li>
-                  <li>Which links on forums do work and which one not and why?</li>
-                  <li>How to make big traffic from forums?</li>
-                  <li>Where and how to find new forums?</li>
-                </ul>
-                <a href="" class="pd__more">Learn more</a>
-              </div>
-              <div class="pd__foot">
-                <div class="pd-off">
-                  <strong>25<sup>%</sup></strong>
-                  Discount
-                </div>
-                <div class="pd-try">
-                  <span class="pd-try__price pd-try__price--discount">$95</span>
-                  <span class="pd-try__discount-price">$71,25</span>
-                  <span class="pd-try__add">
-                    <i class="icon-3"></i>
-                  </span>
-                  <a href="" class="btn-sm-1">try demo</a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <?php }?>
         </div>
         <div class="bs-more">
           <a href="" class="btn-2">View More Bestsellers</a>
@@ -235,7 +100,7 @@ $this->title = 'My Yii Application';
         <h2 class="title-3">MarketingHack Statistics</h2>
         <div class="st-row">
           <div class="st-col">
-            <strong>5</strong>
+            <strong><?=$productsCount?></strong>
             Products <br>Launched
           </div>
           <div class="st-col">
@@ -243,11 +108,11 @@ $this->title = 'My Yii Application';
             Products <br>Updates
           </div>
           <div class="st-col">
-            <strong>1027</strong>
+            <strong><?=$hrefsCount?></strong>
             Websites <br>for Using
           </div>
           <div class="st-col">
-            <strong>924</strong>
+            <strong><?=$usersCount?></strong>
             Total <br>Users
           </div>
         </div>
@@ -258,42 +123,21 @@ $this->title = 'My Yii Application';
       <div class="container">
         <h2 class="title-1 text-center">Press About Us</h2>
         <div class="pas-slider js-carousel" data-dots="true" data-dotsclass="dots-1" data-infinite="true" data-speed="300" data-slides="1">
+          <?php foreach ($aboutUsContent as $i) { 
+              if ($i->href != 'type1') continue;?>
           <div>
             <div class="pas__item">
               <div class="pas__logo">
-                <img src="img/press-ic.png" class="img-fluid" alt="">
+                <img src="images/aboutus/<?=$i->image?>" class="img-fluid" alt="">
               </div>
               <div class="pas__content">
                 <i class="icon-4"></i>
-                <p class="pas__text">The claim is true: you do not have to write your own backend for a lot of application and for a lot of common needs. It is exciting where the industry is going in the future with more APIs and the marketplace-style direction. </p>
+                <p class="pas__text"><?=$i->content?></p>
                 <a href="" class="pas__link">Read more</a>
               </div>
             </div>
           </div>
-          <div>
-            <div class="pas__item">
-              <div class="pas__logo">
-                <img src="img/press-ic.png" class="img-fluid" alt="">
-              </div>
-              <div class="pas__content">
-                <i class="icon-4"></i>
-                <p class="pas__text">The claim is true: you do not have to write your own backend for a lot of application and for a lot of common needs. It is exciting where the industry is going in the future with more APIs and the marketplace-style direction. </p>
-                <a href="" class="pas__link">Read more</a>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="pas__item">
-              <div class="pas__logo">
-                <img src="img/press-ic.png" class="img-fluid" alt="">
-              </div>
-              <div class="pas__content">
-                <i class="icon-4"></i>
-                <p class="pas__text">The claim is true: you do not have to write your own backend for a lot of application and for a lot of common needs. It is exciting where the industry is going in the future with more APIs and the marketplace-style direction. </p>
-                <a href="" class="pas__link">Read more</a>
-              </div>
-            </div>
-          </div>
+          <?php }?>
         </div>
       </div>
     </section>
@@ -302,90 +146,23 @@ $this->title = 'My Yii Application';
       <div class="container">
         <h2 class="title-1 text-center">What People Think About Us</h2>
         <div class="tst-slider js-carousel" data-dots="true" data-dotsclass="dots-2" data-infinite="true" data-slides="3" data-speed="300" data-adaptiveheight="true">
+          <?php foreach ($aboutUsContent as $i) { 
+              if ($i->href != 'type2') continue;?>            
           <div>
             <div class="tst__item">
               <div class="tst__content">
-                <p class="tst__text">“The claim is true: you do not have to write your own backend for a lot of application and for a lot of common needs. It is exciting where the industry is going in the future with more APIs and the marketplace”</p>
+                <p class="tst__text"><?=$i->content?></p>
               </div>
               <div class="tst__user">
-                <img src="img/tst-img-1.png" class="tst__ava" alt="">
+                <img src="images/aboutus/<?=$i->image?>" class="tst__ava" alt="">
                 <div class="tst__info">
-                  <h3>Gary Meyer</h3>
-                  <p>CEO, Framework7</p>
+                  <h3><?=$i->author_name?></h3>
+                  <p><?=$i->author_bio?></p>
                 </div>
               </div>
             </div>
           </div>
-          <div>
-            <div class="tst__item">
-              <div class="tst__content">
-                <p class="tst__text">“The claim is true: you do not have to write your own backend for a lot of application and for a lot of common needs. It is exciting where the industry is going in the future with more APIs and the marketplace-style direction. We will see it being easier and easier to build pretty sophisticated applications and not writing any server-side code. We will see it being easier and easier to build pretty sophisticated applications and not writing any server-side code.”</p>
-              </div>
-              <div class="tst__user">
-                <img src="img/tst-img-2.png" class="tst__ava" alt="">
-                <div class="tst__info">
-                  <h3>Drew Ashlock</h3>
-                  <p>Product Manager, Invidio</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="tst__item">
-              <div class="tst__content">
-                <p class="tst__text">“The claim is true: you do not have to write your own backend for a lot of application and for a lot of common needs. It is exciting where the industry is going in the future with more APIs and the marketplace-style direction. We will see it being easier and easier to build pretty sophisticated applications and not writing any server-side code.”</p>
-              </div>
-              <div class="tst__user">
-                <img src="img/tst-img-3.png" class="tst__ava" alt="">
-                <div class="tst__info">
-                  <h3>Alexey Malcev</h3>
-                  <p>General Marcetolog, SEOtrust</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="tst__item">
-              <div class="tst__content">
-                <p class="tst__text">“The claim is true: you do not have to write your own backend for a lot of application and for a lot of common needs. It is exciting where the industry is going in the future with more APIs and the marketplace”</p>
-              </div>
-              <div class="tst__user">
-                <img src="img/tst-img-1.png" class="tst__ava" alt="">
-                <div class="tst__info">
-                  <h3>Gary Meyer</h3>
-                  <p>CEO, Framework7</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="tst__item">
-              <div class="tst__content">
-                <p class="tst__text">“The claim is true: you do not have to write your own backend for a lot of application and for a lot of common needs. It is exciting where the industry is going in the future with more APIs and the marketplace-style direction. We will see it being easier and easier to build pretty sophisticated applications and not writing any server-side code. We will see it being easier and easier to build pretty sophisticated applications and not writing any server-side code.”</p>
-              </div>
-              <div class="tst__user">
-                <img src="img/tst-img-2.png" class="tst__ava" alt="">
-                <div class="tst__info">
-                  <h3>Drew Ashlock</h3>
-                  <p>Product Manager, Invidio</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="tst__item">
-              <div class="tst__content">
-                <p class="tst__text">“The claim is true: you do not have to write your own backend for a lot of application and for a lot of common needs. It is exciting where the industry is going in the future with more APIs and the marketplace-style direction. We will see it being easier and easier to build pretty sophisticated applications and not writing any server-side code.”</p>
-              </div>
-              <div class="tst__user">
-                <img src="img/tst-img-3.png" class="tst__ava" alt="">
-                <div class="tst__info">
-                  <h3>Alexey Malcev</h3>
-                  <p>General Marcetolog, SEOtrust</p>
-                </div>
-              </div>
-            </div>
-          </div>
+            <?php }?>
         </div>
       </div>
     </section>

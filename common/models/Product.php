@@ -4,6 +4,9 @@ namespace common\models;
 
 use Yii;
 use himiklab\sortablegrid\SortableGridBehavior;
+use common\models\ProductHref;
+use common\models\ProductGuide;
+use common\models\Discount;
 
 /**
  * This is the model class for table "product".
@@ -77,6 +80,23 @@ class Product extends \yii\db\ActiveRecord
         return parent::beforeSave($insert);
     }
     
+    
+    /**
+     * Get Discount
+     * @return Discount
+     */
+    public function getDiscount()
+    {
+        $time = time();
+         return Discount::find()
+                ->innerJoin('discount_to_product', '`discount`.`id` = `discount_to_product`.`discount_id`')
+                ->where(['<', 'date_from', $time])
+                ->andWhere(['<', 'date_to', $time])
+                ->andWhere(['product_id' => $this->id])
+                ->orderBy('id DESC')
+                ->one();
+    }
+    
     /**
      * Get Status Name
      * @return string
@@ -84,6 +104,37 @@ class Product extends \yii\db\ActiveRecord
     public function getStatusName()
     {
         return self::$statuses[$this->status];
+    }
+    
+    /**
+     * Get Hrefs
+     * @return array
+     */
+    public function getHrefs()
+    {
+        return $this->hasMany(ProductHref::className(), ['product_id' => 'id']);
+    }
+    
+    /**
+     * Get Guide
+     * @return array
+     */
+    public function getGuide()
+    {
+        return $this->hasMany(ProductGuide::className(), ['product_id' => 'id']);
+    }
+    
+    /**
+     * Get final price
+     * @return float
+     */
+    public function getPriceFinal()
+    {
+        $price = $this->price;
+        if ($this->discount){
+            $price = round($price - $price * $this->discount->percent / 100);
+        }
+        return $price;
     }
     
     /**

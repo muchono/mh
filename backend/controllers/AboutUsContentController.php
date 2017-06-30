@@ -8,6 +8,7 @@ use backend\models\AboutUsContentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * AboutUsContentController implements the CRUD actions for AboutUsContent model.
@@ -65,8 +66,17 @@ class AboutUsContentController extends Controller
     {
         $model = new AboutUsContent();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile'); 
+            if ($model->save()) {
+                if ($model->imageFile) {
+                    $model->image = 'main_'.$model->id . '.' . $model->imageFile->extension;
+                    $model->imageFile->saveAs($model->imagesRootDir.$model->image);
+                }
+                $model->save(false, array('image'));
+                
+                return $this->redirect(['index']);
+            }
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -84,8 +94,17 @@ class AboutUsContentController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile'); 
+            if ($model->save()) {
+                if ($model->imageFile) {
+                    $model->image = 'main_'.$model->id . '.' . $model->imageFile->extension;
+                    $model->imageFile->saveAs($model->imagesRootDir.$model->image);
+                    $model->save(false, array('image'));
+                }                
+                return $this->redirect(['index']);   
+            }
+
         } else {
             return $this->render('update', [
                 'model' => $model,

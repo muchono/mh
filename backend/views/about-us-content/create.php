@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model common\models\AboutUsContent */
 
 $this->title = 'Create';
-$this->params['breadcrumbs'][] = ['label' => 'How It Works', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'About US', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="about-us-content-create">

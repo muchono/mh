@@ -9,14 +9,18 @@ use Yii;
  *
  * @property string $id
  * @property string $title
+ * @property string $image
  * @property string $content
  * @property string $href
+ * @property string $author_name
+ * @property string $author_bio
  */
 class AboutUsContent extends \yii\db\ActiveRecord
 {
+    public $imageFile;    
     public static $hrefs = array(
-        'type1' => 'Type1',
-        'type2' => 'Type2',
+        'type1' => 'Press About Us',
+        'type2' => 'Think About Us',
     );
     /**
      * @inheritdoc
@@ -34,7 +38,8 @@ class AboutUsContent extends \yii\db\ActiveRecord
         return [
             [['title', 'href', 'content'], 'required'],
             [['content'], 'string'],
-            [['title', 'href'], 'string', 'max' => 255],
+            [['title', 'href','author_name','author_bio','image'], 'string', 'max' => 255],
+            [['imageFile'], 'file', 'skipOnEmpty' => !$this->isNewRecord, 'extensions' => 'png,jpg,jpeg,gif'],            
         ];
     }
 
@@ -46,8 +51,11 @@ class AboutUsContent extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
+            'image' => 'Image',            
             'content' => 'Content',
             'href' => 'Type',
+            'author_name' => 'Author Name',
+            'author_bio' => 'Author Info',
         ];
     }
     
@@ -55,4 +63,13 @@ class AboutUsContent extends \yii\db\ActiveRecord
     {
         return self::$hrefs[$this->href];
     }
+    
+    /**
+     * Get Images Directory
+     * @return string
+     */
+    public function getImagesRootDir()
+    {
+        return Yii::getAlias('@frontend') . '/web/images/aboutus/';
+    }    
 }

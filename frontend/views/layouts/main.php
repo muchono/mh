@@ -7,6 +7,8 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
+use yii\helpers\Url;
+
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
@@ -57,13 +59,13 @@ AppAsset::register($this);
       </div>
       <nav class="main-nav">
         <ul class="main-nav__list">
-          <li class="main-nav__item"><a href="" class="main-nav__link">Home</a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link">How It Works</a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link">Products</a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link">Special Offers</a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link">F.A.Q.</a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link">Support</a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link">Blog</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['site/index']);?>" class="main-nav__link">Home</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['site/hiw']);?>" class="main-nav__link">How It Works</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['site/products']);?>" class="main-nav__link">Products</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['site/special-offer']);?>" class="main-nav__link">Special Offers</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['site/faq']);?>" class="main-nav__link">F.A.Q.</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['site/support']);?>" class="main-nav__link">Support</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['blog']);?>" class="main-nav__link">Blog</a></li>
         </ul>
       </nav>
       <div class="user-pane">
@@ -236,7 +238,6 @@ AppAsset::register($this);
 
 <?php $this->endBody() ?>
   <!-- Vendor -->
-  <script src="vendor/jquery/dist/jquery.js"></script>
   <script src="vendor/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
   <script src="vendor/slick-carousel/slick/slick.min.js"></script>
 

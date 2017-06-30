@@ -7,11 +7,17 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+
+use common\models\LoginForm;
+use common\models\Product;
+use common\models\ProductHref;
+use common\models\User;
+use common\models\AboutUsContent;
+use common\models\Faq;
 
 /**
  * Site controller
@@ -72,8 +78,81 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->render('index', array(
+            'products' => Product::find()->where(['status' => '1'])->orderBy('order')->all(),
+            'productsCount' => Product::find()->where(['status' => '1'])->count(),
+            'hrefsCount' => ProductHref::find()->where(['status' => '1'])->count(),
+            'usersCount' => User::find()->where(['active' => '1'])->count(),
+            'aboutUsContent' => AboutUsContent::find()->all(),
+        ));
     }
+    
+    /**
+     * Displays FAQ.
+     *
+     * @return mixed
+     */
+    public function actionFaq()
+    {
+        $getID = Yii::$app->request->get('id');
+        if (!empty($getID)
+                && ($model = Faq::findOne($getID)))
+        {
+            return $this->render('faq_answer', array(
+                'model' => $model,
+                'faqs' => Faq::find()->orderBy('title')->all(),
+            ));            
+        } else {
+            return $this->render('faq', array(
+            'faqs' => Faq::find()->orderBy('title')->all(),
+            ));
+        }
+
+    }
+
+    /**
+     * Displays Products.
+     *
+     * @return mixed
+     */
+    public function actionProducts()
+    {
+        return $this->render('products', array(
+        ));
+    }
+    
+    /**
+     * Displays Special Offers.
+     *
+     * @return mixed
+     */
+    public function actionSpecialOffer()
+    {
+        return $this->render('special_offer', array(
+        ));
+    }
+    
+    /**
+     * Displays Support.
+     *
+     * @return mixed
+     */
+    public function actionSupport()
+    {
+        return $this->render('support', array(
+        ));
+    }    
+    
+    /**
+     * Displays How It Works.
+     *
+     * @return mixed
+     */
+    public function actionHiw()
+    {
+        return $this->render('hiw', array(
+        ));
+    }    
 
     /**
      * Logs in a user.

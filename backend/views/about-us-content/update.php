@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model common\models\AboutUsContent */
 
 $this->title = 'Update';
-$this->params['breadcrumbs'][] = ['label' => 'How It Works', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'About US', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="about-us-content-update">

@@ -14,6 +14,13 @@ use dosamigos\tinymce\TinyMce;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+    <?php if (!$model->isNewRecord) {?>
+        <?= Html::img(Yii::$app->urlManagerFrontend->createUrl('').'images/aboutus/'.$model->image, ['style' => 'max-width:500px'])?>
+    <?php }?> 
+    <?= $form->field($model, 'imageFile')->fileInput() ?> 
+    
+    <?= $form->field($model, 'author_name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'author_bio')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'content')->widget(TinyMce::className(), [
     'options' => ['rows' => 26],
