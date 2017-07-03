@@ -1,3 +1,20 @@
+CREATE TABLE IF NOT EXISTS `product_page` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) unsigned NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text,
+  `guide_description` varchar(500) NOT NULL DEFAULT '',
+  `list_description` varchar(500) NOT NULL DEFAULT '',  
+  `feature1` varchar(500) NOT NULL DEFAULT '',
+  `feature2` varchar(500) NOT NULL DEFAULT '',
+  `feature3` varchar(500) NOT NULL DEFAULT '',
+  `feature4` varchar(500) NOT NULL DEFAULT '',
+  `feature5` varchar(500) NOT NULL DEFAULT '',
+  `content` text,
+  PRIMARY KEY (`id`),
+  INDEX product_id(product_id)
+);
+
 ALTER TABLE about_us_content ADD `author_name` varchar(255) NOT NULL DEFAULT '';
 ALTER TABLE about_us_content ADD `author_bio` varchar(255) NOT NULL DEFAULT '';
 ALTER TABLE about_us_content ADD `image` varchar(255) NOT NULL;

@@ -23,10 +23,7 @@ class ProductGuideController extends Controller
      * @var Product 
      */
     private $product = null;
-    /**
-     * @inheritdoc
-     */
-    
+
     
     /**
      * @inheritdoc
