@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = 'Update';
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p> 
+        <?= Html::a('Page', ['product-page/index', 'product_id' => $model->id], ['class' => 'btn btn-success']) ?>
         <?= Html::a('List', ['product-href/index', 'product_id' => $model->id], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Guide', ['product-guide/index', 'product_id' => $model->id], ['class' => 'btn btn-success']) ?>
     </p>

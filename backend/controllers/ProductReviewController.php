@@ -4,25 +4,23 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Product;
-use common\models\ProductPage;
-use backend\models\ProductPageSearch;
+use common\models\ProductReview;
+use backend\models\ProductReviewSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
- * ProductPageController implements the CRUD actions for ProductPage model.
+ * ProductReviewController implements the CRUD actions for ProductReview model.
  */
-class ProductPageController extends Controller
+class ProductReviewController extends Controller
 {
-    
     /**
      * Base Product
      * @var Product 
      */
     private $product = null;
-
     
     /**
      * @inheritdoc
@@ -48,45 +46,37 @@ class ProductPageController extends Controller
         ];
     }
 
+
     /**
-     * Lists all ProductPage models.
+     * Lists all ProductReview models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $model = ProductPage::find()->where(['product_id' => $this->product->id])->one();
+        $searchModel = new ProductReviewSearch();
         
-        if ($model === null) {
-            return $this->redirect(['create', 'product_id' => $this->product->id]);
-        } else {
-            return $this->redirect(['update', 'id' => $model->id]);   
-        }
-    }
+        $searchModel->setProduct($this->product);
+        
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-    /**
-     * Displays a single ProductPage model.
-     * @param string $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Creates a new ProductPage model.
+     * Creates a new ProductReview model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new ProductPage();
+        $model = new ProductReview();
         $model->setProduct($this->product);
         
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->id]);
+            return $this->redirect(['index', 'product_id' => $this->product->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -95,7 +85,7 @@ class ProductPageController extends Controller
     }
 
     /**
-     * Updates an existing ProductPage model.
+     * Updates an existing ProductReview model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
@@ -105,9 +95,8 @@ class ProductPageController extends Controller
         $model = $this->findModel($id);
         
         $model->setProduct(Product::findOne($model->product_id));
-        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->id]);
+            return $this->redirect(['index', 'product_id' => $model->product_id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -116,16 +105,18 @@ class ProductPageController extends Controller
     }
 
     /**
-     * Deletes an existing ProductPage model.
+     * Deletes an existing ProductReview model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $product_id = $model->product_id;
+        $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['index', 'product_id' => $product_id]);
     }
 
     public function beforeAction($action)
@@ -143,17 +134,16 @@ class ProductPageController extends Controller
         return $r ? parent::beforeAction($action) : $r;
     }
     
-    
     /**
-     * Finds the ProductPage model based on its primary key value.
+     * Finds the ProductReview model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return ProductPage the loaded model
+     * @return ProductReview the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ProductPage::findOne($id)) !== null) {
+        if (($model = ProductReview::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -23,6 +23,12 @@ use Yii;
 class ProductPage extends \yii\db\ActiveRecord
 {
     /**
+     * Base Product
+     * @var Product 
+     */
+    private $product = null;
+    
+    /**
      * @inheritdoc
      */
     public static function tableName()
@@ -36,7 +42,7 @@ class ProductPage extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'title'], 'required'],
+            [['product_id','title','description','guide_description','list_description','content'], 'required'],
             [['product_id'], 'integer'],
             [['description', 'content'], 'string'],
             [['title'], 'string', 'max' => 255],
@@ -44,6 +50,23 @@ class ProductPage extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * Set product
+     */
+    public function setProduct(Product $product)
+    {
+        $this->product = $product;
+    } 
+    
+    /**
+     * Get current product
+     * @return Product
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+    
     /**
      * @inheritdoc
      */
@@ -56,11 +79,11 @@ class ProductPage extends \yii\db\ActiveRecord
             'description' => 'Description',
             'guide_description' => 'Guide Description',
             'list_description' => 'List Description',
-            'feature1' => 'Feature1',
-            'feature2' => 'Feature2',
-            'feature3' => 'Feature3',
-            'feature4' => 'Feature4',
-            'feature5' => 'Feature5',
+            'feature1' => 'Feature 1',
+            'feature2' => 'Feature 2',
+            'feature3' => 'Feature 3',
+            'feature4' => 'Feature 4',
+            'feature5' => 'Feature 5',
             'content' => 'Content',
         ];
     }

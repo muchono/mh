@@ -4,14 +4,14 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\ProductPage */
+/* @var $model common\models\ProductReview */
 
-$this->title = 'Product Page';
+$this->title = 'Create Review';
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['product/index']];
 $this->params['breadcrumbs'][] = ['label' => $model->getProduct()->title, 'url' => ['product/update', 'id' => $model->getProduct()->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="product-page-create">
+<div class="product-review-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

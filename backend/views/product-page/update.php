@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\ProductPage */
 
-$this->title = 'Update Product Page: ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Product Pages', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Product Page';
+$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['product/index']];
+$this->params['breadcrumbs'][] = ['label' => $model->getProduct()->title, 'url' => ['product/update', 'id' => $model->getProduct()->id]];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-page-update">
 

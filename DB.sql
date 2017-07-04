@@ -1,3 +1,16 @@
+CREATE TABLE IF NOT EXISTS `product_review` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL default 0,
+  `name` varchar(255) NOT NULL default '',
+  `email` varchar(255) NOT NULL default '',
+  `raiting` int(1) UNSIGNED NOT NULL default 0,
+  `content` text,
+  `active` int(1) unsigned NOT NULL DEFAULT '0',  
+  PRIMARY KEY (`id`),
+  INDEX product_id(product_id)
+);
+
 CREATE TABLE IF NOT EXISTS `product_page` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `product_id` int(11) unsigned NOT NULL,
