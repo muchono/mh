@@ -6,6 +6,7 @@ use Yii;
 use himiklab\sortablegrid\SortableGridBehavior;
 use common\models\ProductHref;
 use common\models\ProductGuide;
+use common\models\ProductReview;
 use common\models\Discount;
 
 /**
@@ -122,6 +123,15 @@ class Product extends \yii\db\ActiveRecord
     public function getGuide()
     {
         return $this->hasMany(ProductGuide::className(), ['product_id' => 'id']);
+    }
+    
+    /**
+     * Get Reviews
+     * @return array
+     */
+    public function getReviews()
+    {
+        return $this->hasMany(ProductReview::className(), ['product_id' => 'id']);
     }
     
     /**

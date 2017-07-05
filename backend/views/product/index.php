@@ -31,6 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'price',
             [
+                'attribute'=>'reviews',
+                'value' => function ($data) {
+                    $unreviewed = $data->getReviews()->where(['active' => 0])->count();
+                    return $data->getReviews()->count().($unreviewed ? ' (Unreviewed: '.$unreviewed.')' : '');
+                },
+                'filter' => $searchModel::$statuses,
+            ],            
+            [
                 'attribute'=>'status',
                 'value' => function ($data) {
                     return $data->getStatusName();
