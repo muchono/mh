@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 use yii\behaviors\AttributeBehavior;
 use common\models\DiscountToProduct;
+use common\models\DiscountQuery;
 use yii\behaviors\BlameableBehavior;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 
@@ -36,6 +37,12 @@ class Discount extends \yii\db\ActiveRecord
         0 => 'Disabled',
         1 => 'Active',
     );
+
+
+    public static function find()
+    {
+        return new DiscountQuery(get_called_class());
+    }    
     
     /**
      * @inheritdoc
@@ -109,6 +116,7 @@ class Discount extends \yii\db\ActiveRecord
         return true;
     }
     
+   
     /**
      * Get Status Name
      * @return string
@@ -128,35 +136,12 @@ class Discount extends \yii\db\ActiveRecord
     }
     
     /**
-     * Save files
-     */
-    public function saveFiles()
-    {
-        $fields_update = [];
-        
-        foreach ([1,2] as $i) {
-            $tmp = 'file'.$i;
-            $tmp2 = 'imageFile'.$i;
-            if ($this->$tmp2) {
-                $this->$tmp = 'discount_'.$tmp.'_' . $this->id . '.' . $this->$tmp2->extension;  
-                $this->$tmp2->saveAs($this->imagesRootDir.$this->$tmp);
-                $fields_update[] = $tmp;
-            }
-        }
-
-        if ($fields_update)
-        {
-            $this->save(false, $fields_update);
-        }
-    }
-    
-    /**
      * Get Images Directory
      * @return string
      */
     public function getImagesRootDir()
     {
-        return Yii::getAlias('@webroot') . '/images/';
+        return Yii::getAlias('@frontend') . '/web/images/discount/';
     }
     
     /**
@@ -185,6 +170,29 @@ class Discount extends \yii\db\ActiveRecord
     public function getProduct()
     {
         return $this->product;
+    }
+    
+    /**
+     * Save files
+     */
+    public function saveFiles()
+    {
+        $fields_update = [];
+        
+        foreach ([1,2] as $i) {
+            $tmp = 'file'.$i;
+            $tmp2 = 'imageFile'.$i;
+            if ($this->$tmp2) {
+                $this->$tmp = 'discount_'.$tmp.'_' . $this->id . '.' . $this->$tmp2->extension;  
+                $this->$tmp2->saveAs($this->imagesRootDir.$this->$tmp);
+                $fields_update[] = $tmp;
+            }
+        }
+
+        if ($fields_update)
+        {
+            $this->save(false, $fields_update);
+        }
     }
     
     /**

@@ -78,6 +78,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $this->view->params['page'] ='home';
+        
         $this->view->params['layout_style'] = 'main-layout';
         return $this->render('index', array(
             'products' => Product::find()->where(['status' => '1'])->orderBy('order')->all(),
@@ -95,6 +97,8 @@ class SiteController extends Controller
      */
     public function actionFaq()
     {
+        $this->view->params['page'] ='faq';
+        
         $getID = Yii::$app->request->get('id');
         if (!empty($getID)
                 && ($model = Faq::findOne($getID)))
@@ -118,6 +122,8 @@ class SiteController extends Controller
      */
     public function actionProducts()
     {
+        $this->view->params['page'] ='products';
+        
         return $this->render('products', array(
         ));
     }
@@ -129,6 +135,7 @@ class SiteController extends Controller
      */
     public function actionSpecialOffer()
     {
+        $this->view->params['page'] ='special-offer';
         return $this->render('special_offer', array(
         ));
     }
@@ -140,6 +147,7 @@ class SiteController extends Controller
      */
     public function actionSupport()
     {
+        $this->view->params['page'] ='support';
         return $this->render('support', array(
         ));
     }    
@@ -151,6 +159,8 @@ class SiteController extends Controller
      */
     public function actionHiw()
     {
+        $this->view->params['page'] ='hiw';
+        
         return $this->render('hiw', array(
         ));
     }    

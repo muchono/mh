@@ -71,7 +71,7 @@ use yii\helpers\Url;
           </div>
           <aside class="post-page-side-bar">
             <div class="advertising-block">
-              <a href=""><img src="img/advertising-img.jpg" alt=""></a>
+                <a href=""><img src="images/discount/<?=$special_offer->file1?>" alt=""></a>
             </div>
             <h2 class="title-10">Recommended for you:</h2>
             <?php foreach ($model->getRecommended() as $d) {?>
@@ -92,3 +92,29 @@ use yii\helpers\Url;
         </div>
       </div>
     </section>
+    <div class="social-pane">
+      <ul class="sp__list">
+        <li class="sp__item">
+          <a href="" class="sp__link">
+            <i class="fb"></i>
+          </a>
+        </li>
+        <li class="sp__item">
+          <a href="" class="sp__link">
+            <i class="tw"></i>
+          </a>
+        </li>
+        <li class="sp__item">
+          <a href="" class="sp__link">
+            <i class="gp"></i>
+          </a>
+        </li>
+        <li class="sp__item">
+          <a href="" class="sp__link">
+            <i class="pt"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <?= $this->render('_bottom', [
+    ]) ?>

@@ -45,6 +45,7 @@ AppAsset::register($this);
 
   <!-- Head Libs -->
   <!-- <script src="bower_components/modernizr/modernizr.js"></script> -->    
+   <?php $this->head() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -58,13 +59,13 @@ AppAsset::register($this);
       </div>
       <nav class="main-nav">
         <ul class="main-nav__list">
-          <li class="main-nav__item"><a href="<?=Url::to(['site/index']);?>" class="main-nav__link">Home</a></li>
-          <li class="main-nav__item"><a href="<?=Url::to(['site/hiw']);?>" class="main-nav__link">How It Works</a></li>
-          <li class="main-nav__item"><a href="<?=Url::to(['site/products']);?>" class="main-nav__link">Products</a></li>
-          <li class="main-nav__item"><a href="<?=Url::to(['site/special-offer']);?>" class="main-nav__link">Special Offers</a></li>
-          <li class="main-nav__item"><a href="<?=Url::to(['site/faq']);?>" class="main-nav__link">F.A.Q.</a></li>
-          <li class="main-nav__item"><a href="<?=Url::to(['site/support']);?>" class="main-nav__link">Support</a></li>
-          <li class="main-nav__item"><a href="<?=Url::to(['blog/index']);?>" class="main-nav__link">Blog</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['site/index']);?>" class="main-nav__link <?=($this->params['page'] == 'home') ? 'main-nav__link--active' : ''?>">Home</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['site/hiw']);?>" class="main-nav__link <?=($this->params['page'] == 'hiw') ? 'main-nav__link--active' : ''?>">How It Works</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['site/products']);?>" class="main-nav__link <?=($this->params['page'] == 'products') ? 'main-nav__link--active' : ''?>">Products</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['site/special-offer']);?>" class="main-nav__link <?=($this->params['page'] == 'special-offer') ? 'main-nav__link--active' : ''?>">Special Offers</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['site/faq']);?>" class="main-nav__link <?=($this->params['page'] == 'faq') ? 'main-nav__link--active' : ''?>">F.A.Q.</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['site/support']);?>" class="main-nav__link <?=($this->params['page'] == 'support') ? 'main-nav__link--active' : ''?>">Support</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['blog/index']);?>" class="main-nav__link <?=($this->params['page'] == 'blog') ? 'main-nav__link--active' : ''?>">Blog</a></li>
         </ul>
       </nav>
       <div class="user-pane">
