@@ -78,6 +78,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $this->view->params['layout_style'] = 'main-layout';
         return $this->render('index', array(
             'products' => Product::find()->where(['status' => '1'])->orderBy('order')->all(),
             'productsCount' => Product::find()->where(['status' => '1'])->count(),

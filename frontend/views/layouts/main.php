@@ -45,11 +45,10 @@ AppAsset::register($this);
 
   <!-- Head Libs -->
   <!-- <script src="bower_components/modernizr/modernizr.js"></script> -->    
-    <?php $this->head() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
-  <div class="main-layout">
+  <div class="<?=$this->params['layout_style'] ? $this->params['layout_style'] : 'simple-page-layout'?>">
     <div class="top-bar">
       <a href="" class="menu-btn js-side-menu-btn">
         <span></span>
@@ -65,7 +64,7 @@ AppAsset::register($this);
           <li class="main-nav__item"><a href="<?=Url::to(['site/special-offer']);?>" class="main-nav__link">Special Offers</a></li>
           <li class="main-nav__item"><a href="<?=Url::to(['site/faq']);?>" class="main-nav__link">F.A.Q.</a></li>
           <li class="main-nav__item"><a href="<?=Url::to(['site/support']);?>" class="main-nav__link">Support</a></li>
-          <li class="main-nav__item"><a href="<?=Url::to(['blog']);?>" class="main-nav__link">Blog</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['blog/index']);?>" class="main-nav__link">Blog</a></li>
         </ul>
       </nav>
       <div class="user-pane">

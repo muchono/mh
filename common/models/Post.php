@@ -140,4 +140,13 @@ class Post extends \yii\db\ActiveRecord
     {
         return self::$statuses[$this->status];
     }   
+    
+    /**
+     * Get Author Name
+     * @return string
+     */
+    public function getAuthor()
+    {
+        return $this->author_name ? $this->author_name : 'MarketingHack Team';
+    }    
 }

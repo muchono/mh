@@ -1,120 +1,3993 @@
-html,
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+/* line 6, ./public/vendor/reset-css/_reset.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+/* line 27, ./public/vendor/reset-css/_reset.scss */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+/* line 31, ./public/vendor/reset-css/_reset.scss */
 body {
-    height: 100%;
-}
+  line-height: 1; }
 
-.wrap {
-    min-height: 100%;
-    height: auto;
-    margin: 0 auto -60px;
-    padding: 0 0 60px;
-}
+/* line 34, ./public/vendor/reset-css/_reset.scss */
+ol, ul {
+  list-style: none; }
 
-.wrap > .container {
-    padding: 70px 15px 20px;
-}
+/* line 37, ./public/vendor/reset-css/_reset.scss */
+blockquote, q {
+  quotes: none; }
+  /* line 39, ./public/vendor/reset-css/_reset.scss */
+  blockquote:before, blockquote:after, q:before, q:after {
+    content: '';
+    content: none; }
 
-.footer {
-    height: 60px;
-    background-color: #f5f5f5;
-    border-top: 1px solid #ddd;
-    padding-top: 20px;
-}
+/* line 44, ./public/vendor/reset-css/_reset.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
 
-.jumbotron {
-    text-align: center;
-    background-color: transparent;
-}
+/* line 1, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none; }
 
-.jumbotron .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-}
+/* line 8, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both; }
 
-.not-set {
-    color: #c55;
-    font-style: italic;
-}
+/* line 14, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
 
-/* add sorting icons to gridview sort links */
-a.asc:after, a.desc:after {
-    position: relative;
-    top: 1px;
-    display: inline-block;
-    font-family: 'Glyphicons Halflings';
-    font-style: normal;
-    font-weight: normal;
-    line-height: 1;
-    padding-left: 5px;
-}
+/* line 20, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.img-fluid {
+  display: block;
+  max-width: 100%;
+  height: auto; }
 
-a.asc:after {
-    content: "\e151";
-}
+/* line 26, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.table {
+  display: table;
+  width: 100%;
+  height: 100%; }
 
-a.desc:after {
-    content: "\e152";
-}
+/* line 32, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.cell {
+  display: table-cell;
+  vertical-align: middle; }
 
-.sort-numerical a.asc:after {
-    content: "\e153";
-}
+/* line 37, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.pull-left {
+  float: left !important; }
 
-.sort-numerical a.desc:after {
-    content: "\e154";
-}
+/* line 41, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.pull-right {
+  float: right !important; }
 
-.sort-ordinal a.asc:after {
-    content: "\e155";
-}
+/* line 45, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.pull-center {
+  float: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important; }
 
-.sort-ordinal a.desc:after {
-    content: "\e156";
-}
+/* line 51, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.align-left {
+  float: left !important;
+  margin: 6px 20px 15px 0 !important; }
 
-.grid-view td {
-    white-space: nowrap;
-}
+/* line 56, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.align-right {
+  float: right !important;
+  margin: 6px 0 15px 20px !important; }
 
-.grid-view .filters input,
-.grid-view .filters select {
-    min-width: 50px;
-}
+/* line 61, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.align-center {
+  margin: 0 0 15px !important; }
+  /* line 63, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+  .align-center img {
+    margin: 0 auto; }
 
-.hint-block {
+/* line 68, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.text-left {
+  text-align: left; }
+
+/* line 72, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.text-right {
+  text-align: right; }
+
+/* line 76, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.text-center {
+  text-align: center; }
+
+/* line 80, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.ib {
+  display: inline-block; }
+
+/* line 84, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.vat {
+  vertical-align: top; }
+
+/* line 88, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.fixed {
+  position: fixed; }
+
+/* line 92, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+video {
+  width: 100% !important;
+  height: auto !important; }
+
+/* line 97, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.video-wrap {
+  position: relative;
+  padding-bottom: 54%;
+  /* 16:9 56.25% */
+  padding-top: 25px;
+  height: 0; }
+  /* line 102, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+  .video-wrap iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
+
+/* line 111, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.maestro-ic {
+  background-image: url(../img/sprite.png);
+  background-position: -601px 0px;
+  width: 60px;
+  height: 38px;
+  display: inline-block; }
+
+/* line 115, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.visa-ic {
+  background-image: url(../img/sprite.png);
+  background-position: -421px 0px;
+  width: 60px;
+  height: 38px;
+  display: inline-block; }
+
+/* line 119, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.ae-ic {
+  background-image: url(../img/sprite.png);
+  background-position: -481px 0px;
+  width: 60px;
+  height: 38px;
+  display: inline-block; }
+
+/* line 123, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.paypal-ic {
+  background-image: url(../img/sprite.png);
+  background-position: -661px 0px;
+  width: 60px;
+  height: 38px;
+  display: inline-block; }
+
+/* line 127, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.bitcoin-ic {
+  background-image: url(../img/sprite.png);
+  background-position: -541px 0px;
+  width: 60px;
+  height: 38px;
+  display: inline-block; }
+
+/* line 131, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.webmoney-ic {
+  background-image: url(../img/sprite.png);
+  background-position: -721px 0px;
+  width: 60px;
+  height: 38px;
+  display: inline-block; }
+
+/* line 136, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.pgn-prev {
+  background-image: url(../img/sprite.png);
+  background-position: -79px 0px;
+  width: 15px;
+  height: 7px;
+  display: inline-block;
+  vertical-align: middle; }
+
+/* line 142, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.pgn-next {
+  background-image: url(../img/sprite.png);
+  background-position: -94px 0px;
+  width: 15px;
+  height: 7px;
+  display: inline-block;
+  vertical-align: middle; }
+
+/* line 148, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.alert-ic-1 {
+  background-image: url(../img/sprite.png);
+  background-position: -300px 0px;
+  width: 33px;
+  height: 29px;
+  display: inline-block; }
+
+/* line 153, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.icon-1 {
+  background-image: url(../img/sprite.png);
+  background-position: -274px 0px;
+  width: 26px;
+  height: 34px;
+  display: inline-block; }
+
+/* line 158, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.icon-2 {
+  background-image: url(../img/sprite.png);
+  background-position: -333px 0px;
+  width: 40px;
+  height: 34px;
+  display: inline-block; }
+
+/* line 163, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.icon-3 {
+  background-image: url(../img/sprite.png);
+  background-position: -22px 0px;
+  width: 14px;
+  height: 17px;
+  display: inline-block; }
+
+/* line 168, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.icon-4 {
+  background-image: url(../img/sprite.png);
+  background-position: -373px 0px;
+  width: 48px;
+  height: 38px;
+  display: inline-block; }
+
+/* line 173, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.icon-5 {
+  background-image: url(../img/sprite.png);
+  background-position: -249px 0px;
+  width: 25px;
+  height: 24px;
+  display: inline-block;
+  vertical-align: top; }
+
+/* line 179, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.icon-8 {
+  background-image: url(../img/sprite.png);
+  background-position: -36px 0px;
+  width: 14px;
+  height: 15px;
+  display: inline-block;
+  vertical-align: middle; }
+
+/* line 185, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.icon-9 {
+  background-image: url(../img/sprite.png);
+  background-position: -9px 0px;
+  width: 13px;
+  height: 10px;
+  display: inline-block;
+  vertical-align: middle; }
+
+/* line 191, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.icon-10 {
+  background-image: url(../img/sprite.png);
+  background-position: -209px 0px;
+  width: 19px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: top; }
+
+/* line 197, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.icon-11 {
+  background-image: url(../img/sprite.png);
+  background-position: -190px 0px;
+  width: 19px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: top; }
+
+/* line 203, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.icon-12 {
+  background-image: url(../img/sprite.png);
+  background-position: -50px 0px;
+  width: 14px;
+  height: 17px;
+  display: inline-block;
+  vertical-align: middle; }
+
+/* line 209, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.icon-13 {
+  background-image: url(../img/sprite.png);
+  background-position: -109px 0px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: middle; }
+
+/* line 215, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.icon-14 {
+  background-image: url(../img/sprite.png);
+  background-position: -1269px 0px;
+  width: 62px;
+  height: 87px;
+  display: inline-block;
+  vertical-align: middle; }
+
+/* line 245, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.fb {
+  background-image: url(../img/sprite.png);
+  background-position: -1086px 0px;
+  width: 61px;
+  height: 76px;
+  display: inline-block;
+  vertical-align: top; }
+  /* line 250, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+  .fb:hover {
+    background-image: url(../img/sprite.png);
+    background-position: -1208px 0px;
+    width: 61px;
+    height: 76px; }
+
+/* line 255, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.tw {
+  background-image: url(../img/sprite.png);
+  background-position: -1147px 0px;
+  width: 61px;
+  height: 76px;
+  display: inline-block;
+  vertical-align: top; }
+  /* line 260, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+  .tw:hover {
+    background-image: url(../img/sprite.png);
+    background-position: -1025px 0px;
+    width: 61px;
+    height: 76px; }
+
+/* line 265, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.gp {
+  background-image: url(../img/sprite.png);
+  background-position: -781px 0px;
+  width: 61px;
+  height: 76px;
+  display: inline-block;
+  vertical-align: top; }
+  /* line 270, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+  .gp:hover {
+    background-image: url(../img/sprite.png);
+    background-position: -903px 0px;
+    width: 61px;
+    height: 76px; }
+
+/* line 275, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+.pt {
+  background-image: url(../img/sprite.png);
+  background-position: -964px 0px;
+  width: 61px;
+  height: 76px;
+  display: inline-block;
+  vertical-align: top; }
+  /* line 280, D:/aartyomenko/Git/marketingHack/public/scss/_helper.scss */
+  .pt:hover {
+    background-image: url(../img/sprite.png);
+    background-position: -842px 0px;
+    width: 61px;
+    height: 76px; }
+
+/* line 1, D:/aartyomenko/Git/marketingHack/public/scss/_buttons.scss */
+.btn-1 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color: #ffffff;
+  background: #357fdd;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.5;
+  border: none;
+  display: inline-block;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+  /* line 19, D:/aartyomenko/Git/marketingHack/public/scss/_buttons.scss */
+  .btn-1:hover, .btn-1:active, .btn-1:focus {
+    background-color: #2c75ce; }
+
+/* line 26, D:/aartyomenko/Git/marketingHack/public/scss/_buttons.scss */
+.btn-2 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color: #ffffff;
+  background: #ff612a;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.5;
+  border: none;
+  display: inline-block;
+  padding: 14px 10px;
+  min-width: 275px;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: -0.025em;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+  /* line 44, D:/aartyomenko/Git/marketingHack/public/scss/_buttons.scss */
+  .btn-2:hover, .btn-2:active, .btn-2:focus {
+    background-color: #ff4200; }
+
+/* line 51, D:/aartyomenko/Git/marketingHack/public/scss/_buttons.scss */
+.btn-3, .btn-5 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color: #ffffff;
+  background: #23af3d;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.5;
+  border: none;
+  display: inline-block;
+  padding: 14px 10px;
+  min-width: 275px;
+  text-align: center;
+  text-decoration: none;
+  letter-spacing: -0.025em;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+  /* line 69, D:/aartyomenko/Git/marketingHack/public/scss/_buttons.scss */
+  .btn-3:hover, .btn-5:hover, .btn-3:active, .btn-5:active, .btn-3:focus, .btn-5:focus {
+    background-color: #10a22b; }
+
+/* line 76, D:/aartyomenko/Git/marketingHack/public/scss/_buttons.scss */
+.btn-4 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color: #f3fff7;
+  background: #23af3d;
+  border: 1px solid #fff;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  display: inline-block;
+  padding: 10px;
+  min-width: 156px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+  /* line 94, D:/aartyomenko/Git/marketingHack/public/scss/_buttons.scss */
+  .btn-4:hover, .btn-4:active, .btn-4:focus {
+    background-color: #10a22b; }
+
+/* line 101, D:/aartyomenko/Git/marketingHack/public/scss/_buttons.scss */
+.btn-5 {
+  padding: 10px;
+  min-width: 100%;
+  text-transform: uppercase; }
+
+/* line 108, D:/aartyomenko/Git/marketingHack/public/scss/_buttons.scss */
+.btn-sm-1 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color: #ffffff;
+  background: #357fdd;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  border: none;
+  display: inline-block;
+  padding: 9px 10px;
+  min-width: 102px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+  /* line 126, D:/aartyomenko/Git/marketingHack/public/scss/_buttons.scss */
+  .btn-sm-1:hover, .btn-sm-1:active, .btn-sm-1:focus {
+    background-color: #2c75ce; }
+
+/* line 133, D:/aartyomenko/Git/marketingHack/public/scss/_buttons.scss */
+.btn-sm-2 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color: #ffffff;
+  background: #23af3d;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  border: none;
+  display: inline-block;
+  padding: 9px 10px;
+  min-width: 102px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+  /* line 151, D:/aartyomenko/Git/marketingHack/public/scss/_buttons.scss */
+  .btn-sm-2:hover, .btn-sm-2:active, .btn-sm-2:focus {
+    background-color: #10a22b; }
+
+/* line 1, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+.title-1 {
+  color: #353535;
+  font-size: 30px;
+  font-weight: 300; }
+  @media screen and (min-width: 768px) {
+    /* line 1, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+    .title-1 {
+      font-size: 36px; } }
+
+/* line 11, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+.title-2 {
+  color: #353535;
+  font: 800 30px/1.25 "Lato"; }
+  @media screen and (min-width: 768px) {
+    /* line 11, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+    .title-2 {
+      font-size: 36px; } }
+
+/* line 20, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+.title-3 {
+  color: #bad8ff;
+  font-size: 36px;
+  font-weight: 300; }
+  /* line 25, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+  .title-3 b {
+    font-weight: 600; }
+
+/* line 30, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+.title-4 {
+  color: #1a1a1a;
+  font: 800 32px/1.25 "Lato"; }
+  @media screen and (min-width: 768px) {
+    /* line 30, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+    .title-4 {
+      font-size: 36px; } }
+
+/* line 39, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+.title-5 {
+  color: #464646;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 13px; }
+  @media screen and (min-width: 768px) {
+    /* line 39, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+    .title-5 {
+      font-size: 30px;
+      margin-bottom: 23px; } }
+
+/* line 51, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+.title-6 {
+  color: #353535;
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 1em; }
+  @media screen and (min-width: 768px) {
+    /* line 51, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+    .title-6 {
+      font-size: 36px; } }
+
+/* line 62, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+.title-7 {
+  color: #353535;
+  font: 700 30px/1.25 "Lato";
+  margin-bottom: 0.75em; }
+  /* line 67, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+  .title-7 a {
+    color: inherit;
+    font: inherit; }
+
+/* line 73, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+.title-8 {
+  color: #353535;
+  font-size: 32px; }
+
+/* line 78, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+.title-9 {
+  color: #353535;
+  font-size: 30px;
+  font-weight: 600; }
+  @media screen and (min-width: 768px) {
+    /* line 78, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+    .title-9 {
+      font-size: 40px; } }
+
+/* line 88, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+.title-10 {
+  color: #353535;
+  font-size: 24px;
+  font-weight: 600; }
+
+/* line 94, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+.title-11 {
+  color: #353535;
+  font-size: 24px;
+  font-weight: 600; }
+  @media screen and (min-width: 768px) {
+    /* line 94, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+    .title-11 {
+      font-size: 30px; } }
+
+/* line 104, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+.title-12 {
+  color: #353535;
+  font-size: 18px;
+  font-weight: 700; }
+
+/* line 110, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+.title-13 {
+  color: #353535;
+  font: 700 24px/1.25 "Lato";
+  margin-bottom: 0.75em; }
+  /* line 115, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+  .title-13 a {
+    color: inherit;
+    font: inherit; }
+
+/* line 121, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+.title-14 {
+  color: #353535;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 1em; }
+  @media screen and (min-width: 768px) {
+    /* line 121, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+    .title-14 {
+      font-size: 36px; } }
+
+/* line 132, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+.title-15 {
+  color: #353535;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px; }
+  @media screen and (min-width: 768px) {
+    /* line 132, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+    .title-15 {
+      font-size: 30px;
+      margin-bottom: 30px; } }
+
+/* line 144, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+.title-16 {
+  color: #10a22b;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 25px; }
+  @media screen and (min-width: 768px) {
+    /* line 144, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+    .title-16 {
+      font-size: 30px; } }
+
+/* line 155, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+.text-1 {
+  color: #464646;
+  font-size: 14px;
+  line-height: 26px;
+  font-weight: 400;
+  margin-bottom: 22px; }
+  @media screen and (min-width: 768px) {
+    /* line 155, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+    .text-1 {
+      margin-bottom: 32px; } }
+
+/* line 167, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+.blockquote-1 {
+  border: 6px solid #fd622c;
+  color: #464646;
+  font-size: 18px;
+  line-height: 32px;
+  font-weight: 400;
+  max-width: 750px;
+  margin: 32px auto 36px;
+  padding: 14px 18px; }
+  @media screen and (min-width: 768px) {
+    /* line 167, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+    .blockquote-1 {
+      font-size: 24px;
+      margin: 42px auto 56px;
+      padding: 32px 46px; } }
+
+/* line 184, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+.blockquote-2 {
+  background: #fff;
+  border-left: 7px solid #ff612a;
+  color: #353535;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.667;
+  padding: 21px 26px; }
+
+/* line 194, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+.alert-1 {
+  background: #ffd6d6;
+  border: 1px solid #d45e5e;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #a82929;
+  font-size: 12px;
+  line-height: 1.25;
+  font-weight: 400;
+  max-width: 735px;
+  margin: 25px auto 5px;
+  padding: 12px 12px 12px 19px; }
+  @media screen and (min-width: 768px) {
+    /* line 194, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+    .alert-1 {
+      margin: 50px auto 5px; } }
+  /* line 211, D:/aartyomenko/Git/marketingHack/public/scss/_typography.scss */
+  .alert-1 .alert-ic-1 {
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    float: left;
+    margin-right: 15px; }
+
+/* line 1, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-bg {
+  background: rgba(0, 0, 0, 0.65); }
+
+/* line 5, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-content {
+  pointer-events: none;
+  text-align: center; }
+
+/* line 10, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-close {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 0;
+  opacity: 1; }
+  /* line 20, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+  .mfp-close:active {
+    top: 20px; }
+  /* line 24, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+  .mfp-close:before, .mfp-close:after {
+    content: '';
+    background: #919aa6;
+    -webkit-border-radius: 1px;
+    border-radius: 1px;
+    position: absolute;
+    pointer-events: none;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 3px;
+    margin-top: -1px;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg); }
+  /* line 39, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+  .mfp-close:after {
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg); }
+
+/* line 44, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.aut-popup {
+  background: #fff;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  pointer-events: auto;
+  display: inline-block;
+  max-width: 340px;
+  width: 100%;
+  padding: 22px 18px;
+  position: relative; }
+  @media screen and (min-width: 480px) {
+    /* line 44, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+    .aut-popup {
+      padding: 22px 37px; } }
+  /* line 58, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+  .aut-popup .btn-5 {
+    margin-top: 8px;
+    margin-bottom: 8px; }
+
+/* line 64, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.aut-title {
+  color: #1a1a1a;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  text-align: left;
+  margin-bottom: 15px; }
+
+/* line 73, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.aut-fields {
+  padding-top: 10px; }
+
+/* line 77, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.aut-field {
+  margin-bottom: 11px; }
+
+/* line 81, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.aut-input {
+  border: 1px solid #989898;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  color: #1a1a1a;
+  font-size: 16px;
+  line-height: 21px;
+  font-weight: 400;
+  width: 100%;
+  padding: 10px 12px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+  /* line 92, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+  .aut-input:focus {
+    border-color: #4f82c0; }
+
+/* line 97, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.aut-link {
+  color: #383838;
+  display: inline-block;
+  font-size: 14px;
+  text-align: center;
+  letter-spacing: -0.025em;
+  margin-bottom: 8px; }
+
+/* line 106, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.aut-text {
+  color: #383838;
+  font-size: 12px;
+  margin-top: 10px; }
+  /* line 111, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+  .aut-text a {
+    color: #015fd8; }
+
+/* line 120, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-bg {
+  opacity: 0;
+  -webkit-transition: all 0.15s ease-out;
+  transition: all 0.15s ease-out; }
+
+/* line 126, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-bg.mfp-ready {
+  opacity: 1; }
+
+/* line 131, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-bg.mfp-removing {
+  opacity: 0; }
+
+/* line 136, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-wrap .mfp-content {
+  opacity: 0;
+  -webkit-transition: all 0.15s ease-out;
+  transition: all 0.15s ease-out; }
+
+/* line 142, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-wrap.mfp-ready .mfp-content {
+  opacity: 1; }
+
+/* line 147, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-wrap.mfp-removing .mfp-content {
+  opacity: 0; }
+
+/* line 154, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-fadeup.mfp-bg {
+  opacity: 0;
+  -webkit-transition: all 0.35s ease-out;
+  transition: all 0.35s ease-out; }
+
+/* line 160, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-fadeup.mfp-bg.mfp-ready {
+  opacity: 1; }
+
+/* line 165, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-fadeup.mfp-bg.mfp-removing {
+  opacity: 0; }
+
+/* line 170, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-fadeup.mfp-wrap .mfp-content {
+  opacity: 0;
+  -webkit-transform: translateY(50%);
+  -ms-transform: translateY(50%);
+  transform: translateY(50%);
+  -webkit-transition: all 0.45s ease-out;
+  transition: all 0.45s ease-out; }
+
+/* line 177, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-fadeup.mfp-wrap.mfp-ready .mfp-content {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0); }
+
+/* line 183, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-fadeup.mfp-wrap.mfp-removing .mfp-content {
+  opacity: 0;
+  -webkit-transform: translateY(50%);
+  -ms-transform: translateY(50%);
+  transform: translateY(50%); }
+
+/* line 192, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-fadedown.mfp-bg {
+  opacity: 0;
+  -webkit-transition: all 0.35s ease-out;
+  transition: all 0.35s ease-out; }
+
+/* line 198, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-fadedown.mfp-bg.mfp-ready {
+  opacity: 1; }
+
+/* line 203, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-fadedown.mfp-bg.mfp-removing {
+  opacity: 0; }
+
+/* line 208, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-fadedown.mfp-wrap .mfp-content {
+  opacity: 0;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -webkit-transition: all 0.45s ease-out;
+  transition: all 0.45s ease-out; }
+
+/* line 215, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-fadedown.mfp-wrap.mfp-ready .mfp-content {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0); }
+
+/* line 221, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-fadedown.mfp-wrap.mfp-removing .mfp-content {
+  opacity: 0;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+/* line 230, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-fadeleft.mfp-bg {
+  opacity: 0;
+  -webkit-transition: all 0.35s ease-out;
+  transition: all 0.35s ease-out; }
+
+/* line 236, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-fadeleft.mfp-bg.mfp-ready {
+  opacity: 1; }
+
+/* line 241, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-fadeleft.mfp-bg.mfp-removing {
+  opacity: 0; }
+
+/* line 246, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-fadeleft.mfp-wrap .mfp-content {
+  opacity: 0;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  -webkit-transition: all 0.45s ease-out;
+  transition: all 0.45s ease-out; }
+
+/* line 253, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-fadeleft.mfp-wrap.mfp-ready .mfp-content {
+  opacity: 1;
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0); }
+
+/* line 259, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-fadeleft.mfp-wrap.mfp-removing .mfp-content {
+  opacity: 0;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%); }
+
+/* line 268, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-faderight.mfp-bg {
+  opacity: 0;
+  -webkit-transition: all 0.35s ease-out;
+  transition: all 0.35s ease-out; }
+
+/* line 275, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-faderight.mfp-bg.mfp-ready {
+  opacity: 1; }
+
+/* line 281, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-faderight.mfp-bg.mfp-removing {
+  opacity: 0; }
+
+/* line 286, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-faderight.mfp-wrap .mfp-content {
+  opacity: 0;
+  -webkit-transform: translateX(50%);
+  -ms-transform: translateX(50%);
+  transform: translateX(50%);
+  -webkit-transition: all 0.45s ease-out;
+  transition: all 0.45s ease-out; }
+
+/* line 293, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-faderight.mfp-wrap.mfp-ready .mfp-content {
+  opacity: 1;
+  -webkit-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0); }
+
+/* line 299, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-faderight.mfp-wrap.mfp-removing .mfp-content {
+  opacity: 0;
+  -webkit-transform: translateX(50%);
+  -ms-transform: translateX(50%);
+  transform: translateX(50%); }
+
+/* line 308, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-zoomin.mfp-bg {
+  background: rgba(0, 0, 0, 0.91);
+  opacity: 0;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; }
+
+/* line 315, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-zoomin.mfp-bg.mfp-ready {
+  opacity: 1; }
+
+/* line 320, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-zoomin.mfp-bg.mfp-removing {
+  opacity: 0; }
+
+/* line 326, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-zoomin.mfp-wrap .mfp-close {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transform: translateY(-200px);
+  -ms-transform: translateY(-200px);
+  transform: translateY(-200px);
+  -webkit-transition: all 1s ease-out;
+  transition: all 1s ease-out; }
+
+/* line 332, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-zoomin.mfp-wrap .mfp-arrow-1 {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: all 0.5s 0.6s ease-out;
+  transition: all 0.5s 0.6s ease-out; }
+
+/* line 341, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-zoomin.mfp-wrap.mfp-ready .mfp-close {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0); }
+
+/* line 346, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-zoomin.mfp-wrap.mfp-ready .mfp-arrow-1 {
+  opacity: 1;
+  visibility: visible; }
+
+/* line 354, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-zoomin.mfp-wrap.mfp-removing .mfp-close {
+  opacity: 0;
+  -webkit-transform: translateY(-200px);
+  -ms-transform: translateY(-200px);
+  transform: translateY(-200px); }
+
+/* line 358, D:/aartyomenko/Git/marketingHack/public/scss/_popups.scss */
+.mfp-zoomin.mfp-wrap.mfp-removing .mfp-arrow-1 {
+  opacity: 0; }
+
+/* line 1, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  height: 100%; }
+
+/* line 7, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+body {
+  color: #353535;
+  font: 16px/1.25 "Open Sans";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  height: 100%; }
+
+/* line 15, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+/* line 22, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+*:focus {
+  outline: 0; }
+
+/* line 27, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+.main-layout {
+  padding-top: 68px;
+  position: relative;
+  height: 100%; }
+
+/* line 33, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+.alter-layout {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 68px;
+  position: relative;
+  height: 100%;
+  height: 100vh; }
+  /* line 40, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+  .alter-layout .content {
+    background: #f0f0f0;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    overflow-y: auto; }
+  @media screen and (min-width: 1200px) {
+    /* line 33, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+    .alter-layout {
+      padding-top: 0; }
+      /* line 49, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+      .alter-layout .side-menu {
+        position: static;
+        -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+        transform: translateX(0); }
+      /* line 54, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+      .alter-layout .sm__logo {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex; }
+      /* line 58, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+      .alter-layout .sm-list-1 {
+        margin-bottom: 0; }
+      /* line 62, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+      .alter-layout .top-bar,
+      .alter-layout .sm__top,
+      .alter-layout .sm__bottom,
+      .alter-layout .sm-title,
+      .alter-layout .sm-list-2 {
+        display: none; } }
+
+/* line 72, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+.simple-page-layout {
+  background: #f0f0f0;
+  padding-top: 68px;
+  position: relative;
+  min-height: 100%; }
+
+/* line 79, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+a {
+  color: #31599c;
+  text-decoration: none; }
+
+/* line 84, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+a,
+button, input[type="button"], input[type="reset"], input[type="submit"],
+input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"], input:not([type]), textarea {
+  font-family: "Open Sans";
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  outline: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; }
+
+/* line 93, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+.container, .container-md, .container-lg {
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  position: relative; }
+  @media screen and (min-width: 768px) {
+    /* line 93, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+    .container, .container-md, .container-lg {
+      padding-left: 20px;
+      padding-right: 20px; } }
+
+/* line 107, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+.container-md {
+  max-width: 1290px; }
+
+/* line 112, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+.container-lg {
+  max-width: 1520px; }
+
+/* line 117, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+
+/* line 121, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+.simple-page {
+  background: #fff;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding: 30px 14px; }
+  @media screen and (min-width: 768px) {
+    /* line 121, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+    .simple-page {
+      margin-left: 20px;
+      margin-right: 20px;
+      padding: 35px 28px 60px; } }
+  @media screen and (min-width: 1024px) {
+    /* line 121, D:/aartyomenko/Git/marketingHack/public/scss/_theme_base.scss */
+    .simple-page {
+      max-width: 990px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 35px 40px 60px; } }
+
+/* line 1, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.top-bar {
+  background: black;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  min-height: 68px;
+  padding: 10px 15px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 998; }
+  @media screen and (min-width: 1200px) {
+    /* line 1, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .top-bar {
+      padding: 10px 50px; } }
+
+@media screen and (min-width: 1200px) {
+  /* line 19, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .menu-btn {
+    display: none; } }
+
+/* line 24, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.menu-btn span {
+  background: #d2d2d2;
+  display: block;
+  height: 4px;
+  width: 28px;
+  margin: 9px 0;
+  position: relative; }
+  /* line 32, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .menu-btn span:before, .menu-btn span:after {
+    content: '';
+    background: #d2d2d2;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 4px; }
+  /* line 42, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .menu-btn span:before {
+    top: -9px; }
+  /* line 46, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .menu-btn span:after {
+    bottom: -9px; }
+
+/* line 52, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.logo__link {
+  display: inline-block;
+  padding: 5px;
+  vertical-align: top; }
+
+/* line 58, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.main-nav {
+  display: none; }
+  @media screen and (min-width: 1200px) {
+    /* line 58, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .main-nav {
+      display: block; } }
+
+/* line 66, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.main-nav__list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+
+/* line 70, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.main-nav__item {
+  margin: 5px 10px; }
+
+/* line 74, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.main-nav__link {
+  color: #cdcdcd;
+  display: block;
+  font-size: 14px;
+  padding: 10px;
+  text-decoration: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+  /* line 82, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .main-nav__link:hover, .main-nav__link--active {
+    color: #ff612a; }
+
+/* line 88, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.user-pane {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: -10px;
+  min-width: 28px; }
+
+/* line 94, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.up__btn {
+  color: #3c91fe;
+  display: none;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 5px;
+  margin: 10px;
+  text-decoration: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+  @media screen and (min-width: 1200px) {
+    /* line 94, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .up__btn {
+      display: block; } }
+
+/* line 109, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.side-menu {
+  background: #1a1a1a;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 280px;
+  -webkit-flex-basis: 280px;
+  -ms-flex-preferred-size: 280px;
+  flex-basis: 280px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 999;
+  -webkit-transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  transform: translateX(-100%);
+  overflow-y: auto;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+  /* line 125, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .side-menu--open {
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0); }
+
+/* line 130, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.sm__logo {
+  display: none;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  min-height: 126px; }
+
+/* line 137, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.sm__top,
+.sm__bottom {
+  padding: 10px; }
+
+/* line 142, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.sm-btn {
+  display: block;
+  float: right;
+  padding: 12px 14px; }
+
+/* line 148, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.sm__content {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1; }
+
+/* line 152, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.sm-list-1 {
+  margin-bottom: 45px; }
+
+/* line 156, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.sm-list-1__item {
+  margin-bottom: 1px; }
+  /* line 160, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .sm-list-1__item--unblock .sm-list-1__link {
+    background: #5c5c5c;
+    border-left: 6px solid #919191;
+    color: #f0f0f0; }
+    /* line 165, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .sm-list-1__item--unblock .sm-list-1__link:after {
+      background-image: url(../img/sprite.png);
+      background-position: -157px 0px;
+      width: 16px;
+      height: 15px; }
+  /* line 172, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .sm-list-1__item--unblock.sm-list-1__item--active .sm-list-1__link, .sm-list-1__item--unblock:hover .sm-list-1__link {
+    background: #a3340e;
+    border-color: #ff6833;
+    color: #e9e29a; }
+  /* line 181, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .sm-list-1__item--unblock.sm-list-1__item--active .sm-list-1__link:after {
+    opacity: 0; }
+
+/* line 189, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.sm-list-1__link {
+  background: #323232;
+  border-left: 6px solid #323232;
+  color: #8e8e8e;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 600;
+  min-height: 70px;
+  padding: 19px 17px;
+  position: relative;
+  text-decoration: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+  /* line 204, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .sm-list-1__link:after {
+    content: '';
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    background-image: url(../img/sprite.png);
+    background-position: -141px 0px;
+    width: 16px;
+    height: 15px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s; }
+
+/* line 215, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.sm-title {
+  color: #757575;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 18px;
+  text-align: center;
+  text-transform: uppercase; }
+
+/* line 224, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.sm-list-2 {
+  margin: 0 17px 15px; }
+
+/* line 228, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.sm-list-2__item {
+  border-top: 1px solid #454545; }
+  /* line 231, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .sm-list-2__item:last-child {
+    border-bottom: 1px solid #454545; }
+  /* line 237, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .sm-list-2__item--active .sm-list-2__link, .sm-list-2__item:hover .sm-list-2__link {
+    background: #333; }
+
+/* line 243, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.sm-list-2__link {
+  color: #acacac;
+  display: block;
+  font-size: 13px;
+  line-height: 17px;
+  font-weight: 600;
+  padding: 10px 15px 12px;
+  text-align: center;
+  text-decoration: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+
+/* line 255, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.home-header {
+  background: #000 url(../img/hh-bg.png) right top no-repeat;
+  position: relative;
+  padding: 50px 0; }
+  /* line 260, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .home-header:before {
+    content: '';
+    background: rgba(255, 255, 255, 0.1);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0; }
+  /* line 270, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .home-header .row {
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between; }
+    @media screen and (min-width: 1024px) {
+      /* line 270, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .home-header .row {
+        padding: 0 25px; } }
+    @media screen and (min-width: 1200px) {
+      /* line 270, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .home-header .row {
+        padding: 0 35px; } }
+
+/* line 283, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.hh__hero {
+  display: none;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+  align-self: center; }
+  @media screen and (min-width: 768px) {
+    /* line 283, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .hh__hero {
+      display: block; } }
+  @media screen and (min-width: 1200px) {
+    /* line 283, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .hh__hero {
+      -webkit-flex-basis: 54%;
+      -ms-flex-preferred-size: 54%;
+      flex-basis: 54%; } }
+
+/* line 296, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.hh__title {
+  color: #dcdcdc;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 26px; }
+  /* line 303, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .hh__title strong {
+    color: #fd622c;
     display: block;
-    margin-top: 5px;
-    color: #999;
-}
+    font-size: 48px; }
+  /* line 309, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .hh__title br {
+    display: none; }
+    @media screen and (min-width: 1200px) {
+      /* line 309, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .hh__title br {
+        display: block; } }
 
-.error-summary {
-    color: #a94442;
-    background: #fdf7f7;
-    border-left: 3px solid #eed3d7;
-    padding: 10px 20px;
-    margin: 0 0 15px 0;
-}
+/* line 318, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.hh__text {
+  color: #a4a4a4;
+  display: none;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px; }
+  @media screen and (min-width: 1024px) {
+    /* line 318, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .hh__text {
+      display: block; } }
 
-/* align the logout "link" (button in form) of the navbar */
-.nav li > form > button.logout {
-    padding: 15px;
-    border: none;
-}
+/* line 330, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.hh__form {
+  background: #f3faff;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-flex-basis: 100%;
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
+  padding: 23px 18px 13px; }
+  @media screen and (min-width: 768px) {
+    /* line 330, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .hh__form {
+      -webkit-flex-basis: 340px;
+      -ms-flex-preferred-size: 340px;
+      flex-basis: 340px;
+      margin-left: 40px;
+      padding: 23px 37px 13px; } }
+  /* line 343, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .hh__form .btn-1 {
+    width: 100%;
+    margin-bottom: 11px; }
 
-@media(max-width:767px) {
-    .nav li > form > button.logout {
-        display:block;
-        text-align: left;
-        width: 100%;
-        padding: 10px 15px;
-    }
-}
+/* line 349, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.df__title {
+  color: #1a1a1a;
+  font-size: 26px;
+  font-weight: 300;
+  text-align: center;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px; }
 
-.nav > li > form > button.logout:focus,
-.nav > li > form > button.logout:hover {
-    text-decoration: none;
-}
+/* line 358, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.df__field {
+  margin-bottom: 11px; }
+  /* line 361, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .df__field input[type="color"], .df__field input[type="date"], .df__field input[type="datetime"], .df__field input[type="datetime-local"], .df__field input[type="email"], .df__field input[type="month"], .df__field input[type="number"], .df__field input[type="password"], .df__field input[type="search"], .df__field input[type="tel"], .df__field input[type="text"], .df__field input[type="time"], .df__field input[type="url"], .df__field input[type="week"], .df__field input:not([type]), .df__field textarea {
+    border: 1px solid #989898;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    color: #383838;
+    padding: 10px 12px;
+    width: 100%; }
+    /* line 368, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .df__field input[type="color"]:focus, .df__field input[type="date"]:focus, .df__field input[type="datetime"]:focus, .df__field input[type="datetime-local"]:focus, .df__field input[type="email"]:focus, .df__field input[type="month"]:focus, .df__field input[type="number"]:focus, .df__field input[type="password"]:focus, .df__field input[type="search"]:focus, .df__field input[type="tel"]:focus, .df__field input[type="text"]:focus, .df__field input[type="time"]:focus, .df__field input[type="url"]:focus, .df__field input[type="week"]:focus, .df__field input:not([type]):focus, .df__field textarea:focus {
+      border-color: #4f82c0; }
 
-.nav > li > form > button.logout:focus {
-    outline: none;
-}
+/* line 374, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.df__text {
+  color: #383838;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  text-align: center;
+  margin-bottom: 15px; }
+  /* line 382, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .df__text strong {
+    font-weight: 700; }
+
+/* line 388, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.bestsellers {
+  background: #f0f0f0;
+  padding: 60px 0 65px; }
+
+/* line 393, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.bs-head {
+  text-align: center;
+  margin-bottom: 52px; }
+  /* line 397, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .bs-head .title-1 {
+    margin-bottom: 12px; }
+
+/* line 402, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.bs-head__text {
+  color: #353535;
+  font-size: 15px;
+  margin-bottom: 10px; }
+  /* line 407, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .bs-head__text strong {
+    font-weight: 700; }
+
+/* line 412, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.bs-list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: -13px; }
+
+/* line 418, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.bs-list__item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-basis: 100%;
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
+  max-width: 100%;
+  padding: 13px; }
+  @media screen and (min-width: 768px) {
+    /* line 418, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .bs-list__item {
+      -webkit-flex-basis: 50%;
+      -ms-flex-preferred-size: 50%;
+      flex-basis: 50%;
+      max-width: 50%; } }
+  /* line 429, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .bs-list__item .product {
+    width: 100%; }
+
+/* line 434, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.bs-more {
+  text-align: center;
+  margin-top: 42px; }
+
+/* line 439, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.product {
+  background: #fff;
+  border: 1px solid #cccccc;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+
+/* line 447, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pd__head {
+  padding: 15px;
+  position: relative; }
+  @media screen and (min-width: 480px) {
+    /* line 447, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .pd__head {
+      padding: 16px 22px; } }
+  /* line 455, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .pd__head .title-2 {
+    margin-bottom: 7px; }
+  /* line 459, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .pd__head .icon-1,
+  .pd__head .icon-2 {
+    position: absolute;
+    right: 17px;
+    top: 13px; }
+  /* line 466, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .pd__head .icon-2 {
+    right: 4px; }
+
+/* line 471, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pd__text-1 {
+  color: #a8a8a8;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 13px;
+  padding-right: 30px; }
+
+/* line 480, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pd__text-2 {
+  color: #353535;
+  font: 15px/1.25 "PT Sans"; }
+
+/* line 485, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pd__content {
+  background: #f3faff;
+  padding: 15px 15px 15px 41px;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1; }
+  @media screen and (min-width: 480px) {
+    /* line 485, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .pd__content {
+      padding: 15px 15px 15px 48px; } }
+
+/* line 495, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.list-1 {
+  margin: 0 0 2px; }
+  /* line 498, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .list-1 li {
+    color: #3b4b5e;
+    font: 15px/1.25 "PT Sans";
+    padding: 5px 0;
+    position: relative; }
+    /* line 504, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .list-1 li:before {
+      content: '';
+      background-image: url(../img/sprite.png);
+      background-position: -173px 0px;
+      width: 17px;
+      height: 17px;
+      position: absolute;
+      left: -26px;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%); }
+
+/* line 515, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pd__more {
+  color: #31599c;
+  font: 15px/1.25 "PT Sans"; }
+
+/* line 520, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pd__foot {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  min-height: 74px;
+  padding: 15px 20px;
+  overflow: hidden; }
+
+/* line 529, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pd-off, .pd-on {
+  background: #f21847;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  display: none;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  color: #ffebeb;
+  font: 900 12px/0.95 "Lato";
+  text-transform: uppercase;
+  width: 90px;
+  height: 90px;
+  padding: 15px 0;
+  margin: -7px 0 -39px;
+  text-align: center; }
+  @media screen and (min-width: 480px) {
+    /* line 529, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .pd-off, .pd-on {
+      display: block; } }
+  /* line 547, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .pd-off strong, .pd-on strong {
+    font-size: 36px; }
+  /* line 551, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .pd-off sup, .pd-on sup {
+    font-size: 24px;
+    line-height: 1.2;
+    vertical-align: top; }
+
+/* line 558, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pd-on {
+  background: #23af3d;
+  color: #f3fff8;
+  font-size: 20px;
+  line-height: 1.1; }
+
+/* line 566, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pd-try {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center; }
+
+/* line 573, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pd-try__price {
+  color: #393939;
+  font: 16px/1.25 "PT Sans";
+  margin-right: 10px; }
+  /* line 578, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .pd-try__price--discount {
+    text-decoration: line-through; }
+    @media screen and (min-width: 768px) {
+      /* line 578, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .pd-try__price--discount {
+        display: none; } }
+    @media screen and (min-width: 1024px) {
+      /* line 578, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .pd-try__price--discount {
+        display: block; } }
+
+/* line 591, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pd-try__discount-price {
+  color: #f21847;
+  font: 700 18px/1.25 "PT Sans";
+  letter-spacing: -0.025em;
+  margin-right: 10px; }
+
+/* line 598, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pd-try__add {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #fff;
+  border: 1px solid #b0bed1;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  cursor: pointer;
+  line-height: 35px;
+  text-align: center;
+  width: 36px;
+  height: 36px;
+  margin-right: 8px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+  /* line 611, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .pd-try__add:hover {
+    background: #e1edff; }
+  /* line 615, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .pd-try__add i {
+    margin-left: 3px; }
+
+/* line 620, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pd__available {
+  background: #e3fde1;
+  color: #527a4f;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  font: 18px/2 "PT Sans";
+  padding: 5px 10px;
+  text-align: center; }
+
+/* line 630, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.statistics {
+  background: #346cb3;
+  display: none;
+  padding: 48px 0 58px; }
+  @media screen and (min-width: 768px) {
+    /* line 630, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .statistics {
+      display: block; } }
+  /* line 639, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .statistics .title-3 {
+    text-align: center;
+    margin-bottom: 20px; }
+
+/* line 645, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.st-row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+
+/* line 649, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.st-col {
+  color: #bad8ff;
+  font-size: 18px;
+  -webkit-flex-basis: 25%;
+  -ms-flex-preferred-size: 25%;
+  flex-basis: 25%;
+  text-align: center;
+  padding: 20px; }
+  @media screen and (min-width: 1200px) {
+    /* line 649, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .st-col {
+      font-size: 24px; } }
+  /* line 660, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .st-col strong {
+    display: block;
+    font-size: 60px;
+    font-weight: 800;
+    margin-bottom: 2px; }
+    @media screen and (min-width: 1024px) {
+      /* line 660, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .st-col strong {
+        font-size: 72px; } }
+    @media screen and (min-width: 1200px) {
+      /* line 660, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .st-col strong {
+        font-size: 90px; } }
+
+/* line 677, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.press-about-us {
+  padding: 44px 0; }
+  /* line 680, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .press-about-us .title-1 {
+    margin-bottom: 40px; }
+
+/* line 685, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pas__item {
+  display: block; }
+  @media screen and (min-width: 768px) {
+    /* line 685, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .pas__item {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex; } }
+
+/* line 693, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pas__logo {
+  -webkit-flex-basis: 352px;
+  -ms-flex-preferred-size: 352px;
+  flex-basis: 352px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-bottom: 30px; }
+  @media screen and (min-width: 768px) {
+    /* line 693, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .pas__logo {
+      margin-bottom: 0; } }
+
+/* line 705, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pas__content {
+  -webkit-flex-basis: 68%;
+  -ms-flex-preferred-size: 68%;
+  flex-basis: 68%;
+  font: 16px/1.25 "PT Sans"; }
+  /* line 709, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .pas__content .icon-4 {
+    margin-bottom: 10px; }
+
+/* line 714, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pas__text {
+  color: #353535;
+  margin-bottom: 10px; }
+
+/* line 719, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pas__link {
+  color: #3c91fe;
+  text-decoration: none; }
+
+/* line 724, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.dots-1,
+.dots-2 {
+  text-align: center;
+  margin: 38px 0 0; }
+  /* line 729, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .dots-1 li,
+  .dots-2 li {
+    background: #b5c7db;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    cursor: pointer;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin: 6px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s; }
+    /* line 739, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .dots-1 li.slick-active,
+    .dots-2 li.slick-active {
+      background: #6b90b7; }
+
+/* line 746, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.dots-2 li {
+  background: #fff; }
+
+/* line 752, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.testimonials {
+  background: #e1f0ff;
+  padding: 42px 0 46px;
+  overflow: hidden; }
+  /* line 757, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .testimonials .title-1 {
+    margin-bottom: 57px; }
+
+/* line 762, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.tst-slider {
+  margin: 0 -20px; }
+  @media screen and (min-width: 1024px) {
+    /* line 762, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .tst-slider {
+      margin: 0 auto;
+      max-width: 760px; } }
+  @media screen and (min-width: 1200px) {
+    /* line 762, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .tst-slider {
+      max-width: 100%; } }
+
+/* line 775, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.tst__item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 0 20px; }
+
+/* line 782, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.tst__content {
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  -ms-grid-row-align: stretch;
+  align-self: stretch;
+  background: #fff;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  padding: 36px;
+  position: relative;
+  margin-bottom: 25px; }
+  /* line 790, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .tst__content:after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 140px;
+    width: 0;
+    height: 0;
+    border-top: 26px solid #fff;
+    border-right: 26px solid transparent; }
+
+/* line 802, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.tst__text {
+  color: #353535;
+  font: 16px/1.25 "PT Sans"; }
+
+/* line 807, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.tst__user {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center; }
+
+/* line 812, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.tst__ava {
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  margin-right: 23px; }
+
+/* line 819, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.tst__info {
+  margin-bottom: 5px; }
+  /* line 822, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .tst__info h3 {
+    color: #195db3;
+    margin-bottom: 7px; }
+  /* line 826, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .tst__info p {
+    color: #353535;
+    font: 16px/1.25 "PT Sans"; }
+
+/* line 833, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.create-account {
+  line-height: 1.5;
+  padding: 86px 0 90px;
+  text-align: center; }
+  @media screen and (min-width: 1024px) {
+    /* line 833, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .create-account {
+      padding: 86px 60px 90px; } }
+  @media screen and (min-width: 1200px) {
+    /* line 833, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .create-account {
+      padding: 86px 0 90px; } }
+  /* line 846, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .create-account .btn-3, .create-account .btn-5 {
+    margin-bottom: 20px; }
+
+/* line 851, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.ca__text-1 {
+  color: #353535;
+  font-size: 32px;
+  display: none; }
+  @media screen and (min-width: 768px) {
+    /* line 851, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .ca__text-1 {
+      display: block; } }
+
+/* line 861, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.ca__text-2 {
+  color: #353535;
+  font-size: 16px;
+  margin-bottom: 32px;
+  display: none; }
+  @media screen and (min-width: 768px) {
+    /* line 861, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .ca__text-2 {
+      display: block; } }
+
+/* line 872, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.ca__text-3 {
+  color: #8b8b8b;
+  font-size: 14px; }
+
+/* line 878, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.main-footer {
+  background: #1a1a1a; }
+
+/* line 882, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.mf__content {
+  padding: 48px 30px 30px 15px; }
+  @media screen and (min-width: 768px) {
+    /* line 882, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .mf__content {
+      padding: 48px 0 60px; } }
+
+/* line 890, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.mfc__row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+
+/* line 894, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.mf-info {
+  -webkit-flex-basis: 357px;
+  -ms-flex-preferred-size: 357px;
+  flex-basis: 357px; }
+  @media screen and (min-width: 768px) {
+    /* line 894, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .mf-info {
+      padding-right: 6%; } }
+  @media screen and (min-width: 1024px) {
+    /* line 894, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .mf-info {
+      padding-right: 11%; } }
+
+/* line 906, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.mf-logo {
+  margin-bottom: 25px; }
+
+/* line 910, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.mf-copy {
+  color: #cdcdcd;
+  font: 14px/1.25 "PT Sans";
+  margin-bottom: 14px; }
+
+/* line 916, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.mf-text {
+  color: #b2b2b2;
+  font: 12px/1.25 "PT Sans";
+  margin-bottom: 14px; }
+
+/* line 922, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.mf-menu {
+  -webkit-flex-basis: 212px;
+  -ms-flex-preferred-size: 212px;
+  flex-basis: 212px;
+  display: none; }
+  @media screen and (min-width: 768px) {
+    /* line 922, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .mf-menu {
+      display: block; } }
+
+/* line 931, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.mf-products {
+  -webkit-flex-basis: 355px;
+  -ms-flex-preferred-size: 355px;
+  flex-basis: 355px;
+  display: none; }
+  @media screen and (min-width: 768px) {
+    /* line 931, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .mf-products {
+      display: block; } }
+
+/* line 940, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.mf-contacts {
+  display: none;
+  -webkit-flex-basis: 176px;
+  -ms-flex-preferred-size: 176px;
+  flex-basis: 176px; }
+  @media screen and (min-width: 1024px) {
+    /* line 940, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .mf-contacts {
+      display: block; } }
+
+/* line 949, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.mf-title {
+  color: #fd622c;
+  font: 18px/1.25 "PT Sans";
+  margin: 5px 0 11px; }
+
+/* line 955, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.mf__item {
+  padding: 4px 0 5px; }
+
+/* line 959, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.mf__link {
+  color: #cdcdcd;
+  font: 16px/1.25 "PT Sans";
+  text-decoration: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+  /* line 965, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .mf__link:hover {
+    color: #3c91fe; }
+
+/* line 970, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.mf__foot {
+  background: #000000;
+  padding: 9px 0; }
+
+/* line 975, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.payment-list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  color: #cdcdcd;
+  font: 14px/1.25 "PT Sans"; }
+  @media screen and (min-width: 768px) {
+    /* line 975, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .payment-list {
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      -ms-flex-pack: center;
+      justify-content: center; } }
+  /* line 987, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .payment-list li {
+    padding: 6px; }
+    @media screen and (min-width: 768px) {
+      /* line 987, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .payment-list li {
+        padding: 7px; } }
+    /* line 994, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .payment-list li.payment-list__title {
+      margin-top: -7px; }
+      @media screen and (min-width: 768px) {
+        /* line 994, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+        .payment-list li.payment-list__title {
+          margin-left: -113px; } }
+
+/* line 1005, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.top-line {
+  background: #dbdbdb;
+  border-bottom: 1px solid #ccc;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 0 14px; }
+  /* line 1012, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .top-line:before {
+    content: ''; }
+
+/* line 1017, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.tl__menu {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+  /* line 1021, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .tl__menu--center .tl__link {
+    padding: 8px 8px 10px; }
+    @media screen and (min-width: 768px) {
+      /* line 1021, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .tl__menu--center .tl__link {
+        margin: 0 20px; } }
+
+/* line 1031, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.tl__link {
+  color: #1a1a1a;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 8px 3px 10px;
+  margin: 0 5px;
+  text-decoration: none;
+  white-space: nowrap;
+  min-height: 35px; }
+  /* line 1043, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .tl__link span {
+    display: none; }
+    @media screen and (min-width: 768px) {
+      /* line 1043, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .tl__link span {
+        display: inline; } }
+  @media screen and (min-width: 768px) {
+    /* line 1051, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .tl__link i {
+      margin-right: 10px; } }
+
+/* line 1059, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.inner-content {
+  padding: 42px 7px; }
+  @media screen and (min-width: 768px) {
+    /* line 1059, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .inner-content {
+      padding: 42px 18px; } }
+  @media screen and (min-width: 1200px) {
+    /* line 1059, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .inner-content {
+      padding: 42px; } }
+
+/* line 1071, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.ic-head {
+  margin-bottom: 30px; }
+  @media screen and (min-width: 768px) {
+    /* line 1071, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .ic-head {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between; } }
+  /* line 1079, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .ic-head .btn-4 {
+    margin: 9px 0 5px; }
+
+/* line 1084, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.ic-head__get {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 22px; }
+  @media screen and (min-width: 768px) {
+    /* line 1084, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .ic-head__get {
+      margin-top: 0; } }
+
+/* line 1095, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.ic-head-off {
+  background: #f21847;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  color: #ffebeb;
+  font: 900 12px/0.95 "Lato";
+  text-transform: uppercase;
+  width: 90px;
+  height: 90px;
+  padding: 20px 0;
+  margin-right: 10px;
+  text-align: center; }
+  @media screen and (min-width: 768px) {
+    /* line 1095, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .ic-head-off {
+      display: none; } }
+  /* line 1112, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .ic-head-off strong {
+    font-size: 36px; }
+  /* line 1116, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .ic-head-off sup {
+    font-size: 24px;
+    line-height: 1.2;
+    vertical-align: top; }
+
+/* line 1123, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.ic-head__text {
+  color: #464646;
+  font-size: 14px;
+  margin: 3px 0; }
+
+/* line 1129, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.ic-price {
+  text-align: center; }
+  /* line 1133, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .ic-price--free-now .free__text {
+    display: inline; }
+  /* line 1137, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .ic-price--free-now .price__text {
+    text-decoration: line-through; }
+
+/* line 1143, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.price__text {
+  color: #393939;
+  font-size: 14px;
+  letter-spacing: -0.025em; }
+
+/* line 1149, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.free__text {
+  display: none;
+  color: #10a22b;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.025em; }
+
+/* line 1162, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.tab-list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: -1px; }
+
+/* line 1167, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.tab-list__item {
+  -webkit-flex-basis: 148px;
+  -ms-flex-preferred-size: 148px;
+  flex-basis: 148px;
+  margin-right: 2px; }
+
+/* line 1172, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.tab-list__link {
+  background: #efefef;
+  background: -webkit-linear-gradient(top, #efefef 0%, #f9f9f9 46%, #f4f4f4 60%, #e5e5e5 100%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#efefef), color-stop(46%, #f9f9f9), color-stop(60%, #f4f4f4), to(#e5e5e5));
+  background: linear-gradient(to bottom, #efefef 0%, #f9f9f9 46%, #f4f4f4 60%, #e5e5e5 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efefef', endColorstr='#e5e5e5',GradientType=0 );
+  border: 1px solid #ccc;
+  -webkit-border-radius: 6px 6px 0 0;
+  border-radius: 6px 6px 0 0;
+  color: #686868;
+  display: block;
+  font-size: 16px;
+  line-height: 28px;
+  padding: 10px;
+  text-align: center;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+  /* line 1188, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .tab-list__link span {
+    position: relative; }
+    /* line 1191, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .tab-list__link span:before {
+      content: '';
+      background: #fff;
+      -webkit-border-radius: 50%;
+      border-radius: 50%;
+      border: 2px solid #9b9b9b;
+      -webkit-box-shadow: 0 0 0 2px #fff;
+      box-shadow: 0 0 0 2px #fff;
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      top: 55%;
+      left: -28px;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%); }
+    /* line 1205, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .tab-list__link span:after {
+      content: '';
+      background: #acacac;
+      -webkit-border-radius: 50%;
+      border-radius: 50%;
+      border: 2px solid #9b9b9b;
+      width: 12px;
+      height: 12px;
+      position: absolute;
+      top: 55%;
+      left: -24px;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%); }
+  /* line 1219, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .tab-list__link--active {
+    background: #fff;
+    border-bottom-color: #fff;
+    color: #464646;
+    font-weight: 600; }
+    /* line 1226, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .tab-list__link--active span:after {
+      background: #4b90c9;
+      border-color: #3e86bd; }
+
+/* line 1234, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.tab-content {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 38px 13px 30px; }
+  /* line 1239, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .tab-content .pagination {
+    margin-top: 34px; }
+
+/* line 1244, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.table-view {
+  overflow-y: auto; }
+  /* line 1247, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .table-view .table-info,
+  .table-view .table-1 {
+    min-width: 960px; }
+
+/* line 1253, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.tab-foot {
+  margin-top: 30px;
+  text-align: center; }
+  @media screen and (min-width: 1600px) {
+    /* line 1257, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .tab-foot__2 {
+      max-width: 65%; } }
+
+/* line 1265, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.table-info {
+  color: #464646;
+  font-size: 14px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-bottom: 15px; }
+  /* line 1272, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .table-info strong {
+    font-weight: 700; }
+
+/* line 1277, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.filter-list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+
+/* line 1281, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.filter-list__item {
+  font-weight: 600;
+  margin-left: 48px; }
+  /* line 1285, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .filter-list__item:first-child {
+    margin: 0; }
+
+/* line 1290, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.filter-list__filter {
+  cursor: pointer;
+  color: #31599c; }
+  /* line 1294, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .filter-list__filter:after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #515151;
+    display: inline-block;
+    vertical-align: middle;
+    margin: -2px 4px 0 8px; }
+
+/* line 1307, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.filter-list__info {
+  color: #8a8989;
+  font-weight: 400; }
+
+/* line 1312, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.table-1 {
+  font: 14px/20px Arial, "Helvetica Neue", Helvetica, sans-serif;
+  width: 100%; }
+  /* line 1316, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .table-1 a {
+    font-size: inherit; }
+  /* line 1320, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .table-1 th {
+    background: #fbfbfb;
+    border: 1px solid #c2c2c2;
+    font-weight: bold;
+    text-align: center;
+    padding: 11px 10px;
+    white-space: nowrap; }
+    /* line 1328, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .table-1 th .table-filter {
+      display: inline-block;
+      vertical-align: middle; }
+    /* line 1333, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .table-1 th .tf-wrap {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column; }
+      /* line 1337, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .table-1 th .tf-wrap__up {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid #1a1a1a;
+        margin: 2px 3px 3px;
+        cursor: pointer; }
+      /* line 1347, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .table-1 th .tf-wrap__down {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid #1a1a1a;
+        margin: 2px 3px 3px;
+        cursor: pointer; }
+  /* line 1359, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .table-1 td {
+    border-bottom: 1px solid #e6e8e9;
+    padding: 8px 10px; }
+    /* line 1363, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .table-1 td.tb__1, .table-1 td.tb__2, .table-1 td.tb__9 {
+      text-align: center; }
+    /* line 1369, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .table-1 td.tb__4, .table-1 td.tb__5 {
+      text-align: right; }
+    /* line 1374, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .table-1 td.tb__1 {
+      color: #1a1a1a; }
+    /* line 1378, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .table-1 td.tb__7 {
+      color: #7f7f7f; }
+      /* line 1381, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .table-1 td.tb__7 .follow-link {
+        color: #28930c; }
+      /* line 1385, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .table-1 td.tb__7 .redirect-link {
+        color: #ff652f; }
+  /* line 1393, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .table-1 tbody tr:nth-child(even) {
+    background: #f7f9fa; }
+
+/* line 1400, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.tb__1,
+.tb__2,
+.tb__9 {
+  width: 36px; }
+
+/* line 1406, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.tb__4 {
+  width: 60px; }
+
+/* line 1410, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.tb__5,
+.tb__8 {
+  width: 80px; }
+
+/* line 1416, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pagination {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
+
+/* line 1421, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pgn-switcher {
+  border: 1px solid #c2c2c2;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 11px; }
+
+/* line 1427, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pgn-switcher__btn {
+  background: #fefefe;
+  background: -webkit-linear-gradient(top, #fefefe 0%, #fbfbfb 100%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#fefefe), to(#fbfbfb));
+  background: linear-gradient(to bottom, #fefefe 0%, #fbfbfb 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#fbfbfb',GradientType=0 );
+  border-right: 1px solid #c2c2c2;
+  color: #1a1a1a;
+  font: 14px/18px Arial, "Helvetica Neue", Helvetica, sans-serif;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  min-height: 26px;
+  min-width: 45px;
+  padding: 4px; }
+  /* line 1443, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .pgn-switcher__btn:last-child {
+    border-right: none; }
+
+/* line 1448, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pgn-list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 9px; }
+
+/* line 1453, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pgn-list__item {
+  border: 1px solid #c2c2c2;
+  margin: 0 2px; }
+
+/* line 1458, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pgn-list__link {
+  background: #fefefe;
+  background: -webkit-linear-gradient(top, #fefefe 0%, #fbfbfb 100%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#fefefe), to(#fbfbfb));
+  background: linear-gradient(to bottom, #fefefe 0%, #fbfbfb 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#fbfbfb',GradientType=0 );
+  color: #1a1a1a;
+  font: 14px/18px Arial, "Helvetica Neue", Helvetica, sans-serif;
+  display: block;
+  min-width: 36px;
+  padding: 4px;
+  text-align: center;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+  /* line 1472, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .pgn-list__link--active {
+    background: #c4dbff; }
+
+/* line 1478, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.guide-container {
+  position: relative; }
+  @media screen and (min-width: 768px) {
+    /* line 1478, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .guide-container {
+      padding: 0 20px; } }
+  @media screen and (min-width: 1600px) {
+    /* line 1478, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .guide-container {
+      max-width: 64%; } }
+  /* line 1489, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .guide-container img {
+    margin-top: 10px;
+    margin-bottom: 40px; }
+    @media screen and (min-width: 768px) {
+      /* line 1489, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .guide-container img {
+        margin-bottom: 70px; } }
+
+/* line 1499, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.contents-list-block {
+  background: #e1f0ff;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  padding: 20px 24px;
+  position: relative;
+  margin-bottom: 35px; }
+  @media screen and (min-width: 768px) {
+    /* line 1499, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .contents-list-block {
+      float: right;
+      max-width: 275px;
+      margin-left: 3%; } }
+  @media screen and (min-width: 1024px) {
+    /* line 1499, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .contents-list-block {
+      max-width: 416px; } }
+  @media screen and (min-width: 1600px) {
+    /* line 1499, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .contents-list-block {
+      position: absolute;
+      left: 100%;
+      width: 50%;
+      max-width: none;
+      margin-left: 4%; } }
+
+/* line 1525, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.contents-list-block__icon {
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  top: 19px;
+  right: 22px; }
+  /* line 1533, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .contents-list-block__icon:before, .contents-list-block__icon:after {
+    content: '';
+    background: #abc4dd;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    margin-top: -1px;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg); }
+  /* line 1546, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .contents-list-block__icon:after {
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg); }
+
+/* line 1551, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.contents-list__head {
+  color: #89aacc;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 35px; }
+
+/* line 1560, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.contents-list {
+  color: #464646;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+  list-style: decimal inside; }
+
+/* line 1568, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.contents-list__item {
+  margin-bottom: 16px;
+  padding-left: 20px;
+  position: relative; }
+  /* line 1573, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .contents-list__item:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border-top: 9px solid transparent;
+    border-left: 9px solid #bcd6ef;
+    border-bottom: 9px solid transparent;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%); }
+
+/* line 1588, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.terms-list {
+  color: #353535;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow: hidden; }
+  /* line 1594, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .terms-list dt {
+    font-weight: 700;
+    text-transform: uppercase; }
+  /* line 1599, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .terms-list dd {
+    margin-bottom: 1.6em; }
+
+/* line 1606, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.blog-page .pagination {
+  margin: 45px 0; }
+
+/* line 1611, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.blog-head {
+  padding: 45px 0 50px;
+  text-align: center; }
+  /* line 1615, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .blog-head .title-1 {
+    margin-bottom: 12px; }
+
+/* line 1620, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.head-text {
+  font-size: 15px; }
+
+/* line 1624, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.post-list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: -13px; }
+
+/* line 1630, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.post-list__item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  max-width: 100%;
+  -webkit-flex-basis: 100%;
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
+  padding: 13px; }
+  @media screen and (min-width: 768px) {
+    /* line 1630, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .post-list__item {
+      max-width: 50%;
+      -webkit-flex-basis: 50%;
+      -ms-flex-preferred-size: 50%;
+      flex-basis: 50%; } }
+  @media screen and (min-width: 1200px) {
+    /* line 1630, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .post-list__item {
+      max-width: 33.333333%;
+      -webkit-flex-basis: 33.333333%;
+      -ms-flex-preferred-size: 33.333333%;
+      flex-basis: 33.333333%; } }
+
+/* line 1648, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.post {
+  background: #fff;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  overflow: hidden; }
+
+/* line 1657, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.post__image img {
+  width: 100%; }
+
+/* line 1661, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.post__image a {
+  display: block; }
+
+/* line 1666, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.post__content {
+  padding: 23px 14px; }
+  @media screen and (min-width: 768px) {
+    /* line 1666, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .post__content {
+      padding: 23px; } }
+
+/* line 1674, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.post__text {
+  font-family: "PT Sans";
+  font-size: 15px;
+  margin-bottom: 18px; }
+
+/* line 1680, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.post__meta {
+  color: #979797;
+  font-size: 14px;
+  letter-spacing: -0.025em; }
+
+/* line 1686, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.subscribe-block {
+  background: #346cb3;
+  padding: 50px 0 70px; }
+
+/* line 1691, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.sbsc-form {
+  max-width: 744px;
+  padding-left: 22px;
+  padding-right: 22px;
+  margin-left: auto;
+  margin-right: auto; }
+  /* line 1698, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .sbsc-form .title-3 {
+    margin-bottom: 57px;
+    text-align: center; }
+
+/* line 1704, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.sbsc-form__field {
+  margin-bottom: 23px; }
+  /* line 1707, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .sbsc-form__field:last-child {
+    margin-bottom: 0; }
+
+/* line 1713, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+input[type="color"].sbsc-form__input, input[type="date"].sbsc-form__input, input[type="datetime"].sbsc-form__input, input[type="datetime-local"].sbsc-form__input, input[type="email"].sbsc-form__input, input[type="month"].sbsc-form__input, input[type="number"].sbsc-form__input, input[type="password"].sbsc-form__input, input[type="search"].sbsc-form__input, input[type="tel"].sbsc-form__input, input[type="text"].sbsc-form__input, input[type="time"].sbsc-form__input, input[type="url"].sbsc-form__input, input[type="week"].sbsc-form__input, input:not([type]).sbsc-form__input, textarea.sbsc-form__input {
+  background: #fff;
+  border: 1px solid #fff;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  color: #353535;
+  font-size: 22px;
+  line-height: 30px;
+  letter-spacing: -0.025em;
+  width: 100%;
+  padding: 10px 18px; }
+
+/* line 1727, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+button.sbsc-form__botton, input[type="button"].sbsc-form__botton, input[type="reset"].sbsc-form__botton, input[type="submit"].sbsc-form__botton {
+  background: transparent;
+  border: 1px solid #abd0fe;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 30px;
+  letter-spacing: -0.025em;
+  width: 100%;
+  padding: 10px 18px;
+  text-transform: uppercase;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+  /* line 1742, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  button.sbsc-form__botton:hover, input[type="button"].sbsc-form__botton:hover, input[type="reset"].sbsc-form__botton:hover, input[type="submit"].sbsc-form__botton:hover {
+    background: #518fe6;
+    border-color: #518fe6; }
+
+/* line 1749, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.get-access-block {
+  padding: 18px 0 78px;
+  text-align: center; }
+  @media screen and (min-width: 768px) {
+    /* line 1749, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .get-access-block {
+      padding: 90px 0 93px; } }
+  /* line 1757, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .get-access-block .title-8 {
+    display: none;
+    margin-bottom: 5px; }
+    @media screen and (min-width: 768px) {
+      /* line 1757, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .get-access-block .title-8 {
+        display: block; } }
+  /* line 1766, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .get-access-block .btn-3, .get-access-block .btn-5 {
+    margin: 34px 0 22px; }
+
+/* line 1771, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.gab__text-1 {
+  display: none; }
+  @media screen and (min-width: 768px) {
+    /* line 1771, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .gab__text-1 {
+      display: block; } }
+
+/* line 1779, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.gab__text-2 {
+  color: #8b8b8b;
+  font-size: 14px; }
+
+/* line 1793, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.breadcrumbs__item {
+  display: inline;
+  margin-right: 20px; }
+  /* line 1797, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .breadcrumbs__item:last-child {
+    margin-right: 0; }
+
+/* line 1802, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.breadcrumbs__link {
+  color: #10a22b;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.025em; }
+
+/* line 1809, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.breadcrumbs-2 {
+  margin-bottom: 25px; }
+
+/* line 1817, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.breadcrumbs-2__item {
+  display: inline; }
+  /* line 1820, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .breadcrumbs-2__item:after {
+    content: '>';
+    color: #8b8b8b;
+    font: 14px "PT Sans";
+    margin: 0 2px; }
+  /* line 1828, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .breadcrumbs-2__item:last-child:after {
+    content: none; }
+
+/* line 1834, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.breadcrumbs-2__link,
+.breadcrumbs-2__text {
+  color: #8b8b8b;
+  font: 14px "PT Sans";
+  text-decoration: underline; }
+
+/* line 1841, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.breadcrumbs-2__text {
+  text-decoration: none; }
+
+/* line 1845, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.post-page-head {
+  padding-top: 43px; }
+  /* line 1848, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .post-page-head .title-9 {
+    margin: 15px 0 26px; }
+
+/* line 1853, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.post-page-head__text {
+  background: #fff;
+  font-size: 18px;
+  padding: 25px; }
+  @media screen and (min-width: 768px) {
+    /* line 1853, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .post-page-head__text {
+      padding: 30px; } }
+
+/* line 1863, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.post-page-head__meta {
+  color: #868585;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 24px 0; }
+  /* line 1869, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .post-page-head__meta a {
+    color: inherit; }
+
+/* line 1874, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.post-page-head__author {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 32px; }
+  /* line 1879, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .post-page-head__author figure {
+    width: 50px;
+    height: 50px;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    margin-right: 14px;
+    overflow: hidden; }
+    /* line 1886, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .post-page-head__author figure img {
+      display: block; }
+
+/* line 1893, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.post-page-head__comments i {
+  margin-right: 5px; }
+
+/* line 1898, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.post-page-wrap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; }
+  @media screen and (min-width: 1024px) {
+    /* line 1898, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .post-page-wrap {
+      -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap; } }
+
+/* line 1907, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.post-page-content {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -webkit-box-ordinal-group: 4;
+  -webkit-order: 3;
+  -ms-flex-order: 3;
+  order: 3; }
+  @media screen and (min-width: 1024px) {
+    /* line 1907, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .post-page-content {
+      -webkit-box-ordinal-group: 2;
+      -webkit-order: 1;
+      -ms-flex-order: 1;
+      order: 1; } }
+
+/* line 1916, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.post-article {
+  border-bottom: 1px solid #c1c1c1;
+  padding-bottom: 66px; }
+  /* line 1920, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .post-article .title-11 {
+    margin-bottom: 26px; }
+  /* line 1924, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .post-article p {
+    line-height: 1.625;
+    margin-bottom: 26px; }
+  /* line 1929, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .post-article .blockquote-2 {
+    margin: 50px 0; }
+
+/* line 1934, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.post-page__img {
+  margin-bottom: 42px; }
+
+/* line 1938, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.by-author {
+  border-bottom: 1px solid #c1c1c1;
+  padding: 23px 0 28px;
+  margin-bottom: 60px; }
+  /* line 1943, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .by-author .by-author__img {
+    display: none;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 100px;
+    height: 100%;
+    float: left;
+    margin: 14px 32px 14px 27px; }
+    @media screen and (min-width: 768px) {
+      /* line 1943, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .by-author .by-author__img {
+        display: block; } }
+    /* line 1956, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .by-author .by-author__img img {
+      display: block; }
+  /* line 1961, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .by-author .title-12 {
+    margin-bottom: 15px; }
+  /* line 1965, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .by-author p {
+    font-size: 14px;
+    line-height: 1.57; }
+  /* line 1970, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .by-author a {
+    color: #1069dc; }
+
+/* line 1975, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.post-page-side-bar {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 100%;
+  -webkit-box-ordinal-group: 3;
+  -webkit-order: 2;
+  -ms-flex-order: 2;
+  order: 2; }
+  /* line 1980, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .post-page-side-bar > * {
+    display: none; }
+  @media screen and (min-width: 1024px) {
+    /* line 1975, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .post-page-side-bar {
+      width: 300px;
+      margin-left: 58px; }
+      /* line 1988, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .post-page-side-bar > * {
+        display: block; } }
+  /* line 1993, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .post-page-side-bar .title-10 {
+    margin-bottom: 37px; }
+  /* line 1997, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .post-page-side-bar .post {
+    margin-bottom: 24px; }
+
+/* line 2002, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.advertising-block {
+  display: block;
+  position: relative;
+  margin-bottom: 37px;
+  text-align: center;
+  margin-top: 80px; }
+  /* line 2009, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .advertising-block:before {
+    content: '';
+    background-image: url(../img/sprite.png);
+    background-position: -1269px 0px;
+    width: 62px;
+    height: 87px;
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    -webkit-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%); }
+
+/* line 2020, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.related-posts {
+  margin-bottom: 50px; }
+  /* line 2023, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .related-posts .title-11 {
+    margin-bottom: 37px; }
+  /* line 2027, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .related-posts .post__content {
+    padding: 20px 15px; }
+
+/* line 2032, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.related-posts-list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-left: -11px;
+  margin-right: -11px; }
+
+/* line 2039, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.related-posts__item {
+  max-width: 100%;
+  -webkit-flex-basis: 100%;
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
+  padding-left: 11px;
+  padding-right: 11px;
+  margin-bottom: 25px; }
+  /* line 2046, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .related-posts__item:last-child {
+    display: none; }
+  @media screen and (min-width: 768px) {
+    /* line 2039, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .related-posts__item {
+      max-width: 50%;
+      -webkit-flex-basis: 50%;
+      -ms-flex-preferred-size: 50%;
+      flex-basis: 50%; } }
+  @media screen and (min-width: 1200px) {
+    /* line 2039, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .related-posts__item {
+      max-width: 33.333333%;
+      -webkit-flex-basis: 33.333333%;
+      -ms-flex-preferred-size: 33.333333%;
+      flex-basis: 33.333333%; }
+      /* line 2059, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .related-posts__item:last-child {
+        display: block; } }
+
+/* line 2066, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.social-pane {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 17px;
+  margin-top: 34px;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  z-index: 999; }
+  @media screen and (min-width: 1200px) {
+    /* line 2066, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .social-pane {
+      display: block; } }
+
+/* line 2080, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.sp__list {
+  overflow: hidden; }
+
+/* line 2084, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.sp__item {
+  margin: 0 0 11px; }
+
+/* line 2089, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pay-list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-left: -8px;
+  margin-right: -8px;
+  margin-bottom: 30px; }
+  @media screen and (min-width: 768px) {
+    /* line 2089, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .pay-list {
+      margin-left: -15px;
+      margin-right: -15px;
+      margin-bottom: 50px; } }
+
+/* line 2103, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pay-list__item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-basis: 50%;
+  -ms-flex-preferred-size: 50%;
+  flex-basis: 50%;
+  max-width: 50%;
+  padding: 0 8px 16px 8px; }
+  @media screen and (min-width: 768px) {
+    /* line 2103, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .pay-list__item {
+      -webkit-flex-basis: 33.3333%;
+      -ms-flex-preferred-size: 33.3333%;
+      flex-basis: 33.3333%;
+      max-width: 33.3333%;
+      padding: 0 15px 30px 15px; } }
+  @media screen and (min-width: 1024px) {
+    /* line 2103, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .pay-list__item {
+      -webkit-flex-basis: 25%;
+      -ms-flex-preferred-size: 25%;
+      flex-basis: 25%;
+      max-width: 25%; } }
+  /* line 2121, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .pay-list__item input {
+    display: none; }
+    /* line 2124, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .pay-list__item input:checked + label.pay-btn {
+      border-color: #fd622c;
+      -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.24);
+      box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.24); }
+
+/* line 2131, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pay-btn {
+  background: #fff;
+  border: 6px solid #dbdbdb;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  min-height: 136px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding: 7px 13px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s; }
+  @media screen and (min-width: 768px) {
+    /* line 2131, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .pay-btn {
+      min-height: 180px; } }
+  /* line 2145, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .pay-btn__icon {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1; }
+  /* line 2152, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .pay-btn__text {
+    color: #464646;
+    font: 13px/1.77 "Open Sans";
+    text-align: center; }
+    @media screen and (min-width: 768px) {
+      /* line 2152, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .pay-btn__text {
+        font-size: 18px; } }
+
+/* line 2164, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.billing-info {
+  margin-bottom: 44px; }
+
+/* line 2168, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.billing-field-row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-bottom: 25px; }
+  @media screen and (min-width: 1024px) {
+    /* line 2168, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .billing-field-row {
+      margin-bottom: 15px; } }
+
+/* line 2178, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.billing-field {
+  -webkit-flex-basis: 100%;
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
+  max-width: 100%; }
+  @media screen and (min-width: 1024px) {
+    /* line 2178, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .billing-field {
+      -webkit-flex-basis: 45%;
+      -ms-flex-preferred-size: 45%;
+      flex-basis: 45%;
+      max-width: 45%; } }
+  /* line 2187, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .billing-field--auto {
+    -webkit-flex-basis: 100%;
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+    max-width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: 20px 0; }
+    @media screen and (min-width: 1024px) {
+      /* line 2187, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .billing-field--auto {
+        -webkit-flex-basis: 10%;
+        -ms-flex-preferred-size: 10%;
+        flex-basis: 10%;
+        max-width: 10%;
+        margin: 0; } }
+  /* line 2203, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .billing-field--novalidate .bf__input,
+  .billing-field--novalidate .bf__select {
+    border-color: #e30d03; }
+  /* line 2208, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .billing-field--novalidate .bf__label {
+    color: #e30d03; }
+
+/* line 2214, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.bf__label {
+  color: #353535;
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px; }
+
+/* line 2222, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.bf__input,
+.bf__select {
+  border: 1px solid #b1b1b1;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  font: 16px/1.25 "Open Sans";
+  padding: 9px;
+  width: 100%; }
+
+/* line 2231, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.bf__info {
+  color: #616161;
+  display: block;
+  font-size: 14px;
+  margin-top: 4px; }
+
+/* line 2238, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.bf__or {
+  color: #777;
+  font-size: 18px;
+  font-weight: 700;
+  min-width: 82px;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-transform: uppercase;
+  text-align: center; }
+
+/* line 2249, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.order-table {
+  width: 100%; }
+  /* line 2253, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .order-table thead th {
+    background: #f8f8f8;
+    border: 1px solid #c6c6c6;
+    color: #353535;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 16px 15px; }
+  /* line 2264, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .order-table tbody td {
+    border: 1px solid #c6c6c6;
+    color: #525252;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 22px;
+    vertical-align: middle;
+    padding: 14px 15px;
+    position: relative; }
+  /* line 2278, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .order-table .ot__row--selected td {
+    color: #188310; }
+  @media screen and (min-width: 768px) {
+    /* line 2284, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .order-table .ot__row--discount .ot__product {
+      padding-right: 100px; } }
+  /* line 2290, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .order-table .ot__row--discount .ot__cost {
+    color: #f21847;
+    font-size: 18px;
+    font-weight: 600; }
+  @media screen and (min-width: 768px) {
+    /* line 2298, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .order-table .ot__num {
+      width: 50px; } }
+  /* line 2304, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .order-table .ot__cost {
+    text-align: center; }
+    @media screen and (min-width: 768px) {
+      /* line 2304, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .order-table .ot__cost {
+        width: 140px; } }
+  /* line 2312, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .order-table .ot__discount {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1; }
+    @media screen and (min-width: 768px) {
+      /* line 2312, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .order-table .ot__discount {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center; } }
+  /* line 2327, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .order-table--separate {
+    border-collapse: separate;
+    border-spacing: 0 3px; }
+    /* line 2332, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .order-table--separate tbody td:not(:first-child) {
+      border-left: none; }
+
+/* line 2339, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.ot__discount {
+  background: #f21847;
+  color: #ffebeb;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font: 900 36px/0.9 "Lato";
+  text-transform: uppercase;
+  padding: 3px 10px 7px; }
+  /* line 2350, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .ot__discount .otd__inner span {
+    font-size: 24px;
+    vertical-align: top; }
+  /* line 2355, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .ot__discount .otd__inner div {
+    font-size: 12px; }
+
+/* line 2361, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.int-text {
+  color: #777;
+  font-size: 16px;
+  text-align: center;
+  margin: 27px 30px 25px; }
+  @media screen and (min-width: 768px) {
+    /* line 2361, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .int-text {
+      font-size: 18px; } }
+
+/* line 2372, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.payment-foot {
+  text-align: center; }
+  @media screen and (min-width: 768px) {
+    /* line 2372, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .payment-foot {
+      text-align: right; } }
+  /* line 2379, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .payment-foot .btn-3, .payment-foot .btn-5 {
+    text-transform: uppercase; }
+
+/* line 2384, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.total-payment {
+  background: #e3fae5;
+  color: #353535;
+  font-size: 16px;
+  padding: 16px;
+  margin: 25px 0; }
+  @media screen and (min-width: 768px) {
+    /* line 2384, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .total-payment {
+      font-size: 18px;
+      padding: 16px 55px; } }
+
+/* line 2397, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.terms-text {
+  color: #616161;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 38px; }
+  @media screen and (min-width: 768px) {
+    /* line 2397, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .terms-text {
+      text-align: right; } }
+  /* line 2407, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .terms-text a {
+    color: #343434;
+    font-weight: 600; }
+
+/* line 2414, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.search-questions {
+  background: #e1f0ff;
+  padding: 45px 14px;
+  margin-left: -14px;
+  margin-right: -14px;
+  margin-bottom: 30px; }
+  @media screen and (min-width: 768px) {
+    /* line 2414, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .search-questions {
+      padding: 65px 28px;
+      margin-left: -28px;
+      margin-right: -28px;
+      margin-bottom: 50px; } }
+  @media screen and (min-width: 1024px) {
+    /* line 2414, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .search-questions {
+      padding: 65px;
+      margin-left: -40px;
+      margin-right: -40px; } }
+
+/* line 2436, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+input[type="color"].search-questions__input, input[type="date"].search-questions__input, input[type="datetime"].search-questions__input, input[type="datetime-local"].search-questions__input, input[type="email"].search-questions__input, input[type="month"].search-questions__input, input[type="number"].search-questions__input, input[type="password"].search-questions__input, input[type="search"].search-questions__input, input[type="tel"].search-questions__input, input[type="text"].search-questions__input, input[type="time"].search-questions__input, input[type="url"].search-questions__input, input[type="week"].search-questions__input, input:not([type]).search-questions__input, textarea.search-questions__input {
+  border: 1px solid #c6d6e6;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  color: #353535;
+  font-size: 18px;
+  letter-spacing: -0.025em;
+  width: 100%;
+  padding: 15px; }
+  @media screen and (min-width: 768px) {
+    /* line 2436, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    input[type="color"].search-questions__input, input[type="date"].search-questions__input, input[type="datetime"].search-questions__input, input[type="datetime-local"].search-questions__input, input[type="email"].search-questions__input, input[type="month"].search-questions__input, input[type="number"].search-questions__input, input[type="password"].search-questions__input, input[type="search"].search-questions__input, input[type="tel"].search-questions__input, input[type="text"].search-questions__input, input[type="time"].search-questions__input, input[type="url"].search-questions__input, input[type="week"].search-questions__input, input:not([type]).search-questions__input, textarea.search-questions__input {
+      font-size: 22px; } }
+
+/* line 2451, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pq-list {
+  margin-bottom: 50px; }
+
+/* line 2455, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pq__item {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.375;
+  margin-bottom: 18px; }
+  @media screen and (min-width: 768px) {
+    /* line 2455, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .pq__item {
+      margin-bottom: 10px; } }
+
+/* line 2466, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.pq__link {
+  color: #353535; }
+
+/* line 2471, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+.search-answer {
+  background: #e1ffe9;
+  color: #353535;
+  font-size: 14px;
+  line-height: 1.375;
+  padding: 17px;
+  margin-bottom: 30px; }
+  @media screen and (min-width: 768px) {
+    /* line 2471, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+    .search-answer {
+      font-size: 16px;
+      padding: 25px;
+      margin-bottom: 60px; } }
+  /* line 2485, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+  .search-answer p {
+    margin-bottom: 10px; }
+    @media screen and (min-width: 768px) {
+      /* line 2485, D:/aartyomenko/Git/marketingHack/public/scss/_theme_style.scss */
+      .search-answer p {
+        margin-bottom: 15px; } }
+
+/*# sourceMappingURL=maps/main.css.map */
