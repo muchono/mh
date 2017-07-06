@@ -108,7 +108,7 @@ class PostController extends Controller
                     $model->save(false, array('image'));
                 }
                 if ($model->imageFileAvatar) {
-                    $model->avatar_image = 'main_'.$model->id . '.' . $model->imageFileAvatar->extension;
+                    $model->avatar_image = 'blog_avatar_image_'.$model->id . '.' . $model->imageFileAvatar->extension;
                     $model->imageFileAvatar->saveAs($model->imagesRootDir.$model->avatar_image);
                     $model->save(false, array('image', 'avatar_image'));
                 }             

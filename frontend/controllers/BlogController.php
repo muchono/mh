@@ -17,5 +17,16 @@ class BlogController extends \yii\web\Controller
         
         return $this->render('index');
     }
+    
+    public function actionPost($id)
+    {
+        if (($model = Post::findOne($id)) !== null) {
+            return $this->render('post', array(
+                'model' => $model,
+            ));
+        } else {
+            return $this->redirect(['index']);
+        }
+    }
 
 }

@@ -22,6 +22,9 @@ use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
  * @property integer $updated_at
  * @property integer $sent
  * @property string $active
+ * @property string $author_name
+ * @property string $author_bio
+ * @property string $avatar_image
  */
 class Post extends \yii\db\ActiveRecord
 {
@@ -130,6 +133,25 @@ class Post extends \yii\db\ActiveRecord
     public function getImagesRootDir()
     {
         return Yii::getAlias('@frontend') . '/web/images/blog/';
+    }
+    
+    
+    /**
+     * Get Recommended
+     * @return array
+     */
+    public function getRecommended()
+    {
+        return self::find()->where(['<>', 'id', $this->id])->limit(2)->all();
+    }
+    
+    /**
+     * Get Related
+     * @return array
+     */
+    public function getRelated()
+    {
+        return self::find()->where(['<>', 'id', $this->id])->limit(3)->all();
     }
     
     /**
