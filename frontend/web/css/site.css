@@ -3991,3 +3991,15 @@ input[type="color"].search-questions__input, input[type="date"].search-questions
         margin-bottom: 15px; } }
 
 /*# sourceMappingURL=maps/main.css.map */
+
+.error-message {
+  color: #f21847;
+  margin: 5px 0 15px;
+  padding: 0 6px; }
+
+.success-message {
+  color: #20b718;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 5px 0 15px;
+  padding: 0 6px; }

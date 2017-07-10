@@ -60,7 +60,7 @@ use yii\helpers\Url;
                       <h3 class="title-13"><a href="<?=Url::to(['post', 'id'=>$d->id]);?>"><?=$d->title ?></a></h3>
                       <p class="post__text"><?=$d->meta_description ?>...</p>
                       <div class="post__meta">
-                        <span class="post__author">by <?=$d->author_name ?></span>
+                        <span class="post__author">by <?=$d->getAuthor() ?></span>
                       </div>
                     </div>
                   </article>
@@ -83,7 +83,7 @@ use yii\helpers\Url;
                 <h3 class="title-7 "><a href="<?=Url::to(['post', 'id'=>$d->id]);?>"><?=$d->title ?></a></h3>
                 <p class="post__text"><?=$d->meta_description ?>...</p>
                 <div class="post__meta">
-                  <span class="post__author">by <?=$d->author_name ?></span>
+                  <span class="post__author">by <?=$d->getAuthor() ?></span>
                 </div>
               </div>
             </article>

@@ -1,12 +1,16 @@
 <?php
 
 namespace frontend\controllers;
+
+use Yii;
 use common\models\Post;
 use common\models\Discount;
-
+use common\models\Subscriber;
 use yii\data\ActiveDataProvider;
+
 class BlogController extends \yii\web\Controller
 {
+    const MAX_SUBSCRIBERS_HOUR = 10;
     
     public function actionIndex()
     {
@@ -24,21 +28,48 @@ class BlogController extends \yii\web\Controller
     public function actionPost($id)
     {
         $a = Discount::find()->active()->latest();
-        
+        $special_offer = Discount::find()->active()->latest();
+
         if (($model = Post::findOne($id)) !== null) {
             return $this->render('post', array(
                 'model' => $model,
-                'special_offer' => Discount::find()->active()->latest(),
+                'special_offer' => $special_offer,
             ));
         } else {
             return $this->redirect(['index']);
         }
     }
     
+    public function actionSubscribe()
+    {
+        $subscriber = new Subscriber;
+        $subscriber->email = !empty($_POST['email']) ? $_POST['email'] : '';
+        $subscriber->ip =  ip2long(Yii::$app->request->userIP);
+        
+        $countLast = Subscriber::find()
+                ->where(['ip' => $subscriber->ip])
+                ->andWhere(['>', 'created_at', time()-86400]) //check for week
+                ->count();
+        
+        if ($countLast > self::MAX_SUBSCRIBERS_HOUR) {
+            Yii::$app->session['subscribed'] = true;
+        } elseif ($subscriber->save()) {
+            Yii::$app->session['subscribed'] = true;
+        }
+        $r = array('errors'=>join(' ', $subscriber->getErrors('email')));
+        
+        echo json_encode($r);
+        Yii::$app->end();
+    }
+    
     public function beforeAction($action)
     {
         $this->view->params['page'] ='blog';
         return parent::beforeAction($action);
-    }    
-
+    }  
+    
+    static public function isSubscribed()
+    {
+        return Yii::$app->session['subscribed'];
+    }
 }

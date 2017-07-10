@@ -1,3 +1,14 @@
+CREATE TABLE IF NOT EXISTS `subscriber` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `created_at` int(11) unsigned NOT NULL,
+  `updated_at` int(11) unsigned NOT NULL,
+  `ip` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `email` (`email`),
+  KEY `ip` (`ip`)
+);
+
 CREATE TABLE IF NOT EXISTS `product_review` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `product_id` int(11) unsigned NOT NULL,

@@ -169,6 +169,6 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getAuthor()
     {
-        return $this->author_name ? $this->author_name : 'MarketingHack Team';
+        return trim($this->author_name) ? $this->author_name : 'MarketingHack Team';
     }    
 }
