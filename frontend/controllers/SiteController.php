@@ -82,8 +82,8 @@ class SiteController extends Controller
         
         $this->view->params['layout_style'] = 'main-layout';
         return $this->render('index', array(
-            'products' => Product::find()->where(['status' => '1'])->orderBy('order')->all(),
-            'productsCount' => Product::find()->where(['status' => '1'])->count(),
+            'products' => Product::findActive()->all(),
+            'productsCount' => Product::findActive()->count(),
             'hrefsCount' => ProductHref::find()->where(['status' => '1'])->count(),
             'usersCount' => User::find()->where(['active' => '1'])->count(),
             'aboutUsContent' => AboutUsContent::find()->all(),
@@ -162,6 +162,19 @@ class SiteController extends Controller
         $this->view->params['page'] ='hiw';
         
         return $this->render('hiw', array(
+        ));
+    }    
+    
+    /**
+     * Displays Terms
+     *
+     * @return mixed
+     */
+    public function actionTerms()
+    {
+        $this->view->params['page'] ='';
+        
+        return $this->render('terms', array(
         ));
     }    
 

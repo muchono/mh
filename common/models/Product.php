@@ -83,6 +83,15 @@ class Product extends \yii\db\ActiveRecord
     
     
     /**
+     * find Active
+     * @return string
+     */
+    static public function findActive()
+    {
+        return self::find()->where(['status' => '1'])->orderBy('order');
+    }
+    
+    /**
      * Get Discount
      * @return Discount
      */

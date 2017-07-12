@@ -147,7 +147,7 @@ AppAsset::register($this);
                   <li class="mf__item"><a href="<?=Url::to(['site/products']);?>" class="mf__link">Products</a></li>
                   <li class="mf__item"><a href="<?=Url::to(['site/special-offer']);?>" class="mf__link">Special Offers</a></li>
                   <li class="mf__item"><a href="<?=Url::to(['site/faq']);?>" class="mf__link">F.A.Q.</a></li>
-                  <li class="mf__item"><a href="<?=Url::to(['site/terms-of-use']);?>" class="mf__link">Terms of Use</a></li>
+                  <li class="mf__item"><a href="<?=Url::to(['site/terms']);?>" class="mf__link">Terms of Use</a></li>
                   <li class="mf__item"><a href="<?=Url::to(['blog/index']);?>" class="mf__link">Blog</a></li>
                 </ul>
               </nav>
