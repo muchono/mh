@@ -8,6 +8,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use yii\helpers\Url;
+use yii\web\View;
 
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
@@ -48,6 +49,9 @@ AppAsset::register($this);
   <!-- Head Libs -->
   <!-- <script src="bower_components/modernizr/modernizr.js"></script> -->    
    <?php $this->head() ?>
+  <script type="text/javascript">
+      var active_product_id = <?=rand(100,1000);?>
+  </script>
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -146,18 +150,15 @@ AppAsset::register($this);
         </div>
 
         <div class="tab-container">
-          <ul class="tab-list">
-            <li class="tab-list__item"><span class="tab-list__link tab-list__link--active"><span>List</span></span></li>
-            <li class="tab-list__item"><span class="tab-list__link"><span>Guide</span></span></li>
-          </ul>
-            <div class="tab-content">
-                <div class="loader_container" ><div class="loader">&nbsp;</div></div>
-                
-            </div>
-
-          <div class="tab-foot">
+            <ul class="tab-list">
+              <li class="tab-list__item"><span class="tab-list__link tab-list__link--active" id="tabList"><span>List</span></span></li>
+              <li class="tab-list__item"><span class="tab-list__link but_guide" id="tabGuide"><span>Guide</span></span></li>
+            </ul>
+            <div class="tab-content"></div>
+            <div class="tab-foot">
             <a href="" class="btn-3">Get Free Access</a>
           </div>
+          <div class="loader" style="display:none">&nbsp;</div>
         </div>
       </div>
     </div>
@@ -169,7 +170,17 @@ AppAsset::register($this);
   <script src="vendor/slick-carousel/slick/slick.min.js"></script>
 
   <!-- Theme Base -->
-  <script src="js/main.js"></script>    
+  <script src="js/main.js"></script>
+<?php
+$this->registerJsFile(
+    '@web/js/logged.js'
+);
+$this->registerJs(
+    "Logged.construct(".$this->params['selectd_product']->id.");",
+    View::POS_READY,
+    'my-button-handler'
+);
+?>  
 </body>
 </html>
 <?php $this->endPage() ?>
