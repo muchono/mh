@@ -67,7 +67,7 @@ class ProductHref extends \yii\db\ActiveRecord
     {
         return [
             [['product_id', 'url', 'example_url','type_links', 'categories'], 'required'],
-            [['product_id', 'status', 'alexa_rank','mark'], 'integer'],
+            [['product_id', 'status', 'alexa_rank'], 'integer'],
             [['da_rank'], 'number'],
             [['about'], 'string'],
             [[ 'url'], 'string', 'max' => 255],
