@@ -17,8 +17,6 @@ use common\models\User;
     <?php foreach (User::$productActivityNames as $k=>$n) {?>
         <tr><th><?=$n?></th>
             <td>Emails:<br/><?=Html::textarea($k, join(', ', User::getValues($groups[$k], 'email')), ['rows' => 5,'cols' => 100]);?>
-                <br/><br/>Phones:<br/>
-            <?=Html::textarea($k, join(', ', User::getValues($groups[$k], 'phone')), ['rows' => 5,'cols' => 100]);?>
             </td></tr>
     <?php }?>
     </table>

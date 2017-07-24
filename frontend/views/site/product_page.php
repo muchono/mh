@@ -210,7 +210,7 @@ $this->title = $model->title;
                     <div class="pp__contains-text"><strong>Practice knowledges</strong> - <?=$model->page->feature1?>.</div>
                   </li>
                     <?php }?>
-                  <?php if ($model->page->feature2) {?>1
+                  <?php if ($model->page->feature2) {?>
                   <li class="pp__contains-list-item">
                     <div class="pp__contains-icon">
                       <i class="pp-icon-4"></i>

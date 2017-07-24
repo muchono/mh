@@ -565,21 +565,14 @@ INSERT INTO `product_review` (`id`, `product_id`, `user_id`, `name`, `email`, `r
 
 CREATE TABLE IF NOT EXISTS `subscriber` (
   `id` int(11) unsigned NOT NULL,
+  `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `created_at` int(11) unsigned NOT NULL,
   `updated_at` int(11) unsigned NOT NULL,
-  `ip` int(11) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  `ip` int(11) unsigned NOT NULL,
+  `active` int(11) unsigned NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `subscriber`
---
-
-INSERT INTO `subscriber` (`id`, `email`, `created_at`, `updated_at`, `ip`) VALUES
-(1, 'ssdfsdfsdf@dsfsdf.com', 1499421706, 1499421706, 2130706433),
-(2, 'ssdfsdfsdf@dsfsd2f.com', 1499421802, 1499421802, 2130706433),
-(3, 'ssdfsdfsdf@dsfsd3.com', 1499422014, 1499422014, 2130706433),
-(4, 'ssdfsdfsdf@dsfsd4.com', 1499422893, 1499422893, 2130706433);
 
 -- --------------------------------------------------------
 

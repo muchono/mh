@@ -18,12 +18,15 @@ $this->title = 'Home';
           </div>
           <div class="hh__form">
             <div class="demo-form">
+                <h2 class="df__title">Get a Free Demo</h2>
               <?php 
               Pjax::begin([
                 // Pjax options
               ]);
-              $form = ActiveForm::begin(); ?>
-                <h2 class="df__title">Get a Free Demo</h2>
+              $form = ActiveForm::begin([
+                'options' => ['data' => ['pjax' => true]],
+                ]); ?>
+                
                 <div class="df__field">
                   <?= $form->field($getDemoModel, 'name')->textInput(['class' => 'df__input','placeholder' => 'Name'])->label(false) ?>
                 </div>
@@ -187,7 +190,7 @@ $this->title = 'Home';
       <div class="container">
         <p class="ca__text-1">Get access to actual websites lists and step-by-step guides right now! </p>
         <p class="ca__text-2">- go through the registration and get the access to demo versions of all our products.</p>
-        <a href="" class="btn-3">Create Your Account</a>
+        <a href="#signup-popup" class="btn-3 js-popups">Create Your Account</a>
         <p class="ca__text-3">Registration is free <br>and will take you a few minutes.</p>
       </div>
     </section>

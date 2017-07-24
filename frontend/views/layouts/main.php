@@ -257,7 +257,7 @@ AppAsset::register($this);
       </div>
     </div>
     <button class="btn-5">Register</button>
-    <p class="aut-text">By clicking Register you agree <br>to our <a href="">terms and conditions</a></p>
+    <p class="aut-text">By clicking Register you agree <br>to our <a href="<?=Url::to(['site/terms']);?>">terms and conditions</a></p>
   </div>
 
 <?php $this->endBody() ?>

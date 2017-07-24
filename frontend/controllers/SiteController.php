@@ -84,15 +84,25 @@ class SiteController extends \frontend\controllers\Controller
         
         $this->view->params['layout_style'] = 'main-layout';
         
-        $get_demo_model = new GetDemoForm();
-        return $this->render('index', array(
-            'products' => Product::findActive()->all(),
-            'productsCount' => Product::findActive()->count(),
-            'hrefsCount' => ProductHref::find()->where(['status' => '1'])->count(),
-            'usersCount' => User::find()->where(['active' => '1'])->count(),
-            'aboutUsContent' => AboutUsContent::find()->all(),
-            'getDemoModel' => $get_demo_model,
-        ));
+        $getDemoModel = new GetDemoForm();
+        if ($getDemoModel->load(Yii::$app->request->post()) && $getDemoModel->validate()) {
+            $subscriber = new \common\models\Subscriber();
+            $subscriber->name = $getDemoModel->name;
+            $subscriber->email = $getDemoModel->email;
+            $subscriber->ip =  ip2long(Yii::$app->request->userIP);
+            $subscriber->save(false);
+            
+            exit('<center>Thank you. <br/><br/>Instructions have been sent to your e-mail box.</center>');
+        } else {
+            return $this->render('index', array(
+                'products' => Product::findActive()->all(),
+                'productsCount' => Product::findActive()->count(),
+                'hrefsCount' => ProductHref::find()->where(['status' => '1'])->count(),
+                'usersCount' => User::find()->where(['active' => '1'])->count(),
+                'aboutUsContent' => AboutUsContent::find()->all(),
+                'getDemoModel' => $getDemoModel,
+            ));
+        }
     }
     
     /**

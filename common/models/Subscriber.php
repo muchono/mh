@@ -9,9 +9,11 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "subscriber".
  *
  * @property string $id
+ * @property string $name
  * @property string $email
  * @property string $created_at
  * @property string $ip
+ * @property integer $active
  */
 class Subscriber extends \yii\db\ActiveRecord
 {
@@ -30,7 +32,8 @@ class Subscriber extends \yii\db\ActiveRecord
     {
         return [
             [['email', 'ip'], 'required'],
-            [['created_at', 'ip'], 'integer'],
+            [['name'], 'string'],
+            [['created_at', 'ip', 'active'], 'integer'],
             [['email'], 'email'],
             ['email', 'unique', 'message'=>'Email subscribed.'],
         ];
