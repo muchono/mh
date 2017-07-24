@@ -23,50 +23,29 @@ var $body = $('body');
   });
 })();
 
-// // Reviews slider
-// (function() {
-//     $(document).ready(function() {
-//         var slider = $('.js-reviews-slider');
+// Toggle
+(function() {
+    $(document).ready(function() {
+        var $btn = $('.js-toggle');
 
-//         slider.slick({
-//             arrows: false,
-//             dots: true,
-//             slidesToShow: 3,
-//             slidesToScroll: 1,
-//             adaptiveHeight: true,
-//             speed: 800,
-//             dotsClass: 'reviews-dots',
-//             customPaging : function(slider, i) {
-//                 return '<span></span>';
-//             },
-//             responsive: [{
-//                 breakpoint: 1200,
-//                 settings: {
-//                     slidesToShow: 3,
-//                     slidesToScroll: 1,
-//                 }
-//             }, {
-//                 breakpoint: 1199,
-//                 settings: {
-//                     slidesToShow: 3,
-//                     slidesToScroll: 1
-//                 }
-//             }, {
-//                 breakpoint: 1023,
-//                 settings: {
-//                     slidesToShow: 2,
-//                     slidesToScroll: 1
-//                 }
-//             }, {
-//                 breakpoint: 639,
-//                 settings: {
-//                     slidesToShow: 1,
-//                     slidesToScroll: 1
-//                 }
-//             }]
-//         });
-//     });
-// })();
+        $btn.each(function(index, el) {
+          var $this = $(this);
+          var toggleClass = $this.data('toggle');
+
+          $this.on('click', function(event) {
+            // event.preventDefault();
+            $this.toggleClass(toggleClass);
+          });
+        });
+    });
+    
+    $('#head_offer_close').click(function(e){
+        e.preventDefault();
+        $.post("?r=site/hide-offer", function( data ) {
+            $('.discount-line').hide();
+        });
+    });
+})();
 
 // Carousel
 (function() {

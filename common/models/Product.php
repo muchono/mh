@@ -7,6 +7,7 @@ use himiklab\sortablegrid\SortableGridBehavior;
 use common\models\ProductHref;
 use common\models\ProductGuide;
 use common\models\ProductReview;
+use common\models\ProductPage;
 use common\models\Discount;
 
 /**
@@ -135,6 +136,15 @@ class Product extends \yii\db\ActiveRecord
     }
     
     /**
+     * Get Page
+     * @return ProductPage
+     */
+    public function getPage()
+    {
+        return ProductPage::find()->where(['product_id' => $this->id])->one();
+    }
+    
+    /**
      * Get Reviews
      * @return array
      */
@@ -142,6 +152,15 @@ class Product extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ProductReview::className(), ['product_id' => 'id']);
     }
+    
+    /**
+     * Get ActiveReviews
+     * @return array
+     */
+    public function getActiveReviews()
+    {
+        return $this->hasMany(ProductReview::className(), ['product_id' => 'id'])->where(['active' => 1]);
+    }    
     
     /**
      * Get final price

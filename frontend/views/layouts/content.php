@@ -43,9 +43,6 @@ AppAsset::register($this);
   <link rel="stylesheet" href="vendor/slick-carousel/slick/slick.css">
   <link rel="stylesheet" href="vendor/magnific-popup/dist/magnific-popup.css">
 
-  <!-- Theme CSS -->
-  <link rel="stylesheet" href="css/main.css">
-
   <!-- Head Libs -->
   <!-- <script src="bower_components/modernizr/modernizr.js"></script> -->    
    <?php $this->head() ?>
@@ -152,7 +149,7 @@ AppAsset::register($this);
         <div class="tab-container">
             <ul class="tab-list">
               <li class="tab-list__item"><span class="tab-list__link tab-list__link--active" id="tabList"><span>List</span></span></li>
-              <li class="tab-list__item"><span class="tab-list__link but_guide" id="tabGuide"><span>Guide</span></span></li>
+              <li class="tab-list__item"><span class="tab-list__link" id="tabGuide"><span>Guide</span></span></li>
             </ul>
             <div class="tab-content"></div>
             <div class="tab-foot">

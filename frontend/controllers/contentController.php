@@ -6,10 +6,12 @@ use Yii;
 use common\models\Product;
 use common\models\ProductHref;
 use common\models\ProductGuide;
+use yii\data\ActiveDataProvider;
+use yii\data\Pagination;
 
-class LogedController extends \yii\web\Controller
+class ContentController extends \frontend\controllers\Controller
 {
-    public $layout = 'logged';
+    public $layout = 'content';
     
     public function beforeAction($action)
     {
@@ -62,12 +64,20 @@ class LogedController extends \yii\web\Controller
     
     public function renderHrefs($product)
     {
-        return $this->renderPartial('_list');
+        $dataProvider = new ActiveDataProvider([
+            'query' => $product->getHrefs(),
+            'pagination' => array('pageSize' => 3),
+        ]);    
+        $pages = new Pagination(['totalCount' => $dataProvider->getTotalCount()]);
+
+        return $this->renderPartial('_list',['product' => $product,
+            'hrefsProvider' => $dataProvider,
+            'pages' => $pages]);
     }
     
     public function renderGuide($product)
     {
-        return $this->renderPartial('_guide');        
+        return $this->renderPartial('_guide',['product' => $product]);
     }    
 
 }

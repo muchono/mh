@@ -105,6 +105,73 @@
     text-transform: uppercase;
 }
 
+.btn-6 {
+    @extend .btn-3;
+    background: #3e73b7;
+
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: #3065a9;
+    }
+}
+
+.btn-7 {
+    appearance: none;
+    color: #f3faff;
+    background: #8401d7;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.2;
+    display: inline-block;
+    padding: 6px;
+    min-width: 122px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+
+    &:hover,
+    &:active,
+    &:focus {
+        background: darken(#8401d7, 10%);
+    }
+}
+
+.btn-8 {
+    appearance: none;
+    color: #fff;
+    background: #23af3d;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.6;
+    letter-spacing: -0.025em;
+    display: inline-block;
+    padding: 10px;
+    min-width: 267px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s;
+
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: #10a22b;
+    }
+}
+
+.btn-9 {
+    @extend .btn-5;
+    text-transform: none;
+}
+
 .btn-sm-1 {
     appearance: none;
     color: #ffffff;
@@ -153,4 +220,54 @@
     &:focus {
         background-color: #10a22b;
     }
+}
+
+.btn-sm-3 {
+    @extend .btn-sm-1;
+    color: #f3faff;
+    text-transform: none;
+    padding: 8px 10px;
+    white-space: nowrap;
+}
+
+
+.btn-back {
+    @extend .btn-sm-2;
+    min-width: 210px;
+    position: relative;
+
+    &:before {
+        content: '';
+        @include sprite($arr-ic);
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+.btn-report {
+    @extend .btn-sm-1;
+    color: #f3fff7;
+    font-size: 15px;
+    width: 100%;
+}
+
+.btn-report-disable {
+    appearance: none;
+    color: #f3fff7;
+    background: #82a3ce;
+    border-radius: 3px;
+    cursor: default;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.2;
+    border: none;
+    display: inline-block;
+    padding: 9px 10px;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.3s;
 }

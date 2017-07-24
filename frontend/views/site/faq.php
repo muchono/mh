@@ -13,7 +13,7 @@ $this->title = 'FAQ';
 
 ?>
 
-<section class="simple-page">
+<section class="simple-page sm">
       <div class="breadcrumbs-2">
         <ul class="breadcrumbs-2__list">
           <li class="breadcrumbs-2__item">

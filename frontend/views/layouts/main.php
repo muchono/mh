@@ -39,25 +39,32 @@ AppAsset::register($this);
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Open+Sans:300,400,600,700|PT+Sans:400,700" rel="stylesheet">
 
   <!-- Vendor CSS -->
+  <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="vendor/slick-carousel/slick/slick.css">
   <link rel="stylesheet" href="vendor/magnific-popup/dist/magnific-popup.css">
-
-  <!-- Theme CSS -->
-  <link rel="stylesheet" href="css/main.css">
 
   <!-- Head Libs -->
   <!-- <script src="bower_components/modernizr/modernizr.js"></script> -->    
    <?php $this->head() ?>
 </head>
+
 <body>
 <?php $this->beginBody() ?>
-  <div class="<?=$this->params['layout_style'] ? $this->params['layout_style'] : 'simple-page-layout'?>">
+  <div class="<?=$this->params['layout_style'] ? $this->params['layout_style'] : 'simple-page-layout'?>  discount-line--add">
     <div class="top-bar">
+        <?php if ($this->params['head_offer']){?>
+      <div class="discount-line">
+        <span><?=$this->params['head_offer']->title?></span>
+        <a href="<?=Url::to(['site/product', 'product_id'=>$this->params['head_offer']->getProductIDs()->one()->id]);?>" class="btn-7">Check now</a>
+        <a href="" class="dl__close" id="head_offer_close"><i class="icon-15"></i></a>
+      </div>
+        <?php }?>
+      <div class="top-bar__inner">
       <a href="" class="menu-btn js-side-menu-btn">
         <span></span>
       </a>
       <div class="logo">
-        <a href="" class="logo__link"><img src="img/main-logo.png" alt="" class="img-fluid"></a>
+        <a href="<?=Url::to(['site/index']);?>" class="logo__link"><img src="img/main-logo.png" alt="" class="img-fluid"></a>
       </div>
       <nav class="main-nav">
         <ul class="main-nav__list">
@@ -74,6 +81,7 @@ AppAsset::register($this);
         <a href="#login-popup" class="up__btn js-popups">Log In</a>
         <a href="#signup-popup" class="up__btn js-popups">Sign Up</a>
       </div>
+    </div>
     </div>
 
     <div class="side-menu js-side-menu">
@@ -128,6 +136,30 @@ AppAsset::register($this);
       </div>
     </div>
     <?= $content ?>
+<div class="social-pane">
+      <ul class="sp__list">
+        <li class="sp__item">
+          <a href="" class="sp__link">
+            <i class="fb"></i>
+          </a>
+        </li>
+        <li class="sp__item">
+          <a href="" class="sp__link">
+            <i class="tw"></i>
+          </a>
+        </li>
+        <li class="sp__item">
+          <a href="" class="sp__link">
+            <i class="gp"></i>
+          </a>
+        </li>
+        <li class="sp__item">
+          <a href="" class="sp__link">
+            <i class="pt"></i>
+          </a>
+        </li>
+      </ul>
+    </div>      
     <footer class="main-footer">
       <div class="mf__content">
         <div class="container">
@@ -157,7 +189,7 @@ AppAsset::register($this);
               <ul class="mf__list">
                 <?php foreach (Product::find()->where(['status' => 1])->limit(5)->all() as $p) {?>
                 <li class="mf__item">
-                  <a href="" class="mf__link"><?=$p->title?></a>
+                  <a href="<?=Url::to(['site/product','product_id'=>$p->id])?>" class="mf__link"><?=$p->title?></a>
                 </li>
                 <?php }?>
               </ul>

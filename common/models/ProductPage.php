@@ -87,4 +87,19 @@ class ProductPage extends \yii\db\ActiveRecord
             'content' => 'Content',
         ];
     }
+    
+    /**
+     * Get features
+     * @return array List of features
+     */
+    public function getFeatures()
+    {
+        $features = [];
+        for($i=1; $i<=5; $i++) {
+            if ($this->{'feature' . $i}) {
+                $features[] = $this->{'feature' . $i};
+            }
+        }
+        return $features;
+    }
 }

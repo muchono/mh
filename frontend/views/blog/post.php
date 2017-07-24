@@ -10,7 +10,7 @@ use yii\helpers\Url;
             <ul class="breadcrumbs__list">
                 <?php foreach($model->categories as $c) {?>
               <li class="breadcrumbs__item">
-                <a href="" class="breadcrumbs__link"><?=$c->title?></a>
+                <a href="<?=Url::to(['index', 'cid'=>$c->id]);?>" class="breadcrumbs__link"><?=$c->title?></a>
               </li>
                 <?php }?>
             </ul>
@@ -77,6 +77,7 @@ use yii\helpers\Url;
             <?php foreach ($model->getRecommended() as $d) {?>
             <article class="post">
               <figure class="post__image">
+                  <script src="../../web/js/main.js" type="text/javascript"></script>
                 <a href="<?=Url::to(['post', 'id'=>$d->id]);?>"><img src="images/blog/<?=$d->image?>" alt="" class="img-fluid"></a>
               </figure>
               <div class="post__content">
@@ -92,29 +93,6 @@ use yii\helpers\Url;
         </div>
       </div>
     </section>
-    <div class="social-pane">
-      <ul class="sp__list">
-        <li class="sp__item">
-          <a href="" class="sp__link">
-            <i class="fb"></i>
-          </a>
-        </li>
-        <li class="sp__item">
-          <a href="" class="sp__link">
-            <i class="tw"></i>
-          </a>
-        </li>
-        <li class="sp__item">
-          <a href="" class="sp__link">
-            <i class="gp"></i>
-          </a>
-        </li>
-        <li class="sp__item">
-          <a href="" class="sp__link">
-            <i class="pt"></i>
-          </a>
-        </li>
-      </ul>
-    </div>
+    
     <?= $this->render('_bottom', [
     ]) ?>

@@ -4,18 +4,26 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\Post;
+use common\models\PostCategory;
 use common\models\Discount;
 use common\models\Subscriber;
 use yii\data\ActiveDataProvider;
 
-class BlogController extends \yii\web\Controller
+class BlogController extends \frontend\controllers\Controller
 {
     const MAX_SUBSCRIBERS_HOUR = 10;
     
     public function actionIndex()
     {
+        $query = Post::find()->where(['active' => '1']);
+        if (Yii::$app->request->get('cid') && $cmodel = PostCategory::findOne(Yii::$app->request->get('cid'))){
+            $query=$query->innerJoinWith([
+                'postCategories' => function ($query) use ($cmodel) {
+                    $query->onCondition(['category_id' => $cmodel->id]);
+                }]);
+        }
         $dataProvider = new ActiveDataProvider([
-            'query' => Post::find()->where(['active' => '1']),
+            'query' => $query,
             'pagination' => array('pageSize' => 9),
         ]);
         return $this->render('index', array(
@@ -68,8 +76,4 @@ class BlogController extends \yii\web\Controller
         return parent::beforeAction($action);
     }  
     
-    static public function isSubscribed()
-    {
-        return Yii::$app->session['subscribed'];
-    }
 }

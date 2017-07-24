@@ -32,8 +32,8 @@ class ProductHref extends \yii\db\ActiveRecord
      * statuses values
      */
     public static $link_types = array(
-        'follow' => 'Follow',
-        'nofollow' => 'Nofollow',
+        'follow' => 'Follow link',
+        'nofollow' => 'Nofollow link',
         'redirect' => 'Redirect',
         'nolinks' => 'No Links',
     );
@@ -67,7 +67,7 @@ class ProductHref extends \yii\db\ActiveRecord
     {
         return [
             [['product_id', 'url', 'example_url','type_links', 'categories'], 'required'],
-            [['product_id', 'status', 'alexa_rank'], 'integer'],
+            [['product_id', 'status', 'alexa_rank','mark'], 'integer'],
             [['da_rank'], 'number'],
             [['about'], 'string'],
             [[ 'url'], 'string', 'max' => 255],
@@ -132,6 +132,21 @@ class ProductHref extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ProductHrefCategory::className(), ['id' => 'category_id'])
                     ->via('hREFCategories');
+    }
+    
+    /**
+     * Get categories array
+     * @return array
+     */
+    public function getCategoriesArray()
+    {
+        $r = [];
+        $categories = $this->getCategories()->asArray()->all();
+        
+        foreach($categories as $c){
+            $r[$c['id']] = $c['title'];
+        }
+        return $r;
     }
     
     /**

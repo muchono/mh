@@ -36,26 +36,28 @@
 
   <div class="alter-layout">
     <div class="top-bar">
-      <a href="" class="menu-btn js-side-menu-btn">
-        <span></span>
-      </a>
-      <div class="logo">
-        <a href="" class="logo__link"><img src="img/main-logo.png" alt="" class="img-fluid"></a>
-      </div>
-      <nav class="main-nav">
-        <ul class="main-nav__list">
-          <li class="main-nav__item"><a href="" class="main-nav__link">Home</a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link">How It Works</a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link">Products</a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link">Special Offers</a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link">F.A.Q.</a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link">Support</a></li>
-          <li class="main-nav__item"><a href="" class="main-nav__link">Blog</a></li>
-        </ul>
-      </nav>
-      <div class="user-pane">
-        <a href="" class="up__btn">Log In</a>
-        <a href="" class="up__btn">Sign Up</a>
+      <div class="top-bar__inner">
+        <a href="" class="menu-btn js-side-menu-btn">
+          <span></span>
+        </a>
+        <div class="logo">
+          <a href="" class="logo__link"><img src="img/main-logo.png" alt="" class="img-fluid"></a>
+        </div>
+        <nav class="main-nav">
+          <ul class="main-nav__list">
+            <li class="main-nav__item"><a href="" class="main-nav__link">Home</a></li>
+            <li class="main-nav__item"><a href="" class="main-nav__link">How It Works</a></li>
+            <li class="main-nav__item"><a href="" class="main-nav__link">Products</a></li>
+            <li class="main-nav__item"><a href="" class="main-nav__link">Special Offers</a></li>
+            <li class="main-nav__item"><a href="" class="main-nav__link">F.A.Q.</a></li>
+            <li class="main-nav__item"><a href="" class="main-nav__link">Support</a></li>
+            <li class="main-nav__item"><a href="" class="main-nav__link">Blog</a></li>
+          </ul>
+        </nav>
+        <div class="user-pane">
+          <a href="" class="up__btn">Log In</a>
+          <a href="" class="up__btn">Sign Up</a>
+        </div>
       </div>
     </div>
 
@@ -159,9 +161,45 @@
               <div class="table-info">
                 <div>Latest update: <strong>06.24.2016</strong></div>
                 <ul class="filter-list">
-                  <li class="filter-list__item">Show <span class="filter-list__filter">All URLs</span></li>
-                  <li class="filter-list__item">Sort By <span class="filter-list__filter">DA</span></li>
-                  <li class="filter-list__item">Show <span class="filter-list__filter">50</span> Per Page</li>
+                  <li class="filter-list__item">
+                    Show
+                    <div class="filter-list__select">
+                      <select>
+                        <option value="">All URLs</option>
+                        <option value="">All URLs</option>
+                        <option value="">All URLs</option>
+                        <option value="">All URLs</option>
+                        <option value="">All URLs</option>
+                      </select>
+                    </div>
+                  </li>
+                  <li class="filter-list__item">
+                    Sort By
+                    <div class="filter-list__select">
+                      <select>
+                        <option value="">DA</option>
+                        <option value="">DA</option>
+                        <option value="">DA</option>
+                        <option value="">DA</option>
+                        <option value="">DA</option>
+                        <option value="">DA</option>
+                      </select>
+                    </div>
+                  </li>
+                  <li class="filter-list__item">
+                    Show
+                    <div class="filter-list__select">
+                      <select>
+                        <option value="">50</option>
+                        <option value="">50</option>
+                        <option value="">50</option>
+                        <option value="">50</option>
+                        <option value="">50</option>
+                        <option value="">50</option>
+                      </select>
+                    </div>
+                    Per Page
+                  </li>
                   <li class="filter-list__item"><span class="filter-list__info">Showing 1 to 50 of 247 URLs</span></li>
                 </ul>
               </div>
@@ -217,7 +255,9 @@
                       </span>
                     </th>
                     <th class="tb__8">Example</th>
-                    <th class="tb__9">R</th>
+                    <th class="tb__9">
+                      R
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -241,7 +281,36 @@
                     <td class="tb__6">Website Development</td>
                     <td class="tb__7"><a href="">Follow link</a></td>
                     <td class="tb__8"><a href="">Example</a></td>
-                    <td class="tb__9"><i class="icon-12"></i></td>
+                    <td class="tb__9">
+                      <i class="icon-12"></i>
+                      <div class="report">
+                        <div class="report__head">
+                          Please Report
+                          <span class="report__close">
+                            <i></i>
+                          </span>
+                        </div>
+                        <div class="report__content">
+                          <ul class="report-list">
+                            <li class="report-list__item">
+                              <input type="checkbox" id="input-1">
+                              <label for="input-1">Doesn't provide guest posting</label>
+                            </li>
+                            <li class="report-list__item">
+                              <input type="checkbox" id="input-2">
+                              <label for="input-2">Requires payment for guest posting</label>
+                            </li>
+                            <li class="report-list__item">
+                              <input type="checkbox" id="input-3">
+                              <label for="input-3">Site ceased to exist</label>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="report__foot">
+                          <a href="" class="btn-report">send report</a>
+                        </div>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
                     <td class="tb__1">3</td>
@@ -252,7 +321,9 @@
                     <td class="tb__6">Marketing, SEO</td>
                     <td class="tb__7">Nofollow link</td>
                     <td class="tb__8"><a href="">Example</a></td>
-                    <td class="tb__9"><i class="icon-12"></i></td>
+                    <td class="tb__9">
+                      <i class="icon-12"></i>
+                    </td>
                   </tr>
                   <tr>
                     <td class="tb__1">1</td>
@@ -318,7 +389,25 @@
                     <td class="tb__6">Marketing, SEO</td>
                     <td class="tb__7">Nofollow link</td>
                     <td class="tb__8"><a href="">Example</a></td>
-                    <td class="tb__9"><i class="icon-12"></i></td>
+                    <td class="tb__9">
+                      <i class="icon-12"></i>
+                      <div class="report">
+                        <div class="report__head">
+                          Please Report
+                          <span class="report__close">
+                            <i></i>
+                          </span>
+                        </div>
+                        <div class="report__content">
+                          <figure class="report__img">
+                            <img src="img/report-thank-img.jpg" alt="" class="img-fluid">
+                          </figure>
+                        </div>
+                        <div class="report__foot">
+                          <div class="btn-report-disable">Thank you!</div>
+                        </div>
+                      </div>
+                    </td>
                   </tr>
                   <tr>
                     <td class="tb__1">1</td>
@@ -351,7 +440,9 @@
                     <td class="tb__6">Marketing, SEO</td>
                     <td class="tb__7">Nofollow link</td>
                     <td class="tb__8"><a href="">Example</a></td>
-                    <td class="tb__9"><i class="icon-12"></i></td>
+                    <td class="tb__9">
+                      <i class="icon-12"></i>
+                    </td>
                   </tr>
                   <tr>
                     <td class="tb__1">1</td>

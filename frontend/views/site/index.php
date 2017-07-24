@@ -1,8 +1,13 @@
 <?php
 
 /* @var $this yii\web\View */
+use yii\helpers\Url;
+use yii\widgets\ActiveForm;
+use yii\captcha\Captcha;
+use yii\web\View;
+use yii\widgets\Pjax;
 
-$this->title = 'My Yii Application';
+$this->title = 'Home';
 ?>
 <header class="home-header">
       <div class="container">
@@ -13,18 +18,30 @@ $this->title = 'My Yii Application';
           </div>
           <div class="hh__form">
             <div class="demo-form">
-              <form action="">
+              <?php 
+              Pjax::begin([
+                // Pjax options
+              ]);
+              $form = ActiveForm::begin(); ?>
                 <h2 class="df__title">Get a Free Demo</h2>
                 <div class="df__field">
-                  <input type="text" class="df__input">
+                  <?= $form->field($getDemoModel, 'name')->textInput(['class' => 'df__input','placeholder' => 'Name'])->label(false) ?>
                 </div>
                 <div class="df__field">
-                  <input type="text" class="df__input">
+                  <?= $form->field($getDemoModel, 'email')->textInput(['class' => 'df__input','placeholder' => 'E-mail'])->label(false) ?>
+                </div>
+                <div class="df__field" id="captcha_block" style="display:none">
+                <?= $form->field($getDemoModel, 'verifyCode')->label(false)
+                      ->widget(Captcha::className(), [
+                    'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
+                    'options' => ['placeholder' => 'code', 'class' => 'df__input']
+                ]) ?>    
                 </div>
                 <p class="df__text">(We’ll never spam your email)</p>
                 <button class="btn-1">Get Demo</button>
                 <p class="df__text"><strong>It's free</strong> and no credit card required</p>
-              </form>
+              <?php ActiveForm::end(); 
+              Pjax::end();?>
             </div>
           </div>
         </div>
@@ -53,7 +70,7 @@ $this->title = 'My Yii Application';
                   <li><?=$g->title?></li>
                 <?php }?>
                 </ul>
-                <a href="" class="pd__more">Learn more</a>
+                <a href="<?=Url::to(['site/product','product_id'=>$p->id])?>" class="pd__more">Learn more</a>
               </div>
               <div class="pd__foot">
                 <?php if (!$p->priceFinal){?>
@@ -90,7 +107,7 @@ $this->title = 'My Yii Application';
           <?php }?>
         </div>
         <div class="bs-more">
-          <a href="" class="btn-2">View More Bestsellers</a>
+          <a href="<?=Url::to(['site/products'])?>" class="btn-2">View More Bestsellers</a>
         </div>
       </div>
     </section>
@@ -174,3 +191,12 @@ $this->title = 'My Yii Application';
         <p class="ca__text-3">Registration is free <br>and will take you a few minutes.</p>
       </div>
     </section>
+<?php
+$this->registerJs(
+    "$('#getdemoform-name').change(function(event){"
+        . "$('#captcha_block').show();"
+        . "})",
+    View::POS_READY,
+    'get-demo-handler'
+);
+?>

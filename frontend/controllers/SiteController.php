@@ -4,17 +4,19 @@ namespace frontend\controllers;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
-use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use frontend\models\GetDemoForm;
+use yii\helpers\Html;
 
 use common\models\LoginForm;
 use common\models\Product;
 use common\models\ProductHref;
+use common\models\ProductReview;
 use common\models\User;
 use common\models\AboutUsContent;
 use common\models\Faq;
@@ -22,7 +24,7 @@ use common\models\Faq;
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends \frontend\controllers\Controller
 {
     /**
      * @inheritdoc
@@ -81,12 +83,15 @@ class SiteController extends Controller
         $this->view->params['page'] ='home';
         
         $this->view->params['layout_style'] = 'main-layout';
+        
+        $get_demo_model = new GetDemoForm();
         return $this->render('index', array(
             'products' => Product::findActive()->all(),
             'productsCount' => Product::findActive()->count(),
             'hrefsCount' => ProductHref::find()->where(['status' => '1'])->count(),
             'usersCount' => User::find()->where(['active' => '1'])->count(),
             'aboutUsContent' => AboutUsContent::find()->all(),
+            'getDemoModel' => $get_demo_model,
         ));
     }
     
@@ -125,8 +130,35 @@ class SiteController extends Controller
         $this->view->params['page'] ='products';
         
         return $this->render('products', array(
+            'products' => Product::findActive()->all(),
         ));
     }
+    
+    /**
+     * Displays Product.
+     *
+     * @return mixed
+     */
+    public function actionProduct()
+    {
+
+        $this->view->params['page'] ='products';
+        if (Yii::$app->request->get('product_id') 
+                && $model = Product::findOne(Yii::$app->request->get('product_id'))) {
+                    $review = new ProductReview(['scenario' => 'front']);
+                    
+                    if ($review->load(Yii::$app->request->post()) && $review->save()) {
+                        return $this->redirect(['site/product', 'product_id' => $model->id, 'review_added'=>'1', '#' => 'under_post']);
+                    }
+                    return $this->render('product_page', array(
+                        'model' => $model,
+                        'review' => $review,
+                        'review_added' => Yii::$app->request->get('review_added'),
+                    ));
+        } else {
+            return $this->redirect(['site/products']);
+        }
+    } 
     
     /**
      * Displays Special Offers.
@@ -137,6 +169,7 @@ class SiteController extends Controller
     {
         $this->view->params['page'] ='special-offer';
         return $this->render('special_offer', array(
+            'products' => Product::findActive()->all(),
         ));
     }
     
@@ -148,9 +181,29 @@ class SiteController extends Controller
     public function actionSupport()
     {
         $this->view->params['page'] ='support';
-        return $this->render('support', array(
-        ));
-    }    
+        
+        if (Yii::$app->request->post() && Yii::$app->request->post('keywords')) {
+            $faqs = Faq::find()->where(['LIKE', 'title', Html::encode(Yii::$app->request->post('keywords'))])->all();
+            $faqs = array_merge($faqs, Faq::find()->where(['LIKE', 'answer', Html::encode(Yii::$app->request->post('keywords'))])->all());
+            return $this->render('support_result', array(
+                'faqs' => $faqs,
+                'keywords' => Html::encode(Yii::$app->request->post('keywords')),
+            ));                    
+        } else {
+            $model = new \frontend\models\SupportQuestion();
+            
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                $model->sendEmail(Yii::$app->params['adminEmail']);
+                
+                return $this->redirect(['site/success']);
+            } else {
+                return $this->render('support', array(
+                    'faqs' => Faq::find()->orderBy('popular_question DESC')->limit(10)->all(),
+                    'model' => $model,
+                ));
+            }
+        }
+    }
     
     /**
      * Displays How It Works.
@@ -162,6 +215,7 @@ class SiteController extends Controller
         $this->view->params['page'] ='hiw';
         
         return $this->render('hiw', array(
+            'products' => Product::findActive()->limit(3)->all(),
         ));
     }    
     
@@ -233,6 +287,19 @@ class SiteController extends Controller
             ]);
         }
     }
+    
+    
+    
+    /**
+     * Displays Special Offers.
+     *
+     * @return mixed
+     */    
+    public function actionHideOffer()
+    {
+        Yii::$app->session->set('head_offer_closed', true);
+        exit;
+    }
 
     /**
      * Displays about page.
@@ -265,6 +332,13 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionSuccess()
+    {
+        $this->layout= 'result';
+        return $this->render('success', [
+        ]);
+    }
+    
     /**
      * Requests password reset.
      *

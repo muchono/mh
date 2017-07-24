@@ -1,5 +1,6 @@
 var Logged = (function() {
     var vars = {
+        list_url: '?r=loged/list',
         product_id: 0,
         guide: '',
         list: '',
@@ -15,6 +16,11 @@ var Logged = (function() {
             if (!el.hasClass('tab-list__link--active')) {
                 root.setActive(el);
             }
+        });
+        $('.tab-content').on('click', 'a.pgn-list__link,a.pgn-switcher__btn', function(event) {
+            event.preventDefault();
+            vars.list_url = $(this).attr('href');
+            tabListFill();
         });
     }
     
@@ -54,7 +60,7 @@ var Logged = (function() {
     function tabListFill() {
         $.ajax({
             type: 'POST',
-            url: '?r=loged/list',
+            url: vars.list_url,
             data: {'project_id': vars.product_id},
             success:function(data){
                     vars.list = data.c;

@@ -74,6 +74,20 @@ body {
   padding-top: 68px;
   position: relative;
   min-height: 100%;
+
+  &.discount-line--add {
+    padding-top: 110px;
+  }
+}
+
+.message-layout {
+  background: #f0f0f0;
+  padding-top: 68px;
+  height: 100%;
+
+  .top-bar__inner {
+    justify-content: center;
+  }
 }
 
 a {
@@ -106,6 +120,18 @@ a,
   }
 }
 
+.container-sm {
+  @extend .container;
+  max-width: 1020px;
+  padding-left: 8px;
+  padding-right: 8px;
+
+  @include media(sm) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
 .container-md {
   @extend .container;
   max-width: 1290px;
@@ -120,13 +146,19 @@ a,
   display: flex;
 }
 
-.simple-page {
+.page-pane {
   background: #fff;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.simple-page {
+  @extend .page-pane;
   margin-left: 8px;
   margin-right: 8px;
   padding: 30px 14px;
+  min-height: 100%;
 
   @include media(sm) {
     margin-left: 20px;
@@ -135,9 +167,78 @@ a,
   }
 
   @include media(md) {
+    &.sm {
+      max-width: 900px;
+    }
+
     max-width: 990px;
     margin-left: auto;
     margin-right: auto;
     padding: 35px 40px 60px;
+  }
+
+  &.msg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 15px;
+
+    @include media(sm) {
+      padding: 20px 40px 40px;
+    }
+
+    @include media(md) {
+      padding: 20px 140px 40px;
+    }
+
+    @include media(lg) {
+      padding: 40px 140px 80px;
+    }
+  }
+}
+
+.product-page {
+  .breadcrumbs-2 {
+    background: #fff;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding: 28px 17px 6px;
+    margin: 0;
+
+    @include media(sm) {
+      background: none;
+      border: none;
+      padding: 0;
+      margin-bottom: 25px;
+    }
+  }
+
+  .page-pane {
+    background: none;
+    border: none;
+
+    @include media(sm) {
+      background: #fff;
+      border-left: 1px solid #ccc;
+      border-right: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+      padding: 28px 17px 6px;
+    }
+
+    @include media(md) {
+      padding: 28px 17px 6px 24px;
+    }
+
+    @include media(lg) {
+      padding: 28px 17px 6px 34px;
+    }
+  }
+
+  .recommend-items {
+    display: none;
+
+    @include media(sm) {
+      display: block;
+    }
   }
 }

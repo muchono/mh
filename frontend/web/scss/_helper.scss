@@ -218,6 +218,53 @@ video {
   vertical-align: middle;
 }
 
+.icon-15 {
+  @include sprite($icon-15);
+  display: inline-block;
+  vertical-align: top;
+}
+
+.icon-17 {
+  @include sprite($icon-17);
+  display: inline-block;
+  vertical-align: top;
+}
+
+.pp-icon-1 {
+  @include sprite($pp-icon-1);
+  display: inline-block;
+}
+
+.pp-icon-2 {
+  @include sprite($pp-icon-2);
+  display: inline-block;
+}
+
+.pp-icon-3 {
+  @include sprite($pp-icon-3);
+  display: inline-block;
+}
+
+.pp-icon-4 {
+  @include sprite($pp-icon-4);
+  display: inline-block;
+}
+
+.pp-icon-5 {
+  @include sprite($pp-icon-5);
+  display: inline-block;
+}
+
+.pp-icon-6 {
+  @include sprite($pp-icon-6);
+  display: inline-block;
+}
+
+.pp-icon-7 {
+  @include sprite($pp-icon-7);
+  display: inline-block;
+}
+
 // .pay-1-ic {
 //   @include sprite($pay-1-ic);
 //   display: inline-block;
