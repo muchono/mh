@@ -6053,3 +6053,7 @@ input[type="color"].search-questions__input, input[type="date"].search-questions
 .rate__star--on,.rate__star--off{
 	cursor: pointer;
 }
+
+.tab-list__item {
+		cursor: pointer;
+}

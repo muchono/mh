@@ -22,10 +22,17 @@ class ContentController extends \frontend\controllers\Controller
     public function actionIndex()
     {
         $user_id = 1;
-        $this->view->params['products'] = Product::findActive()->all();      
-        $this->view->params['selectd_product'] = $this->view->params['products'][0];
-        $this->view->params['selected_product_hrefs'] = $this->renderHrefs($this->view->params['selectd_product']);
-        $this->view->params['selected_product_guide'] = $this->renderGuide($this->view->params['selectd_product']);
+        $this->view->params['products'] = Product::findActive()->all();
+        
+        $product_id = Yii::$app->request->get('product_id');
+        if ($product_id && $product = Product::findOne($product_id)) {
+            $this->view->params['selected_product'] = $product;
+        } else {
+            $this->view->params['selected_product'] = $this->view->params['products'][0];    
+        }
+        
+        $this->view->params['selected_product_hrefs'] = $this->renderHrefs($this->view->params['selected_product']);
+        $this->view->params['selected_product_guide'] = $this->renderGuide($this->view->params['selected_product']);
         
         return $this->render('index');
     }

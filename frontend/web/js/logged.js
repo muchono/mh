@@ -1,6 +1,6 @@
 var Logged = (function() {
     var vars = {
-        list_url: '?r=loged/list',
+        list_url: '?r=content/list',
         product_id: 0,
         guide: '',
         list: '',
@@ -45,7 +45,7 @@ var Logged = (function() {
     function tabGuideFill() {
         $.ajax({
             type: 'POST',
-            url: '?r=loged/guide',
+            url: '?r=content/guide',
             data: {'project_id': vars.product_id},
             success:function(data){
                 vars.guide = data.c;

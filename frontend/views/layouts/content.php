@@ -63,8 +63,8 @@ AppAsset::register($this);
       <div class="sm__content">
         <ul class="sm-list-1">
           <?php foreach ($this->params['products'] as $p){?>
-          <li class="sm-list-1__item sm-list-1__item--unblock <?=$this->params['selectd_product']->id == $p->id ? 'sm-list-1__item--active' : ''?>">
-            <a href="" class="sm-list-1__link"><?=$p->title?></a>
+          <li class="sm-list-1__item <?=$this->params['selected_product']->id == $p->id ? 'sm-list-1__item--unblock sm-list-1__item--active' : 'sm-list-1__item--block'?>">
+            <a href="<?=Url::to(['content/index','product_id'=>$p->id])?>" class="sm-list-1__link"><?=$p->title?></a>
           </li>
           <?php }?>
           <!--
@@ -131,7 +131,7 @@ AppAsset::register($this);
       <div class="inner-content">
         <div class="ic-head">
           <div>
-            <h2 class="title-4"><?=$this->params['selectd_product']->getHrefs()->count()?> Popular Forums</h2>
+            <h2 class="title-4"><?=$this->params['selected_product']->getHrefs()->count()?> Popular Forums</h2>
             <p class="ic-head__text">This is demo version - full version will be available after <a href="">purchase</a></p>
           </div>
           <div class="ic-head__get">
@@ -173,7 +173,7 @@ $this->registerJsFile(
     '@web/js/logged.js'
 );
 $this->registerJs(
-    "Logged.construct(".$this->params['selectd_product']->id.");",
+    "Logged.construct(".$this->params['selected_product']->id.");",
     View::POS_READY,
     'my-button-handler'
 );
