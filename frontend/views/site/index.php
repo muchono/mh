@@ -63,7 +63,7 @@ $this->title = 'Home';
             <div class="product">
               <div class="pd__head">
                 <div class="pd__text-1"><?=$p->short_title?></div>
-                <h3 class="title-2"><?=$p->title?></h3>
+                <a href="<?=Url::to(['site/product','product_id'=>$p->id])?>"><h3 class="title-2"><?=$p->title?></h3></a>
                 <div class="pd__text-2"><?=$p->full_title?></div>
                 <i class="icon-<?=($p->priceFinal) ? 1 : 2?>"></i>
               </div>

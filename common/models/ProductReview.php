@@ -79,7 +79,7 @@ class ProductReview extends \yii\db\ActiveRecord
             [['product_id', 'name', 'email', 'content', 'raiting'], 'required'],
             [['verifyCode'], 'required', 'on' => 'front'],
             [['product_id', 'user_id', 'active'], 'integer'],
-            [['content'], 'string'],
+            [['content'], 'string', 'max' => 2000],
             [['raiting'], 'integer', 'max' => 5, 'min' => 1],
             [['name', 'email'], 'string', 'max' => 255],
             [['email'], 'email'],
@@ -99,7 +99,7 @@ class ProductReview extends \yii\db\ActiveRecord
             'name' => 'Name',
             'email' => 'Email',
             'raiting' => 'Raiting',
-            'content' => 'Content',
+            'content' => 'Review',
             'active' => 'Reviewed',
             'verifyCode' => 'Verification Code',            
         ];

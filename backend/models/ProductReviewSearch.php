@@ -20,6 +20,7 @@ class ProductReviewSearch extends ProductReview
         return [
             [['id', 'raiting', 'active'], 'integer'],
             [['name', 'email', 'content'], 'safe'],
+            [['created_at'], 'date', 'format'=>'dd-MM-yyyy', 'message'=>'{attribute} must be DD-MM-YYYY format.'],            
         ];
     }
 
@@ -47,6 +48,11 @@ class ProductReviewSearch extends ProductReview
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'created_at' => SORT_DESC,
+                ]
+            ],
         ]);
 
         $this->load($params);
@@ -63,6 +69,10 @@ class ProductReviewSearch extends ProductReview
             'raiting' => $this->raiting,
         ]);
 
+        $query->andFilterWhere(['like', 
+            "(date_format(created_at, '%d-%m-%Y %h:%i:%s %p' ))",
+            $this->created_at]);
+        
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'content', $this->content]);

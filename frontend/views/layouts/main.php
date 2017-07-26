@@ -136,6 +136,8 @@ AppAsset::register($this);
       </div>
     </div>
     <?= $content ?>
+
+<?php if ($this->params['social-panel']) {?>
 <div class="social-pane">
       <ul class="sp__list">
         <li class="sp__item">
@@ -159,7 +161,8 @@ AppAsset::register($this);
           </a>
         </li>
       </ul>
-    </div>      
+    </div>
+<?php }?>
     <footer class="main-footer">
       <div class="mf__content">
         <div class="container">

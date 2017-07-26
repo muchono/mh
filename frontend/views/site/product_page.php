@@ -34,12 +34,17 @@ $this->title = $model->title;
               </blockquote>
               <article class="product-page-article">
                   <?=$model->page->content?>
+                <div class="buy-try-pane">
+                  <a href="" class="btn-3">Buy Full Version</a>
+                  <span class="btp__or">or</span>
+                  <a href="" class="btn-6">Try Demo</a>
+                </div>                  
               </article>
               <div class="under-post-pane">
                 <div class="customer-reviews">
                   <div class="upp__head">
                     <h3 class="upp__title">Customer Reviews</h3>
-                    <p class="upp__text">Based on <?=$model->getReviews()->count()?> reviews</p>
+                    <p class="upp__text">Based on <?=$model->getReviews()->where(['active' => 1])->count()?> reviews</p>
                     <a href="" class="upp__btn">Write a review</a>
                   </div>
                   <ul class="reviews-list">
@@ -248,6 +253,9 @@ $this->title = $model->title;
             </aside>
           </div>
         </div>
+    <?= $this->render('_recommend_items', [
+        'products' => $products,
+    ]) ?>          
 <?php
 $this->registerJs(
     "$('.rate__star').click(function(event){"

@@ -35,6 +35,8 @@ class BlogController extends \frontend\controllers\Controller
     
     public function actionPost($id)
     {
+        $this->view->params['social-panel'] = true;
+        
         $a = Discount::find()->active()->latest();
         $special_offer = Discount::find()->active()->latest();
 

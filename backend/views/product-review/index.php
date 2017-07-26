@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\jui\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ProductReviewSearch */
@@ -24,9 +25,25 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
+            [
+                'attribute' => 'created_at',
+                'filter' => DatePicker::widget([
+                    'language' => 'en',
+                    //'dateFormat' => 'dd-MM-yyyy',
+                    'model' => $searchModel,
+                    'attribute' => 'created_at',
+                    'options' => ['class' => 'form-control'],
+                    'clientOptions' => [
+                        'dateFormat' => 'dd-mm-yy',
+                    ],
+                ]),
+                // this is meaningless
+                'format' => ['date', 'php:d-m-Y'],
+                'headerOptions' => ['style' => 'width:118px'],                                
+            ],
+            'raiting',            
             'name',
             'email:email',
-            'raiting',
             [
                 'attribute'=>'active',
                 'value' => function ($data) {

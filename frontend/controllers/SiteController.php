@@ -153,6 +153,7 @@ class SiteController extends \frontend\controllers\Controller
     {
 
         $this->view->params['page'] ='products';
+        $this->view->params['social-panel'] = true;
         if (Yii::$app->request->get('product_id') 
                 && $model = Product::findOne(Yii::$app->request->get('product_id'))) {
                     $review = new ProductReview(['scenario' => 'front']);
@@ -164,6 +165,7 @@ class SiteController extends \frontend\controllers\Controller
                         'model' => $model,
                         'review' => $review,
                         'review_added' => Yii::$app->request->get('review_added'),
+                        'products' => Product::findActive()->limit(4)->all(),
                     ));
         } else {
             return $this->redirect(['site/products']);
