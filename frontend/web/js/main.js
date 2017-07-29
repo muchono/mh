@@ -42,7 +42,7 @@ var $body = $('body');
     $('#head_offer_close').click(function(e){
         e.preventDefault();
         $.post("?r=site/hide-offer", function( data ) {
-            $('.discount-line').hide();
+            $('.discount-line').hide(200);
         });
     });
 })();
