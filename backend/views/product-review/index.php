@@ -43,7 +43,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'raiting',            
             'name',
-            'email:email',
+            [
+                'attribute' => 'content',
+                'headerOptions' => ['style' => 'width:50%'],                                
+            ],            
             [
                 'attribute'=>'active',
                 'value' => function ($data) {

@@ -268,3 +268,5 @@ $this->registerJs(
     'my-button-handler'
 );
 ?>
+</div>
+</section>
