@@ -12,6 +12,11 @@ use yii\data\Pagination;
 class ContentController extends \frontend\controllers\Controller
 {
     public $layout = 'content';
+    public $reportValues = [
+        'not_provide' => "Doesn't provide guest posting",
+        'requires_payment' => "Requires payment for guest posting",
+        'ceased_to_exist' => "Site ceased to exist",
+    ];
     
     public function beforeAction($action)
     {
@@ -61,7 +66,7 @@ class ContentController extends \frontend\controllers\Controller
         //add Security
         if ($product_id && $product = Product::findOne($product_id)) {
             $r = array(
-                'c' => $this->renderHrefs($product),
+                'c' => $this->renderHrefs($product, Yii::$app->request->post('sort')),
             );
         }
             
@@ -69,16 +74,44 @@ class ContentController extends \frontend\controllers\Controller
         exit;
     }
     
-    public function renderHrefs($product)
+    public function actionMarkLink()
     {
-        $dataProvider = new ActiveDataProvider([
+        $r = array('success' => 1);
+        
+        echo json_encode($r);
+        exit;
+    }   
+    
+    public function actionSendReport()
+    {
+        $r = array('success' => 1);
+        
+        echo json_encode($r);
+        exit;
+    }
+    
+    public function renderHrefs($product, $sort = array())
+    {
+        $params = [
             'query' => $product->getHrefs(),
-            'pagination' => array('pageSize' => 3),
-        ]);    
+            'pagination' => array('pageSize' => 50),
+        ];
+
+        if (!empty($sort['list_sort'])) {
+            list($field, $order) = explode(':', $sort['list_sort']);
+            if (in_array($field, ['url','da_rank','alexa_rank','type_links'])
+                    && in_array($order, ['up','down'])) {
+                
+                $params['sort'] = ['defaultOrder' => [$field => $order == 'up' ? SORT_ASC : SORT_DESC]];
+            }
+        }
+        $dataProvider = new ActiveDataProvider($params);    
         $pages = new Pagination(['totalCount' => $dataProvider->getTotalCount()]);
 
         return $this->renderPartial('_list',['product' => $product,
             'hrefsProvider' => $dataProvider,
+            'last_update' => ProductHref::getLastUpdate($product->id),
+            'report_list' => $this->reportValues,
             'pages' => $pages]);
     }
     

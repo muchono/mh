@@ -124,6 +124,16 @@ class ProductHref extends \yii\db\ActiveRecord
         ];
     }    
     
+    /** Get last update
+     * 
+     * @param integer $product_id Product ID
+     * @return string
+     */
+    public static function getLastUpdate($product_id)
+    {
+        return  Yii::$app->formatter->asDate(self::find()->where(['product_id' => $product_id])->orderBy('`timestamp` DESC')->one()->timestamp);
+    }
+    
     /**
      * Get categories
      * @return array

@@ -307,6 +307,7 @@ video {
 .icon-11 {
   background-image: url(../img/sprite.png);
   background-position: -232px 0px;
+  cursor: pointer;
   width: 19px;
   height: 18px;
   display: inline-block;
@@ -316,6 +317,7 @@ video {
 .icon-12 {
   background-image: url(../img/sprite.png);
   background-position: -74px 0px;
+  cursor: pointer;
   width: 14px;
   height: 17px;
   display: inline-block;
@@ -6055,5 +6057,13 @@ input[type="color"].search-questions__input, input[type="date"].search-questions
 }
 
 .tab-list__item {
-		cursor: pointer;
+	cursor: pointer;
+}
+
+.clickable {
+	cursor: pointer;
+}
+
+.hide {
+	display: none;
 }

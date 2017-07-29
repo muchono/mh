@@ -4,6 +4,8 @@ var Logged = (function() {
         product_id: 0,
         guide: '',
         list: '',
+        sort: {'list_sort': ''},
+        report_for: 0,
     };
     var root = this;
     
@@ -19,9 +21,33 @@ var Logged = (function() {
         });
         $('.tab-content').on('click', 'a.pgn-list__link,a.pgn-switcher__btn', function(event) {
             event.preventDefault();
-            vars.list_url = $(this).attr('href');
+            vars.sort.list_url = $(this).attr('href');
             tabListFill();
         });
+        $('.tab-content').on('click', 'span.tf-wrap__up', function(event) {
+            vars.sort.list_sort = $(this).attr('for') + ':up';
+            tabListFill();
+        });
+        $('.tab-content').on('click', 'span.tf-wrap__down', function(event) {
+            vars.sort.list_sort = $(this).attr('for') + ':down';
+            tabListFill();            
+        });
+        
+        $('.tab-content').on('click', '.icon-11', function(event) {
+            markLink($(this));
+        });         
+        
+        $('.tab-content').on('click', '.icon-12', function(event) {
+            showReport($(this));
+        });
+        
+        $('.tab-content').on('click', '.report__close', function(event) {
+            $('.report').hide(200);
+        });        
+        $('.tab-content').on('click', '.btn-report', function(event) {
+            event.preventDefault();
+            sendReport();
+        });        
     }
     
     this.setActive = function(el) {
@@ -36,6 +62,11 @@ var Logged = (function() {
             }           
         };
         at[el.prop('id')]();
+    }
+    
+    function markLink(link) {
+        link.removeClass('icon-11').addClass('icon-10');
+        $.post( "?r=content/mark-link",{'link': link.attr('for')});
     }
     
     function disableTabs() {
@@ -61,7 +92,7 @@ var Logged = (function() {
         $.ajax({
             type: 'POST',
             url: vars.list_url,
-            data: {'project_id': vars.product_id},
+            data: {'project_id': vars.product_id, 'sort':  vars.sort},
             success:function(data){
                     vars.list = data.c;
                     setTab(data.c);
@@ -75,6 +106,28 @@ var Logged = (function() {
     
     function setTab(c) {
         $(".tab-content").html(c);
+    }
+    
+    function sendReport() {
+        var list = $('input[name="report[]"]:checked');
+        if (list.length) {
+            var data = list.serializeArray();
+            $.post("?r=content/send-report&for="+vars.report_for, data)
+            .done(function(){
+                $('.report').hide();                
+                var dialog = $('#report_result');
+                $('[for='+vars.report_for+']').parent().append(dialog);
+                dialog.show(200);
+           });
+        }
+    }
+    
+    function showReport(link) {
+        $('input[name="report[]"]').attr('checked', false);
+        vars.report_for = link.attr('for');
+        var dialog = $('#report_issue');
+        link.parent().append(dialog);
+        dialog.show(200);
     }
     
   

@@ -1,3 +1,11 @@
+CREATE TABLE IF NOT EXISTS `product_href_mark` (
+  `id` int(10) unsigned NOT NULL,
+  `href_id` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned NOT NULL
+) ENGINE=InnoDB;
+
+ALTER TABLE product_href ADD `timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
 -- phpMyAdmin SQL Dump
 -- version 4.4.15.7
 -- http://www.phpmyadmin.net

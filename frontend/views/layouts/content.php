@@ -141,7 +141,18 @@ AppAsset::register($this);
             </div>
             <div>
               <a href="" class="btn-4">Get Free Access</a>
-              <div class="ic-price ic-price--free-now"><span class="price__text">95$</span> <span class="free__text">Free Now</span></div>
+              <div class="ic-price ic-price--free-now">
+                  <?php if ($this->params['selected_product']->discount){?>
+                  <span class="price__text"><?=$this->params['selected_product']->price?>$</span> 
+                  <?php } ?>
+                  <span class="free__text">
+                      <?php if (!$this->params['selected_product']->priceFinal){?>
+                      Free Now
+                      <?php } else {?>
+                      <?=$this->params['selected_product']->priceFinal?>
+                      <?php } ?>
+                  </span>$
+              </div>
             </div>
           </div>
         </div>

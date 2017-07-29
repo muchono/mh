@@ -1,11 +1,46 @@
-
             <div class="table-view">
               <div class="table-info">
-                <div>Latest update: <strong>06.24.2016</strong></div>
+                <div>Latest update: <strong><?=$last_update?></strong></div>
                 <ul class="filter-list">
-                  <li class="filter-list__item">Show <span class="filter-list__filter">All URLs</span></li>
-                  <li class="filter-list__item">Sort By <span class="filter-list__filter">DA</span></li>
-                  <li class="filter-list__item">Show <span class="filter-list__filter">50</span> Per Page</li>
+                  <li class="filter-list__item">
+                    Show
+                    <div class="filter-list__select">
+                      <select>
+                        <option value="">All URLs</option>
+                        <option value="">All URLs</option>
+                        <option value="">All URLs</option>
+                        <option value="">All URLs</option>
+                        <option value="">All URLs</option>
+                      </select>
+                    </div>
+                  </li>
+                  <li class="filter-list__item">
+                    Sort By
+                    <div class="filter-list__select">
+                      <select>
+                        <option value="">DA</option>
+                        <option value="">DA</option>
+                        <option value="">DA</option>
+                        <option value="">DA</option>
+                        <option value="">DA</option>
+                        <option value="">DA</option>
+                      </select>
+                    </div>
+                  </li>
+                  <li class="filter-list__item">
+                    Show
+                    <div class="filter-list__select">
+                      <select>
+                        <option value="">50</option>
+                        <option value="">50</option>
+                        <option value="">50</option>
+                        <option value="">50</option>
+                        <option value="">50</option>
+                        <option value="">50</option>
+                      </select>
+                    </div>
+                    Per Page
+                  </li>
                   <li class="filter-list__item"><span class="filter-list__info">Showing <?=$begin=$pages->getPage() * $pages->pageSize + 1?> to <?=$begin + $hrefsProvider->getCount()-1?> of <?=$hrefsProvider->getTotalCount()?> URLs</span></li>
                 </ul>
               </div>
@@ -19,8 +54,8 @@
                       URL
                       <span class="table-filter">
                         <span class="tf-wrap">
-                          <span class="tf-wrap__up"></span>
-                          <span class="tf-wrap__down"></span>
+                          <span class="tf-wrap__up" for="url"></span>
+                          <span class="tf-wrap__down" for="url"></span>
                         </span>
                       </span>
                     </th>
@@ -28,8 +63,8 @@
                       DA
                       <span class="table-filter">
                         <span class="tf-wrap">
-                          <span class="tf-wrap__up"></span>
-                          <span class="tf-wrap__down"></span>
+                          <span class="tf-wrap__up" for="da_rank"></span>
+                          <span class="tf-wrap__down" for="da_rank"></span>
                         </span>
                       </span>
                     </th>
@@ -37,39 +72,43 @@
                       Alexa
                       <span class="table-filter">
                         <span class="tf-wrap">
-                          <span class="tf-wrap__up"></span>
-                          <span class="tf-wrap__down"></span>
+                          <span class="tf-wrap__up" for="alexa_rank"></span>
+                          <span class="tf-wrap__down" for="alexa_rank"></span>
                         </span>
                       </span>
                     </th>
                     <th class="tb__6">
                       Category
+                      <span class="table-filter">
+                      </span>
                     </th>
                     <th class="tb__7">
                       Details
                       <span class="table-filter">
                         <span class="tf-wrap">
-                          <span class="tf-wrap__up"></span>
-                          <span class="tf-wrap__down"></span>
+                          <span class="tf-wrap__up" for="type_links"></span>
+                          <span class="tf-wrap__down" for="type_links"></span>
                         </span>
                       </span>
                     </th>
                     <th class="tb__8">Example</th>
-                    <th class="tb__9">R</th>
+                    <th class="tb__9">
+                      R
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                     <?php foreach($hrefsProvider->getModels() as $i=>$link) {?>
                   <tr>
                     <td class="tb__1"><?=$i+1?></td>
-                    <td class="tb__2"><i class="icon-10"></i></td>
+                    <td class="tb__2"><i class="icon-11" for="<?=$link->id?>"></i></td>
                     <td class="tb__3"><a href="<?=$link->url?>" target="_blank"><?=$link->url?></a></td>
                     <td class="tb__4"><?=$link->da_rank?></td>
                     <td class="tb__5"><?=$link->alexa_rank?></td>
                     <td class="tb__6"><?= join(', ', $link->getCategoriesArray())?></td>
                     <td class="tb__7"><a href="" class="follow-link"><?=  \common\models\ProductHref::$link_types[$link->type_links]?></a></td>
                     <td class="tb__8"><a href="<?=$link->example_url?>" target="_blank">Example</a></td>
-                    <td class="tb__9"><i class="icon-12"></i></td>
+                    <td class="tb__9"><i class="icon-12" for="<?=$link->id?>"></i></td>
                   </tr>
                     <?php }?>
                 </tbody>
@@ -87,5 +126,43 @@
             'lastPageLabel'=>true,
             ]);
         ?>               
+        </div>
+        <div class="report hide" id="report_issue">
+          <div class="report__head">
+            Please Report
+            <span class="report__close">
+              <i></i>
+            </span>
+          </div>
+          <div class="report__content">
+            <ul class="report-list">
+              <?php foreach($report_list as $k=>$r) { ?>
+              <li class="report-list__item">
+                  <input type="checkbox" id="input-<?=$k?>" name="report[]" value="<?=$k?>">
+                <label for="input-<?=$k?>"><?=$r?></label>
+              </li>
+              <?php }?>
+            </ul>
+          </div>
+          <div class="report__foot">
+            <a href="" class="btn-report">send report</a>
+          </div>
+        </div>
+
+        <div class="report hide" id="report_result">
+          <div class="report__head">
+            Please Report
+            <span class="report__close">
+              <i></i>
+            </span>
+          </div>
+          <div class="report__content">
+            <figure class="report__img">
+              <img src="img/report-thank-img.jpg" alt="" class="img-fluid">
+            </figure>
+          </div>
+          <div class="report__foot">
+            <div class="btn-report-disable">Thank you!</div>
+          </div>
         </div>
           
