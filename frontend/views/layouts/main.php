@@ -8,11 +8,15 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use yii\helpers\Url;
+use yii\widgets\ActiveForm;
+use yii\widgets\Pjax;
 
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
 use common\models\Product;
+
+
 
 AppAsset::register($this);
 ?>
@@ -248,19 +252,29 @@ AppAsset::register($this);
   <div class="mh-popup mfp-hide aut-popup" id="signup-popup">
     <h2 class="aut-title">Sign Up</h2>
     <a href="#login-popup" class="aut-link js-popups">Already have an account?</a>
+    <?php 
+    Pjax::begin([
+      // Pjax options
+    ]);
+    $form = ActiveForm::begin([
+      'options' => ['data' => ['pjax' => true]],
+      ]); ?>                          
     <div class="aut-fields">
       <div class="aut-field">
-        <input type="text" class="aut-input" placeholder="Name">
+        <?= $form->field($this->params['user'], 'name')->textInput(['class' => 'aut-input','placeholder' => 'Name'])->label(false) ?>
       </div>
       <div class="aut-field">
-        <input type="email" class="aut-input" placeholder="Email">
+        <?= $form->field($this->params['user'], 'email')->textInput(['class' => 'aut-input','placeholder' => 'Email'])->label(false) ?>
       </div>
       <div class="aut-field">
-        <input type="password" class="aut-input" placeholder="Password">
+        <?= $form->field($this->params['user'], 'password')->passwordInput(['class' => 'aut-input','placeholder' => 'Password'])->label(false) ?>
       </div>
+        <input type="hidden" name="register" value="new-user"/>
     </div>
     <button class="btn-5">Register</button>
     <p class="aut-text">By clicking Register you agree <br>to our <a href="<?=Url::to(['site/terms']);?>">terms and conditions</a></p>
+    <?php ActiveForm::end(); 
+    Pjax::end();?>    
   </div>
 
 <?php $this->endBody() ?>
