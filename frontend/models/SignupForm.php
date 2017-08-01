@@ -1,7 +1,10 @@
 <?php
 namespace frontend\models;
 
+use Yii;
 use yii\base\Model;
+use yii\helpers\Url;
+
 use common\models\User;
 
 /**
@@ -12,7 +15,7 @@ class SignupForm extends Model
     public $name;
     public $email;
     public $password;
-
+    public $user = null;
 
     /**
      * @inheritdoc
@@ -46,27 +49,34 @@ class SignupForm extends Model
             return null;
         }
         
-        $user = new User();
-        $user->name = $this->name;
-        $user->email = $this->email;
-        $user->setPassword($this->password);
-        $user->generateAuthKey();
+        $this->user = new User();
+        $this->user->name = $this->name;
+        $this->user->email = $this->email;
         
-        return $user->save() ? $user : null;
+        //temporary
+        $this->user->active = $this->user->registration_confirmed = 1;
+        
+        $this->user->setPassword($this->password);
+        $this->user->generateAuthKey();
+        
+        return $this->user->save() ? $this->user : null;
     }
     
     /**
      * Sends an email to the specified email address using the information collected by this model.
-     *
      * @return bool whether the email was sent
      */
     public function sendEmail()
     {
+        $link = Url::to(['site/registration', 'code' => md5($this->user->created_at)], true);
+        $body = 'Please confirm your registration by the following link:<br/>';
+        $body .= '<a href="'.$link.'">'.$link.'</a>';
+        
         return Yii::$app->mailer->compose()
-            ->setTo($email)
-            ->setFrom([$this->email => $this->name])
-            ->setSubject('Registration information')
-            ->setTextBody($this->body)
+            ->setTo($this->email)
+            ->setFrom(Yii::$app->params['adminEmail'])
+            ->setSubject('Registration confirmation')
+            ->setTextBody($body)
             ->send();
-    }    
+    }
 }

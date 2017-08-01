@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use Yii;
+use yii\helpers\Url;
 use common\models\Discount;
 use frontend\models\SignupForm;
 
@@ -29,15 +30,19 @@ class Controller extends \yii\web\Controller
     public function actionSignup()
     {
         $model = new SignupForm();
+
         if (Yii::$app->request->post('register') && $model->load(Yii::$app->request->post())) {
+            
             if ($user = $model->signup()) {
                 $model->sendEmail();
+                echo '<script>location.replace("'.Url::to(['result/reg-finish', 'email' => $model->email]).'");</script>';
+                exit;
                 /**
                 if (Yii::$app->getUser()->login($user)) {
                     return $this->goHome();
                 }**/
             }
-        }
+        } 
 
         $this->view->params['user'] = $model;
     }

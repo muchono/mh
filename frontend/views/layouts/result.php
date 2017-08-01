@@ -40,6 +40,7 @@ AppAsset::register($this);
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Open+Sans:300,400,600,700|PT+Sans:400,700" rel="stylesheet">
 
   <!-- Vendor CSS -->
+  <link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="vendor/slick-carousel/slick/slick.css">
   <link rel="stylesheet" href="vendor/magnific-popup/dist/magnific-popup.css">
 
