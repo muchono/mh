@@ -81,10 +81,49 @@ AppAsset::register($this);
           <li class="main-nav__item"><a href="<?=Url::to(['blog/index']);?>" class="main-nav__link <?=($this->params['page'] == 'blog') ? 'main-nav__link--active' : ''?>">Blog</a></li>
         </ul>
       </nav>
+
       <div class="user-pane">
+        <?php if (Yii::$app->user->isGuest){?>
         <a href="#login-popup" class="up__btn js-popups">Log In</a>
         <a href="#signup-popup" class="up__btn js-popups">Sign Up</a>
+        <?php } else { ?>        
+          <div class="user-pane__drop js-toggle" data-toggle="user-pane__drop--open">
+            <span class="up__btn">My Account</span>
+            <ul class="drop-list">
+              <li class="drop-list__item">
+                <a href="<?=Url::to(['account/index']);?>" class="drop-list__link">
+                <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                My Products</a>
+              </li>
+              <li class="drop-list__item">
+                <a href="<?=Url::to(['account/profile']);?>" class="drop-list__link">
+                <i class="fa fa-cog" aria-hidden="true" style="font-size: 16px;"></i>
+                Edit Profile</a>
+              </li>
+              <li class="drop-list__item">
+                <a href="<?=Url::to(['account/orders']);?>" class="drop-list__link">
+                <i class="fa fa-file-text" aria-hidden="true"></i>
+                Order History</a>
+              </li>
+              <li class="drop-list__item">
+                <a href="<?=Url::to(['account/change']);?>" class="drop-list__link">
+                <i class="fa fa-lock" aria-hidden="true" style="font-size: 15px;"></i>
+                Change Password</a>
+              </li>
+              <li class="drop-list__item">
+                <a href="<?=Url::to(['account/logout']);?>" class="drop-list__link">
+                <i class="fa fa-sign-out" aria-hidden="true" style="font-size: 14px;"></i>
+                Logout</a>
+              </li>
+            </ul>
+          </div>
+          <a href="<?=Url::to(['cart/index']);?>" class="up__btn up__btn--cart">
+            <i class="icon-17"></i>
+            <span id="cart_items">0</span>
+          </a>
+        <?php }?>
       </div>
+    
     </div>
     </div>
 
@@ -236,17 +275,27 @@ AppAsset::register($this);
 
   <div class="mh-popup mfp-hide aut-popup" id="login-popup">
     <h2 class="aut-title">Log In</h2>
+    <?php 
+    Pjax::begin([
+      // Pjax options
+    ]);
+    $formLogin = ActiveForm::begin([
+      'options' => ['data' => ['pjax' => true]],
+      ]); ?>      
     <div class="aut-fields">
       <div class="aut-field">
-        <input type="email" class="aut-input" placeholder="Email">
+        <?= $formLogin->field($this->params['user_login'], 'email')->textInput(['class' => 'aut-input','placeholder' => 'Email'])->label(false) ?>
       </div>
       <div class="aut-field">
-        <input type="password" class="aut-input" placeholder="Password">
+        <?= $formLogin->field($this->params['user_login'], 'password')->passwordInput(['class' => 'aut-input','placeholder' => 'Password'])->label(false) ?>
       </div>
     </div>
     <a href="" class="aut-link">Forgot your password?</a>
     <button class="btn-5">Login</button>
     <a href="#signup-popup" class="aut-link js-popups">Don't have an account?</a>
+    <input type="hidden" name="login" value="existing-user"/>
+    <?php ActiveForm::end(); 
+    Pjax::end();?>       
   </div>
 
   <div class="mh-popup mfp-hide aut-popup" id="signup-popup">

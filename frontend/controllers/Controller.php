@@ -6,6 +6,7 @@ use Yii;
 use yii\helpers\Url;
 use common\models\Discount;
 use frontend\models\SignupForm;
+use frontend\models\LoginForm;
 
 class Controller extends \yii\web\Controller
 {
@@ -13,6 +14,7 @@ class Controller extends \yii\web\Controller
     {
         $this->view->params['head_offer'] = Yii::$app->session->get('head_offer_closed') ? null : Discount::find()->latest();
         $this->actionSignup();
+        $this->actionLogin();
         
         return parent::beforeAction($action);
     }  
@@ -21,6 +23,25 @@ class Controller extends \yii\web\Controller
     {
         return Yii::$app->session['subscribed'];
     }
+    
+    /**
+     * Login
+     *
+     * @return mixed
+     */
+    public function actionLogin()
+    {
+        $model = new LoginForm();
+        if (Yii::$app->request->post('login')) {
+            if ($model->load(Yii::$app->request->post()) && $model->login()) {
+                echo 'Redirecting ...<script>location.reload();</script>';
+                exit;
+            }
+        }
+        
+        $this->view->params['user_login'] = $model;
+    }
+
     
     /**
      * Signs user up.

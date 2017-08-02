@@ -28,7 +28,7 @@ use common\models\OrderToProduct;
  * @property integer $created_at
  * @property integer $updated_at
  */
-class User extends \yii\db\ActiveRecord
+class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 1;
@@ -136,14 +136,14 @@ class User extends \yii\db\ActiveRecord
     }
 
     /**
-     * Finds user by username
+     * Finds user by Email
      *
-     * @param string $username
+     * @param string $email
      * @return static|null
      */
-    public static function findByUsername($username)
+    public static function findByEmail($email)
     {
-        return static::findOne(['username' => $username, 'active' => self::STATUS_ACTIVE]);
+        return static::findOne(['email' => $email, 'active' => self::STATUS_ACTIVE]);
     }
 
     /**
