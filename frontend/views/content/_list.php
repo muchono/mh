@@ -5,38 +5,30 @@
                   <li class="filter-list__item">
                     Show
                     <div class="filter-list__select">
-                      <select>
-                        <option value="">All URLs</option>
-                        <option value="">All URLs</option>
-                        <option value="">All URLs</option>
-                        <option value="">All URLs</option>
-                        <option value="">All URLs</option>
+                      <select name="urls_filter">
+                        <option value="all_urls">All URLs</option>
+                        <option value="latest_urls" <?= $sort['urls_filter'] == 'latest_urls' ? 'selected' : ''?>>Latest Update</option>
                       </select>
                     </div>
                   </li>
                   <li class="filter-list__item">
                     Sort By
-                    <div class="filter-list__select">
+                    <div class="filter-list__select" name="order_filter">
                       <select>
-                        <option value="">DA</option>
-                        <option value="">DA</option>
-                        <option value="">DA</option>
-                        <option value="">DA</option>
-                        <option value="">DA</option>
-                        <option value="">DA</option>
+                        <option value=""></option>
+                        <option value="da_rank:down" <?= $sort['list_sort'] == 'da_rank:down' ? 'selected' : ''?>>DA</option>
+                        <option value="alexa_rank:down" <?= $sort['list_sort'] == 'alexa_rank:down' ? 'selected' : ''?>>Alexa</option>
+                        <option value="url:down" <?= $sort['list_sort'] == 'url:down' ? 'selected' : ''?>>Alphabet</option>
                       </select>
                     </div>
                   </li>
                   <li class="filter-list__item">
                     Show
                     <div class="filter-list__select">
-                      <select>
-                        <option value="">50</option>
-                        <option value="">50</option>
-                        <option value="">50</option>
-                        <option value="">50</option>
-                        <option value="">50</option>
-                        <option value="">50</option>
+                      <select name="pages_filter">
+                          <?php foreach([50,100,25] as $p){?>
+                          <option value="<?=$p?>" <?=$p == $sort['page_size'] ? 'selected': ''?>><?=$p?></option>
+                          <?php }?>
                       </select>
                     </div>
                     Per Page
@@ -85,10 +77,6 @@
                     <th class="tb__7">
                       Details
                       <span class="table-filter">
-                        <span class="tf-wrap">
-                          <span class="tf-wrap__up" for="type_links"></span>
-                          <span class="tf-wrap__down" for="type_links"></span>
-                        </span>
                       </span>
                     </th>
                     <th class="tb__8">Example</th>

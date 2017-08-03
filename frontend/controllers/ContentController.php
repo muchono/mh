@@ -93,9 +93,19 @@ class ContentController extends \frontend\controllers\Controller
     
     public function renderHrefs($product, $sort = array())
     {
+        $page_size = 50;
+        
+        if (!empty($sort['page_size']) && in_array($page_size, array(1,25,50,100))) {
+            $page_size = $sort['page_size'];
+        }
+        $where = [];
+        if ($sort['urls_filter'] && $sort['urls_filter'] == 'latest_urls'){
+            $where['last_update'] = ProductHref::getLastAdd($product->id);
+        }
+        
         $params = [
-            'query' => $product->getHrefs(),
-            'pagination' => array('pageSize' => 50),
+            'query' => $product->getHrefs()->where($where),
+            'pagination' => array('pageSize' => $page_size),
         ];
 
         if (!empty($sort['list_sort'])) {
@@ -113,7 +123,9 @@ class ContentController extends \frontend\controllers\Controller
             'hrefsProvider' => $dataProvider,
             'last_update' => ProductHref::getLastUpdate($product->id),
             'report_list' => $this->reportValues,
-            'pages' => $pages]);
+            'pages' => $pages,
+            'sort' => $sort,
+            ]);
     }
     
     public function renderGuide($product)

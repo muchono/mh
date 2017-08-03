@@ -37,7 +37,7 @@ $this->title = $model->title;
                 <div class="buy-try-pane">
                   <a href="" class="btn-3">Buy Full Version</a>
                   <span class="btp__or">or</span>
-                  <a href="" class="btn-6">Try Demo</a>
+                  <a href="<?=Url::to(['content/index','product_id'=>$model->id])?>" class="btn-6">Try Demo</a>
                 </div>                  
               </article>
               <div class="under-post-pane">
@@ -199,7 +199,7 @@ $this->title = $model->title;
                   </div>
                   <div class="pp__foot">
                     <a href="" class="btn-5">Add to cart</a>
-                    <span class="pp__or">or <a href="">check demo</a></span>
+                    <span class="pp__or">or <a href="<?=Url::to(['content/index','product_id'=>$model->id])?>">check demo</a></span>
                   </div>
                 </div>
               </div>

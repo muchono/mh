@@ -41,7 +41,7 @@ class ProductGuide extends \yii\db\ActiveRecord
     
     public function getAboutCode()
     {
-        return preg_replace('/(text|simple)(?![^<]*>|[^<>]*<\/)/i', '*', $this->about);
+        return preg_replace('/\w/i', '*', strip_tags($this->about));
     }
     
     /**

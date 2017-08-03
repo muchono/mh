@@ -4,7 +4,7 @@ var Logged = (function() {
         product_id: 0,
         guide: '',
         list: '',
-        sort: {'list_sort': ''},
+        sort: {'list_sort': '', 'page_size': 50, 'urls_filter': ''},
         report_for: 0,
     };
     var root = this;
@@ -21,7 +21,7 @@ var Logged = (function() {
         });
         $('.tab-content').on('click', 'a.pgn-list__link,a.pgn-switcher__btn', function(event) {
             event.preventDefault();
-            vars.sort.list_url = $(this).attr('href');
+            vars.list_url = $(this).attr('href');
             tabListFill();
         });
         $('.tab-content').on('click', 'span.tf-wrap__up', function(event) {
@@ -52,7 +52,22 @@ var Logged = (function() {
         });     
         $('.tab-content').on('click', '.unclickable', function(event) {
             event.preventDefault();
-        });     
+        }); 
+        
+        $('.tab-content').on('change', '[name=order_filter]', function(event) {
+            vars.sort.list_sort = $('option:selected', $(this)).val();
+            tabListFill();
+        });
+        
+        $('.tab-content').on('change', '[name=pages_filter]', function(event) {
+            vars.sort.page_size = $('option:selected', $(this)).val();
+            tabListFill();
+        });
+        
+        $('.tab-content').on('change', '[name=urls_filter]', function(event) {
+            vars.sort.urls_filter = $('option:selected', $(this)).val();
+            tabListFill();
+        });       
     }
     
     this.setActive = function(el) {

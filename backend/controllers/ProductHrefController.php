@@ -99,11 +99,14 @@ class ProductHrefController extends Controller
              * add new data
              */
             if (!empty($post['new'])) {
+                $time = time();
                 foreach($post['new'] as $info) {
                     $model = new ProductHref;
                     $model->load(array('ProductHref' => $info));
                     $model->status = 1;
                     $model->product_id = $this->product->id;
+                    $model->last_udate = $time;
+                    
                     if ($model->save()) {
                         $hrefs[$model->id] = $model;
                     } else {

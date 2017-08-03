@@ -3309,7 +3309,7 @@ input[type="color"], input[type="date"], input[type="datetime"], input[type="dat
     font-family: "Open Sans";
     font-weight: 600;
     line-height: 17px;
-    padding: 0 14px 0 5px; }
+    padding: 0 4px 0 5px; }
 
 /* line 1484, E:/GIT/marketinghack/public/scss/_theme_style.scss */
 .filter-list__info {

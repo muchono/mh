@@ -25,6 +25,7 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . '../../backend/extensions/SEOstats'
  * @property string $about
  * @property string $example_url
  * @property string $type_links
+ * @property string $last_udate
  */
 class ProductHref extends \yii\db\ActiveRecord
 {
@@ -67,7 +68,7 @@ class ProductHref extends \yii\db\ActiveRecord
     {
         return [
             [['product_id', 'url', 'example_url','type_links', 'categories'], 'required'],
-            [['product_id', 'status', 'alexa_rank'], 'integer'],
+            [['product_id', 'status', 'alexa_rank', 'last_udate'], 'integer'],
             [['da_rank'], 'number'],
             [['about'], 'string'],
             [[ 'url'], 'string', 'max' => 255],
@@ -92,6 +93,7 @@ class ProductHref extends \yii\db\ActiveRecord
             'da_rank' => 'DA',
             'about' => 'Details',
             'type_links' => 'Type Links',
+            'last_udate' => 'Last Update',
         ];
     }
     
@@ -134,11 +136,18 @@ class ProductHref extends \yii\db\ActiveRecord
         return  Yii::$app->formatter->asDate(self::find()->where(['product_id' => $product_id])->orderBy('`timestamp` DESC')->one()->timestamp);
     }
     
+    /** Get last add
+     * 
+     * @param integer $product_id Product ID
+     * @return string
+     */
+    public static function getLastAdd($product_id)
+    {
+        return  self::find()->where(['product_id' => $product_id])->orderBy('`last_update` DESC')->one()->last_update;
+    }
+    
     public function getUrlCoded()
     {
-        var regEx = new RegExp("(" + searchWord + ")(?!([^<]+)?>)", "gi");
-
-        var output = originalString.replace(regEx, "<strong>$1</strong>");
         return preg_replace('/\w/i', '*', $this->url);
     }
     

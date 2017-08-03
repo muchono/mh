@@ -55,7 +55,7 @@ $this->title = 'Products';
                   <span class="pd-try__add">                
                     <i class="icon-3"></i>
                   </span>
-                  <a href="" class="btn-sm-1">try demo</a>
+                  <a href="<?=Url::to(['content/index','product_id'=>$p->id])?>" class="btn-sm-1">try demo</a>
                 </div>
               </div>
             </div>
