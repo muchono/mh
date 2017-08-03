@@ -67,6 +67,7 @@ class ContentController extends \frontend\controllers\Controller
         if ($product_id && $product = Product::findOne($product_id)) {
             $r = array(
                 'c' => $this->renderHrefs($product, Yii::$app->request->post('sort')),
+                'accessable' => false,
             );
         }
             

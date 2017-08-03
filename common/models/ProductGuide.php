@@ -39,6 +39,11 @@ class ProductGuide extends \yii\db\ActiveRecord
         return $this->product;
     }
     
+    public function getAboutCode()
+    {
+        return preg_replace('/(text|simple)(?![^<]*>|[^<>]*<\/)/i', '*', $this->about);
+    }
+    
     /**
      * @inheritdoc
      */

@@ -93,17 +93,19 @@ AppAsset::register($this);
             <a href="" class="sm-list-2__link">Renew Subscriptions</a>
           </li>
           <li class="sm-list-2__item">
-            <a href="" class="sm-list-2__link">F.A.Q.</a>
+            <a href="<?=Url::to(['site/faq']);?>" class="sm-list-2__link">F.A.Q.</a>
           </li>
           <li class="sm-list-2__item sm-list-2__item--active">
-            <a href="" class="sm-list-2__link">Blog</a>
+            <a href="<?=Url::to(['blog/index']);?>" class="sm-list-2__link">Blog</a>
+          </li>
+          <?php if (!Yii::$app->user->isGuest){?>
+          <li class="sm-list-2__item">
+            <a href="<?=Url::to(['account/index']);?>" class="sm-list-2__link">My Account</a>
           </li>
           <li class="sm-list-2__item">
-            <a href="" class="sm-list-2__link">My Account</a>
+            <a href="<?=Url::to(['account/logout']);?>" class="sm-list-2__link">Logout</a>
           </li>
-          <li class="sm-list-2__item">
-            <a href="" class="sm-list-2__link">Logout</a>
-          </li>
+          <?php }?>
         </ul>
       </div>
       <div class="sm__bottom">
@@ -115,17 +117,21 @@ AppAsset::register($this);
       <div class="top-line">
         <ul class="tl__menu tl__menu--center">
           <li class="tl__item"><a href="" class="tl__link">Renew&nbsp;<span>Subscriptions</span></a></li>
-          <li class="tl__item"><a href="" class="tl__link">F.A.Q.</a></li>
-          <li class="tl__item"><a href="" class="tl__link">Blog</a></li>
+          <li class="tl__item"><a href="<?=Url::to(['site/faq']);?>" class="tl__link">F.A.Q.</a></li>
+          <li class="tl__item"><a href="<?=Url::to(['blog/index']);?>" class="tl__link">Blog</a></li>
         </ul>
+         
         <ul class="tl__menu">
+            <?php if (!Yii::$app->user->isGuest){?> 
           <li class="tl__item">
-            <a href="" class="tl__link"><i class="icon-8"></i> <span>My Account</span></a>
+            <a href="<?=Url::to(['account/index']);?>" class="tl__link"><i class="icon-8"></i> <span>My Account</span></a>
           </li>
           <li class="tl__item">
-            <a href="" class="tl__link"><i class="icon-9"></i> <span>Logout</span></a>
+            <a href="<?=Url::to(['account/logout']);?>" class="tl__link"><i class="icon-9"></i> <span>Logout</span></a>
           </li>
+          <?php }?>
         </ul>
+          
       </div>
 
       <div class="inner-content">
@@ -140,7 +146,9 @@ AppAsset::register($this);
               Discount
             </div>
             <div>
-              <a href="" class="btn-4">Get Free Access</a>
+              <?php if (Yii::$app->user->isGuest){?> 
+              <a href="#signup-popup" class="btn-4 js-popups">Get Free Access</a>
+              <?php }?>
               <div class="ic-price ic-price--free-now">
                   <?php if ($this->params['selected_product']->discount){?>
                   <span class="price__text"><?=$this->params['selected_product']->price?>$</span> 
@@ -164,14 +172,16 @@ AppAsset::register($this);
             </ul>
             <div class="tab-content"></div>
             <div class="tab-foot">
-            <a href="" class="btn-3">Get Free Access</a>
+            <?php if (Yii::$app->user->isGuest){?>
+            <a href="#signup-popup" class="btn-3 js-popups">Get Free Access</a>
+            <?php }?>
           </div>
           <div class="loader" style="display:none">&nbsp;</div>
         </div>
       </div>
     </div>
   </div>
-
+<?= $this->renderFile('@frontend/views/layouts/_signup.php', []) ?>
 <?php $this->endBody() ?>
   <!-- Vendor -->
   <script src="vendor/magnific-popup/dist/jquery.magnific-popup.min.js"></script>

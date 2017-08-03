@@ -34,7 +34,9 @@ var Logged = (function() {
         });
         
         $('.tab-content').on('click', '.icon-11', function(event) {
-            markLink($(this));
+            if (!$(this).hasClass('unclickable')) {
+                markLink($(this));
+            }
         });         
         
         $('.tab-content').on('click', '.icon-12', function(event) {
@@ -47,7 +49,10 @@ var Logged = (function() {
         $('.tab-content').on('click', '.btn-report', function(event) {
             event.preventDefault();
             sendReport();
-        });        
+        });     
+        $('.tab-content').on('click', '.unclickable', function(event) {
+            event.preventDefault();
+        });     
     }
     
     this.setActive = function(el) {

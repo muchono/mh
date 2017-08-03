@@ -75,7 +75,7 @@
           </div>
           <div class="account-cb-field">
             <input type="checkbox" id="bfcb-2" class="bfcb__input">
-            <label for="bfcb-2" class="bfcb__label">Receive e-mails with MarketingHack blog�s news</label>
+            <label for="bfcb-2" class="bfcb__label">Receive e-mails with MarketingHack blog’s news</label>
           </div>
         </div>
       </div>

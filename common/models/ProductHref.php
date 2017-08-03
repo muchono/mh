@@ -134,6 +134,14 @@ class ProductHref extends \yii\db\ActiveRecord
         return  Yii::$app->formatter->asDate(self::find()->where(['product_id' => $product_id])->orderBy('`timestamp` DESC')->one()->timestamp);
     }
     
+    public function getUrlCoded()
+    {
+        var regEx = new RegExp("(" + searchWord + ")(?!([^<]+)?>)", "gi");
+
+        var output = originalString.replace(regEx, "<strong>$1</strong>");
+        return preg_replace('/\w/i', '*', $this->url);
+    }
+    
     /**
      * Get categories
      * @return array

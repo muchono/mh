@@ -101,14 +101,14 @@
                     <?php foreach($hrefsProvider->getModels() as $i=>$link) {?>
                   <tr>
                     <td class="tb__1"><?=$i+1?></td>
-                    <td class="tb__2"><i class="icon-11" for="<?=$link->id?>"></i></td>
-                    <td class="tb__3"><a href="<?=$link->url?>" target="_blank"><?=$link->url?></a></td>
+                    <td class="tb__2"><i class="icon-11 <?=$accessable ? '' : 'unclickable'?>" for="<?=$link->id?>"></i></td>
+                    <td class="tb__3"><a href="<?=$accessable ? $link->url : ''?>" class=" <?=$accessable ? '' : 'unclickable'?>" target="_blank"><?=$link->urlCoded?></a></td>
                     <td class="tb__4"><?=$link->da_rank?></td>
                     <td class="tb__5"><?=$link->alexa_rank?></td>
                     <td class="tb__6"><?= join(', ', $link->getCategoriesArray())?></td>
-                    <td class="tb__7"><a href="" class="follow-link"><?=  \common\models\ProductHref::$link_types[$link->type_links]?></a></td>
-                    <td class="tb__8"><a href="<?=$link->example_url?>" target="_blank">Example</a></td>
-                    <td class="tb__9"><i class="icon-12" for="<?=$link->id?>"></i></td>
+                    <td class="tb__7"><a href="" class="follow-link unclickable"><?=  \common\models\ProductHref::$link_types[$link->type_links]?></a></td>
+                    <td class="tb__8"><a href="<?=$accessable ? $link->example_url : '#'?>" class=" <?=$accessable ? '' : 'unclickable'?>" target="_blank">Example</a></td>
+                    <td class="tb__9"><?php if ($accessable){?><i class="icon-12" for="<?=$link->id?>"></i><?php }?></td>
                   </tr>
                     <?php }?>
                 </tbody>
