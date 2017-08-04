@@ -1,3 +1,16 @@
+CREATE TABLE IF NOT EXISTS `cart` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `product_id` int(11) unsigned NOT NULL,
+  `months` int(3) unsigned NOT NULL,
+  `timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  KEY `product_id` (`product_id`),
+  KEY `timestamp` (`timestamp`),
+  KEY `user_id_2` (`user_id`,`product_id`)
+);
+
 ALTER TABLE product_href ADD `last_update` int(11) unsigned NOT NULL;
 
 CREATE TABLE IF NOT EXISTS `product_href_mark` (

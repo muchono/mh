@@ -45,7 +45,7 @@ $this->title = $model->title;
                   <div class="upp__head">
                     <h3 class="upp__title">Customer Reviews</h3>
                     <p class="upp__text">Based on <?=$model->getReviews()->where(['active' => 1])->count()?> reviews</p>
-                    <a href="" class="upp__btn">Write a review</a>
+                    <a href="#support-form" class="upp__btn">Write a review</a>
                   </div>
                   <ul class="reviews-list">
                     <?php foreach ($model->activeReviews as $r) {?>

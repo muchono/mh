@@ -23,7 +23,7 @@ use yii\helpers\Url;
     </div>
     <a href="" class="aut-link">Forgot your password?</a>
     <button class="btn-5">Login</button>
-    <a href="#signup-popup" class="aut-link js-popups">Don't have an account?</a>
+    <a href="#signup-popup" class="aut-link js-popups" id="signup-popup-link">Don't have an account?</a>
     <input type="hidden" name="login" value="existing-user"/>
     <?php ActiveForm::end(); 
     Pjax::end();?>       

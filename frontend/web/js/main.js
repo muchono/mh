@@ -45,6 +45,11 @@ var $body = $('body');
             $('.discount-line').hide(200);
         });
     });
+    
+    $('.pd-try__add').click(function(e){
+        e.preventDefault();
+        addToCart($(this).attr('for'), 1, $(this));
+    });
 })();
 
 // Carousel
@@ -134,3 +139,15 @@ var $body = $('body');
         });
     });
 })();
+
+function addToCart(product_id, months, obj) {
+    var data = {'product_id': product_id, 'months': months, 'add_to_cart': 1};
+    $.post("?r=cart/add", data, function( res ) {
+        if (res.show_signup){
+            $('#signup-popup-link').click();
+        } else if(res.result){
+            $('#cart_items').html(res.cart_items_count);
+            obj.hide(200);
+        }
+    });
+}

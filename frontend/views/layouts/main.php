@@ -119,7 +119,7 @@ AppAsset::register($this);
           </div>
           <a href="<?=Url::to(['cart/index']);?>" class="up__btn up__btn--cart">
             <i class="icon-17"></i>
-            <span id="cart_items">0</span>
+            <span id="cart_items"><?=$this->params['cart_items']?></span>
           </a>
         <?php }?>
       </div>
