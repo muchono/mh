@@ -17,7 +17,7 @@ class CartController extends \frontend\controllers\Controller
             $r['show_signup'] = 1;
         } elseif (Yii::$app->request->isAjax 
                && Yii::$app->request->post('product_id')) {
-            if ($product = Product::findOne(Yii::$app->request->post('product_id'))){
+            if ($product = Product::findActive(Yii::$app->request->post('product_id'))){
                 $months = in_array(Yii::$app->request->post('months'), [1,2,3]) ? Yii::$app->request->post('months') : 1;
                 $cart = new Cart;
                 $cart->product_id = $product->id;
@@ -30,5 +30,18 @@ class CartController extends \frontend\controllers\Controller
             }
         }
         return $r;
+    }
+    
+    /**
+     * Displays homepage.
+     *
+     * @return mixed
+     */
+    public function actionIndex()
+    {
+        $cartItems = Cart::find()->where(['user_id' => Yii::$app->user->id]);
+        return $this->render('index', array(
+            'cartItems' => $cartItems,
+        ));
     }
 }
