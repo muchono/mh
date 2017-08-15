@@ -73,4 +73,59 @@ class CartController extends \frontend\controllers\Controller
             'cartInfo' => $cartInfo,
         ));
     }
+    /**
+     * Delete Item
+     *
+     * @return mixed
+     */
+    public function actionDeleteItem()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        $r = array('success' => 1);
+        
+        $model = Cart::find()->where(['user_id' => Yii::$app->user->id, 'product_id' => Yii::$app->request->post('product_id')])->one();
+        if ($model){
+            $model->delete();
+        }
+        return $r;
+    }
+    
+    /**
+     * Get Cart Items
+     *
+     * @return mixed
+     */
+    public function actionGetList()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        $r = array('success' => 1);
+        $cartInfo = Cart::getInfo(Yii::$app->user->id);
+        $r['items_count'] = $cartInfo['count'];
+        $r['content'] = $this->renderPartial('_items',[
+           'cartInfo' => $cartInfo,
+        ]);
+        return $r;
+    }
+    
+    /**
+     * Set item months
+     *
+     * @return mixed
+     */
+    public function actionSetMonths()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        $r = array('success' => 1);
+        
+        $model = Cart::find()->where(['user_id' => Yii::$app->user->id, 'product_id' => Yii::$app->request->post('product_id')])->one();
+        if ($model && in_array(Yii::$app->request->post('months'), Cart::$months)){
+            $model->months = Yii::$app->request->post('months');
+            $model->save();
+        }
+        
+        return $r;
+    }
 }

@@ -5,7 +5,7 @@ use yii\web\View;
 <section class="cart-page">
       <div class="container-sm">
         <div class="page-pane">
-          <h1 class="title-14 success">In Your Shopping Cart - <?=$cartInfo['count']?> Item(s)</h1>
+          <h1 class="title-14 success">In Your Shopping Cart - <span id="items_count"><?=$cartInfo['count']?></span> Item(s)</h1>
           <div class="cart-page-wrap">
             <div class="cart-page-content">
               <div class="recommended-items">

@@ -46,7 +46,7 @@ var $body = $('body');
         });
     });
     
-    $('.pd-try__add, .add-to-cart-button').click(function(e){
+    $('.pd-try__add').click(function(e){
         e.preventDefault();
         addToCart($(this).attr('for'), 1, $(this));
     });
