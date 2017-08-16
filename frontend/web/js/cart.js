@@ -8,10 +8,16 @@ var Cart = (function() {
         $('.cart-page-aside').on('click', '.sl__close', function(event) {
             event.preventDefault();
             deleteItem($(this).attr('for'));
+            setTimeout(function(){
+                updateCount();
+            }, 200);                        
         });
         $('.cart-page-aside').on('change', '.item-months', function(event) {
             event.preventDefault();
             setMonths($(this).attr('for'), $(this).val());
+            setTimeout(function(){
+                updateList();
+            }, 200);            
         });
         $('.add-to-cart-button').click(function(e){
             e.preventDefault();
@@ -20,6 +26,15 @@ var Cart = (function() {
                 updateList();
             }, 200);
             
+        });
+        $('.addtocart-checkbox').click(function(e){
+            e.preventDefault();
+            
+            addToCart($(this).val(), 1, $(this).parent().parent());
+            setTimeout(function(){
+                updateCheckoutList();
+            }, 200);            
+
         });
     }
     
@@ -57,6 +72,7 @@ var Cart = (function() {
             dataType:'json'
         });         
     }
+
     
     function updateList() {
         $.ajax({
@@ -75,6 +91,25 @@ var Cart = (function() {
             dataType:'json'
         });        
     }
+    
+    function updateCheckoutList() {
+        $.ajax({
+            type: 'POST',
+            url: 'index.php?r=checkout/get-list',
+            data: {},
+            success:function(data){
+                if (data.content){
+                    $('#list_content').html(data.content);
+                    $('#items_amount').html(data.items_amount);
+                    updateCount();
+                }
+            },
+            error: function(data) { // if error occured
+                //alert("Error occured. Please try again");
+            },
+            dataType:'json'
+        });        
+    }    
     
   
     return this;

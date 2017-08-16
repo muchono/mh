@@ -146,8 +146,16 @@ function addToCart(product_id, months, obj) {
         if (res.show_signup){
             $('#signup-popup-link').click();
         } else if(res.result){
-            $('#cart_items').html(res.cart_items_count);
+            updateCount();
             obj.hide(200);
         }
     });
+}
+
+function updateCount(){
+    $.post("?r=cart/get-count", function( res ) {
+        if (res) {
+            $('#cart_items').html(res.cart_items_count);
+        }
+    });   
 }

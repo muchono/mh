@@ -82,9 +82,9 @@ class Cart extends \yii\db\ActiveRecord
                 $r['products'][$k] = $p;
                 $r['prices'][$k] = $p->priceFinal * $i->months;
                 $r['cart'][$k] = $i;
-                $r['amount'] += $p->price;
-                $r['total'] += $p->priceFinal;
-                $r['discount'] +=  $p->price * $i->months - $p->priceFinal * $i->months;
+                $r['amount'] += $p->price * $i->months;
+                $r['total'] += $r['prices'][$k];
+                $r['discount'] +=  $p->price * $i->months - $r['prices'][$k];
             }
         }
        

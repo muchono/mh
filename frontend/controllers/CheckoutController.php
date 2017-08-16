@@ -34,10 +34,28 @@ class CheckoutController extends \frontend\controllers\Controller
     public function actionIndex()
     {
         $cartInfo = Cart::getInfo(Yii::$app->user->id);
-        $products = Product::findActive()->all();
+        $products = Product::findActive()->andWhere(['not in', 'id', $cartInfo['products_list']])->all();
         return $this->render('index', array(
             'products' => $products,
             'cartInfo' => $cartInfo,
         ));
     }
+    
+    /**
+     * Get Cart Items
+     *
+     * @return mixed
+     */
+    public function actionGetList()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        $r = array('success' => 1);
+        $cartInfo = Cart::getInfo(Yii::$app->user->id);
+        $r['items_amount'] = $cartInfo['amount'];
+        $r['content'] = $this->renderPartial('_items',[
+           'cartInfo' => $cartInfo,
+        ]);
+        return $r;
+    }    
 }

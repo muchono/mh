@@ -59,6 +59,17 @@ class CartController extends \frontend\controllers\Controller
         return $r;
     }
     
+    public function actionGetCount()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $r = ['result' => 1];
+        
+        if (!Yii::$app->user->isGuest){
+            $r['cart_items_count'] = Cart::getCountByUser(Yii::$app->user->id);
+        }
+        return $r;
+    }
+    
     /**
      * Displays homepage.
      *
@@ -67,7 +78,7 @@ class CartController extends \frontend\controllers\Controller
     public function actionIndex()
     {
         $cartInfo = Cart::getInfo(Yii::$app->user->id);
-        $products = Product::findActive()->all();
+        $products = Product::findActive()->andWhere(['not in', 'id', $cartInfo['products_list']])->all();
         return $this->render('index', array(
             'products' => $products,
             'cartInfo' => $cartInfo,

@@ -1,3 +1,8 @@
+<?php
+
+use yii\web\View;
+
+?>
 <section class="simple-page sm">
       <h2 class="title-14">Payment Method:</h2>
       <ul class="pay-list">
@@ -109,63 +114,47 @@
               <th class="ot__cost">Cost</th>
             </tr>
           </thead>
-          <tbody>
-            <tr class="ot__row ot__row--selected">
-              <td class="ot__num">
-                <input type="checkbox">
-              </td>
-              <td class="ot__product">Guest Post Marketing: list + guide (subscription on 1 year)</td>
-              <td class="ot__cost">$49</td>
-            </tr>
+          <tbody  id="list_content">
+               <?= $this->render('_items', [
+                'cartInfo' => $cartInfo,
+                ]) ?>              
           </tbody>
       </table>
+      <?php if($products) {?>
       <p class="int-text">but perhaps you'll also be interested in:</p>
+      <?php }?>
       <table class="order-table order-table--separate">
           <tbody>
-            <tr class="ot__row ot__row--discount">
+              <?php foreach($products as $p) {?>
+            <tr class="ot__row <?=$p->discount ? 'ot__row--discount' : ''?>">
               <td class="ot__num">
-                <input type="checkbox">
+                <input type="checkbox" value="<?=$p->id?>" class="addtocart-checkbox">
               </td>
-              <td class="ot__product">Guest Post Marketing: list + guide (subscription on 1 year)
+              <td class="ot__product"><?=$p->short_title?>: list + guide (subscription on 1 year)
+                <?php if($p->discount) {?>                  
                 <div class="ot__discount"><div class="otd__inner">
-                  45<span>%</span> <div>Discount</div>
+                  <?=$p->discount->percent?><span>%</span> <div>Discount</div>
                 </div></div>
+                 <?php }?>
               </td>
-              <td class="ot__cost">$29</td>
+              <td class="ot__cost">$<?=$p->priceFinal?></td>
             </tr>
-            <tr class="ot__row">
-              <td class="ot__num">
-                <input type="checkbox">
-              </td>
-              <td class="ot__product">Guest Post Marketing: list + guide (subscription on 1 year)</td>
-              <td class="ot__cost">$29</td>
-            </tr>
-            <tr class="ot__row">
-              <td class="ot__num">
-                <input type="checkbox">
-              </td>
-              <td class="ot__product">Guest Post Marketing: list + guide (subscription on 1 year)</td>
-              <td class="ot__cost">$29</td>
-            </tr>
-            <tr class="ot__row">
-              <td class="ot__num">
-                <input type="checkbox">
-              </td>
-              <td class="ot__product">Guest Post Marketing: list + guide (subscription on 1 year)</td>
-              <td class="ot__cost">$29</td>
-            </tr>
-            <tr class="ot__row">
-              <td class="ot__num">
-                <input type="checkbox">
-              </td>
-              <td class="ot__product">Guest Post Marketing: list + guide (subscription on 1 year)</td>
-              <td class="ot__cost">$29</td>
-            </tr>
+            <?php }?>
           </tbody>
       </table>
       <div class="payment-foot">
-        <div class="total-payment">Total payment amount: $49</div>
+        <div class="total-payment">Total payment amount: $<span id="items_amount"><?=$cartInfo['total']?></span></div>
         <p class="terms-text">By passing to payment you confirm that you agree to the <a href="">Terms of Use</a> and <a href="">Privacy Policy</a></p>
         <button class="btn-3">Accept and Pay</button>
       </div>
     </section>
+<?php
+$this->registerJsFile(
+    '@web/js/cart.js'
+);
+$this->registerJs(
+    "Cart.construct();",
+    View::POS_READY,
+    'cart-handler'
+);
+?>
