@@ -15,42 +15,27 @@ use yii\helpers\ArrayHelper;
     
       <?= $form->field($userBilling, 'payment')->hiddenInput(['class' => 'bf__input'])->label(false) ?>      
       <ul class="pay-list">
+          <!--
         <li class="pay-list__item">
-          <input type="radio" name="pay" id="pay-1">
+          <input type="radio" name="payment" id="pay-1" value="Credit Card">
           <label class="pay-btn" for="pay-1">
             <span class="pay-btn__icon">
               <img src="img/pay-1-ic.png" alt="" class="img-fluid">
             </span>
             <span class="pay-btn__text">Credit Card</span>
           </label>
-        </li>
+        </li>-->
+        <?php foreach($payments as $k=>$pay){?>
         <li class="pay-list__item">
-          <input type="radio" name="pay" id="pay-2">
-          <label class="pay-btn" for="pay-2">
+          <input type="radio" name="UserBilling[payment]" id="pay-<?=$k?>" value="<?=$pay?>" <?=$userBilling->payment == $pay ? 'checked' : ''?>>
+          <label class="pay-btn" for="pay-<?=$k?>">
             <span class="pay-btn__icon">
-              <img src="img/pay-2-ic.png" alt="" class="img-fluid">
+              <img src="img/pay-<?=$k?>-ic.png" alt="" class="img-fluid">
             </span>
-            <span class="pay-btn__text">PayPal</span>
+            <span class="pay-btn__text"><?=$pay?></span>
           </label>
         </li>
-        <li class="pay-list__item">
-          <input type="radio" name="pay" id="pay-3">
-          <label class="pay-btn" for="pay-3">
-            <span class="pay-btn__icon">
-              <img src="img/pay-3-ic.png" alt="" class="img-fluid">
-            </span>
-            <span class="pay-btn__text">WebMoney</span>
-          </label>
-        </li>
-        <li class="pay-list__item">
-          <input type="radio" name="pay" id="pay-4">
-          <label class="pay-btn" for="pay-4">
-            <span class="pay-btn__icon">
-              <img src="img/pay-4-ic.png" alt="" class="img-fluid">
-            </span>
-            <span class="pay-btn__text">Bitcoin</span>
-          </label>
-        </li>
+        <?php }?>
       </ul>
       
       <h2 class="title-14">Billing Information:</h2>

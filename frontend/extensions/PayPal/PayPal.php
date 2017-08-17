@@ -13,7 +13,7 @@ use PayPal\Api\Transaction;
 use PayPal\Api\PaymentExecution;
 use PayPal\Common\PPModel;
 
-class PayPal extends CPayment
+class PayPal extends frontend\components\CPayment
 {
     protected $_apiContext = null;
     

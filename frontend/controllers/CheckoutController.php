@@ -10,10 +10,13 @@ use common\models\Cart;
 use common\models\Product;
 use common\models\UserBilling;
 use common\models\User;
-
+use common\models\Order;
 
 class CheckoutController extends \frontend\controllers\Controller
 {
+    const PDF_INVOICE_DIR = 'content/pdf/';
+    protected $_payments = array(2=>'PayPal', 3=>'Webmoney', 4=>'Bitcoin');
+    
     /**
      * @inheritdoc
      */
@@ -43,14 +46,32 @@ class CheckoutController extends \frontend\controllers\Controller
         $user = User::findOne(Yii::$app->user->id);
         $userBilling = $user->billing ? $user->billing : new UserBilling;
         
-        if ($userBilling->load(Yii::$app->request->post()) && $userBilling->validate()) {
-
+        $userBilling->user_id = Yii::$app->user->id;
+        
+        if ($userBilling->load(Yii::$app->request->post()) && $userBilling->save()) {
+            //run payment
+            $items = array();
+            foreach ($cartInfo['products'] as $k=>$p) {
+                $tmp = array('name' => $p->short_title, 'price'=>$p->priceFinal);
+                $items[] = $tmp;
+            }
+            
+            
+            $params = Yii::$app->params['payments'][$userBilling->payment];
+            $params['user'] = $user;
+            $n = '\frontend\extensions\\' . $userBilling->payment. '\\' . $userBilling->payment;
+            $payment = new $n();
+            $payment->setParams($params);
+            $payment->setItems($items);
+            $payment->perform();
+            return '';
         }
         
         return $this->render('index', array(
             'products' => $products,
             'cartInfo' => $cartInfo,
             'userBilling' => $userBilling,
+            'payments' => $this->_payments,
         ));
     }
     
@@ -70,7 +91,122 @@ class CheckoutController extends \frontend\controllers\Controller
            'cartInfo' => $cartInfo,
         ]);
         return $r;
-    }    
+    }
+
+    
+    public function actionPaymentCheck()
+    {
+        $r = array('result'=>0);
+        if (!empty($_POST['payment']) && in_array($_POST['payment'], array_keys(Yii::app()->params->payments))) {
+            Yii::import('frontend.extensions.'.$_POST['payment'].'.'.$_POST['payment']);
+            $payment = new $_POST['payment']();
+            $payment->setParams(Yii::app()->params->payments[$_POST['payment']]);
+            $payments = $payment->getPayments(Yii::app()->user->profile->id);
+            $cart_info = Cart::getByUser(Yii::app()->user->profile->id);
+            $to_pay = $payment->exchange($cart_info['total']);
+            $r['to_pay'] = $to_pay;
+            if ($to_pay <= $payments['total_not_used']) {
+                $r['result'] = 1;
+            } else {
+                $r['message'] = "Received sum: ".($payments['total_not_used'] ? $payments['total_not_used'] : 0) . ' BTC<br/>Note: Bitcoin enrollment can take up to 30 minutes.
+                <br/>So do not close this window and click on the "Confirm" later.';
+            }
+        }
+        exit(json_encode($r));
+    }
+    
+    public function actionPaymentPreResult()
+    {
+        if (Yii::$app->request->get('payment')
+                && in_array(Yii::$app->request->get('payment'), array_keys(Yii::$app->params['payments']))) {
+            
+            $n = '\frontend\extensions\\' . Yii::$app->request->get('payment'). '\\' . Yii::$app->request->get('payment');
+           
+            $payment = new $n();            
+            $payment->setParams(Yii::$app->params['payments'][Yii::$app->request->get('payment')]);
+            $payment->result($_REQUEST);
+        }
+    }
+    
+    public function actionPaymentResult()
+    {
+        $payed = false;
+        if (!Yii::$app->request->get('payment') 
+                && in_array(Yii::$app->request->get('payment'), array_keys(Yii::$app->params['payments']))) {
+            Yii::import('application.extensions.'.$_GET['payment'].'.'.$_GET['payment']);
+
+            $n = '\frontend\extensions\\' . Yii::$app->request->get('payment'). '\\' . Yii::$app->request->get('payment');
+           
+            $payment = new $n();            
+            $payment->setParams(Yii::$app->params['payments'][Yii::$app->request->get('payment')]);
+            
+            $payed = $payment->finish($_REQUEST);
+            
+            if ($payed) {
+                $order_params = Cart::getInfo(Yii::app()->user->profile->id);
+                $order_params['payment_method'] = Yii::$app->request->get('payment');
+                $order_params['payment_status'] = 1;
+                $order_params['id'] = Order::genID();
+                $order_params['transaction_id'] = $payment->getID();
+                $order = new Order();
+                $order->createByCart($order_params);
+        
+                //$pdf_path = $this->generatePDFInvoice($order);
+                
+                /*
+                $html = $this->renderPartial('_order_email_html', array('order'=>$order, 'user' => Yii::app()->user->profile), true);
+                $text = $this->renderPartial('_order_email_text', array('order'=>$order, 'user' => Yii::app()->user->profile), true);
+                $attachment = array(
+                    array(
+                        'name' => 'Order-'.$order->id.'.pdf',
+                        'mime' => 'application/pdf',
+                        'path' => $pdf_path,
+                    ),
+                );
+                 * 
+                 */
+                //Yii::app()->mail->send($html, $text, 'Invoice Payment Confirmation', Yii::app()->params['emailNotif']['from_email'], Yii::app()->user->profile->email, $attachment);
+                //Yii::app()->mail->send($html, $text, 'Invoice Payment Confirmation - COPY', Yii::app()->user->profile->email, Yii::app()->params['emailNotif']['payed_transaction_email'], $attachment);
+
+                $this->redirect(array('buyPublication/ResultPage', 'o' => $order_params['id']));
+            }
+        }
+        
+        $this->redirect(array('buyPublication/ResultPage'));        
+    }
+    
+    static public function invoicePDFDir()
+    {
+        return Yii::app()->getBasePath().'/../'. self::PDF_INVOICE_DIR;
+    }
+    
+    public function generatePDFInvoice(Order $order)
+    {
+        if (!is_dir(self::invoicePDFDir())) {
+            throw new Exception('PDF Invoice direactory not found');
+        }
+        
+        $html = $this->renderPartial('_invoice_pdf', array('order'=>$order), true);
+        
+        include(Yii::$app->getBasePath()."/extensions/mpdf60/mpdf.php");
+        
+        $mpdf=new mPDF('utf-8','A4','','',20,15,48,25,10,10);
+        $mpdf->useOnlyCoreFonts = true;
+        $mpdf->SetProtection(array('print'));
+        $mpdf->SetTitle("Netgeron Invoice");
+        $mpdf->SetAuthor("Netgeron");
+        $mpdf->SetWatermarkText("Paid");
+        $mpdf->showWatermarkText = true;
+        $mpdf->watermark_font = 'DejaVuSansCondensed';
+        $mpdf->watermarkTextAlpha = 0.1;
+        $mpdf->SetDisplayMode('fullpage');
+        $mpdf->WriteHTML($html);
+        
+        $fname = self::invoicePDFDir().$order->id.'.pdf';
+        $mpdf->Output($fname,'F');
+        
+        return $fname;
+    } 
 }
 
 /**

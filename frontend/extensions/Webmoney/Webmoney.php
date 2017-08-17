@@ -1,5 +1,13 @@
 <?php
-class Webmoney extends CPayment 
+
+namespace frontend\extensions\Webmoney;
+
+use Yii;
+use yii\helpers\Url;
+use common\models\Transaction;
+
+
+class Webmoney extends \frontend\components\CPayment
 {
     protected $_action_url = 'https://merchant.webmoney.ru/lmi/payment.asp';
     /**
@@ -25,9 +33,10 @@ class Webmoney extends CPayment
     protected function confirm($params)
     {
         $r = 0;
+        
         $this->addLog('Transaction confirmation request');
         if (!empty($params['LMI_PAYMENT_NO'])){
-            $transaction = Transaction::model()->findByPk($params['LMI_PAYMENT_NO']);
+            $transaction = Transaction::findOne($params['LMI_PAYMENT_NO']);
             if (!empty($transaction)){
                 $this->setID($transaction->id);
                 $this->_payment_result = $transaction->success;
@@ -47,7 +56,6 @@ class Webmoney extends CPayment
     public function exitByError($string, $step, $id) 
     {
         $this->addLog($string . ", step: $step, payment_no: ". $id);
-        Yii::app()->end();
     }
 
     
@@ -55,9 +63,8 @@ class Webmoney extends CPayment
     {
         $transaction = null;
         $this->addLog('Transaction prerequest triger');
-        
         if (isset($params['LMI_PAYMENT_NO'])){
-            $transaction = Transaction::model()->findByPk($params['LMI_PAYMENT_NO']);
+            $transaction = Transaction::findOne($params['LMI_PAYMENT_NO']);
         }
 
         if(empty($transaction)) {
@@ -90,14 +97,12 @@ class Webmoney extends CPayment
                 $this->exitByError('Transaction check error', 3, $params['LMI_PAYMENT_NO'].' '. $chkstring.' '.$sha256);
             }
         }
-        
-        Yii::app()->end;
     }
     
     protected function pay($params)
     {
         echo $this->getHTML();
-        Yii::app()->end();
+        return '';
     }
     
     public function getHTML()
@@ -110,18 +115,18 @@ class Webmoney extends CPayment
           <input type="hidden" name="LMI_PAYMENT_DESC" value="'.$this->_params['description'].'">
           <input type="hidden" name="LMI_PAYMENT_NO" value="'.$this->_transaction->id.'">
           <input type="hidden" name="LMI_PAYEE_PURSE" value="'.$this->_params['wmz'].'">
-          <input type="hidden" name="LMI_RESULT_URL" value="'.Yii::app()->createAbsoluteUrl('BuyPublication/PaymentPreResult', array("payment"=>'Webmoney')).'">
-          <input type="hidden" name="LMI_SUCCESS_URL" value="'.Yii::app()->createAbsoluteUrl('BuyPublication/PaymentResult', array("payment"=>'Webmoney')).'">
+          <input type="hidden" name="LMI_RESULT_URL" value="'.Url::to(['checkout/payment-pre-result', 'payment' => 'Webmoney'], true).'">
+          <input type="hidden" name="LMI_SUCCESS_URL" value="'.Url::to(['checkout/payment-result', 'payment' => 'Webmoney'], true).'">
           <input type="hidden" name="LMI_SUCCESS_METHOD" value="POST">
-          <input type="hidden" name="LMI_FAIL_URL" value="'.Yii::app()->createAbsoluteUrl('BuyPublication/PaymentResult', array("payment"=>'Webmoney')).'">
+          <input type="hidden" name="LMI_FAIL_URL" value="'.Url::to(['checkout/payment-result', 'payment' => 'Webmoney'], true).'">
           <input type="hidden" name="LMI_FAIL_METHOD" value="POST">
-          <input type="hidden" name="LMI_PAYMER_EMAIL" value="'.Yii::app()->user->profile->email.'">
+          <input type="hidden" name="LMI_PAYMER_EMAIL" value="'.$this->_params['user']->email.'">
           '.($this->_params['mode'] == 1 ? '<input type="hidden" name="LMI_SIM_MODE" value="0">' : '').
            '
           <input type="hidden" name="RND" value="'.md5($this->_transaction->time).'">
         </form>
         <script type="text/javascript">
-        document.getElementById("wm_pay_form").submit();
+        //document.getElementById("wm_pay_form").submit();
         </script>
         </body>
         </html>

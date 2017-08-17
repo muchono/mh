@@ -46,6 +46,7 @@ class UserBilling extends \yii\db\ActiveRecord
             [['user_id', 'country', 'agreed'], 'integer'],
             [['full_name', 'email', 'phone_number', 'company_name', 'address', 'zip', 'city'], 'string', 'max' => 255],
             [['payment'], 'string', 'max' => 50],
+            [['email'], 'email'],
         ];
     }
 

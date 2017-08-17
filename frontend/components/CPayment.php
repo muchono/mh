@@ -1,5 +1,11 @@
 <?php
-class CPayment extends CComponent
+
+namespace frontend\components;
+use Yii;
+use yii\helpers\Url;
+use common\models\Transaction;
+
+class CPayment
 {
     /**
      * Payment items
@@ -24,7 +30,8 @@ class CPayment extends CComponent
 
     public function __construct()
     {
-        $this->_logFileName = Yii::getPathOfAlias('application.log') . '/'.  get_class($this).'.log';
+        $reflect = new \ReflectionClass($this);
+        $this->_logFileName = Url::to('@frontend/runtime/logs/'.$reflect->getShortName().'.log');
         $this->_exchangeRate = $this->_defineRate();
     }
     
@@ -165,13 +172,13 @@ class CPayment extends CComponent
     protected function saveSate()
     {
         if ($this->_id) {
-            $transaction = Transaction::model()->findByPk($this->_id);
+            $transaction = Transaction::findOne($this->_id);
             if (!empty($transaction)) {
                 $transaction->success = $this->_payment_result;
                 if (!empty($this->_payment_details)) $transaction->appendResponse($this->_payment_details);
                 $transaction->update();
             }
-        }        
+        }
     }
     
     protected function pay($params) 

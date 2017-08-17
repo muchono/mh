@@ -1,7 +1,7 @@
 <?php
 Yii::import('application.extensions.Curl.Curl');
 
-class Bitcoin extends CPayment
+class Bitcoin extends frontend\components\CPayment
 {
     const CONFIRMATION_AMOUNT = 3;
     const SECURE_STR = 'ch236DDssf2sedjc';

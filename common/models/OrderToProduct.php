@@ -11,6 +11,7 @@ use Yii;
  * @property string $order_id
  * @property string $product_id
  * @property double $price
+ * @property integer $months
  */
 class OrderToProduct extends \yii\db\ActiveRecord
 {
@@ -29,7 +30,7 @@ class OrderToProduct extends \yii\db\ActiveRecord
     {
         return [
             [['order_id', 'product_id'], 'required'],
-            [['order_id', 'product_id'], 'integer'],
+            [['order_id', 'product_id', 'months'], 'integer'],
             [['price'], 'number'],
         ];
     }
@@ -44,6 +45,7 @@ class OrderToProduct extends \yii\db\ActiveRecord
             'order_id' => 'Order ID',
             'product_id' => 'Product ID',
             'price' => 'Price',
+            'months' => 'Months',
         ];
     }
 }

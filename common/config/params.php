@@ -29,7 +29,7 @@ return [
             'secretKey' => 'H735h4H8ejDe9%VDRRYHYsERf57gRET',
             'mode' => '0', // 1 - test mode
             'wmz' => 'Z346340674657',
-            'description'=>'NetGeron Payment',
+            'description'=>'MarcketingHack Payment',
         ),
         'TwocheckoutPayment' => array(
             //https://www.2checkout.com/documentation/checkout/parameters/

@@ -72,6 +72,56 @@ class Order extends \yii\db\ActiveRecord
     }
     
     /**
+     * Create bt Cart information
+     * @param array $params
+     */
+    public function createByCart($params)
+    {
+        if (!empty($params['items'])){
+            $this->id = $params['id'];
+            $this->total = $params['total'];
+            $this->user_id = $params['products'][0]->user_id;
+            $this->payment_method = $params['payment_method'];
+            $this->payment_status = $params['payment_status'];
+            $this->transaction_id = $params['transaction_id'];
+            
+            if (!$this->save()) {
+                print_r($this->getErrors());
+                exit;
+            }
+            
+            $task_date = 0;
+            foreach($params['products'] as $k=>$citem) {
+                $o2p = new OrderToProduct;
+                
+                $o2p->order_id = $this->id;
+                $o2p->product_id = $citem->product->id;
+                $o2p->price = $params['prices'][$k];
+                $o2p->months = $r['cart_items'][$k]->months;
+                $o2p->save();
+                
+                $r['cart_items'][$k]->delete();
+            }
+            
+            $user = User::findOne($this->user_id);
+            $user->orders_num += 1;
+            $user->update();
+        }
+    }
+    
+    /**
+     * Generate Order ID
+     * @return integer
+     */
+    static public function genID()
+    {
+        $last_id = Order::find()
+            ->select('max(id)')
+            ->scalar();
+        return ($last_id ? $last_id : 15142/*any value for first order id*/) + rand(1,20);
+    }
+    
+    /**
      * Get products
      * @return array
      */

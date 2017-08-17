@@ -1,3 +1,15 @@
+CREATE TABLE IF NOT EXISTS `transaction` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `payment` varchar(40) DEFAULT '',
+  `price` float unsigned NOT NULL DEFAULT '0',
+  `success` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `response_details` text,
+  `time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
 CREATE TABLE IF NOT EXISTS `user_billing` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,
@@ -526,9 +538,6 @@ INSERT INTO `order` (`id`, `created_at`, `updated_at`, `status`, `user_id`, `tot
 
 -- --------------------------------------------------------
 
---
--- Структура таблицы `order_to_product`
---
 
 CREATE TABLE IF NOT EXISTS `order_to_product` (
   `id` int(11) unsigned NOT NULL,
@@ -536,16 +545,16 @@ CREATE TABLE IF NOT EXISTS `order_to_product` (
   `product_id` int(11) unsigned NOT NULL,
   `price` float NOT NULL DEFAULT '0',
   `discount` float NOT NULL DEFAULT '0',
-  `discount_id` int(11) unsigned NOT NULL DEFAULT '0'
+  `months` int(11) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `order_to_product`
 --
 
-INSERT INTO `order_to_product` (`id`, `order_id`, `product_id`, `price`, `discount`, `discount_id`) VALUES
-(1, 1, 8, 0, 0, 0),
-(2, 1, 9, 0, 0, 0);
+INSERT INTO `order_to_product` (`id`, `order_id`, `product_id`, `price`, `months`) VALUES
+(1, 1, 8, 0, 1),
+(2, 1, 9, 0, 3);
 
 -- --------------------------------------------------------
 

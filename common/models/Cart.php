@@ -75,6 +75,7 @@ class Cart extends \yii\db\ActiveRecord
         $r['products_list'] = $r['products'] = array();
         $r['amount'] = 0;
         $r['discount'] = 0;
+        $r['cart_items'] = $items;
         foreach($items as $k=>$i){
             $p = Product::findOne($i->product_id);
             if ($p->status){
