@@ -1,10 +1,19 @@
 <?php
 
 use yii\web\View;
+use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 
 ?>
 <section class="simple-page sm">
       <h2 class="title-14">Payment Method:</h2>
+    <?php 
+      $form = ActiveForm::begin([
+     'enableClientValidation' => false,
+     'enableAjaxValidation' => false,          
+        ]); ?>
+    
+      <?= $form->field($userBilling, 'payment')->hiddenInput(['class' => 'bf__input'])->label(false) ?>      
       <ul class="pay-list">
         <li class="pay-list__item">
           <input type="radio" name="pay" id="pay-1">
@@ -43,12 +52,13 @@ use yii\web\View;
           </label>
         </li>
       </ul>
+      
       <h2 class="title-14">Billing Information:</h2>
       <div class="billing-info">
         <div class="billing-field-row">
           <div class="billing-field">
             <label for="" class="bf__label">Full Name</label>
-            <input type="text" class="bf__input">
+            <?= $form->field($userBilling, 'full_name')->textInput(['class' => 'bf__input'])->label(false) ?>
             <span class="bf__info">(for individuals only)</span>
           </div>
           <div class="billing-field billing-field--auto">
@@ -56,52 +66,47 @@ use yii\web\View;
           </div>
           <div class="billing-field">
             <label for="" class="bf__label">Company Name</label>
-            <input type="text" class="bf__input">
+            <?= $form->field($userBilling, 'company_name')->textInput(['class' => 'bf__input'])->label(false) ?>
             <span class="bf__info">(for legal entities only)</span>
           </div>
         </div>
         <div class="billing-field-row">
-          <div class="billing-field billing-field--novalidate">
+          <div class="billing-field">
             <label for="" class="bf__label">Email</label>
-            <input type="email" class="bf__input">
+            <?= $form->field($userBilling, 'email')->textInput(['class' => 'bf__input'])->label(false) ?>            
             <span class="bf__info">(to this email you will get confirmation letter)</span>
           </div>
         </div>
         <div class="billing-field-row">
           <div class="billing-field">
             <label for="" class="bf__label">Phone Number</label>
-            <input type="email" class="bf__input">
+            <?= $form->field($userBilling, 'phone_number')->textInput(['class' => 'bf__input'])->label(false) ?>
             <span class="bf__info">(to this phone number you will get SMS code)</span>
           </div>
         </div>
         <div class="billing-field-row">
           <div class="billing-field">
             <label for="" class="bf__label">Country</label>
-            <select name="" id="" class="bf__select">
-              <option value="">lorem</option>
-              <option value="">lorem</option>
-              <option value="">lorem</option>
-              <option value="">lorem</option>
-              <option value="">lorem</option>
-            </select>
+            <?= $form->field($userBilling, 'country')
+              ->dropDownList(ArrayHelper::map(common\models\Countries::find()->all(), 'id', 'country_name'), ['class'=>'bf__input'])->label(false);?>
           </div>
         </div>
         <div class="billing-field-row">
           <div class="billing-field">
             <label for="" class="bf__label">Address</label>
-            <input type="email" class="bf__input">
+            <?= $form->field($userBilling, 'address')->textInput(['class' => 'bf__input'])->label(false) ?>
           </div>
         </div>
         <div class="billing-field-row">
           <div class="billing-field">
             <label for="" class="bf__label">Postal Code</label>
-            <input type="email" class="bf__input">
+            <?= $form->field($userBilling, 'zip')->textInput(['class' => 'bf__input'])->label(false) ?>
           </div>
         </div>
         <div class="billing-field-row">
           <div class="billing-field">
             <label for="" class="bf__label">City</label>
-            <input type="email" class="bf__input">
+            <?= $form->field($userBilling, 'city')->textInput(['class' => 'bf__input'])->label(false) ?>
           </div>
         </div>
       </div>
@@ -147,6 +152,7 @@ use yii\web\View;
         <p class="terms-text">By passing to payment you confirm that you agree to the <a href="">Terms of Use</a> and <a href="">Privacy Policy</a></p>
         <button class="btn-3">Accept and Pay</button>
       </div>
+        <?php ActiveForm::end(); ?>      
     </section>
 <?php
 $this->registerJsFile(

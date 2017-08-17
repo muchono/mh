@@ -1,3 +1,20 @@
+CREATE TABLE IF NOT EXISTS `user_billing` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `full_name` varchar(255) NOT NULL DEFAULT '',
+  `email` varchar(255) NOT NULL  DEFAULT '',  
+  `phone_number` varchar(255) NOT NULL  DEFAULT '',  
+  `company_name` varchar(255) NOT NULL DEFAULT '',
+  `country` int(11) unsigned NOT NULL DEFAULT '0',
+  `address` varchar(255) NOT NULL DEFAULT '',
+  `zip` varchar(255) NOT NULL DEFAULT '',
+  `city` varchar(255) NOT NULL DEFAULT '',
+  `payment` varchar(50) NOT NULL DEFAULT '',
+  `agreed` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+)
+
 --
 -- Структура таблицы `countries`
 --

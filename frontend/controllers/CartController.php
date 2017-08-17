@@ -9,6 +9,8 @@ use yii\filters\AccessControl;
 
 class CartController extends \frontend\controllers\Controller
 {
+    protected $_payments = array('PayPal', 'Webmoney', 'TwocheckoutPayment', 'Bitcoin');
+    
     /**
      * @inheritdoc
      */

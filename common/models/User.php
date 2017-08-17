@@ -319,6 +319,15 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     }
 
     /**
+     * Get Billing Information
+     * @return UserBilling
+     */
+    public function getBilling()
+    {
+        return $this->hasOne(\common\models\UserBilling::className(), ['user_id' => 'id']);
+    }
+    
+    /**
      * Generates new password reset token
      */
     public function generatePasswordResetToken()
