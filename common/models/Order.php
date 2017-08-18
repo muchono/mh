@@ -96,8 +96,11 @@ class Order extends \yii\db\ActiveRecord
                 
                 $o2p->order_id = $this->id;
                 $o2p->product_id = $citem->product->id;
+                $o2p->user_id = $this->user_id;
                 $o2p->price = $params['prices'][$k];
                 $o2p->months = $r['cart_items'][$k]->months;
+                
+                $o2p->expires = $o2p->calcExpirationDate();
                 $o2p->save();
                 
                 $r['cart_items'][$k]->delete();

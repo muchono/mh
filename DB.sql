@@ -23,6 +23,8 @@ CREATE TABLE IF NOT EXISTS `user_billing` (
   `city` varchar(255) NOT NULL DEFAULT '',
   `payment` varchar(50) NOT NULL DEFAULT '',
   `agreed` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `subscribe_offers` int(1) unsigned NOT NULL DEFAULT '0',
+  `subscribe_blog` int(1) unsigned NOT NULL DEFAULT '0',  
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
 )
@@ -543,9 +545,11 @@ CREATE TABLE IF NOT EXISTS `order_to_product` (
   `id` int(11) unsigned NOT NULL,
   `order_id` int(11) unsigned NOT NULL,
   `product_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
   `price` float NOT NULL DEFAULT '0',
   `discount` float NOT NULL DEFAULT '0',
-  `months` int(11) unsigned NOT NULL DEFAULT '0'
+  `months` int(11) unsigned NOT NULL DEFAULT '0',
+  `expires`  int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
@@ -917,8 +921,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email` varchar(255) NOT NULL,
   `phone` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `subscribe` int(1) unsigned NOT NULL DEFAULT '0',
   `active` int(1) unsigned NOT NULL DEFAULT '0',
+  `subscribe` int(1) unsigned NOT NULL DEFAULT '0',
   `password` varchar(50) NOT NULL DEFAULT '',
   `registration_confirmed` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` int(11) NOT NULL,

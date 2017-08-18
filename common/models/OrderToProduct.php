@@ -12,6 +12,7 @@ use Yii;
  * @property string $product_id
  * @property double $price
  * @property integer $months
+ * @property integer $expires
  */
 class OrderToProduct extends \yii\db\ActiveRecord
 {
@@ -30,7 +31,7 @@ class OrderToProduct extends \yii\db\ActiveRecord
     {
         return [
             [['order_id', 'product_id'], 'required'],
-            [['order_id', 'product_id', 'months'], 'integer'],
+            [['order_id', 'product_id', 'months', 'expires'], 'integer'],
             [['price'], 'number'],
         ];
     }
@@ -46,6 +47,61 @@ class OrderToProduct extends \yii\db\ActiveRecord
             'product_id' => 'Product ID',
             'price' => 'Price',
             'months' => 'Months',
+            'expires' => 'Expires',
         ];
+    }
+    
+    
+    
+    /**
+     * Calc Expiration Date
+     * @return integer
+     */
+    public function calcExpirationDate()
+    {
+        $time_from = self::getLatestExpirationDate($this->product_id, $this->user_id);
+        $time = time();
+        $time_from = $time_from > $time ? $time_from : $time;
+        
+        return strtotime("+".$this->months." months", $time_from);
+    }
+    
+    /**
+     * Get Expiration Date
+     * @return integer
+     */
+    public function getExpirationDate()
+    {
+        return $this->expires;
+    }
+    
+    /**
+     * Get Latest Expiration Date
+     * @return integer
+     */
+    static public function getLatestExpirationDate($product_id, $user_id)
+    {
+        return self::find()
+            ->select('max(expires)')
+            ->where(['product_id'=>$product_id, 'user_id'=>$user_id])
+            ->scalar();
+    }
+    
+    /**
+     * Get Product
+     * @return Product
+     */
+    public function getProduct()
+    {
+        return $this->hasOne(Product::className(), ['id' => 'product_id']);
+    }
+    
+    /**
+     * Get Order
+     * @return Order
+     */
+    public function getOrder()
+    {
+        return $this->hasOne(Order::className(), ['id' => 'order_id']);
     }
 }

@@ -140,14 +140,19 @@ var $body = $('body');
     });
 })();
 
-function addToCart(product_id, months, obj) {
+function addToCart(product_id, months, obj, callback) {
     var data = {'product_id': product_id, 'months': months, 'add_to_cart': 1};
     $.post("?r=cart/add", data, function( res ) {
         if (res.show_signup){
             $('#signup-popup-link').click();
         } else if(res.result){
             updateCount();
-            obj.hide(200);
+            if (typeof callback !== 'undefined') {
+                callback();
+            } else {
+                obj.hide(200);
+            }
+            
         }
     });
 }

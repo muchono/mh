@@ -47,6 +47,7 @@ class CheckoutController extends \frontend\controllers\Controller
         $userBilling = $user->billing ? $user->billing : new UserBilling;
         
         $userBilling->user_id = Yii::$app->user->id;
+        $userBilling->scenario = 'billing';
         
         if ($userBilling->load(Yii::$app->request->post()) && $userBilling->save()) {
             //run payment

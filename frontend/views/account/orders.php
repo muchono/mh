@@ -3,7 +3,7 @@
           <?= $this->render('_menu', [
     ]) ?>
       <h2 class="title-14">Order History:</h2>
-      <p class="transactions">1 - 9 of 9 Transactions</p>
+      <p class="transactions">1 - <?=$orders_count?> of <?=$orders_count?> Transactions</p>
       <div class="table-view">
         <table class="order-history">
           <thead>
@@ -16,55 +16,19 @@
             </tr>
           </thead>
           <tbody>
+            <?php foreach ($orders as $key => $o) {?>
             <tr class="oh__row">
-              <td class="oh__id">103687</td>
-              <td class="oh__date">19/22/2016</td>
-              <td class="oh__desc">Guest Post Marketing: list + guide (subscription on 1 year)</td>
-              <td class="oh__payment">Credit Card</td>
-              <td class="oh__total">$83.88</td>
+              <td class="oh__id"><?=$o->id?></td>
+              <td class="oh__date"><?=date('m/d/Y', $o->created_at)?></td>
+              <td class="oh__desc">
+                  <?php foreach ($o->productIDs as $op) {?>
+                  <div><?=$op->product->short_title?>: list + guide (subscription on <?=$op->months?> year<?=$op->months > 1 ?'s':''?>)</div>
+                  <?php }?> 
+              </td>
+              <td class="oh__payment"><?=$o->payment_method?></td>
+              <td class="oh__total">$<?=$o->total?></td>
             </tr>
-            <tr class="oh__row">
-              <td class="oh__id">103687</td>
-              <td class="oh__date">19/22/2016</td>
-              <td class="oh__desc">Guest Post Marketing: list + guide (subscription on 1 year)</td>
-              <td class="oh__payment">Credit Card</td>
-              <td class="oh__total">$83.88</td>
-            </tr>
-            <tr class="oh__row">
-              <td class="oh__id">103687</td>
-              <td class="oh__date">19/22/2016</td>
-              <td class="oh__desc">Guest Post Marketing: list + guide (subscription on 1 year)</td>
-              <td class="oh__payment">Credit Card</td>
-              <td class="oh__total">$83.88</td>
-            </tr>
-            <tr class="oh__row">
-              <td class="oh__id">103687</td>
-              <td class="oh__date">19/22/2016</td>
-              <td class="oh__desc">Guest Post Marketing: list + guide (subscription on 1 year)</td>
-              <td class="oh__payment">Credit Card</td>
-              <td class="oh__total">$83.88</td>
-            </tr>
-            <tr class="oh__row">
-              <td class="oh__id">103687</td>
-              <td class="oh__date">19/22/2016</td>
-              <td class="oh__desc">Guest Post Marketing: list + guide (subscription on 1 year)</td>
-              <td class="oh__payment">Credit Card</td>
-              <td class="oh__total">$83.88</td>
-            </tr>
-            <tr class="oh__row">
-              <td class="oh__id">103687</td>
-              <td class="oh__date">19/22/2016</td>
-              <td class="oh__desc">Guest Post Marketing: list + guide (subscription on 1 year)</td>
-              <td class="oh__payment">Credit Card</td>
-              <td class="oh__total">$83.88</td>
-            </tr>
-            <tr class="oh__row">
-              <td class="oh__id">103687</td>
-              <td class="oh__date">19/22/2016</td>
-              <td class="oh__desc">Guest Post Marketing: list + guide (subscription on 1 year)</td>
-              <td class="oh__payment">Credit Card</td>
-              <td class="oh__total">$83.88</td>
-            </tr>
+            <?php }?> 
           </tbody>
         </table>
       </div>
