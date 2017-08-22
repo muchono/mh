@@ -14,6 +14,7 @@ use frontend\assets\AppAsset;
 use common\widgets\Alert;
 
 use common\models\Product;
+use common\models\OrderToProduct;
 
 AppAsset::register($this);
 ?>
@@ -55,7 +56,7 @@ AppAsset::register($this);
     <div class="alter-layout">
     <div class="side-menu js-side-menu">
       <div class="sm__logo">
-        <a href="" class="logo__link"><img src="img/main-logo.png" alt="" class="img-fluid"></a>
+        <a href="<?=Url::to(['site/index'])?>" class="logo__link"><img src="img/main-logo.png" alt="" class="img-fluid"></a>
       </div>
       <div class="sm__top">
         <a href="" class="sm-btn"><i class="icon-5"></i></a>
@@ -63,7 +64,7 @@ AppAsset::register($this);
       <div class="sm__content">
         <ul class="sm-list-1">
           <?php foreach ($this->params['products'] as $p){?>
-          <li class="sm-list-1__item <?=$this->params['selected_product']->id == $p->id ? 'sm-list-1__item--unblock sm-list-1__item--active' : 'sm-list-1__item--block'?>">
+          <li class="sm-list-1__item <?=$this->params['selected_product']->id == $p->id ? 'sm-list-1__item--unblock sm-list-1__item--active' : (Yii::$app->user->id && OrderToProduct::isAccessible($p->id, Yii::$app->user->id) ? ' sm-list-1__item--unblock ' : 'sm-list-1__item--block')?>">
             <a href="<?=Url::to(['content/index','product_id'=>$p->id])?>" class="sm-list-1__link"><?=$p->title?></a>
           </li>
           <?php }?>

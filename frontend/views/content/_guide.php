@@ -10,7 +10,7 @@
               </div>
               <?php foreach ($product->guide as $g){?>
               <h2 class="title-5" id="title_<?=$g->id?>"><?=$g->title?></h2>
-              <p class="text-1"><?=$g->aboutCode?> </p>
+              <p class="text-1"><?=$accessable ?  $g->about : $g->aboutCode?> </p>
               <?php }?>
               <div class="alert-1"><i class="alert-ic-1"></i>This content is protected by copyright and is intended for viewing only on MarketingHack.net. Its use: copy, placement, distribution (with a link to this site or not) will be prosecuted according to the Digital Millennium Copyright Act (DMCA).</div>
             </div>

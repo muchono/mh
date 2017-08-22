@@ -6,6 +6,7 @@ use Yii;
 use common\models\Product;
 use common\models\ProductHref;
 use common\models\ProductGuide;
+use common\models\OrderToProduct;
 use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
 
@@ -61,13 +62,12 @@ class ContentController extends \frontend\controllers\Controller
     public function actionList()
     {
         $r = array();
-
         $product_id = Yii::$app->request->post('project_id');
+
         //add Security
         if ($product_id && $product = Product::findOne($product_id)) {
             $r = array(
                 'c' => $this->renderHrefs($product, Yii::$app->request->post('sort')),
-                'accessable' => false,
             );
         }
             
@@ -118,19 +118,24 @@ class ContentController extends \frontend\controllers\Controller
         }
         $dataProvider = new ActiveDataProvider($params);    
         $pages = new Pagination(['totalCount' => $dataProvider->getTotalCount()]);
-
+        
+        $accessable = OrderToProduct::isAccessible($product->id, Yii::$app->user->id);
+        
         return $this->renderPartial('_list',['product' => $product,
             'hrefsProvider' => $dataProvider,
             'last_update' => ProductHref::getLastUpdate($product->id),
             'report_list' => $this->reportValues,
             'pages' => $pages,
             'sort' => $sort,
+            'accessable' => $accessable,
             ]);
     }
     
     public function renderGuide($product)
     {
-        return $this->renderPartial('_guide',['product' => $product]);
+        return $this->renderPartial('_guide',['product' => $product,
+            'accessable' => OrderToProduct::isAccessible($product->id, Yii::$app->user->id)
+            ]);
     }    
 
 }
