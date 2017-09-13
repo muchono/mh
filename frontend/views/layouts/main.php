@@ -54,7 +54,7 @@ AppAsset::register($this);
 
 <body>
 <?php $this->beginBody() ?>
-  <div class="<?=$this->params['layout_style'] ? $this->params['layout_style'] : 'simple-page-layout'?>  discount-line--add">
+  <div class="<?=$this->params['layout_style'] ? $this->params['layout_style'] : 'simple-page-layout'?>  <?php if ($this->params['head_offer']){?>discount-line--add<?php }?>">
     <div class="top-bar">
         <?php if ($this->params['head_offer']){?>
       <div class="discount-line">

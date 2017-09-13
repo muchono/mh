@@ -34,9 +34,7 @@ var Logged = (function() {
         });
         
         $('.tab-content').on('click', '.icon-11', function(event) {
-            if (!$(this).hasClass('unclickable')) {
-                markLink($(this));
-            }
+            markLink($(this), $(this).hasClass('unclickable'));
         });         
         
         $('.tab-content').on('click', '.icon-12', function(event) {
@@ -84,9 +82,11 @@ var Logged = (function() {
         at[el.prop('id')]();
     }
     
-    function markLink(link) {
+    function markLink(link, available) {
         link.removeClass('icon-11').addClass('icon-10');
-        $.post( "?r=content/mark-link",{'link': link.attr('for')});
+        if (available) {
+            $.post( "?r=content/mark-link",{'link': link.attr('for')});
+        }
     }
     
     function disableTabs() {
@@ -143,11 +143,13 @@ var Logged = (function() {
     }
     
     function showReport(link) {
-        $('input[name="report[]"]').attr('checked', false);
-        vars.report_for = link.attr('for');
-        var dialog = $('#report_issue');
-        link.parent().append(dialog);
-        dialog.show(200);
+        if (link.attr('for')) {
+            $('input[name="report[]"]').attr('checked', false);
+            vars.report_for = link.attr('for');
+            var dialog = $('#report_issue');
+            link.parent().append(dialog);
+            dialog.show(200);
+        }
     }
     
   

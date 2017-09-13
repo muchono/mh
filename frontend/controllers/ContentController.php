@@ -108,6 +108,7 @@ class ContentController extends \frontend\controllers\Controller
             'pagination' => array('pageSize' => $page_size),
         ];
 
+        $params['sort'] = ['defaultOrder' => ['da_rank' =>  SORT_DESC]];
         if (!empty($sort['list_sort'])) {
             list($field, $order) = explode(':', $sort['list_sort']);
             if (in_array($field, ['url','da_rank','alexa_rank','type_links'])

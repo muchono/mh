@@ -54,6 +54,32 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
     <div class="alter-layout">
+    <div class="top-bar">
+      <div class="top-bar__inner">
+        <a href="" class="menu-btn js-side-menu-btn">
+          <span></span>
+        </a>
+        <div class="logo">
+          <a href="" class="logo__link"><img src="img/main-logo.png" alt="" class="img-fluid"></a>
+        </div>
+        <nav class="main-nav">
+          <ul class="main-nav__list">
+            <li class="main-nav__item"><a href="" class="main-nav__link">Home</a></li>
+            <li class="main-nav__item"><a href="" class="main-nav__link">How It Works</a></li>
+            <li class="main-nav__item"><a href="" class="main-nav__link">Products</a></li>
+            <li class="main-nav__item"><a href="" class="main-nav__link">Special Offers</a></li>
+            <li class="main-nav__item"><a href="" class="main-nav__link">F.A.Q.</a></li>
+            <li class="main-nav__item"><a href="" class="main-nav__link">Support</a></li>
+            <li class="main-nav__item"><a href="" class="main-nav__link">Blog</a></li>
+          </ul>
+        </nav>
+        <div class="user-pane">
+          <a href="" class="up__btn">Log In</a>
+          <a href="" class="up__btn">Sign Up</a>
+        </div>
+      </div>
+    </div>
+        
     <div class="side-menu js-side-menu">
       <div class="sm__logo">
         <a href="<?=Url::to(['site/index'])?>" class="logo__link"><img src="img/main-logo.png" alt="" class="img-fluid"></a>
@@ -96,7 +122,7 @@ AppAsset::register($this);
           <li class="sm-list-2__item">
             <a href="<?=Url::to(['site/faq']);?>" class="sm-list-2__link">F.A.Q.</a>
           </li>
-          <li class="sm-list-2__item sm-list-2__item--active">
+          <li class="sm-list-2__item">
             <a href="<?=Url::to(['blog/index']);?>" class="sm-list-2__link">Blog</a>
           </li>
           <?php if (!Yii::$app->user->isGuest){?>
@@ -142,10 +168,12 @@ AppAsset::register($this);
             <p class="ic-head__text">This is demo version - full version will be available after <a href="">purchase</a></p>
           </div>
           <div class="ic-head__get">
+            <?php if ($this->params['selected_product']->discount){?>
             <div class="ic-head-off">
-              <strong>25<sup>%</sup></strong>
+              <strong><?=$this->params['selected_product']->discount->percent?><sup>%</sup></strong>
               Discount
             </div>
+            <?php } ?>
             <div>
               <?php if (Yii::$app->user->isGuest){?> 
               <a href="#signup-popup" class="btn-4 js-popups">Get Free Access</a>

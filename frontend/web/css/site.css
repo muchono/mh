@@ -3081,7 +3081,7 @@ input[type="color"], input[type="date"], input[type="datetime"], input[type="dat
   @media screen and (min-width: 768px) {
     /* line 1237, E:/GIT/marketinghack/public/scss/_theme_style.scss */
     .ic-head-off {
-      display: none; } }
+} }
   /* line 1254, E:/GIT/marketinghack/public/scss/_theme_style.scss */
   .ic-head-off strong {
     font-size: 36px; }
@@ -3403,11 +3403,18 @@ input[type="color"], input[type="date"], input[type="datetime"], input[type="dat
 /* line 1587, E:/GIT/marketinghack/public/scss/_theme_style.scss */
 .tb__5,
 .tb__8 {
-  width: 80px; }
+  width: 80px; 
+}
+
+.tb__6,
+.tb__7 {
+  width: 220px; 
+}
 
 /* line 1592, E:/GIT/marketinghack/public/scss/_theme_style.scss */
 .tb__9 {
-  position: relative; }
+  #position: relative; 
+}
 
 /* line 1597, E:/GIT/marketinghack/public/scss/_theme_style.scss */
 .pagination {

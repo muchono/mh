@@ -15,9 +15,8 @@
                     Sort By
                     <div class="filter-list__select" name="order_filter">
                       <select>
-                        <option value=""></option>
                         <option value="da_rank:down" <?= $sort['list_sort'] == 'da_rank:down' ? 'selected' : ''?>>DA</option>
-                        <option value="alexa_rank:down" <?= $sort['list_sort'] == 'alexa_rank:down' ? 'selected' : ''?>>Alexa</option>
+                        <option value="alexa_rank:down" <?= in_array($sort['list_sort'], array('alexa_rank:down', 'alexa_rank:up')) ? 'selected' : ''?>>Alexa</option>
                         <option value="url:down" <?= $sort['list_sort'] == 'url:down' ? 'selected' : ''?>>Alphabet</option>
                       </select>
                     </div>
@@ -77,6 +76,10 @@
                     <th class="tb__7">
                       Details
                       <span class="table-filter">
+                        <span class="tf-wrap">
+                          <span class="tf-wrap__up" for="type_links"></span>
+                          <span class="tf-wrap__down" for="type_links"></span>
+                        </span>                          
                       </span>
                     </th>
                     <th class="tb__8">Example</th>
@@ -94,9 +97,9 @@
                     <td class="tb__4"><?=$link->da_rank?></td>
                     <td class="tb__5"><?=$link->alexa_rank?></td>
                     <td class="tb__6"><?= join(', ', $link->getCategoriesArray())?></td>
-                    <td class="tb__7"><a href="" class="follow-link unclickable"><?=  \common\models\ProductHref::$link_types[$link->type_links]?></a></td>
+                    <td class="tb__7"><a href="" class="follow-link unclickable"><?=  \common\models\ProductHref::$link_types[$link->type_links]?></a> <?=$link->about?></td>
                     <td class="tb__8"><a href="<?=$accessable ? $link->example_url : '#'?>" class=" <?=$accessable ? '' : 'unclickable'?>" target="_blank">Example</a></td>
-                    <td class="tb__9"><?php if ($accessable){?><i class="icon-12" for="<?=$link->id?>"></i><?php }?></td>
+                    <td class="tb__9"><i class="icon-12" for="<?=$accessable ? $link->id:''?>"></i></td>
                   </tr>
                     <?php }?>
                 </tbody>
