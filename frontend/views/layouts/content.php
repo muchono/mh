@@ -168,15 +168,20 @@ AppAsset::register($this);
             <p class="ic-head__text">This is demo version - full version will be available after <a href="">purchase</a></p>
           </div>
           <div class="ic-head__get">
-            <?php if ($this->params['selected_product']->discount){?>
+            <?php if ($this->params['selected_product']->priceFinal 
+                    && $this->params['selected_product']->discount){?>
             <div class="ic-head-off">
               <strong><?=$this->params['selected_product']->discount->percent?><sup>%</sup></strong>
               Discount
             </div>
             <?php } ?>
             <div>
-              <?php if (Yii::$app->user->isGuest){?> 
-              <a href="#signup-popup" class="btn-4 js-popups">Get Free Access</a>
+              <?php if (!$this->params['selected_product']->priceFinal){?> 
+                <?php if (Yii::$app->user->isGuest){?> 
+                <a href="#signup-popup" class="btn-4 js-popups">Get Free Access</a>
+                <?php } else {?>
+                <a href="#signup-popup" class="btn-4 content-add-tocart" for="<?=$this->params['selected_product']->id?>">Get Free Access</a>
+                <?php }?>
               <?php }?>
               <div class="ic-price ic-price--free-now">
                   <?php if ($this->params['selected_product']->discount){?>
@@ -186,9 +191,9 @@ AppAsset::register($this);
                       <?php if (!$this->params['selected_product']->priceFinal){?>
                       Free Now
                       <?php } else {?>
-                      <?=$this->params['selected_product']->priceFinal?>
+                      <?=$this->params['selected_product']->priceFinal?>$
                       <?php } ?>
-                  </span>$
+                  </span>
               </div>
             </div>
           </div>

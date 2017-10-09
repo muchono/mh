@@ -19,6 +19,14 @@ var Logged = (function() {
                 root.setActive(el);
             }
         });
+		
+        $(".content-add-tocart").click(function(){
+            var obj = $(this);
+			addToCart(obj.attr('for'), 1, obj, function(){
+				location.href = '?r=cart/index';
+			});
+        });
+		
         $('.tab-content').on('click', 'a.pgn-list__link,a.pgn-switcher__btn', function(event) {
             event.preventDefault();
             vars.list_url = $(this).attr('href');
