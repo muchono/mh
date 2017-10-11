@@ -26,9 +26,12 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . '../../backend/extensions/SEOstats'
  * @property string $example_url
  * @property string $type_links
  * @property string $last_udate
+ * @property string $cat
  */
 class ProductHref extends \yii\db\ActiveRecord
 {
+    public $categoryFirst;
+   
     /**
      * statuses values
      */
@@ -152,13 +155,24 @@ class ProductHref extends \yii\db\ActiveRecord
     }
     
     /**
-     * Get categories
+     * Get first category name
+     * @return string
+    
+    public function getCategoryFirst()
+    {
+        $arr = $this->getCategoriesArray();
+        return array_shift($arr);
+    } */
+    
+    /**
+     * Get categories titles
      * @return array
      */
     public function getCategories()
     {
         return $this->hasMany(ProductHrefCategory::className(), ['id' => 'category_id'])
-                    ->via('hREFCategories');
+                ->orderBy(['title'=>SORT_ASC])
+                ->via('hREFCategories');
     }
     
     /**

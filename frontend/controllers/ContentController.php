@@ -104,19 +104,35 @@ class ContentController extends \frontend\controllers\Controller
         }
         
         $params = [
+            'query' => $product->getHrefs()->select(['*', 
+                '(SELECT phc.title '
+                . 'FROM product_href_to_category phtoc '
+                . 'LEFT JOIN product_href_category phc ON phc.id = phtoc.category_id '
+                . 'WHERE phtoc.product_id = product_href.id '
+                . 'ORDER BY phc.title '
+                . 'LIMIT 1 ) categoryFirst '])->where($where),
+            'pagination' => array('pageSize' => $page_size),
+        ];
+        /*
+        $params = [
             'query' => $product->getHrefs()->where($where),
             'pagination' => array('pageSize' => $page_size),
         ];
+         * 
+         */
 
         $params['sort'] = ['defaultOrder' => ['da_rank' =>  SORT_DESC]];
+        $sort_attributes = ['url','da_rank','alexa_rank','type_links', 'categoryFirst'];
         if (!empty($sort['list_sort'])) {
             list($field, $order) = explode(':', $sort['list_sort']);
-            if (in_array($field, ['url','da_rank','alexa_rank','type_links'])
+            if (in_array($field, $sort_attributes)
                     && in_array($order, ['up','down'])) {
                 
                 $params['sort'] = ['defaultOrder' => [$field => $order == 'up' ? SORT_ASC : SORT_DESC]];
             }
         }
+        
+        $params['sort']['attributes'] = $sort_attributes;        
         $dataProvider = new ActiveDataProvider($params);    
         $pages = new Pagination(['totalCount' => $dataProvider->getTotalCount()]);
         

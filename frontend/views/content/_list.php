@@ -71,6 +71,10 @@
                     <th class="tb__6">
                       Category
                       <span class="table-filter">
+                        <span class="tf-wrap">
+                          <span class="tf-wrap__up" for="categoryFirst"></span>
+                          <span class="tf-wrap__down" for="categoryFirst"></span>
+                        </span>                          
                       </span>
                     </th>
                     <th class="tb__7">
