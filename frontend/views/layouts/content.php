@@ -165,7 +165,9 @@ AppAsset::register($this);
         <div class="ic-head">
           <div>
             <h2 class="title-4"><?=$this->params['selected_product']->getHrefs()->count()?> Popular Forums</h2>
-            <p class="ic-head__text">This is demo version - full version will be available after <a href="">purchase</a></p>
+            <?php if (Yii::$app->user->isGuest){?>
+            <p class="ic-head__text">This is demo version - full version will be available after <a href="#signup-popup" class="js-popups">purchase</a></p>
+            <?php }?>
           </div>
           <div class="ic-head__get">
             <?php if ($this->params['selected_product']->priceFinal 
@@ -177,16 +179,22 @@ AppAsset::register($this);
             <?php } ?>
             <div>
               <?php if (!$this->params['selected_product']->priceFinal){?> 
-                <?php if (Yii::$app->user->isGuest){?> 
-                <a href="#signup-popup" class="btn-4 js-popups">Get Free Access</a>
-                <?php } else {?>
-                <a href="#signup-popup" class="btn-4 content-add-tocart" for="<?=$this->params['selected_product']->id?>">Get Free Access</a>
+                <?php if (!$this->params['selected_product_accessible']){?> 
+                    <?php if (Yii::$app->user->isGuest){?> 
+                    <a href="#signup-popup" class="btn-4 js-popups">Get Free Access</a>
+                    <?php } else {?>
+                    <a href="#" class="btn-4 content-add-tocart" for="<?=$this->params['selected_product']->id?>">Get Free Access</a>
+                    <?php }?>
                 <?php }?>
-              <?php }?>
-              <div class="ic-price ic-price--free-now">
-                  <?php if ($this->params['selected_product']->discount){?>
+              <?php } else {?>
+                <?php if (!$this->params['selected_product_accessible']){?>
+                <a href="#" class="btn-4 content-add-tocart" for="<?=$this->params['selected_product']->id?>">Buy now</a>
+                <?php } else {?>
+                <a href="#" class="btn-4 content-add-tocart" for="<?=$this->params['selected_product']->id?>">Renew</a>
+                <?php } ?>
+              <?php } ?>
+              <div class="ic-price <?php if ($this->params['selected_product']->discount){?>ic-price--free-now<?php } ?>">
                   <span class="price__text"><?=$this->params['selected_product']->price?>$</span> 
-                  <?php } ?>
                   <span class="free__text">
                       <?php if (!$this->params['selected_product']->priceFinal){?>
                       Free Now
