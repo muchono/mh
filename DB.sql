@@ -1,3 +1,13 @@
+CREATE TABLE IF NOT EXISTS `user_access_data` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `time` datetime NOT NULL,
+  `hash` varchar(200),
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),  
+  KEY `timestamp` (`timestamp`)
+);
+
 CREATE TABLE IF NOT EXISTS `transaction` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `order_id` int(11) unsigned NOT NULL,
