@@ -39,7 +39,7 @@ class ProductHref extends \yii\db\ActiveRecord
         'follow' => 'Follow link',
         'nofollow' => 'Nofollow link',
         'redirect' => 'Redirect',
-        'nolinks' => 'No Links',
+        '' => 'No Links',
     );
     
     /**

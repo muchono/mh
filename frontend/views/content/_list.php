@@ -101,7 +101,7 @@
                     <td class="tb__4"><?=$link->da_rank?></td>
                     <td class="tb__5"><?=$link->alexa_rank?></td>
                     <td class="tb__6"><?= join(', ', $link->getCategoriesArray())?></td>
-                    <td class="tb__7"><a href="" class="follow-link unclickable"><?=  \common\models\ProductHref::$link_types[$link->type_links]?></a> <?=$link->about?></td>
+                    <td class="tb__7"><a href="" class="<?=$link->type_links?>-link unclickable"><?=  $link->type_links ? \common\models\ProductHref::$link_types[$link->type_links] : ''?></a> <?=$link->about?></td>
                     <td class="tb__8"><a href="<?=$accessable ? $link->example_url : '#'?>" class=" <?=$accessable ? '' : 'unclickable'?>" target="_blank">Example</a></td>
                     <td class="tb__9"><i class="icon-12" for="<?=$accessable ? $link->id:''?>"></i></td>
                   </tr>

@@ -89,9 +89,9 @@ AppAsset::register($this);
       </div>
       <div class="sm__content">
         <ul class="sm-list-1">
-          <?php foreach ($this->params['products'] as $p){?>
-          <li class="sm-list-1__item <?=$this->params['selected_product']->id == $p->id ? 'sm-list-1__item--unblock sm-list-1__item--active' : (Yii::$app->user->id && OrderToProduct::isAccessible($p->id, Yii::$app->user->id) ? ' sm-list-1__item--unblock ' : 'sm-list-1__item--block')?>">
-            <a href="<?=Url::to(['content/index','product_id'=>$p->id])?>" class="sm-list-1__link"><?=$p->title?></a>
+          <?php foreach ($this->params['products'] as $p){ $acc = Yii::$app->user->id && OrderToProduct::isAccessible($p->id, Yii::$app->user->id); ?>
+          <li class="sm-list-1__item <?=$this->params['selected_product']->id == $p->id ? 'sm-list-1__item--unblock sm-list-1__item--active' : ( $acc ? ' sm-list-1__item--unblock ' : 'sm-list-1__item--block')?>">
+            <a href="<?=$acc ? Url::to(['content/index','product_id'=>$p->id]): '#'?>" class="sm-list-1__link"><?=$p->title?></a>
           </li>
           <?php }?>
           <!--
