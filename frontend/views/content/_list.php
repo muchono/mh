@@ -72,8 +72,8 @@
                       Category
                       <span class="table-filter">
                         <span class="tf-wrap">
-                          <span class="tf-wrap__up" for="category"></span>
-                          <span class="tf-wrap__down" for="category"></span>
+                          <span class="tf-wrap__up" for="categoryFirst"></span>
+                          <span class="tf-wrap__down" for="categoryFirst"></span>
                         </span>                          
                       </span>
                     </th>
