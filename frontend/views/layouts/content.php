@@ -89,11 +89,22 @@ AppAsset::register($this);
       </div>
       <div class="sm__content">
         <ul class="sm-list-1">
-          <?php foreach ($this->params['products'] as $p){ $acc = Yii::$app->user->id && OrderToProduct::isAccessible($p->id, Yii::$app->user->id); ?>
-          <li class="sm-list-1__item <?=$this->params['selected_product']->id == $p->id ? 'sm-list-1__item--unblock sm-list-1__item--active' : ( $acc ? ' sm-list-1__item--unblock ' : 'sm-list-1__item--block')?>">
-            <a href="<?=$acc ? Url::to(['content/index','product_id'=>$p->id]): '#'?>" class="sm-list-1__link"><?=$p->title?></a>
-          </li>
+          <?php if (Yii::$app->user->isGuest){?>
+            
+            <?php foreach ($this->params['products'] as $p){ ?>
+            <li class="sm-list-1__item <?=$this->params['selected_product']->id == $p->id ? 'sm-list-1__item--unblock sm-list-1__item--active' : ' sm-list-1__item--unblock '?>">
+              <a href="<?=Url::to(['content/index','product_id'=>$p->id])?>" class="sm-list-1__link"><?=$p->title?></a>
+            </li>
+            <?php }?>
+                        
+          <?php } else {?>
+            <?php foreach ($this->params['products'] as $p){ $acc = Yii::$app->user->id && OrderToProduct::isAccessible($p->id, Yii::$app->user->id); ?>
+            <li class="sm-list-1__item <?=$this->params['selected_product']->id == $p->id ? 'sm-list-1__item--unblock sm-list-1__item--active' : ( $acc ? ' sm-list-1__item--unblock ' : 'sm-list-1__item--block')?>">
+              <a href="<?=$acc ? Url::to(['content/index','product_id'=>$p->id]): '#'?>" class="sm-list-1__link"><?=$p->title?></a>
+            </li>
+            <?php }?>
           <?php }?>
+            
           <!--
           <li class="sm-list-1__item sm-list-1__item--unblock sm-list-1__item--active">
             <a href="" class="sm-list-1__link">Q&amp;A Link Building Techniques</a>
@@ -140,7 +151,7 @@ AppAsset::register($this);
       </div>
     </div>
 
-    <div class="content">
+    <div class="content<?php if (!Yii::$app->user->isGuest){?> noselect<?php }?>">
       <div class="top-line">
         <ul class="tl__menu tl__menu--center">
           <li class="tl__item"><a href="" class="tl__link">Renew&nbsp;<span>Subscriptions</span></a></li>
@@ -228,13 +239,19 @@ AppAsset::register($this);
   <!-- Vendor -->
   <script src="vendor/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
   <script src="vendor/slick-carousel/slick/slick.min.js"></script>
-
   <!-- Theme Base -->
   <script src="js/main.js"></script>
 <?php
 $this->registerJsFile(
     '@web/js/logged.js'
 );
+
+if (!Yii::$app->user->isGuest){
+    $this->registerCssFile(
+        '@web/css/content.css'
+    );
+}
+
 $this->registerJs(
     "Logged.construct(".$this->params['selected_product']->id.");",
     View::POS_READY,
