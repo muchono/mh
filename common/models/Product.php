@@ -76,9 +76,6 @@ class Product extends \yii\db\ActiveRecord
      */
     public function beforeSave($insert)
     {
-        if ($insert) {
-            $this->status = 1;
-        }
         return parent::beforeSave($insert);
     }
     
