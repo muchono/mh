@@ -3,12 +3,11 @@
    License: none (public domain)
 */
 /* line 6, ./public/vendor/reset-css/_reset.scss */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+html, body, div, span, applet, object, iframe, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, sub, sup, tt, var,
-b, u, i, center,
+center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
@@ -4879,6 +4878,9 @@ input[type="color"].search-questions__input, input[type="date"].search-questions
 /* line 2957, E:/GIT/marketinghack/public/scss/_theme_style.scss */
 .product-page-article {
   position: relative; }
+  .product-page-article a {
+	text-decoration:underline;
+  }
   /* line 2960, E:/GIT/marketinghack/public/scss/_theme_style.scss */
   .product-page-article p {
     font-size: 16px;
@@ -5220,8 +5222,8 @@ input[type="color"].search-questions__input, input[type="date"].search-questions
 
 /* line 3259, E:/GIT/marketinghack/public/scss/_theme_style.scss */
 .pp__price {
-  color: #393939;
-  font: 14px/1.25 "PT Sans";
+  color: #10a22b;
+  font: 700 18px/1.25 "PT Sans";
   letter-spacing: -0.025em; }
   /* line 3264, E:/GIT/marketinghack/public/scss/_theme_style.scss */
   .pp__price--discount {

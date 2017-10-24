@@ -8,6 +8,7 @@ var Logged = (function() {
         report_for: 0,
     };
     var root = this;
+    var active_report_icon;
     
     this.construct = function(product_id){
         vars.product_id = product_id;
@@ -144,6 +145,9 @@ var Logged = (function() {
             .done(function(){
                 $('.report').hide();                
                 var dialog = $('#report_result');
+                
+                dialog.css({top: active_report_icon.position().top, left: active_report_icon.position().left - dialog.width()-15});
+                
                 $('[for='+vars.report_for+']').parent().append(dialog);
                 dialog.show(200);
            });
@@ -152,9 +156,11 @@ var Logged = (function() {
     
     function showReport(link) {
         if (link.attr('for')) {
+            active_report_icon = link;
             $('input[name="report[]"]').attr('checked', false);
             vars.report_for = link.attr('for');
             var dialog = $('#report_issue');
+            dialog.css({top: link.position().top, left: link.position().left - dialog.width()-15});
             link.parent().append(dialog);
             dialog.show(200);
         }

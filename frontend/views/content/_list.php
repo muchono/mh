@@ -103,7 +103,7 @@
                     <td class="tb__6"><?= join(', ', $link->getCategoriesArray())?></td>
                     <td class="tb__7"><a href="" class="<?=$link->type_links?>-link unclickable"><?=  $link->type_links ? \common\models\ProductHref::$link_types[$link->type_links] : ''?></a> <?=$link->about?></td>
                     <td class="tb__8"><a href="<?=$accessable ? $link->example_url : '#'?>" class=" <?=$accessable ? '' : 'unclickable'?>" target="_blank">Example</a></td>
-                    <td class="tb__9"><i class="icon-12" for="<?=$accessable ? $link->id:''?>"></i></td>
+                    <td class="tb__9"><div><i class="icon-12" for="<?=$accessable ? $link->id:''?>"></i></div></td>
                   </tr>
                     <?php }?>
                 </tbody>
