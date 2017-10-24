@@ -1,3 +1,5 @@
+ALTER TABLE `product_page` CHANGE `content` `content` LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
+
 CREATE TABLE IF NOT EXISTS `user_access_data` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,
