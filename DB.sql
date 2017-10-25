@@ -1,3 +1,5 @@
+ALTER TABLE `product` ADD `questions` TEXT;
+
 ALTER TABLE `product_page` CHANGE `content` `content` LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;
 
 CREATE TABLE IF NOT EXISTS `user_access_data` (

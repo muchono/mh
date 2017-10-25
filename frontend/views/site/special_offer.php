@@ -23,8 +23,8 @@ $this->title = 'Special Offers';
               </div>
               <div class="pd__content">
                 <ul class="list-1">
-                <?php foreach($p->guide as $g) {?>
-                  <li><?=$g->title?></li>
+                <?php foreach($p->getQuestionsList() as $g) {?>
+                  <li><?=$g?></li>
                 <?php }?>
                 </ul>
                 <a href="<?=Url::to(['site/product','product_id'=>$p->id])?>" class="pd__more">Learn more</a>

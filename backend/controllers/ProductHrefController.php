@@ -105,7 +105,7 @@ class ProductHrefController extends Controller
                     $model->load(array('ProductHref' => $info));
                     $model->status = 1;
                     $model->product_id = $this->product->id;
-                    $model->last_udate = $time;
+                    $model->last_update = $time;
                     
                     if ($model->save()) {
                         $hrefs[$model->id] = $model;

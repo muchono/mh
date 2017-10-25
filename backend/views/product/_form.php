@@ -18,6 +18,8 @@ use yii\widgets\ActiveForm;
     
     <?= $form->field($model, 'full_title')->textInput(['maxlength' => true]) ?>
     
+    <?= $form->field($model, 'questions')->textarea(['rows' => 6]) ?>
+    
     <?= $form->field($model, 'price')->textInput() ?>
     
     <?= $form->field($model, 'link_name')->textInput(['maxlength' => true]) ?>    

@@ -25,7 +25,7 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . '../../backend/extensions/SEOstats'
  * @property string $about
  * @property string $example_url
  * @property string $type_links
- * @property string $last_udate
+ * @property string $last_update
  * @property string $cat
  */
 class ProductHref extends \yii\db\ActiveRecord
@@ -71,7 +71,7 @@ class ProductHref extends \yii\db\ActiveRecord
     {
         return [
             [['product_id', 'url', 'example_url','type_links', 'categories'], 'required'],
-            [['product_id', 'status', 'alexa_rank', 'last_udate'], 'integer'],
+            [['product_id', 'status', 'alexa_rank', 'last_update'], 'integer'],
             [['da_rank'], 'number'],
             [['about'], 'string'],
             [[ 'url'], 'string', 'max' => 255],
@@ -96,7 +96,7 @@ class ProductHref extends \yii\db\ActiveRecord
             'da_rank' => 'DA',
             'about' => 'Details',
             'type_links' => 'Type Links',
-            'last_udate' => 'Last Update',
+            'last_update' => 'Last Update',
         ];
     }
     

@@ -27,6 +27,7 @@ class ProductHrefCategory extends \yii\db\ActiveRecord
     {
         return [
             [['title'], 'required'],
+            [['title'], 'unique'],
             [['title'], 'string', 'max' => 255],
         ];
     }

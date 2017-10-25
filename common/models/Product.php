@@ -21,6 +21,7 @@ use common\models\Discount;
  * @property double $price
  * @property string $status
  * @property string $order
+ * @property string $questions
  */
 class Product extends \yii\db\ActiveRecord
 {
@@ -51,6 +52,7 @@ class Product extends \yii\db\ActiveRecord
             [['status', 'order'], 'integer'],
             [['title', 'short_title', 'link_name'], 'string', 'max' => 255],
             [['full_title'], 'string', 'max' => 1000],
+            [['questions'], 'string', 'max' => 3000],
         ];
     }
 
@@ -68,6 +70,7 @@ class Product extends \yii\db\ActiveRecord
             'status' => 'Status',
             'order' => 'Order',
             'link_name' => 'Link Name',
+            'questions' => 'Questions',
         ];
     }
     
@@ -158,6 +161,20 @@ class Product extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ProductReview::className(), ['product_id' => 'id'])->where(['active' => 1]);
     }    
+    
+    /**
+     * Get Questions List
+     * @return array
+     */
+    public function getQuestionsList()
+    {
+        $r = array();
+        $this->questions = trim($this->questions);
+        if ($this->questions){
+            $r = explode(PHP_EOL, $this->questions);
+        }
+        return $r;
+    }
     
     /**
      * Get final price

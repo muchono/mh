@@ -3,11 +3,12 @@
    License: none (public domain)
 */
 /* line 6, ./public/vendor/reset-css/_reset.scss */
-html, body, div, span, applet, object, iframe, p, blockquote, pre,
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, sub, sup, tt, var,
-center,
+b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
@@ -4878,7 +4879,7 @@ input[type="color"].search-questions__input, input[type="date"].search-questions
 /* line 2957, E:/GIT/marketinghack/public/scss/_theme_style.scss */
 .product-page-article {
   position: relative; }
-  .product-page-article a {
+  .product-page-article p a {
 	text-decoration:underline;
   }
   /* line 2960, E:/GIT/marketinghack/public/scss/_theme_style.scss */
@@ -4929,6 +4930,11 @@ input[type="color"].search-questions__input, input[type="date"].search-questions
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column; }
+  
+  .buy-try-pane  a {
+	  
+  }
+  
   @media screen and (min-width: 1024px) {
     /* line 2994, E:/GIT/marketinghack/public/scss/_theme_style.scss */
     .buy-try-pane {
