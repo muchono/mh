@@ -74,7 +74,11 @@ var Logged = (function() {
         $('.tab-content').on('change', '[name=urls_filter]', function(event) {
             vars.sort.urls_filter = $('option:selected', $(this)).val();
             tabListFill();
-        });       
+        });
+        
+        $('.tab-content').on('click', '.contents-list-block__icon', function(event) {
+            $(this).parent().hide(100);
+        });        
     }
     
     this.setActive = function(el) {
