@@ -34,7 +34,9 @@ use yii\helpers\Url;
             <article class="post-article">
               <figure class="post-page__img"><img src="images/blog/<?=$model->image?>" alt="" class="img-fluid"></figure>
               <h2 class="title-11"><?=$model->title?></h2>
+              <span class="reset-this">
               <?=$model->content?>
+              </span>
               
             </article>
             <?php if ($model->author_bio){?>
