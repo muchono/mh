@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\ProductHref;
 use backend\models\ProductHrefCategorySearch;
+use dosamigos\tinymce\TinyMce;
 
 
 /* @var $this yii\web\View */
@@ -25,9 +26,22 @@ use backend\models\ProductHrefCategorySearch;
                 'name' => $field_container.'['.$id.'][example_url]']) ?>
         </div>
         <div class="col-md-4">
-        <?= $form->field($model, 'about')->textarea(['style' => 'height:108px', 
-            'id' => 'about'.$id,
-            'name' => $field_container.'['.$id.'][about]']) ?>   
+    <?= $form->field($model, 'about')->widget(TinyMce::className(), [
+     'options' => ['rows' => 5,
+         'cols' => 3,
+         'id' => 'about'.$id,
+        'name' => $field_container.'['.$id.'][about]'],
+     'language' => 'en_GB',
+     'clientOptions' => [
+         'branding' => false,
+         'menubar' => false,
+         'plugins' => [
+             "link",
+         ],
+         'toolbar' => "bold link",
+     ]
+     ]);?> 
+            
         </div>
         <div class="col-md-3">
         <?= $form->field($model, 'categories')->dropDownList(ProductHrefCategorySearch::getArray(), ['multiple'=>true,

@@ -3387,7 +3387,10 @@ input[type="color"], input[type="date"], input[type="datetime"], input[type="dat
         color: #28930c; }
       /* line 1562, E:/GIT/marketinghack/public/scss/_theme_style.scss */
       .table-1 td.tb__7 .redirect-link {
-        color: #ff652f; }
+        color: #ff652f; 
+		font-weight: bold;
+		
+}
   /* line 1570, E:/GIT/marketinghack/public/scss/_theme_style.scss */
   .table-1 tbody tr:nth-child(even) {
     background: #f7f9fa; }
@@ -3406,11 +3409,6 @@ input[type="color"], input[type="date"], input[type="datetime"], input[type="dat
 .tb__5,
 .tb__8 {
   width: 80px; 
-}
-
-.tb__6,
-.tb__7 {
-  width: 220px; 
 }
 
 /* line 1592, E:/GIT/marketinghack/public/scss/_theme_style.scss */
