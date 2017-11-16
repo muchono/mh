@@ -41,7 +41,7 @@ class ProductGuide extends \yii\db\ActiveRecord
     
     public function getAboutCode()
     {
-        $about = str_replace('get-image', 'get-lmage', $this->about);
+        $about = str_replace(array('get-image', '&nbsp;'), array('get-lmage', ' '), $this->about);
         
         return preg_replace_callback(
             '#.*?(<.+?>).*?#is',
