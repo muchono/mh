@@ -101,7 +101,15 @@
                     <td class="tb__4"><?=$link->da_rank?></td>
                     <td class="tb__5"><?=$link->alexa_rank?></td>
                     <td class="tb__6"><?= join(', ', $link->getCategoriesArray())?></td>
-                    <td class="tb__7"><a href="" class="<?=$link->type_links?>-link unclickable"><?=  $link->type_links ? \common\models\ProductHref::$link_types[$link->type_links] : ''?></a> <?=$link->about?></td>
+                    <td class="tb__7">
+                        <?php if (in_array($link->type_links, array('nofollow','follow'))) {?>
+                        <a class="<?=$link->type_links?>-link unclickable"><?=  \common\models\ProductHref::$link_types[$link->type_links]?></a>.
+                        <?php } else {?>
+                        <a href="" class="<?=$link->type_links?>-link unclickable"><?=  $link->type_links && $link->type_links != 'no_links' ? \common\models\ProductHref::$link_types[$link->type_links] : ''?></a>
+                        
+                        <?php }?>
+                        <?=$link->about?>
+                    </td>
                     <td class="tb__8"><a href="<?=$accessable ? $link->example_url : '#'?>" class=" <?=$accessable ? '' : 'unclickable'?>" target="_blank">Example</a></td>
                     <td class="tb__9"><div><i class="icon-12" for="<?=$accessable ? $link->id:''?>"></i></div></td>
                   </tr>
