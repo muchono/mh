@@ -117,7 +117,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'model' => $model,
                         'form' => $form,
                         'field_container' => 'new',   
-                        'id' => '####',
+                        'id' => 'IIII',
                     ]);
                 }
             ],            

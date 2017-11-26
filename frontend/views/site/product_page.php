@@ -29,11 +29,13 @@ $this->title = $model->title;
           <div class="product-page-wrap">
             <div class="product-page-content">
               <h1 class="title-9"><?=$model->page->title?></h1>
-              <blockquote class="blockquote-3">
+              <blockquote class="blockquote-3 ">
                 <?=$model->page->description?>
               </blockquote>
               <article class="product-page-article">
-                  <?=$model->page->content?>
+                <div class="reset-this">
+                <?=$model->page->content?>
+                </div>
                 <div class="buy-try-pane">
                   <a href="" class="btn-3">Buy Full Version</a>
                   <span class="btp__or">or</span>

@@ -33,7 +33,7 @@ use common\models\Cart;
                   <div class="cs__total">Order Total:  $<?=$cartInfo['total']?></div>
                   <form action="">
                       <input type="hidden" name="r" value="checkout/index">
-                  <?php if ($cartInfo['total']){?>
+                  <?php if ($cartInfo['products']){?>
                   <button class="btn-9">Checkout Now</button>
                   <?php }?>
                   </form>

@@ -796,12 +796,16 @@ video {
   color: #464646;
   font-size: 24px;
   font-weight: 700;
-  margin-bottom: 13px; }
+  margin-bottom: 13px; 
+  margin-top: 13px; 
+}
   @media screen and (min-width: 768px) {
     /* line 39, E:/GIT/marketinghack/public/scss/_typography.scss */
     .title-5 {
       font-size: 30px;
-      margin-bottom: 23px; } }
+      margin-bottom: 23px; 
+      margin-top: 23px; 
+	  } }
 
 /* line 51, E:/GIT/marketinghack/public/scss/_typography.scss */
 .title-6 {
@@ -6148,4 +6152,29 @@ input[type="color"].search-questions__input, input[type="date"].search-questions
     margin-left: 0;
     margin-right: 0;
     font-weight: bold;
+}
+
+.reset-this ul { 
+   list-style-type: disc; 
+   list-style-position: inside; 
+}
+
+.reset-this ol { 
+   list-style-type: decimal; 
+   list-style-position: inside; 
+}
+.reset-this ul ul, .reset-this ol ul { 
+   list-style-type: circle; 
+   list-style-position: inside; 
+   margin-left: 15px; 
+}
+
+.reset-thisol ol, .reset-this ul ol { 
+   list-style-type: lower-latin; 
+   list-style-position: inside; 
+   margin-left: 15px; 
+}
+
+.reset-this p {
+	margin: 15px 0 15px 0;
 }

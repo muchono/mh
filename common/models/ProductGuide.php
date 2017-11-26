@@ -41,15 +41,18 @@ class ProductGuide extends \yii\db\ActiveRecord
     
     public function getAboutCode()
     {
-        $about = str_replace(array('get-image', '&nbsp;'), array('get-lmage', ' '), $this->about);
+        $about = str_replace(array('&nbsp;'), array('####'), $this->about);
+        $about = preg_replace("/<img .*>/", '<img src="img/demo_img.jpg">', $about);
         
-        return preg_replace_callback(
+        $about = preg_replace_callback(
             '#.*?(<.+?>).*?#is',
             function ($matches) {
                $text = strip_tags($matches[0]);
-               return preg_replace('/\w/i', '*', strip_tags($text)) . ($matches[1] ? $matches[1] : '');
+               return preg_replace('/\w/i', '*', $text) . ($matches[1] ? $matches[1] : '');
             },
             $about);
+
+        return str_replace('####', '&nbsp;', $about);
     }
     
     /**
