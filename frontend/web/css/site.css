@@ -2159,7 +2159,7 @@ input[type="color"], input[type="date"], input[type="datetime"], input[type="dat
   letter-spacing: -0.02em;
   margin-bottom: 26px; }
   /* line 444, E:/GIT/marketinghack/public/scss/_theme_style.scss */
-  .hh__title strong {
+  .hh__title_orange {
     color: #fd622c;
     display: block;
     font-size: 48px; }
@@ -6169,7 +6169,7 @@ input[type="color"].search-questions__input, input[type="date"].search-questions
    margin-left: 15px; 
 }
 
-.reset-thisol ol, .reset-this ul ol { 
+.reset-this ol ol, .reset-this ul ol { 
    list-style-type: lower-latin; 
    list-style-position: inside; 
    margin-left: 15px; 

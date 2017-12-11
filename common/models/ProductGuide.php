@@ -42,7 +42,7 @@ class ProductGuide extends \yii\db\ActiveRecord
     public function getAboutCode()
     {
         $about = str_replace(array('&nbsp;'), array('####'), $this->about);
-        $about = preg_replace("/<img .*>/", '<img src="img/demo_img.jpg">', $about);
+        $about = preg_replace("/<img .*>/", '<img class="img-fluid pull-center" src="img/demo_img.jpg">', $about);
         
         $about = preg_replace_callback(
             '#.*?(<.+?>).*?#is',
@@ -53,6 +53,12 @@ class ProductGuide extends \yii\db\ActiveRecord
             $about);
 
         return str_replace('####', '&nbsp;', $about);
+    }
+    
+    public function getAboutClear()
+    {
+        $about = preg_replace("/<img (.*)>/", '<img class="img-fluid pull-center" $1>', $this->about);
+         return $about;
     }
     
     /**

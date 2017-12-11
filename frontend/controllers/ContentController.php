@@ -27,7 +27,6 @@ class ContentController extends \frontend\controllers\Controller
 
     public function actionIndex()
     {
-        $user_id = 1;
         $this->view->params['products'] = Product::findActive()->all();
         
         $product_id = Yii::$app->request->get('product_id');
