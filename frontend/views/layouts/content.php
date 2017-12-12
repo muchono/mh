@@ -175,7 +175,7 @@ AppAsset::register($this);
       <div class="inner-content">
         <div class="ic-head">
           <div>
-            <h2 class="title-4"><?=$this->params['selected_product']->getHrefs()->count()?> Popular Forums</h2>
+            <h2 class="title-4"><?=$this->params['selected_product']->getHrefs()->count()?> <?=$this->params['selected_product']->title?></h2>
             <?php if (Yii::$app->user->isGuest){?>
             <p class="ic-head__text">This is demo version - full version will be available after <a href="#signup-popup" class="js-popups">purchase</a></p>
             <?php }?>

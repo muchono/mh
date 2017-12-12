@@ -3385,7 +3385,7 @@ input[type="color"], input[type="date"], input[type="datetime"], input[type="dat
       color: #1a1a1a; }
     /* line 1555, E:/GIT/marketinghack/public/scss/_theme_style.scss */
     .table-1 td.tb__7 {
-      color: #7f7f7f; }
+      #color: #7f7f7f; }
       /* line 1558, E:/GIT/marketinghack/public/scss/_theme_style.scss */
       .table-1 td.tb__7 .follow-link {
         color: #28930c; }
