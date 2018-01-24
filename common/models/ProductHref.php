@@ -149,10 +149,17 @@ class ProductHref extends \yii\db\ActiveRecord
         return  self::find()->where(['product_id' => $product_id])->orderBy('`last_update` DESC')->one()->last_update;
     }
     
+    public function getAboutCoded()
+    {
+        return preg_replace('/href=".*"/', 'href="#"', $this->about);
+    }
+
     public function getUrlCoded()
     {
         return preg_replace('/\w/i', '*', $this->url);
     }
+    
+
     
     /**
      * Get first category name

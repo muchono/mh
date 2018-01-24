@@ -22,6 +22,7 @@ use common\models\Discount;
  * @property string $status
  * @property string $order
  * @property string $questions
+ * @property integer $links_available
  */
 class Product extends \yii\db\ActiveRecord
 {
@@ -49,7 +50,7 @@ class Product extends \yii\db\ActiveRecord
         return [
             [['title', 'price', 'short_title', 'full_title', 'link_name'], 'required'],
             [['price'], 'number'],
-            [['status', 'order'], 'integer'],
+            [['status', 'order', 'links_available'], 'integer'],
             [['title', 'short_title', 'link_name'], 'string', 'max' => 255],
             [['full_title'], 'string', 'max' => 1000],
             [['questions'], 'string', 'max' => 3000],
@@ -71,6 +72,7 @@ class Product extends \yii\db\ActiveRecord
             'order' => 'Order',
             'link_name' => 'Link Name',
             'questions' => 'Questions',
+            'links_available' => 'Show List Tab',
         ];
     }
     
@@ -124,6 +126,17 @@ class Product extends \yii\db\ActiveRecord
     public function getHrefs()
     {
         return $this->hasMany(ProductHref::className(), ['product_id' => 'id']);
+    }
+    
+    /**
+     * Get Hrefs Count
+     * @return array
+     */
+    public function getHrefsCount()
+    {
+        $count = $this->getHrefs()->count();
+        
+        return $count ? $count : '';
     }
     
     /**

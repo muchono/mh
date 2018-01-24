@@ -46,7 +46,21 @@ use yii\web\JsExpression;
                 "searchreplace visualblocks code fullscreen",
                 "insertdatetime media table contextmenu paste"
             ],
-            'toolbar' => "undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+            'content_css' => [
+                'css/tinymce.css',
+            ],
+            'setup' => new JsExpression("
+                function (editor) {
+                  editor.addButton('block', {
+                    text: 'block',
+                    icon: false,
+                    onclick: function () {
+                    var text = '<blockquote class=\"blockquote-1\">' + editor.selection.getContent() + '</blockquote>';
+                      editor.insertContent(text);
+                    }
+                  });
+                }"),
+            'toolbar' => "undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | block",
             'paste_data_images'=> new JsExpression('true'),
             'image_advtab'=> new JsExpression('true'),
             'file_picker_callback'=> new JsExpression("function(callback, value, meta) {

@@ -1,3 +1,5 @@
+ALTER TABLE `product` ADD `links_available` int(2) unsigned NOT NULL DEFAULT '1';
+
 ALTER TABLE `product` ADD `questions` TEXT;
 
 ALTER TABLE `product_page` CHANGE `content` `content` LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL;

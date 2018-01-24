@@ -10,10 +10,18 @@ var Logged = (function() {
     var root = this;
     var active_report_icon;
     
-    this.construct = function(product_id){
+    this.construct = function(product_id, default_tab){
         vars.product_id = product_id;
-        tabListFill();
-        tabGuideFill();
+       
+        tabListFill(default_tab != 'guide');
+        tabGuideFill(default_tab == 'guide');
+        
+        if (default_tab === 'guide') {
+            $('.guide_header').show();
+        } else {
+            $('.list_header').show();
+        }
+        
         $(".tab-list__link").click(function(){
             var el = $(this);
             if (!el.hasClass('tab-list__link--active')) {
@@ -31,15 +39,15 @@ var Logged = (function() {
         $('.tab-content').on('click', 'a.pgn-list__link,a.pgn-switcher__btn', function(event) {
             event.preventDefault();
             vars.list_url = $(this).attr('href');
-            tabListFill();
+            tabListFill(1);
         });
         $('.tab-content').on('click', 'span.tf-wrap__up', function(event) {
             vars.sort.list_sort = $(this).attr('for') + ':up';
-            tabListFill();
+            tabListFill(1);
         });
         $('.tab-content').on('click', 'span.tf-wrap__down', function(event) {
             vars.sort.list_sort = $(this).attr('for') + ':down';
-            tabListFill();            
+            tabListFill(1);            
         });
         
         $('.tab-content').on('click', '.icon-11', function(event) {
@@ -63,17 +71,17 @@ var Logged = (function() {
         
         $('.tab-content').on('change', '[name=order_filter]', function(event) {
             vars.sort.list_sort = $('option:selected', $(this)).val();
-            tabListFill();
+            tabListFill(1);
         });
         
         $('.tab-content').on('change', '[name=pages_filter]', function(event) {
             vars.sort.page_size = $('option:selected', $(this)).val();
-            tabListFill();
+            tabListFill(1);
         });
         
         $('.tab-content').on('change', '[name=urls_filter]', function(event) {
             vars.sort.urls_filter = $('option:selected', $(this)).val();
-            tabListFill();
+            tabListFill(1);
         });
         
         $('.tab-content').on('click', '.contents-list-block__icon', function(event) {
@@ -84,11 +92,15 @@ var Logged = (function() {
     this.setActive = function(el) {
         disableTabs();
         el.addClass('tab-list__link--active');
+         $('.guide_header').hide();
+         $('.list_header').hide();
         var at = {
             tabGuide: function(){
+                $('.guide_header').show();
                 setTab(vars.guide);
             },
             tabList: function(){
+                $('.list_header').show();
                 setTab(vars.list);
             }           
         };
@@ -106,13 +118,16 @@ var Logged = (function() {
         $(".tab-list__link").removeClass('tab-list__link--active');
     }
 
-    function tabGuideFill() {
+    function tabGuideFill(load_content) {
         $.ajax({
             type: 'POST',
             url: '?r=content/guide',
             data: {'project_id': vars.product_id},
             success:function(data){
                 vars.guide = data.c;
+                if (load_content) {
+                    setTab(data.c);
+                }                
             },
             error: function(data) { // if error occured
                 //alert("Error occured. Please try again");
@@ -121,14 +136,16 @@ var Logged = (function() {
         });     
     }
     
-    function tabListFill() {
+    function tabListFill(load_content) {
         $.ajax({
             type: 'POST',
             url: vars.list_url,
             data: {'project_id': vars.product_id, 'sort':  vars.sort},
             success:function(data){
                     vars.list = data.c;
-                    setTab(data.c);
+                    if (load_content) {
+                        setTab(data.c);
+                    }
             },
             error: function(data) { // if error occured
                 //alert("Error occured. Please try again");

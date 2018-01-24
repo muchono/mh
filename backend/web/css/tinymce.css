@@ -1,0 +1,16 @@
+/* line 176, E:/GIT/marketinghack/public/scss/_typography.scss */
+.blockquote-1 {
+  border: 6px solid #fd622c;
+  color: #464646;
+  font-size: 18px;
+  line-height: 32px;
+  font-weight: 400;
+  max-width: 750px;
+  margin: 32px auto 36px;
+  padding: 14px 18px; }
+  @media screen and (min-width: 768px) {
+    /* line 176, E:/GIT/marketinghack/public/scss/_typography.scss */
+    .blockquote-1 {
+      font-size: 24px;
+      margin: 42px auto 56px;
+      padding: 32px 46px; } }

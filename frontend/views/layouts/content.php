@@ -104,26 +104,6 @@ AppAsset::register($this);
             </li>
             <?php }?>
           <?php }?>
-            
-          <!--
-          <li class="sm-list-1__item sm-list-1__item--unblock sm-list-1__item--active">
-            <a href="" class="sm-list-1__link">Q&amp;A Link Building Techniques</a>
-          </li>
-          <li class="sm-list-1__item sm-list-1__item--unblock">
-            <a href="" class="sm-list-1__link">Guest Posting Marcketing </a>
-          </li>
-          <li class="sm-list-1__item sm-list-1__item--unblock">
-            <a href="" class="sm-list-1__link">Forum Link Building Techniques</a>
-          </li>
-          <li class="sm-list-1__item">
-            <a href="" class="sm-list-1__link">Q&amp;A Link Building Techniques</a>
-          </li>
-          <li class="sm-list-1__item">
-            <a href="" class="sm-list-1__link">Guest Posting Marcketing </a>
-          </li>
-          <li class="sm-list-1__item">
-            <a href="" class="sm-list-1__link">Forum Link Building Techniques</a>
-          </li>-->
         </ul>
         <h3 class="sm-title">Menu</h3>
         <ul class="sm-list-2">
@@ -175,7 +155,10 @@ AppAsset::register($this);
       <div class="inner-content">
         <div class="ic-head">
           <div>
-            <h2 class="title-4"><?=$this->params['selected_product']->getHrefs()->count()?> <?=$this->params['selected_product']->title?></h2>
+            <h2 class="title-4">
+                <span class="list_header hide"><?=$this->params['selected_product']->getHrefsCount()?> <?=$this->params['selected_product']->title?></span>
+                <span class="guide_header hide"><?=$this->params['selected_product']->short_title?></span>
+            </h2>
             <?php if (Yii::$app->user->isGuest){?>
             <p class="ic-head__text">This is demo version - full version will be available after <a href="#signup-popup" class="js-popups">purchase</a></p>
             <?php }?>
@@ -220,8 +203,12 @@ AppAsset::register($this);
 
         <div class="tab-container">
             <ul class="tab-list">
+                <?php if ($this->params['selected_product']->links_available){?>
               <li class="tab-list__item"><span class="tab-list__link tab-list__link--active" id="tabList"><span>List</span></span></li>
               <li class="tab-list__item"><span class="tab-list__link" id="tabGuide"><span>Guide</span></span></li>
+                <?php }else {?>
+              <li class="tab-list__item "><span class="tab-list__link tab-list__link--active" id="tabGuide"><span>Guide</span></span></li>
+                <?php }?>
             </ul>
             <div class="tab-content"></div>
             <div class="tab-foot">
@@ -253,7 +240,7 @@ if (!Yii::$app->user->isGuest){
 }
 
 $this->registerJs(
-    "Logged.construct(".$this->params['selected_product']->id.");",
+    "Logged.construct(".$this->params['selected_product']->id.", '".($this->params['selected_product']->links_available ? '' : 'guide')."');",
     View::POS_READY,
     'my-button-handler'
 );

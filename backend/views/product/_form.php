@@ -24,6 +24,8 @@ use yii\widgets\ActiveForm;
     
     <?= $form->field($model, 'link_name')->textInput(['maxlength' => true]) ?>    
 
+    <?= $form->field($model, 'links_available')->checkbox() ?>
+
     <?= $form->field($model, 'status')->dropDownList($model::$statuses)?>
     
     <div class="form-group">

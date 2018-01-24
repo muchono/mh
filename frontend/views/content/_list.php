@@ -108,7 +108,7 @@
                         <a href="" class="<?=$link->type_links?>-link unclickable"><?=  $link->type_links && $link->type_links != 'no_links' ? \common\models\ProductHref::$link_types[$link->type_links] : ''?></a>
                         
                         <?php }?>
-                        <?=$link->about?>
+                        <?=$accessable ? $link->about : $link->aboutCoded?>
                     </td>
                     <td class="tb__8"><a href="<?=$accessable ? $link->example_url : '#'?>" class=" <?=$accessable ? '' : 'unclickable'?>" target="_blank">Example</a></td>
                     <td class="tb__9"><div><i class="icon-12" for="<?=$accessable ? $link->id:''?>"></i></div></td>
