@@ -145,7 +145,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getGuide()
     {
-        return $this->hasMany(ProductGuide::className(), ['product_id' => 'id']);
+        return $this->hasMany(ProductGuide::className(), ['product_id' => 'id'])->orderBy(['order' => SORT_ASC]);
     }
     
     /**
