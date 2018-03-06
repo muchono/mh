@@ -17,7 +17,7 @@ $this->title = 'Special Offers';
             <div class="product">
               <div class="pd__head">
                 <div class="pd__text-1"><?=$p->short_title?></div>
-                <a href="<?=Url::to(['site/product','product_id'=>$p->id])?>"><h3 class="title-2"><?=$p->getHrefsCount()?> <?=$p->title?></h3></a>
+                <a href="<?=Url::to(['site/product','product_id'=>$p->id])?>"><h3 class="title-2"><?=$p->links_available ? $p->getHrefsCount() : ''?> <?=$p->title?></h3></a>
                 <div class="pd__text-2"><?=$p->full_title?></div>
                 <i class="icon-<?=($p->priceFinal) ? 1 : 2?>"></i>
               </div>

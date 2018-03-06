@@ -235,7 +235,7 @@ AppAsset::register($this);
               <ul class="mf__list">
                 <?php foreach (Product::find()->where(['status' => 1])->limit(5)->all() as $p) {?>
                 <li class="mf__item">
-                  <a href="<?=Url::to(['site/product','product_id'=>$p->id])?>" class="mf__link"><?=$p->getHrefsCount()?>  <?=$p->title?></a>
+                  <a href="<?=Url::to(['site/product','product_id'=>$p->id])?>" class="mf__link"><?=$p->links_available ? $p->getHrefsCount() : ''?>  <?=$p->title?></a>
                 </li>
                 <?php }?>
               </ul>
