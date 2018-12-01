@@ -50,6 +50,7 @@ AppAsset::register($this);
   <!-- Head Libs -->
   <!-- <script src="bower_components/modernizr/modernizr.js"></script> -->    
    <?php $this->head() ?>
+   <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/8752e8f12b6b871d82830d027/712da38dc210c72b9987101eb.js");</script>
 </head>
 
 <body>
