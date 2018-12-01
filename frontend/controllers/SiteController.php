@@ -86,7 +86,7 @@ class SiteController extends \frontend\controllers\Controller
         
 
         //0baf1f4673
-        $MailChimp = new MailChimp('72aa2d8be5545aba6805c17c744206fd-us18');
+        $MailChimp = new MailChimp('');
         //$result = $MailChimp->get('/lists/');
         $result = $MailChimp->get('/lists/');
         //$result = $MailChimp->get('/ecommerce/stores');
