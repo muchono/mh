@@ -11,6 +11,14 @@ $config = [
             'thousandSeparator' => ' ',
             'currencyCode' => 'USD',
        ],
+        'log' => [
+            'targets' => [
+                [
+                    'class' => 'yii\log\DbTarget',
+                    'levels' => ['info'],
+                ],
+            ],
+        ],
     ],
 ];
 

@@ -21,8 +21,6 @@ use common\models\User;
 use common\models\AboutUsContent;
 use common\models\Faq;
 
-use \DrewM\MailChimp\MailChimp;
-
 /**
  * Site controller
  */
@@ -82,47 +80,8 @@ class SiteController extends \frontend\controllers\Controller
      */
     public function actionMc()
     {
-        $this->view->params['page'] ='faq';
-        
-
-        //0baf1f4673
-        $MailChimp = new MailChimp('');
-        //$result = $MailChimp->get('/lists/');
-        $result = $MailChimp->get('/lists/');
-        //$result = $MailChimp->get('/ecommerce/stores');
-        
-        /*
-        $result = $MailChimp->post("/ecommerce/stores", [
-                    "id" => "mh_store_1",
-                    "list_id" => "0baf1f4673",
-                    "name" => "Marketing Hack",
-                    "domain" => "marketinghack.net",
-                    "email_address" => "info@marketinghack.net",
-                    "currency_code" => "USD"
-                    ]);
-
-        $result = $MailChimp->post("/ecommerce/stores", [
-                    "id" => "mh_store_1",
-                    "list_id" => "0baf1f4673",
-                    "name" => "Marketing Hack",
-                    "domain" => "marketinghack.net",
-                    "email_address" => "info@marketinghack.net",
-                    "currency_code" => "USD"
-                    ]);
-*/
-        $result = $MailChimp->post("/ecommerce/stores/mh_store_1/products", [
-                    "id" => "product_2",
-                    "title" => "Product Title 2",
-                    "variants" => [
-                        ["id" => "product_2",
-                         "title" => "Product Title 2",
-                        ]
-                    ],
-                    ]);
-
-        print_r($result);
-        
-        print 'OK';
+        $mc = new \common\models\MailchimpMirror();
+        $mc->actionMc();
     }
     
     /**

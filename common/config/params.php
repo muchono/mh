@@ -44,4 +44,8 @@ return [
             'key'  => 'a3245363-9f00-424f-b1f6-f98116b50280',
         ),
     ),
+    'mailchimp' => array(
+        'apikey' => '72aa2d8be5545aba6805c17c744206fd-us18',
+        'store_id' => 'mh_store_1',
+    ),
 ];
