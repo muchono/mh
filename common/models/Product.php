@@ -10,6 +10,8 @@ use common\models\ProductReview;
 use common\models\ProductPage;
 use common\models\Discount;
 
+use common\models\MailchimpMirror;
+
 /**
  * This is the model class for table "product".
  *
@@ -81,6 +83,16 @@ class Product extends \yii\db\ActiveRecord
      */
     public function beforeSave($insert)
     {
+        $mc = new MailchimpMirror();
+        if ($insert){
+            $r = $mc->addProduct($this);
+            if (!$r){
+                $this->addError([['title' => $mc->getErrorName()]]);
+            }
+        }else{
+            
+        }
+        exit;
         return parent::beforeSave($insert);
     }
     

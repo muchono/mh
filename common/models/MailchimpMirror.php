@@ -5,6 +5,8 @@ namespace common\models;
 use Yii;
 use \DrewM\MailChimp\MailChimp;
 
+use common\models\Product;
+
 class MailchimpMirror
 {
     const ID = 'mailchimp';
@@ -41,17 +43,25 @@ class MailchimpMirror
         return $this->result;
     }
     
-    public function addProduct()
+    public function addProduct(Product $p)
     {
-        $result = $MailChimp->post("/ecommerce/stores/mh_store_1/products", [
-                    "id" => "product_2",
+        $result = $this->api->post("/ecommerce/stores/mh_store_1/products", [
+                    //"id" => "product_2",
                     "title" => "Product Title 2",
                     "variants" => [
-                        ["id" => "product_2",
+                        [
+                         "id" => "product_2",
                          "title" => "Product Title 2",
                         ]
                     ],
-        ]);        
+        ]);
+        
+        print_r($result);
+    }
+    
+    public function getErrorName()
+    {
+        return 'MailChimp Error. ' . $this->result['title'];
     }
     
     public function actionMc()
