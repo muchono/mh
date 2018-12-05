@@ -40,29 +40,76 @@ class MailchimpMirror
             'result' => $this->result,
         ]), self::ID);
         
-        return $this->result;
+        return $this->api->success();
     }
     
-    public function addProduct(Product $p)
+    /**
+     * Add Product
+     * @param Product $p Product Data
+     * @return boolean Result
+     */
+    public function productAdd(Product $p)
     {
-        $result = $this->api->post("/ecommerce/stores/mh_store_1/products", [
-                    //"id" => "product_2",
-                    "title" => "Product Title 2",
+        return $this->call('post', "/ecommerce/stores/".$this->store_id."/products", [
+                    "id" => $p->id,
+                    "title" => $p->title,
+                    "description" => $p->full_title,
                     "variants" => [
                         [
-                         "id" => "product_2",
-                         "title" => "Product Title 2",
+                         "id" => $p->id,
+                         "title" => $p->title,
                         ]
                     ],
         ]);
-        
-        print_r($result);
+    }
+    /**
+     * Delete Product
+     * @param Product $p Product Data
+     * @return boolean Result
+     */
+    public function productDelete(Product $p)
+    {
+        return $this->call('delete', "/ecommerce/stores/".$this->store_id."/products/".$p->id);
     }
     
+    /**
+     * Update Product
+     * @param Product $p Product Data
+     * @return boolean Result
+     */
+    public function productUpdate(Product $p)
+    {
+        return $this->call('patch', "/ecommerce/stores/".$this->store_id."/products/".$p->id, [
+                    "title" => $p->title,
+                    "description" => $p->full_title,
+                    "variants" => [
+                        [
+                         "id" => $p->id,
+                         "title" => $p->title,
+                        ]
+                    ],
+        ]);
+    }  
+    
+    
+    /**
+     * Get Last Error Name
+     * @return string Error Name
+     */
     public function getErrorName()
     {
-        return 'MailChimp Error. ' . $this->result['title'];
+        return 'MailChimp Error: ' . $this->api->getLastError();
     }
+    
+    /**
+     * Access to MailChimp Direct Inteface
+     * @return MailChimp
+     */
+    public function api()
+    {
+        return $this->api;
+    }
+    
     
     public function actionMc()
     {

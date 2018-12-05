@@ -81,21 +81,35 @@ class Product extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function beforeSave($insert)
+    public function afterSave($insert, $changedAttributes)
     {
+        $r = true;
         $mc = new MailchimpMirror();
+        
         if ($insert){
-            $r = $mc->addProduct($this);
+            $r = $mc->productAdd($this);
             if (!$r){
-                $this->addError([['title' => $mc->getErrorName()]]);
+                $this->addError('title', $mc->getErrorName());
+                $r = false;
             }
         }else{
-            
+            $r = $mc->productUpdate($this);
+            if (!$r){
+                $this->addError('title', $mc->getErrorName());
+                $r = false;
+            }
         }
-        exit;
-        return parent::beforeSave($insert);
+
+        return parent::afterSave($insert, $changedAttributes);
     }
     
+    public function delete()
+    {
+        $mc = new MailchimpMirror();
+        
+        $mc->productDelete($this);
+        parent::delete();
+    }
     
     /**
      * find Active
