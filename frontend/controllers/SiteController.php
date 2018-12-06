@@ -74,17 +74,6 @@ class SiteController extends \frontend\controllers\Controller
     }
 
     /**
-     * Displays FAQ.
-     *
-     * @return mixed
-     */
-    public function actionMc()
-    {
-        $mc = new \common\models\MailchimpMirror();
-        $mc->actionMc();
-    }
-    
-    /**
      * Displays homepage.
      *
      * @return mixed

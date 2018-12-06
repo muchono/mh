@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
+use common\models\MailchimpMirror;
 /**
  * This is the model class for table "subscriber".
  *
@@ -50,6 +51,21 @@ class Subscriber extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'ip' => 'Ip',
         ];
+    }
+    
+    /**
+     * @inheritdoc
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        $r = true;
+        $mc = new MailchimpMirror();
+        
+        if ($insert){
+            $r = $mc->listsAddMember($this);
+        }
+
+        return parent::afterSave($insert, $changedAttributes);
     }
     
     /**

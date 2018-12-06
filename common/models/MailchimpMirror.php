@@ -6,18 +6,22 @@ use Yii;
 use \DrewM\MailChimp\MailChimp;
 
 use common\models\Product;
+use common\models\User;
+use common\models\Subscriber;
 
 class MailchimpMirror
 {
     const ID = 'mailchimp';
     protected $api = null;
     protected $store_id = '';
+    protected $list_id = '';
     protected $result = null;
     
     public function __construct()
     {
         $this->api = new MailChimp(Yii::$app->params[self::ID]['apikey']);
         $this->store_id = Yii::$app->params[self::ID]['store_id'];
+        $this->list_id = Yii::$app->params[self::ID]['list_id'];
     }
     
     /**
@@ -43,54 +47,125 @@ class MailchimpMirror
         return $this->api->success();
     }
     
+    
     /**
-     * Add Product
-     * @param Product $p Product Data
+     * Add to list
+     * @param Subscriber $d Data
      * @return boolean Result
      */
-    public function productAdd(Product $p)
+    public function listsAddMember(Subscriber $d)
+    {
+        return $this->call('post', "/lists/".$this->list_id."/members", [
+                    "email_address" => $d->email,
+                    "status" => 'subscribed',
+        ]);
+    }
+    
+    /**
+     * Get Lists
+     * @return list
+     */
+    public function listsGet()
+    {
+        $this->call('get', "/lists/");
+        return $this->result;
+    }
+    
+    /**
+     * Add Product
+     * @param Product $d Product Data
+     * @return boolean Result
+     */
+    public function productAdd(Product $d)
     {
         return $this->call('post', "/ecommerce/stores/".$this->store_id."/products", [
-                    "id" => $p->id,
-                    "title" => $p->title,
-                    "description" => $p->full_title,
+                    "id" => $d->id,
+                    "title" => $d->title,
+                    "description" => $d->full_title,
                     "variants" => [
                         [
-                         "id" => $p->id,
-                         "title" => $p->title,
+                         "id" => $d->id,
+                         "title" => $d->title,
                         ]
                     ],
         ]);
     }
     /**
      * Delete Product
-     * @param Product $p Product Data
+     * @param Product $d Product Data
      * @return boolean Result
      */
-    public function productDelete(Product $p)
+    public function productDelete(Product $d)
     {
-        return $this->call('delete', "/ecommerce/stores/".$this->store_id."/products/".$p->id);
+        return $this->call('delete', "/ecommerce/stores/".$this->store_id."/products/".$d->id);
     }
     
     /**
      * Update Product
-     * @param Product $p Product Data
+     * @param Product $d Product Data
      * @return boolean Result
      */
-    public function productUpdate(Product $p)
+    public function productUpdate(Product $d)
     {
-        return $this->call('patch', "/ecommerce/stores/".$this->store_id."/products/".$p->id, [
-                    "title" => $p->title,
-                    "description" => $p->full_title,
+        return $this->call('patch', "/ecommerce/stores/".$this->store_id."/products/".$d->id, [
+                    "title" => $d->title,
+                    "description" => $d->full_title,
                     "variants" => [
                         [
-                         "id" => $p->id,
-                         "title" => $p->title,
+                         "id" => $d->id,
+                         "title" => $d->title,
                         ]
                     ],
         ]);
     }  
     
+
+    
+    /**
+     * Add user
+     * @param User $d Data
+     * @return boolean Result
+     */
+    public function userAdd(User $d)
+    {
+        return $this->call('post', "/ecommerce/stores/".$this->store_id."/customers", [
+                    "id" => $d->id,
+                    "email_address" => $d->email,
+                    "opt_in_status" => false,
+                    "first_name" => $d->name,
+        ]);
+    }
+    /**
+     * Delete user
+     * @param User $d  Data
+     * @return boolean Result
+     */
+    public function userDelete(User $d)
+    {
+        return $this->call('delete', "/ecommerce/stores/".$this->store_id."/customers/".$d->id);
+    }
+    
+    /**
+     * Update user
+     * @param Product $d Product Data
+     * @return boolean Result
+     */
+    public function userUpdate(User $d)
+    {
+        return $this->call('patch', "/ecommerce/stores/".$this->store_id."/customers/".$d->id, [
+                    "first_name" => $d->name,
+        ]);
+    } 
+    
+    /**
+     * Get Users
+     * @return list
+     */
+    public function usersGet($id = 0)
+    {
+        $this->call('get', "/ecommerce/stores/".$this->store_id."/customers" . ($id ? '/'. (int) $id : ''));
+        return $this->result;
+    }
     
     /**
      * Get Last Error Name

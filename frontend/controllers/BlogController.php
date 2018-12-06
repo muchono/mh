@@ -62,7 +62,7 @@ class BlogController extends \frontend\controllers\Controller
                 ->count();
         
         if ($countLast > self::MAX_SUBSCRIBERS_HOUR) {
-            Yii::$app->session['subscribed'] = true;
+            Yii::$app->session['subscribed'] = false;
         } elseif ($subscriber->save()) {
             Yii::$app->session['subscribed'] = true;
         }
