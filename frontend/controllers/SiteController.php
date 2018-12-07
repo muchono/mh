@@ -225,7 +225,15 @@ class SiteController extends \frontend\controllers\Controller
     public function actionHiw()
     {
         $this->view->params['page'] ='hiw';
-        
+        print Yii::$app->params['adminEmail'];
+Yii::$app->mailer->compose()
+            ->setTo('mailmuchenik@gmail.com')
+            ->setFrom(Yii::$app->params['adminEmail'])
+            ->setSubject('Registration confirmation')
+            ->setTextBody('body')
+            ->send();
+
+exit('SEND');
         return $this->render('hiw', array(
             'products' => Product::findActive()->limit(3)->all(),
         ));
