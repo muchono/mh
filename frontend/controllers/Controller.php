@@ -5,10 +5,12 @@ namespace frontend\controllers;
 use Yii;
 use yii\helpers\Url;
 use common\models\Discount;
+use common\models\User;
 use frontend\models\SignupForm;
 use frontend\models\LoginForm;
 use common\models\Cart;
 
+use common\models\MailchimpMirror;
 
 class Controller extends \yii\web\Controller
 {
@@ -58,7 +60,11 @@ class Controller extends \yii\web\Controller
         if (Yii::$app->request->post('register') && $model->load(Yii::$app->request->post())) {
             
             if ($user = $model->signup()) {
-                $model->sendEmail();
+                //$model->sendEmail();
+                
+                $mc = new MailchimpMirror();
+                $mc->userAdd($user);
+                
                 echo '<script>location.replace("'.Url::to(['result/reg-finish', 'email' => $model->email]).'");</script>';
                 exit;
                 /**
