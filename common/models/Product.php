@@ -10,8 +10,6 @@ use common\models\ProductReview;
 use common\models\ProductPage;
 use common\models\Discount;
 
-use common\models\MailchimpMirror;
-
 /**
  * This is the model class for table "product".
  *
@@ -84,16 +82,13 @@ class Product extends \yii\db\ActiveRecord
     public function afterSave($insert, $changedAttributes)
     {
         $r = true;
-        $mc = new MailchimpMirror();
         
         if ($insert){
-            $r = $mc->productAdd($this);
             if (!$r){
                 $this->addError('title', $mc->getErrorName());
                 $r = false;
             }
         }else{
-            $r = $mc->productUpdate($this);
             if (!$r){
                 $this->addError('title', $mc->getErrorName());
                 $r = false;
@@ -105,9 +100,6 @@ class Product extends \yii\db\ActiveRecord
     
     public function delete()
     {
-        $mc = new MailchimpMirror();
-        
-        $mc->productDelete($this);
         parent::delete();
     }
     

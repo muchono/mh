@@ -11,7 +11,6 @@ use common\models\Product;
 use common\models\Order;
 use common\models\OrderToProduct;
 
-use common\models\MailchimpMirror;
 
 /**
  * This is the model class for table "user".
@@ -68,21 +67,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function afterSave($insert, $changedAttributes)
     {
         $r = true;
-        $mc = new MailchimpMirror();
-        
-        if ($insert){
-            $r = $mc->userAdd($this);
-            if (!$r){
-                $this->addError('name', $mc->getErrorName());
-                $r = false;
-            }
-        }else{
-            $r = $mc->userUpdate($this);
-            if (!$r){
-                $this->addError('name', $mc->getErrorName());
-                $r = false;
-            }
-        }
 
         return parent::afterSave($insert, $changedAttributes);
     }
@@ -92,8 +76,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function beforeSave($insert)
     {
-        $mc = new MailchimpMirror();
-
         $this->password = Yii::$app->security->generatePasswordHash($password);
         return parent::beforeSave($insert);
     }
@@ -110,9 +92,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     
     public function delete()
     {
-        $mc = new MailchimpMirror();
-        
-        $mc->userDelete($this);
         parent::delete();
     }
     
