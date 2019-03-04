@@ -26,12 +26,18 @@ class CPayment
     protected $_currency = 'USD';
     protected $_exchangeRate = 0;
     protected $_symbol = '$';
+    /**
+     * Payment Class Name
+     * @var string 
+     */
+    protected $_name = '';
 
 
     public function __construct()
     {
         $reflect = new \ReflectionClass($this);
-        $this->_logFileName = Url::to('@frontend/runtime/logs/'.$reflect->getShortName().'.log');
+        $this->_name = $reflect->getShortName();
+        $this->_logFileName = Url::to('@frontend/runtime/logs/'.$this->_name.'.log');
         $this->_exchangeRate = $this->_defineRate();
     }
     
@@ -152,7 +158,8 @@ class CPayment
     {
         $this->_transaction = new Transaction;
         $this->_transaction->price = $this->_total;
-        $this->_transaction->payment = get_class($this);
+        $this->_transaction->payment = $this->_name;
+        $this->_transaction->user_id = Yii::$app->user->id;
         $this->_transaction->insert();
         
         $this->setID($this->_transaction->id);

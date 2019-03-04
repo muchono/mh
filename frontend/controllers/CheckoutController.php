@@ -15,7 +15,7 @@ use common\models\Order;
 class CheckoutController extends \frontend\controllers\Controller
 {
     const PDF_INVOICE_DIR = 'content/pdf/';
-    protected $_payments = array(2=>'PayPal', 3=>'Webmoney', 4=>'Bitcoin');
+    protected $_payments = array(3=>'Webmoney', /*2=>'PayPal' , 4=>'Bitcoin'*/);
     
     /**
      * @inheritdoc
@@ -98,12 +98,13 @@ class CheckoutController extends \frontend\controllers\Controller
     public function actionPaymentCheck()
     {
         $r = array('result'=>0);
-        if (!empty($_POST['payment']) && in_array($_POST['payment'], array_keys(Yii::app()->params->payments))) {
-            Yii::import('frontend.extensions.'.$_POST['payment'].'.'.$_POST['payment']);
-            $payment = new $_POST['payment']();
-            $payment->setParams(Yii::app()->params->payments[$_POST['payment']]);
-            $payments = $payment->getPayments(Yii::app()->user->profile->id);
-            $cart_info = Cart::getByUser(Yii::app()->user->profile->id);
+        $payment_name = Yii::$app->request->post('payment');
+        if (!empty($payment_name) && in_array($payment_name, array_keys(Yii::$app->params['payments']))) {
+            $n = '\frontend\extensions\\' . new $payment_name. '\\' . new $payment_name;
+            $payment = new $n();            
+            $payment->setParams(Yii::$app->params['payments'][$_POST['payment']]);
+            $payments = $payment->getPayments(Yii::$app->user->id);
+            $cart_info = Cart::getByUser(Yii::$app->user->id);
             $to_pay = $payment->exchange($cart_info['total']);
             $r['to_pay'] = $to_pay;
             if ($to_pay <= $payments['total_not_used']) {
@@ -118,13 +119,14 @@ class CheckoutController extends \frontend\controllers\Controller
     
     public function actionPaymentPreResult()
     {
-        if (Yii::$app->request->get('payment')
-                && in_array(Yii::$app->request->get('payment'), array_keys(Yii::$app->params['payments']))) {
+        $payment_name = Yii::$app->request->get('payment');
+        if ($payment_name
+                && in_array($payment_name, array_keys(Yii::$app->params['payments']))) {
             
-            $n = '\frontend\extensions\\' . Yii::$app->request->get('payment'). '\\' . Yii::$app->request->get('payment');
+            $n = '\frontend\extensions\\' . $payment_name. '\\' . $payment_name;
            
             $payment = new $n();            
-            $payment->setParams(Yii::$app->params['payments'][Yii::$app->request->get('payment')]);
+            $payment->setParams(Yii::$app->params['payments'][$payment_name]);
             $payment->result($_REQUEST);
         }
     }
@@ -132,19 +134,18 @@ class CheckoutController extends \frontend\controllers\Controller
     public function actionPaymentResult()
     {
         $payed = false;
-        if (!Yii::$app->request->get('payment') 
-                && in_array(Yii::$app->request->get('payment'), array_keys(Yii::$app->params['payments']))) {
-            Yii::import('application.extensions.'.$_GET['payment'].'.'.$_GET['payment']);
-
-            $n = '\frontend\extensions\\' . Yii::$app->request->get('payment'). '\\' . Yii::$app->request->get('payment');
+        $payment_name = Yii::$app->request->get('payment');
+        if (!$payment_name 
+                && in_array($payment_name, array_keys(Yii::$app->params['payments']))) {
+            $n = '\frontend\extensions\\' . $payment_name. '\\' . $payment_name;
            
             $payment = new $n();            
-            $payment->setParams(Yii::$app->params['payments'][Yii::$app->request->get('payment')]);
+            $payment->setParams(Yii::$app->params['payments'][$payment_name]);
             
             $payed = $payment->finish($_REQUEST);
             
             if ($payed) {
-                $order_params = Cart::getInfo(Yii::app()->user->profile->id);
+                $order_params = Cart::getInfo(Yii::$app->user->id);
                 $order_params['payment_method'] = Yii::$app->request->get('payment');
                 $order_params['payment_status'] = 1;
                 $order_params['id'] = Order::genID();
