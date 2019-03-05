@@ -10,8 +10,6 @@ use frontend\models\SignupForm;
 use frontend\models\LoginForm;
 use common\models\Cart;
 
-use common\models\MailchimpMirror;
-
 class Controller extends \yii\web\Controller
 {
     public function beforeAction($action)
@@ -61,9 +59,6 @@ class Controller extends \yii\web\Controller
             
             if ($user = $model->signup()) {
                 //$model->sendEmail();
-                
-                $mc = new MailchimpMirror();
-                $mc->userAdd($user);
                 
                 echo '<script>location.replace("'.Url::to(['result/reg-finish', 'email' => $model->email]).'");</script>';
                 exit;
