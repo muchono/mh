@@ -129,6 +129,16 @@ class SiteController extends \frontend\controllers\Controller
         }
 
     }
+    
+    /**
+     * Displays Login.
+     *
+     * @return mixed
+     */
+    public function actionSignin()
+    {
+        return $this->redirect(['site/index', 'show_login' => 1]);
+    }
 
     /**
      * Displays Products.
@@ -225,6 +235,7 @@ class SiteController extends \frontend\controllers\Controller
     public function actionHiw()
     {
         $this->view->params['page'] ='hiw';
+        /*
         print Yii::$app->params['adminEmail'];
 Yii::$app->mailer->compose()
             ->setTo('mailmuchenik@gmail.com')
@@ -234,6 +245,8 @@ Yii::$app->mailer->compose()
             ->send();
 
 exit('SEND');
+         * 
+         */
         return $this->render('hiw', array(
             'products' => Product::findActive()->limit(3)->all(),
         ));

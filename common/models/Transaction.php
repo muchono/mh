@@ -18,6 +18,24 @@ use Yii;
  */
 class Transaction extends \yii\db\ActiveRecord
 {
+    public function appendResponse($r)
+    {
+        $this->response_details = $this->response_details . ' REQ-JSON:  ' . json_encode($r);
+    }
+    
+    /**
+     * before save
+     */
+    public function beforeSave($insert)
+    {
+        if ($this->isNewRecord) {
+            $this->user_id = Yii::$app->user->id;
+            $this->time = date('Y-m-d H:i:s');
+        }
+
+        return parent::beforeSave($insert);
+    }
+    
     /**
      * @inheritdoc
      */

@@ -26,7 +26,7 @@ use yii\web\View;
               </div>
             </td>
             <td class="ot__product">
-              <?=$op->product->short_title?>: list + guide (subscription on <?=$op->months?> year)
+              <?=$op->product->short_title?>: list + guide (subscription on <?=$op->months?> year<?=$op->months > 1?'s':''?>)
               <div class="ot__product-mb-only">
                 21 Aug 2017 <br>
                 <a href="" class="btn-sm-2">Renew</a>

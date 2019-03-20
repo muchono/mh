@@ -16,6 +16,18 @@ class CheckoutController extends \frontend\controllers\Controller
 {
     const PDF_INVOICE_DIR = 'content/pdf/';
     protected $_payments = array(3=>'Webmoney', /*2=>'PayPal' , 4=>'Bitcoin'*/);
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeAction($action)
+    {            
+        if (in_array($action->id, ['payment-result', 'payment-pre-result'])) {
+            $this->enableCsrfValidation = false;
+        }
+
+        return parent::beforeAction($action);
+    }
     
     /**
      * @inheritdoc
@@ -29,11 +41,28 @@ class CheckoutController extends \frontend\controllers\Controller
                     [
                         'allow' => true,
                         'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['payment-pre-result'],
+                        'allow' => true,
+                        'roles' => ['?'],                        
                     ],                    
                 ],
             ],             
         ];
     }
+    
+    
+    /**
+     * Displays fail page.
+     * @return mixed
+     */
+
+    public function actionFail()
+    {
+        $this->layout = 'result';
+        return $this->render('fail');
+    }    
     
     /**
      * Displays homepage.
@@ -64,6 +93,7 @@ class CheckoutController extends \frontend\controllers\Controller
             $payment = new $n();
             $payment->setParams($params);
             $payment->setItems($items);
+            $payment->setTotal($cartInfo['total']);
             $payment->perform();
             return '';
         }
@@ -121,7 +151,7 @@ class CheckoutController extends \frontend\controllers\Controller
     {
         $payment_name = Yii::$app->request->get('payment');
         if ($payment_name
-                && in_array($payment_name, array_keys(Yii::$app->params['payments']))) {
+                && isset(Yii::$app->params['payments'][$payment_name])) {
             
             $n = '\frontend\extensions\\' . $payment_name. '\\' . $payment_name;
            
@@ -135,15 +165,13 @@ class CheckoutController extends \frontend\controllers\Controller
     {
         $payed = false;
         $payment_name = Yii::$app->request->get('payment');
-        if (!$payment_name 
-                && in_array($payment_name, array_keys(Yii::$app->params['payments']))) {
+        if ($payment_name 
+                && isset(Yii::$app->params['payments'][$payment_name])) {
             $n = '\frontend\extensions\\' . $payment_name. '\\' . $payment_name;
-           
+
             $payment = new $n();            
             $payment->setParams(Yii::$app->params['payments'][$payment_name]);
-            
             $payed = $payment->finish($_REQUEST);
-            
             if ($payed) {
                 $order_params = Cart::getInfo(Yii::$app->user->id);
                 $order_params['payment_method'] = Yii::$app->request->get('payment');
@@ -169,12 +197,31 @@ class CheckoutController extends \frontend\controllers\Controller
                  */
                 //Yii::app()->mail->send($html, $text, 'Invoice Payment Confirmation', Yii::app()->params['emailNotif']['from_email'], Yii::app()->user->profile->email, $attachment);
                 //Yii::app()->mail->send($html, $text, 'Invoice Payment Confirmation - COPY', Yii::app()->user->profile->email, Yii::app()->params['emailNotif']['payed_transaction_email'], $attachment);
-
-                $this->redirect(array('buyPublication/ResultPage', 'o' => $order_params['id']));
+                
+                return $this->redirect(array('checkout/success', 'o' => $order->id));
             }
         }
         
-        $this->redirect(array('buyPublication/ResultPage'));        
+        return $this->redirect(array('checkout/fail'));
+    }
+    
+    /**
+     * Displays success page.
+     * @return mixed
+     */
+
+    public function actionSuccess()
+    {
+        $this->layout = 'result';
+        
+        if (Yii::$app->request->get('o')) {
+            $order = Order::findOne(Yii::$app->request->get('o'));
+            if ($order && $order->user_id == Yii::$app->user->id) {
+                $user = User::findOne(Yii::$app->user->id);
+                return $this->render('success', ['order_id' => $order->id, 'email' => $user->email]);
+            }
+        }
+        return '';
     }
     
     static public function invoicePDFDir()

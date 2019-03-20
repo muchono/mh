@@ -63,7 +63,7 @@ class OrderToProduct extends \yii\db\ActiveRecord
         $time = time();
         $time_from = $time_from > $time ? $time_from : $time;
         
-        return strtotime("+".$this->months." months", $time_from);
+        return strtotime("+".$this->months." years", $time_from);
     }
     
     /**

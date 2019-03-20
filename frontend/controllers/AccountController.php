@@ -50,13 +50,19 @@ class AccountController extends \frontend\controllers\Controller
      */
     public function actionIndex()
     {
-        $orderedProducts = OrderToProduct::find()
-        ->select('order_to_product.*, max(expires)')
+        $subQuery = OrderToProduct::find()
+        ->select('order_to_product.product_id, max(order_to_product.expires) expires')
         ->joinWith(['order','product'])
         ->andWhere(['order.user_id' => Yii::$app->user->id])
         ->andWhere(['product.status' => 1])
-        ->groupBy(['product_id'])
+        ->groupBy(['order_to_product.product_id']);
+
+        
+        $orderedProducts = OrderToProduct::find()
+        ->select('order_to_product.*')
+        ->innerJoin(['res' => $subQuery], 'order_to_product.`product_id` = res.`product_id` AND order_to_product.expires = res.expires')
         ->all();
+        
         /*
         foreach ($orderedProducts as $op) {
             $op->expires = $op->calcExpirationDate();

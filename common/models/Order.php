@@ -77,13 +77,14 @@ class Order extends \yii\db\ActiveRecord
      */
     public function createByCart($params)
     {
-        if (!empty($params['items'])){
+        if (!empty($params['cart_items'])){
             $this->id = $params['id'];
             $this->total = $params['total'];
-            $this->user_id = $params['products'][0]->user_id;
+            $this->user_id = $params['cart_items'][0]->user_id;
             $this->payment_method = $params['payment_method'];
             $this->payment_status = $params['payment_status'];
             $this->transaction_id = $params['transaction_id'];
+            $this->status = 1;
             
             if (!$this->save()) {
                 print_r($this->getErrors());
@@ -91,24 +92,20 @@ class Order extends \yii\db\ActiveRecord
             }
             
             $task_date = 0;
-            foreach($params['products'] as $k=>$citem) {
+            foreach($params['products'] as $k=>$product) {
                 $o2p = new OrderToProduct;
                 
                 $o2p->order_id = $this->id;
-                $o2p->product_id = $citem->product->id;
+                $o2p->product_id = $product->id;
                 $o2p->user_id = $this->user_id;
                 $o2p->price = $params['prices'][$k];
-                $o2p->months = $r['cart_items'][$k]->months;
+                $o2p->months = $params['cart_items'][$k]->months;
                 
                 $o2p->expires = $o2p->calcExpirationDate();
                 $o2p->save();
                 
-                $r['cart_items'][$k]->delete();
+                $params['cart_items'][$k]->delete();
             }
-            
-            $user = User::findOne($this->user_id);
-            $user->orders_num += 1;
-            $user->update();
         }
     }
     

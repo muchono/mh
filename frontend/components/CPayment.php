@@ -116,6 +116,11 @@ class CPayment
         $this->_items = $items;
     }
     
+    public function setTotal($t)
+    {
+        $this->_total = $t;
+    }
+    
     public function setID($params)
     {
         $this->_id = $params;

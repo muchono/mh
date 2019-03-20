@@ -10,6 +10,7 @@ use yii\widgets\Breadcrumbs;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
+use yii\web\View;
 
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
@@ -85,7 +86,7 @@ AppAsset::register($this);
 
       <div class="user-pane">
         <?php if (Yii::$app->user->isGuest){?>
-        <a href="#login-popup" class="up__btn js-popups">Log In</a>
+        <a href="#login-popup" class="up__btn js-popups" id="loginhref">Log In</a>
         <a href="#signup-popup" class="up__btn js-popups">Sign Up</a>
         <?php } else { ?>        
           <div class="user-pane__drop js-toggle" data-toggle="user-pane__drop--open">
@@ -283,6 +284,15 @@ AppAsset::register($this);
 
   <!-- Theme Base -->
   <script src="js/main.js"></script>    
+  <?php
+  if (Yii::$app->request->get('show_login')) {
+    $this->registerJs(
+        "$('#loginhref').click();",
+        View::POS_READY,
+        'login-button-handler'
+    );  
+  }
+  ?>
 </body>
 </html>
 <?php $this->endPage() ?>

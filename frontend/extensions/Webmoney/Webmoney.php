@@ -92,6 +92,7 @@ class Webmoney extends \frontend\components\CPayment
             if($hash_check){
                 $this->_payment_result = 1;
                 $this->saveSate();
+                $this->addLog('Transaction prerequest success');
             } else {
                 $this->saveSate();
                 $this->exitByError('Transaction check error', 3, $params['LMI_PAYMENT_NO'].' '. $chkstring.' '.$sha256);
@@ -114,9 +115,11 @@ class Webmoney extends \frontend\components\CPayment
           <input type="hidden" name="LMI_PAYMENT_AMOUNT" value="'.$this->_transaction->price.'">
           <input type="hidden" name="LMI_PAYMENT_DESC" value="'.$this->_params['description'].'">
           <input type="hidden" name="LMI_PAYMENT_NO" value="'.$this->_transaction->id.'">
-          <input type="hidden" name="LMI_PAYEE_PURSE" value="'.$this->_params['wmz'].'">
-          <input type="hidden" name="LMI_RESULT_URL" value="'.Url::to(['checkout/payment-pre-result', 'payment' => 'Webmoney'], true).'">
-          <input type="hidden" name="LMI_SUCCESS_URL" value="'.Url::to(['checkout/payment-result', 'payment' => 'Webmoney'], true).'">
+          <input type="hidden" name="LMI_PAYEE_PURSE" value="'.$this->_params['wmz'].'">'.
+                
+          //configured on merchant settings page
+          //'<input type="hidden" name="LMI_RESULT_URL" value="'.Url::to(['checkout/payment-pre-result', 'payment' => 'Webmoney'], true).'">'.
+          '<input type="hidden" name="LMI_SUCCESS_URL" value="'.Url::to(['checkout/payment-result', 'payment' => 'Webmoney'], true).'">
           <input type="hidden" name="LMI_SUCCESS_METHOD" value="POST">
           <input type="hidden" name="LMI_FAIL_URL" value="'.Url::to(['checkout/payment-result', 'payment' => 'Webmoney'], true).'">
           <input type="hidden" name="LMI_FAIL_METHOD" value="POST">
@@ -126,7 +129,7 @@ class Webmoney extends \frontend\components\CPayment
           <input type="hidden" name="RND" value="'.md5($this->_transaction->time).'">
         </form>
         <script type="text/javascript">
-        //document.getElementById("wm_pay_form").submit();
+        document.getElementById("wm_pay_form").submit();
         </script>
         </body>
         </html>

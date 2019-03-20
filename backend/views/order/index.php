@@ -68,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'Payment',
                 'content' => function ($model, $key, $index, $column) {
-                    return 'PayPal';
+                    return $model->payment_method;
                 },
             ],
             [
