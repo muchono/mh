@@ -14,7 +14,7 @@ use common\models\Order;
 
 class CheckoutController extends \frontend\controllers\Controller
 {
-    const PDF_INVOICE_DIR = 'content/pdf/';
+    const PDF_INVOICE_DIR = '/runtime/invoices/';
     protected $_payments = array(3=>'Webmoney', /*2=>'PayPal' , 4=>'Bitcoin'*/);
 
     /**
@@ -181,7 +181,7 @@ class CheckoutController extends \frontend\controllers\Controller
                 $order = new Order();
                 $order->createByCart($order_params);
         
-                //$pdf_path = $this->generatePDFInvoice($order);
+                $pdf_path = $this->generatePDFInvoice($order);
                 
                 /*
                 $html = $this->renderPartial('_order_email_html', array('order'=>$order, 'user' => Yii::app()->user->profile), true);
@@ -226,7 +226,7 @@ class CheckoutController extends \frontend\controllers\Controller
     
     static public function invoicePDFDir()
     {
-        return Yii::app()->getBasePath().'/../'. self::PDF_INVOICE_DIR;
+        return \Yii::getAlias('@frontend'). self::PDF_INVOICE_DIR;
     }
     
     public function generatePDFInvoice(Order $order)
@@ -234,16 +234,17 @@ class CheckoutController extends \frontend\controllers\Controller
         if (!is_dir(self::invoicePDFDir())) {
             throw new Exception('PDF Invoice direactory not found');
         }
+        $user = User::findOne($order->user_id);
         
-        $html = $this->renderPartial('_invoice_pdf', array('order'=>$order), true);
+        $html = $this->renderPartial('_invoice_pdf', array('order'=>$order, 'user'=> $user), true);
         
         include(Yii::$app->getBasePath()."/extensions/mpdf60/mpdf.php");
         
-        $mpdf=new mPDF('utf-8','A4','','',20,15,48,25,10,10);
+        $mpdf=new \mPDF('utf-8','A4','','',20,15,48,25,10,10);
         $mpdf->useOnlyCoreFonts = true;
         $mpdf->SetProtection(array('print'));
-        $mpdf->SetTitle("Netgeron Invoice");
-        $mpdf->SetAuthor("Netgeron");
+        $mpdf->SetTitle("MarketingHack Invoice");
+        $mpdf->SetAuthor("MarketingHack");
         $mpdf->SetWatermarkText("Paid");
         $mpdf->showWatermarkText = true;
         $mpdf->watermark_font = 'DejaVuSansCondensed';

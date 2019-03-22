@@ -74,7 +74,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'Invoice',
                 'content' => function ($model, $key, $index, $column) {
-                    return Html::a('<span class="glyphicon glyphicon-download-alt"></span>', ['invoice/get', 'id' => $model->id], ['target' => '_blank']);
+                    return Html::a('<span class="glyphicon glyphicon-download-alt"></span>', ['order/get-invoice', 'id' => $model->id], ['target' => '_blank']);
                 },
 
             ],                        

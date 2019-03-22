@@ -115,6 +115,23 @@ class OrderController extends Controller
 
         return $this->redirect(['index']);
     }
+    
+    /**
+     * Get invoice
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param string $id
+     * @return mixed
+     */
+    public function actionGetInvoice($id)
+    {
+        $fname = \frontend\controllers\CheckoutController::invoicePDFDir() . $id . '.pdf';
+        
+        if (file_exists($fname)) {
+            header("Content-type:application/pdf");
+            header("Content-Disposition:attachment;filename='invoice_".$id.".pdf'");
+            readfile($fname);
+        }
+    }
 
     /**
      * Finds the Order model based on its primary key value.
