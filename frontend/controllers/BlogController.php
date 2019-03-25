@@ -7,6 +7,7 @@ use common\models\Post;
 use common\models\PostCategory;
 use common\models\Discount;
 use common\models\Subscriber;
+use common\models\User;
 use yii\data\ActiveDataProvider;
 
 class BlogController extends \frontend\controllers\Controller
@@ -53,8 +54,9 @@ class BlogController extends \frontend\controllers\Controller
     public function actionSubscribe()
     {
         $subscriber = new Subscriber;
-        $subscriber->email = !empty($_POST['email']) ? $_POST['email'] : '';
+        $subscriber->email = !empty(Yii::$app->request->post('email')) ? Yii::$app->request->post('email') : '';
         $subscriber->ip =  ip2long(Yii::$app->request->userIP);
+        $subscriber->active =  1;
         
         $countLast = Subscriber::find()
                 ->where(['ip' => $subscriber->ip])
@@ -71,6 +73,36 @@ class BlogController extends \frontend\controllers\Controller
         echo json_encode($r);
         Yii::$app->end();
     }
+    
+    public function actionUnsubscribe()
+    {
+        if (Yii::$app->request->get('id') && Yii::$app->request->get('key')) {
+            $who = substr(Yii::$app->request->get('id'), 0, 1);
+            $id = substr(Yii::$app->request->get('id'), 1);
+            switch($who){
+                case 's': 
+                    $user = Subscriber::findOne($id);
+                    if (!empty($user) 
+                            && Yii::$app->request->get('key') == md5($user->id.$user->created_at)) {
+                        $user->active = 0;
+                        $user->save();
+                    }
+                    break;
+                case 'u': 
+                    $user = User::findOne($id);
+                    if (!empty($user) 
+                            && Yii::$app->request->get('key') == md5($user->id.$user->created_at)) {
+                        $billing = $user->billing;
+                        $billing->subscribe_blog = 0;
+                        $billing->save();
+                    }
+                    break;
+            }
+            $this->layout= 'result';
+            
+            return $this->render('success', []);            
+        }
+   }
     
     public function beforeAction($action)
     {

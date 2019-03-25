@@ -97,50 +97,58 @@ var $body = $('body');
 
 // Popups
 (function(){
+    
+    $('.aut-popup').on('click', 'a.js-popups', function(){
+        initPopUp($(this));
+     });
+    
     var popupsBtn = $('.js-popups');
 
     popupsBtn.each(function() {
-        var $this = $(this);
-        var mainMode = $this.data('popup-mode') ? $this.data('popup-mode') : 'inline';
-        var mainClass = $this.data('popup-type') ? $this.data('popup-type') : 'mfp-default';
-        var prependTo = $this.data('prependto') ? $this.data('prependto') : 'body';
-        var closebtn = $this.data('closebtn') ? $this.data('closebtn') : '<span class="mfp-close"></span>';
-        var alignTop = $this.data('aligntop') ? $this.data('aligntop') : false;
-
-        $this.magnificPopup({
-            alignTop: alignTop,
-            type: mainMode,
-            midClick: true,
-            overflowY: 'scroll',
-            fixedBgPos: false,
-            prependTo: $(prependTo),
-            closeMarkup: closebtn,
-            removalDelay: 500,
-            mainClass: mainClass,
-            callbacks: {
-                open: function() {
-                    var stickyTopBar = $('.top-bar');
-                    var scrollBarWidth = window.innerWidth - $body.width();
-
-                    $html.addClass('open-mfp');
-                    // initMap('update');
-
-                    if(scrollBarWidth !== 0) {
-                        stickyTopBar.css('right', scrollBarWidth);
-                    }
-                },
-                close: function() {
-                    var stickyTopBar = $('.top-bar');
-
-                    stickyTopBar.css('right', '');
-                    $html.removeClass('open-mfp');
-                    // $this.removeClass('-open');
-                }
-            }
-        });
+        initPopUp($(this));
     });
 })();
 
+function initPopUp(forit){
+    var $this = forit;
+    var mainMode = $this.data('popup-mode') ? $this.data('popup-mode') : 'inline';
+    var mainClass = $this.data('popup-type') ? $this.data('popup-type') : 'mfp-default';
+    var prependTo = $this.data('prependto') ? $this.data('prependto') : 'body';
+    var closebtn = $this.data('closebtn') ? $this.data('closebtn') : '<span class="mfp-close"></span>';
+    var alignTop = $this.data('aligntop') ? $this.data('aligntop') : false;
+
+    $this.magnificPopup({
+        alignTop: alignTop,
+        type: mainMode,
+        midClick: true,
+        overflowY: 'scroll',
+        fixedBgPos: false,
+        prependTo: $(prependTo),
+        closeMarkup: closebtn,
+        removalDelay: 500,
+        mainClass: mainClass,
+        callbacks: {
+            open: function() {
+                var stickyTopBar = $('.top-bar');
+                var scrollBarWidth = window.innerWidth - $body.width();
+
+                $html.addClass('open-mfp');
+                // initMap('update');
+
+                if(scrollBarWidth !== 0) {
+                    stickyTopBar.css('right', scrollBarWidth);
+                }
+            },
+            close: function() {
+                var stickyTopBar = $('.top-bar');
+
+                stickyTopBar.css('right', '');
+                $html.removeClass('open-mfp');
+                // $this.removeClass('-open');
+            }
+        }
+    });    
+};
 function addToCart(product_id, months, obj, callback) {
     var data = {'product_id': product_id, 'months': months, 'add_to_cart': 1};
     $.post("?r=cart/add", data, function( res ) {

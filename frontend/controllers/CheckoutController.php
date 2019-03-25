@@ -173,7 +173,9 @@ class CheckoutController extends \frontend\controllers\Controller
             $payment->setParams(Yii::$app->params['payments'][$payment_name]);
             $payed = $payment->finish($_REQUEST);
             if ($payed) {
-                $order_params = Cart::getInfo(Yii::$app->user->id);
+                $user = User::getInfo(Yii::$app->user->id);
+                
+                $order_params = Cart::getInfo($user->id);
                 $order_params['payment_method'] = Yii::$app->request->get('payment');
                 $order_params['payment_status'] = 1;
                 $order_params['id'] = Order::genID();
@@ -183,20 +185,35 @@ class CheckoutController extends \frontend\controllers\Controller
         
                 $pdf_path = $this->generatePDFInvoice($order);
                 
-                /*
-                $html = $this->renderPartial('_order_email_html', array('order'=>$order, 'user' => Yii::app()->user->profile), true);
-                $text = $this->renderPartial('_order_email_text', array('order'=>$order, 'user' => Yii::app()->user->profile), true);
-                $attachment = array(
-                    array(
-                        'name' => 'Order-'.$order->id.'.pdf',
-                        'mime' => 'application/pdf',
-                        'path' => $pdf_path,
-                    ),
-                );
-                 * 
-                 */
-                //Yii::app()->mail->send($html, $text, 'Invoice Payment Confirmation', Yii::app()->params['emailNotif']['from_email'], Yii::app()->user->profile->email, $attachment);
-                //Yii::app()->mail->send($html, $text, 'Invoice Payment Confirmation - COPY', Yii::app()->user->profile->email, Yii::app()->params['emailNotif']['payed_transaction_email'], $attachment);
+                $products_list = [];
+                $discount = 0;
+                
+                foreach($order->products as $p) {
+                    $products_list[] = $p->short_title;
+                }
+                
+                foreach ($order->productIDs as $p) {
+                    $discount = $p->discount;
+                }
+                
+                $body = Yii::$app->controller->renderPartial('@app/views/mails/thank_you_for_purchase.php', [
+                    'products' => $products_list,
+                ]);
+                
+                if ($discount) {
+                    $body = Yii::$app->controller->renderPartial('@app/views/mails/thank_you_for_purchase_discount.php', [
+                        'products' => $products_list,
+                        'discount' => $discount,
+                    ]);                    
+                }
+                
+                Yii::$app->mailer->compose()
+                            ->setTo($user->email)
+                            ->setFrom(Yii::$app->params['adminEmail'])
+                            ->setSubject('MarketingHack Purchase')
+                            ->setTextBody($body)
+                            ->attach($pdf_path)
+                            ->send();
                 
                 return $this->redirect(array('checkout/success', 'o' => $order->id));
             }

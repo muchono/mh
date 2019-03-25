@@ -4,11 +4,14 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Post;
+use common\models\Subscriber;
+use common\models\User;
 use backend\models\PostSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use yii\helpers\Url;
 
 /**
  * PostController implements the CRUD actions for Post model.
@@ -78,7 +81,7 @@ class PostController extends Controller
                     $model->imageFileAvatar->saveAs($model->imagesRootDir.$model->avatar_image);                    
                 }
                 $model->save(false, array('image', 'avatar_image'));
-
+                
                 return $this->redirect(['update', 'id' => $model->id]);
             }
         }
@@ -112,7 +115,10 @@ class PostController extends Controller
                     $model->imageFileAvatar->saveAs($model->imagesRootDir.$model->avatar_image);
                     $model->save(false, array('image', 'avatar_image'));
                 }             
-
+                
+                if (Yii::$app->request->post('send')) {
+                    $this->sendNotification($model);
+                }
                 return $this->redirect(['update', 'id' => $model->id]);
             }
         }
@@ -135,6 +141,58 @@ class PostController extends Controller
         return $this->redirect(['index']);
     }
 
+    /**
+     * Send post notification
+     */
+    public function sendNotification(Post $post)
+    {
+        //send to registered users
+        $usersBilling = \common\models\UserBilling::find()->where(['subscribe_blog' => 1])->all();
+        foreach($usersBilling as $ub) {
+            $user = \common\models\User::findOne($ub->user_id);
+            
+            $body = Yii::$app->controller->renderPartial('@app/views/mails/post.php', [
+                'post' => $post,
+                'front_url' => Yii::$app->urlManagerFrontend->getHostInfo().Yii::$app->urlManagerFrontend->getBaseUrl('').'/',
+                'user' => $user,
+                'subscriber' => 0,                
+            ]);
+/*
+            Yii::$app->mailer->compose()
+                        ->setTo($user->email)
+                        ->setFrom(Yii::$app->params['adminEmail'])
+                        ->setSubject('MarketingHack New Post')
+                        ->setTextBody($body)
+                        ->send();            
+ * 
+ */
+        }
+        
+        //send to subscribed users
+        $slist = Subscriber::find()
+                ->where(['active' => 1])
+                ->all();
+
+        foreach($slist as $s) {
+            $body = Yii::$app->controller->renderPartial('@app/views/mails/post.php', [
+                'post' => $post,
+                'front_url' => Yii::$app->urlManagerFrontend->getHostInfo().Yii::$app->urlManagerFrontend->getBaseUrl('').'/',
+                'user' => $s,
+                'subscriber' => 1,
+            ]);
+/*            
+            Yii::$app->mailer->compose()
+                        ->setTo($s->email)
+                        ->setFrom(Yii::$app->params['adminEmail'])
+                        ->setSubject('MarketingHack New Post')
+                        ->setTextBody($body)
+                        ->send();            
+ * 
+ */
+        }
+    }
+    
+    
     /**
      * Finds the Post model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

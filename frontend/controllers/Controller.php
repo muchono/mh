@@ -8,6 +8,9 @@ use common\models\Discount;
 use common\models\User;
 use frontend\models\SignupForm;
 use frontend\models\LoginForm;
+use frontend\models\ForgotForm;
+
+
 use common\models\Cart;
 
 class Controller extends \yii\web\Controller
@@ -18,6 +21,12 @@ class Controller extends \yii\web\Controller
         $this->view->params['cart_items'] = !Yii::$app->user->isGuest ? Cart::getCountByUser(Yii::$app->user->id) : 0;
         $this->actionSignup();
         $this->actionLogin();
+        $this->actionForgot();
+        
+        $link = ForgotLink::create(5);
+        
+        print $link->auth_key;
+        exit;
         
         return parent::beforeAction($action);
     }  
@@ -25,6 +34,38 @@ class Controller extends \yii\web\Controller
     static public function isSubscribed()
     {
         return Yii::$app->session['subscribed'];
+    }
+    
+    
+    /**
+     * Forgot
+     *
+     * @return mixed
+     */
+    public function actionForgot()
+    {
+        $model = new ForgotForm();
+        if (Yii::$app->request->post('forgot')) {
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                $user = $model->getUser();
+                $forgotLink = ForgotLink::create($user->id);
+
+                $body = Yii::$app->controller->renderPartial('@app/views/mails/.php', [
+                    'link' => Url::to(['site/forgot', ['key' => $forgotLink->auth_key, 'u' => $user->id]], true),
+                ]);
+                //send to user
+                Yii::$app->mailer->compose()
+                            ->setTo($user->email)
+                            ->setFrom(Yii::$app->params['adminEmail'])
+                            ->setSubject('MarketingHack Account Operation')
+                            ->setTextBody($body)
+                            ->send();                
+                echo 'The instructions were sent to your e-mail!';
+                exit;
+            }
+        }
+        
+        $this->view->params['user_forgot'] = $model;
     }
     
     /**
@@ -58,8 +99,7 @@ class Controller extends \yii\web\Controller
         if (Yii::$app->request->post('register') && $model->load(Yii::$app->request->post())) {
             
             if ($user = $model->signup()) {
-                //$model->sendEmail();
-                
+                $model->sendEmail();
                 echo '<script>location.replace("'.Url::to(['result/reg-finish', 'email' => $model->email]).'");</script>';
                 exit;
                 /**

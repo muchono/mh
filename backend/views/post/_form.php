@@ -65,7 +65,12 @@ use yii\helpers\Url;
     <?= $form->field($model, 'imageFileAvatar')->fileInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?php if ($model->isNewRecord){ ?>
+        <?= Html::submitButton('Create', ['class' => 'btn btn-success']) ?>
+        <?php } else {?>
+        <?= Html::submitButton('Update', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('Send', ['class' => 'btn btn-success','name' => 'send', 'value' => 1]) ?>
+        <?php }?>
     </div>
 
     <?php ActiveForm::end(); ?>

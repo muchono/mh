@@ -53,15 +53,16 @@ class SupportQuestion extends Model
      * Sends an email to the specified email address using the information collected by this model.
      *
      * @param string $email the target email address
+     * @param integer $ticket_id ticket ID
      * @return bool whether the email was sent
      */
-    public function sendEmail($email)
+    public function sendEmail($email, $ticket_id)
     {
         return Yii::$app->mailer->compose()
             ->setTo($email)
             ->setFrom([$this->email => $this->name])
             ->setSubject($this->subject)
-            ->setTextBody($this->short_question. '<br><br>' . $this->message)
+            ->setTextBody('Ticket #' . $ticket_id . '<br><br>' . $this->short_question. '<br><br>' . $this->message)
             ->send();
     }
 }

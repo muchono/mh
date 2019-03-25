@@ -6,6 +6,7 @@ use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\helpers\Url;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -215,7 +216,22 @@ class SiteController extends \frontend\controllers\Controller
             $model = new \frontend\models\SupportQuestion();
             
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-                $model->sendEmail(Yii::$app->params['adminEmail']);
+                $ticket_id = time() - 1553300000/* any value */;
+                //send to admin
+                $model->sendEmail(Yii::$app->params['adminEmail'], $ticket_id);
+                
+                
+                //send to user
+                $body = Yii::$app->controller->renderPartial('@app/views/mails/inquiry.php', [
+                    'ticket_id' => $ticket_id,
+                ]);
+                //send to user
+                Yii::$app->mailer->compose()
+                            ->setTo($model->email)
+                            ->setFrom(Yii::$app->params['adminEmail'])
+                            ->setSubject('MarketingHack Inquiry - #'.$ticket_id)
+                            ->setTextBody($body)
+                            ->send();
                 
                 return $this->redirect(['site/success']);
             } else {

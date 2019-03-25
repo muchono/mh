@@ -69,13 +69,13 @@ class SignupForm extends Model
     public function sendEmail()
     {
         $link = Url::to(['site/registration', 'code' => md5($this->user->created_at)], true);
-        $body = 'Please confirm your registration by the following link:<br/>';
-        $body .= '<a href="'.$link.'">'.$link.'</a>';
-        
+        $body = Yii::$app->controller->renderPartial('@app/views/mails/registration_confirmation.php', [
+            'link' => $link,
+        ]);
         return Yii::$app->mailer->compose()
             ->setTo($this->email)
             ->setFrom(Yii::$app->params['adminEmail'])
-            ->setSubject('Registration confirmation')
+            ->setSubject('MarketingHack Registration Confirmation')
             ->setTextBody($body)
             ->send();
     }
