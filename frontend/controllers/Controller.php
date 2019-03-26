@@ -10,7 +10,6 @@ use frontend\models\SignupForm;
 use frontend\models\LoginForm;
 use frontend\models\ForgotForm;
 
-
 use common\models\Cart;
 
 class Controller extends \yii\web\Controller
@@ -22,12 +21,7 @@ class Controller extends \yii\web\Controller
         $this->actionSignup();
         $this->actionLogin();
         $this->actionForgot();
-        
-        $link = ForgotLink::create(5);
-        
-        print $link->auth_key;
-        exit;
-        
+
         return parent::beforeAction($action);
     }  
     
@@ -48,10 +42,11 @@ class Controller extends \yii\web\Controller
         if (Yii::$app->request->post('forgot')) {
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
                 $user = $model->getUser();
-                $forgotLink = ForgotLink::create($user->id);
-
-                $body = Yii::$app->controller->renderPartial('@app/views/mails/.php', [
-                    'link' => Url::to(['site/forgot', ['key' => $forgotLink->auth_key, 'u' => $user->id]], true),
+                $user->generatePasswordResetToken();
+                $user->save();
+                
+                $body = Yii::$app->controller->renderPartial('@app/views/mails/password_reset.php', [
+                    'link' => Url::to(['site/restore', ['key' => $user->password_reset_token, 'u' => $user->id]], true),
                 ]);
                 //send to user
                 Yii::$app->mailer->compose()

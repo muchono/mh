@@ -132,6 +132,42 @@ class SiteController extends \frontend\controllers\Controller
     }
     
     /**
+     * Forgot password
+     *
+     * @return mixed
+     */
+    public function actionRestore()
+    {   
+        if (Yii::$app->request->get('key')) {
+            $user = User::findByPasswordResetToken(Yii::$app->request->get('key'));
+            if ($user) {
+                $password = substr(md5(time()), 0, rand(6, 10));
+                
+                $user->removePasswordResetToken();
+                $user->setPassword($password);
+                $user->save();
+                
+                $body = Yii::$app->controller->renderPartial('@app/views/mails/password_changed.php', [
+                    'password' => $password,
+                ]);
+                //send to user
+                Yii::$app->mailer->compose()
+                            ->setTo($user->email)
+                            ->setFrom(Yii::$app->params['adminEmail'])
+                            ->setSubject('MarketingHack Password Reset')
+                            ->setTextBody($body)
+                            ->send();
+                        
+                $this->layout= 'result';
+                
+                return $this->render('success', [
+                    'text' => 'Your password has been reset. Check your email for further instructions.',
+                ]);
+            }
+        }
+    }
+    
+    /**
      * Displays Login.
      *
      * @return mixed
@@ -333,6 +369,7 @@ exit('SEND');
     {
         $this->layout= 'result';
         return $this->render('success', [
+            'text' => 'Thank you for contacting MarketingHack.',
         ]);
     }
     
@@ -340,7 +377,7 @@ exit('SEND');
      * Requests password reset.
      *
      * @return mixed
-     */
+     
     public function actionRequestPasswordReset()
     {
         $model = new PasswordResetRequestForm();
@@ -357,7 +394,7 @@ exit('SEND');
         return $this->render('requestPasswordResetToken', [
             'model' => $model,
         ]);
-    }
+    }*/
 
     /**
      * Resets password.
@@ -365,7 +402,7 @@ exit('SEND');
      * @param string $token
      * @return mixed
      * @throws BadRequestHttpException
-     */
+     
     public function actionResetPassword($token)
     {
         try {
@@ -383,5 +420,5 @@ exit('SEND');
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
-    }
+    }*/
 }

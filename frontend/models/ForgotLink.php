@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace frontend\models;
 
 use Yii;
 
@@ -27,7 +27,7 @@ class ForgotLink extends \yii\db\ActiveRecord
         $link = new ForgotLink;
         $link->user_id = (int) $user_id;
         $link->created_at = time();
-        $link->auth_key = sha1($this->created_at.$this->user_id, true);
+        $link->auth_key = sha1($link->created_at.$link->user_id, true);
         $link->save();
         
         return $link;
