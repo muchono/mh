@@ -119,7 +119,15 @@ class Product extends \yii\db\ActiveRecord
     public function getDiscount()
     {
         $time = time();
-         return Discount::find()
+        $is_special_offer = null;
+        
+        if (Yii::$app->user->id) {
+            $is_special_offer = Discount::isSpeacialAvailable(Yii::$app->user->id) && empty(Discount::getProductsNotInCart(Yii::$app->user->id));
+        }
+        
+         return $is_special_offer 
+                 ? Discount::findOne(Discount::SPECIAL40ID)
+                 : Discount::find()
                 ->innerJoin('discount_to_product', '`discount`.`id` = `discount_to_product`.`discount_id`')
                 ->where(['status' => Discount::STATUS_ACTIVE])                 
                 ->andWhere(['<', 'date_from', $time])

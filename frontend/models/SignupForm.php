@@ -54,7 +54,7 @@ class SignupForm extends Model
         $this->user->email = $this->email;
         
         //temporary
-        $this->user->active = $this->user->registration_confirmed = 1;
+        $this->user->active = $this->user->registration_confirmed = 0;
         
         $this->user->setPassword($this->password);
         $this->user->generateAuthKey();
@@ -68,7 +68,7 @@ class SignupForm extends Model
      */
     public function sendEmail()
     {
-        $link = Url::to(['site/registration', 'code' => md5($this->user->created_at)], true);
+        $link = Url::to(['site/registration', 'code' => $this->user->auth_key, 'id' => $this->user->id], true);
         $body = Yii::$app->controller->renderPartial('@app/views/mails/registration_confirmation.php', [
             'link' => $link,
         ]);

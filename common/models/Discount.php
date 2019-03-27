@@ -130,19 +130,26 @@ class Discount extends \yii\db\ActiveRecord
         return self::$statuses[$this->status];
     }
     
+    /**
+     * Check if special offer is not expired
+     * @param integer $user_id
+     * @return boolean
+     */
     public static function isSpeacialAvailable($user_id)
     {
         $user = User::findOne($user_id);
-        $r = false;
-        if (time() - $user->created_at < self::SPECIAL_AVAILABLE_TIME) {
-            $cart_products = Cart::getInfo($user_id);
-            $productsIDs = Product::find()->select('id')->where(['status' => '1'])->asArray()->column();
-            $difference = array_diff($cart_products['products_list'], $productsIDs);
-            if (empty($difference)) {
-                $r = true;
-            }
-        }
-        return $r;
+        return (time() - $user->created_at < self::SPECIAL_AVAILABLE_TIME);
+    }
+
+    /**
+     * Get all available products` IDs that are not in cart
+     * @param integer $user_id
+     * @return array
+     */
+    public static function getProductsNotInCart($user_id) {
+        $cart_products = Cart::find()->select('product_id')->where(['user_id' => $user_id])->asArray()->column();
+        $productsIDs = Product::find()->select('id')->where(['status' => '1'])->asArray()->column();
+        return array_diff($productsIDs, $cart_products);
     }
     
     /**

@@ -132,6 +132,39 @@ class SiteController extends \frontend\controllers\Controller
     }
     
     /**
+     * Confirm registration
+     */
+    public function actionRegistration() 
+    {
+        if (Yii::$app->request->get('code') && Yii::$app->request->get('id')) {
+            $user = User::findOne(Yii::$app->request->get('id'));
+            
+            
+            $login_case = \frontend\models\LoginCase::addCase($user->id, 'special_offer');
+            
+            $link = Url::to(['site/apply-special-offer', 'code' => $login_case->auth_key, 'id' => $login_case->id], true);
+            
+            print $link;
+            print 'OK';
+            if ($user->auth_key == Yii::$app->request->get('code')
+                    && !$user->registration_confirmed)
+            {
+                $user->registration_confirmed = $user->active = 1;
+                $user->save();
+                
+                //$login_case = \frontend\models\LoginCase::addCase($user->id, 'special_offer');
+                //send offer 40%
+                
+                $this->layout= 'result';
+                
+                return $this->render('success', [
+                    'text' => 'Thank you. Your registration completed.',
+                ]);                
+            }
+        }
+    }
+    
+    /**
      * Forgot password
      *
      * @return mixed
@@ -353,6 +386,36 @@ exit('SEND');
         exit;
     }
 
+    /**
+     * Apply special offer
+     *
+     * @return mixed
+     */
+    public function actionApplySpecialOffer()
+    {
+        if (Yii::$app->request->get('code') && Yii::$app->request->get('id')) {
+            $login_case = \frontend\models\LoginCase::findOne(Yii::$app->request->get('id'));
+            
+            if ($login_case && $login_case->auth_key == Yii::$app->request->get('code')) {
+                $user = User::findOne($login_case->user_id);
+                if ($user && $user->active && \common\models\Discount::isSpeacialAvailable($user->id)) {
+                    Yii::$app->user->login($user, 0);
+                    foreach (\common\models\Discount::getProductsNotInCart($user->id) as $pid) {
+                        $cart = new \common\models\Cart();
+                        $cart->product_id = $pid;
+                        $cart->months = 1;
+                        $cart->user_id = $user->id;
+                        $cart->save();
+                    }
+                    
+                    return $this->redirect(['cart/index']);
+                }
+                
+            }
+        }
+        return $this->redirect(['site/index']);
+    }
+    
     /**
      * Displays about page.
      *
