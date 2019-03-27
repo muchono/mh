@@ -3,6 +3,7 @@
 namespace common\models;
 
 use common\models\Product;
+use common\models\Discount;
 
 use Yii;
 
@@ -72,20 +73,27 @@ class Cart extends \yii\db\ActiveRecord
     {
         $r['count'] = self::getCountByUser($user_id);
         $items = self::find()->where(['user_id' => $user_id])->all();
-        $r['products_list'] = $r['products'] = array();
+        $time = time();
+        
+        $r['offers'] = $r['products_list'] = $r['products'] = array();
         $r['amount'] = 0;
         $r['discount'] = 0;
         $r['cart_items'] = $items;
+
         foreach($items as $k=>$i){
             $p = Product::findOne($i->product_id);
             if ($p->status){
-                $r['products_list'][] = $p->id;
+                $discount = $p->discount;
+                $r['products_list'][$p->id] = $p->id;
                 $r['products'][$k] = $p;
-                $r['prices'][$k] = $p->priceFinal * $i->months;
+                $r['prices'][$k] = $p->price * $i->months;
+                $r['offers_discount'][$i->product_id] = !empty($discount) ? round(($r['prices'][$k] * $discount->percent/100)): 0;
+                $r['offers'][$i->product_id] = $discount;
+                
                 $r['cart'][$k] = $i;
                 $r['amount'] += $p->price * $i->months;
-                $r['total'] += $r['prices'][$k];
-                $r['discount'] +=  $p->price * $i->months - $r['prices'][$k];
+                $r['total'] += $r['prices'][$k] - $r['offers_discount'][$i->product_id];
+                $r['discount'] +=  $r['offers_discount'][$i->product_id];
             }
         }
        

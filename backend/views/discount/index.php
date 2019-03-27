@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\jui\DatePicker;
 use common\models\Product;
+use common\models\Discount;
 
 
 /* @var $this yii\web\View */
@@ -86,6 +87,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => 'yii\grid\ActionColumn',
                 'headerOptions' => ['style' => 'width:150px'],
                 'template' => '{update} {delete}',
+                'visibleButtons' => [
+                    'delete' => function ($model, $key, $index) {
+                                    return $model->id != Discount::SPECIAL40ID;
+                    }
+                ],                
                 
             ],
         ],

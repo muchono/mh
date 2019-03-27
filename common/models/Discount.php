@@ -6,6 +6,9 @@ use Yii;
 use yii\behaviors\AttributeBehavior;
 use common\models\DiscountToProduct;
 use common\models\DiscountQuery;
+use common\models\User;
+use common\models\Cart;
+use common\models\Product;
 use yii\behaviors\BlameableBehavior;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 
@@ -26,7 +29,8 @@ class Discount extends \yii\db\ActiveRecord
     
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 1;
-    
+    const SPECIAL40ID = 10;
+    const SPECIAL_AVAILABLE_TIME = 86400;//24 hours
     public $imageFile1;
     
     public $imageFile2;
@@ -124,6 +128,21 @@ class Discount extends \yii\db\ActiveRecord
     public function getStatusName()
     {
         return self::$statuses[$this->status];
+    }
+    
+    public static function isSpeacialAvailable($user_id)
+    {
+        $user = User::findOne($user_id);
+        $r = false;
+        if (time() - $user->created_at < self::SPECIAL_AVAILABLE_TIME) {
+            $cart_products = Cart::getInfo($user_id);
+            $productsIDs = Product::find()->select('id')->where(['status' => '1'])->asArray()->column();
+            $difference = array_diff($cart_products['products_list'], $productsIDs);
+            if (empty($difference)) {
+                $r = true;
+            }
+        }
+        return $r;
     }
     
     /**

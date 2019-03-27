@@ -121,9 +121,11 @@ class Product extends \yii\db\ActiveRecord
         $time = time();
          return Discount::find()
                 ->innerJoin('discount_to_product', '`discount`.`id` = `discount_to_product`.`discount_id`')
-                ->where(['<', 'date_from', $time])
-                ->andWhere(['<', 'date_to', $time])
+                ->where(['status' => Discount::STATUS_ACTIVE])                 
+                ->andWhere(['<', 'date_from', $time])
+                ->andWhere(['>', 'date_to', $time])
                 ->andWhere(['product_id' => $this->id])
+                ->andWhere(['!=', 'discount.id', Discount::SPECIAL40ID])
                 ->orderBy('id DESC')
                 ->one();
     }

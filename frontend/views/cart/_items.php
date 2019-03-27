@@ -23,6 +23,10 @@ use common\models\Cart;
                           <div class="sl__price <?=$p->priceFinal ? '' : 'sl__price--free'?>"><?=$p->priceFinal ? '$'.$cartInfo['prices'][$k] : 'Free'?></div>
                         </div>
                       </div>
+                      
+                      <?php if (isset($cartInfo['offers'][$p->id])) {?>
+                      <div class="cs__discount">Offer: <strong><?=$cartInfo['offers'][$p->id]->title?></strong></div>
+                      <?php }?>
                     </li>
                       <?php }?>
                   </ul>

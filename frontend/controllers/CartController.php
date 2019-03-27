@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use common\models\Cart;
 use common\models\Product;
+use common\models\Discount;
 use yii\filters\AccessControl;
 
 class CartController extends \frontend\controllers\Controller
@@ -81,6 +82,7 @@ class CartController extends \frontend\controllers\Controller
     {
         $cartInfo = Cart::getInfo(Yii::$app->user->id);
         $products = Product::findActive()->andWhere(['not in', 'id', $cartInfo['products_list']])->all();
+        
         return $this->render('index', array(
             'products' => $products,
             'cartInfo' => $cartInfo,
