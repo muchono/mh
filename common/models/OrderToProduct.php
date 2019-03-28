@@ -13,6 +13,8 @@ use Yii;
  * @property double $price
  * @property integer $months
  * @property integer $expires
+ * @property integer $five_days_notify
+ * @property integer $expiration_notify
  */
 class OrderToProduct extends \yii\db\ActiveRecord
 {
@@ -31,7 +33,7 @@ class OrderToProduct extends \yii\db\ActiveRecord
     {
         return [
             [['order_id', 'product_id'], 'required'],
-            [['order_id', 'product_id', 'months', 'expires'], 'integer'],
+            [['order_id', 'product_id', 'months', 'expires', 'five_days_notify', 'expiration_notify'], 'integer'],
             [['price'], 'number'],
         ];
     }
@@ -75,6 +77,31 @@ class OrderToProduct extends \yii\db\ActiveRecord
         return $this->expires;
     }
     
+    /**
+     * Days to expiration orders
+     * @return integer
+     */
+    public static function getDaysToExpiration($days, $flag = '')
+    {
+        $sql = 'SELECT otp2.*
+                FROM `order_to_product` otp1
+                    LEFT JOIN `order_to_product` otp2 
+                        ON otp1.user_id = otp2.user_id 
+                        AND otp1.product_id = otp2.product_id 
+                        AND otp2.expires = (
+                            SELECT MAX(otp3.expires) 
+                                FROM `order_to_product` otp3
+                                WHERE otp3.user_id = otp2.user_id 
+                                AND otp3.product_id = otp2.product_id
+                        )
+                WHERE datediff(NOW(), FROM_UNIXTIME(otp2.expires)) <= '. intval($days)
+                .($flag  ? ' AND otp2.'.$flag.' = 0' : '')
+                .' GROUP BY otp1.product_id, otp1.user_id';
+        
+        return self::findBySql($sql)->all();
+    }
+    
+  
     /**
      * Get Latest Expiration Date
      * @return integer

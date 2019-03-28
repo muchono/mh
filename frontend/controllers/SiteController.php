@@ -381,6 +381,81 @@ exit('SEND');
         }
     }
     
+    /**
+     * Five days before product expiration notify
+     *
+     * @return mixed
+     */
+    public function actionCheckExpiration5()
+    {
+        $five_days = \common\models\OrderToProduct::getDaysToExpiration(5 /*days*/, 'five_days_notify');
+        $fh = fopen(Url::to('@frontend/runtime/logs/expiration5days.log'), 'a+');
+        fwrite($fh, date('d-m-Y H:i') . " : Start check \n");
+        
+        foreach($five_days as $d) {
+            print $d->id;
+            $product = Product::findOne($d->product_id);
+            $user = User::findOne($d->user_id);
+            
+            if ($product->status && $user->active) {
+                $body = Yii::$app->controller->renderPartial('@app/views/mails/subscription_ends_ in_5days.php', [
+                    'link' => Url::to(['site/product', 'product_id' => $product->id], true),
+                ]);
+
+                Yii::$app->mailer->compose()
+                            ->setTo($user->email)
+                            ->setFrom(Yii::$app->params['adminEmail'])
+                            ->setSubject('Subscription ends in 5 days')
+                            ->setTextBody($body)
+                            ->send();
+                
+                $d->five_days_notify = 1;
+                $d->save();
+                
+                fwrite($fh, date('d-m-Y H:i') . ' : User ID: ' . $user->id . '; Product ID: ' . $product->id . "\n");
+            }
+        }
+        
+        fclose($fh);
+    }
+    
+  /**
+     * Product expiration notify
+     *
+     * @return mixed
+     */
+    public function actionCheckExpiration()
+    {
+        $expired = \common\models\OrderToProduct::getDaysToExpiration(0/* means expired*/, 'expiration_notify');
+        $fh = fopen(Url::to('@frontend/runtime/logs/subscription_has_expired.log'), 'a+');
+        fwrite($fh, date('d-m-Y H:i') . " : Start check \n");
+        
+        foreach($expired as $d) {
+            $product = Product::findOne($d->product_id);
+            $user = User::findOne($d->user_id);
+            
+            if ($product->status && $user->active) {
+                $body = Yii::$app->controller->renderPartial('@app/views/mails/subscription_has_expired.php', [
+                    'link' => Url::to(['site/product', 'product_id' => $product->id], true),
+                ]);
+
+                Yii::$app->mailer->compose()
+                            ->setTo($user->email)
+                            ->setFrom(Yii::$app->params['adminEmail'])
+                            ->setSubject('Subscription has expired')
+                            ->setTextBody($body)
+                            ->send();
+                
+                $d->expiration_notify = 1;
+                $d->save();
+                
+                fwrite($fh, date('d-m-Y H:i') . ' : User ID: ' . $user->id . '; Product ID: ' . $product->id . "\n");
+            }
+        }
+        
+        fclose($fh);
+    }    
+    
     
     
     /**
