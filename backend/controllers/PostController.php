@@ -157,15 +157,14 @@ class PostController extends Controller
                 'user' => $user,
                 'subscriber' => 0,                
             ]);
-/*
+
             Yii::$app->mailer->compose()
                         ->setTo($user->email)
                         ->setFrom(Yii::$app->params['adminEmail'])
                         ->setSubject('MarketingHack New Post')
                         ->setTextBody($body)
                         ->send();            
- * 
- */
+
         }
         
         //send to subscribed users
@@ -180,15 +179,13 @@ class PostController extends Controller
                 'user' => $s,
                 'subscriber' => 1,
             ]);
-/*            
+    
             Yii::$app->mailer->compose()
                         ->setTo($s->email)
                         ->setFrom(Yii::$app->params['adminEmail'])
                         ->setSubject('MarketingHack New Post')
                         ->setTextBody($body)
                         ->send();            
- * 
- */
         }
     }
     

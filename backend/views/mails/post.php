@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="css/app.css" />
-    <title>My Basic Email Template Subject</title>
+    <title>New Blog Post</title>
     <style>
     @media only screen {
         html {

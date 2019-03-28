@@ -69,7 +69,7 @@ use yii\helpers\Url;
         <?= Html::submitButton('Create', ['class' => 'btn btn-success']) ?>
         <?php } else {?>
         <?= Html::submitButton('Update', ['class' => 'btn btn-primary']) ?>
-        <?= Html::submitButton('Send', ['class' => 'btn btn-success','name' => 'send', 'value' => 1]) ?>
+        <?= Html::submitButton('Send E-mail To Users', ['class' => 'btn btn-success','name' => 'send', 'value' => 1]) ?>
         <?php }?>
     </div>
 

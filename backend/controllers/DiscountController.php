@@ -66,6 +66,7 @@ class DiscountController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+    
 
     /**
      * Creates a new Discount model.
@@ -105,6 +106,10 @@ class DiscountController extends Controller
             $model->imageFile2 = UploadedFile::getInstance($model, 'imageFile2');            
             if ($model->save()) {
                 $model->saveFiles();
+                if (Yii::$app->request->post('send')) {
+                    $this->sendNotification($model);
+                }
+                
                 return $this->redirect(['update', 'id' => $model->id]);
             }
         } 
@@ -129,6 +134,57 @@ class DiscountController extends Controller
         return $this->redirect(['index']);
     }
 
+  /**
+     * Send post notification
+     */
+    public function sendNotification(Discount $offer)
+    {
+        //send to registered users
+        $usersBilling = \common\models\UserBilling::find()->where(['subscribe_offers' => 1])->all();
+        foreach($usersBilling as $ub) {
+            $user = \common\models\User::findOne($ub->user_id);
+            
+            $body = Yii::$app->controller->renderPartial('@app/views/mails/action.php', [
+                'offer' => $offer,
+                'front_url' => Yii::$app->urlManagerFrontend->getHostInfo().Yii::$app->urlManagerFrontend->getBaseUrl('').'/',
+                'user' => $user,
+                'subscriber' => 0,                
+            ]);
+            
+            print $body;
+            exit;
+
+            Yii::$app->mailer->compose()
+                        ->setTo($user->email)
+                        ->setFrom(Yii::$app->params['adminEmail'])
+                        ->setSubject($offer->title.' from MarketingHack.net')
+                        ->setTextBody($body)
+                        ->send();            
+
+        }
+        
+        //send to subscribed users
+        $slist = Subscriber::find()
+                ->where(['active' => 1])
+                ->all();
+
+        foreach($slist as $s) {
+            $body = Yii::$app->controller->renderPartial('@app/views/mails/action.php', [
+                'offer' => $offer,
+                'front_url' => Yii::$app->urlManagerFrontend->getHostInfo().Yii::$app->urlManagerFrontend->getBaseUrl('').'/',
+                'user' => $s,
+                'subscriber' => 1,
+            ]);
+    
+            Yii::$app->mailer->compose()
+                        ->setTo($s->email)
+                        ->setFrom(Yii::$app->params['adminEmail'])
+                        ->setSubject($offer->title.' from MarketingHack.net')
+                        ->setTextBody($body)
+                        ->send();
+        }
+    }
+    
     /**
      * Finds the Discount model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

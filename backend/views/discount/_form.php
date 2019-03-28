@@ -59,6 +59,9 @@ use backend\models\ProductSearch;
     
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?php if (!$model->isNewRecord){ ?>
+        <?= Html::submitButton('Send E-mail To Users', ['class' => 'btn btn-success','name' => 'send', 'value' => 1]) ?>
+        <?php }?>
     </div>
 
     <?php ActiveForm::end(); ?>
