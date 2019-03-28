@@ -136,6 +136,7 @@ class SiteController extends \frontend\controllers\Controller
      */
     public function actionRegistration() 
     {
+
         if (Yii::$app->request->get('code') && Yii::$app->request->get('id')) {
             $user = User::findOne(Yii::$app->request->get('id'));
             
@@ -143,17 +144,24 @@ class SiteController extends \frontend\controllers\Controller
             $login_case = \frontend\models\LoginCase::addCase($user->id, 'special_offer');
             
             $link = Url::to(['site/apply-special-offer', 'code' => $login_case->auth_key, 'id' => $login_case->id], true);
-            
-            print $link;
-            print 'OK';
             if ($user->auth_key == Yii::$app->request->get('code')
                     && !$user->registration_confirmed)
             {
                 $user->registration_confirmed = $user->active = 1;
                 $user->save();
                 
-                //$login_case = \frontend\models\LoginCase::addCase($user->id, 'special_offer');
-                //send offer 40%
+                $login_case = \frontend\models\LoginCase::addCase($user->id, 'special_offer');
+                $body = Yii::$app->controller->renderPartial('@app/views/mails/special_offer.php', [
+                    'link' => Url::to(['site/apply-special-offer', 'code' => $login_case->auth_key, 'id' => $login_case->id], true),
+                    'products' => Product::findActive()->all(),
+                ]);
+                
+                Yii::$app->mailer->compose()
+                            ->setTo($user->email)
+                            ->setFrom(Yii::$app->params['adminEmail'])
+                            ->setSubject('Special 40% off for new users')
+                            ->setTextBody($body)
+                            ->send();                
                 
                 $this->layout= 'result';
                 
