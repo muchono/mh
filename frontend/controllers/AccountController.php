@@ -138,6 +138,10 @@ class AccountController extends \frontend\controllers\Controller
      */
     public function actionLogout()
     {
+        $user = User::findOne(Yii::$app->user->id);
+        $user->active_at = 0;
+        $user->save();
+                
         Yii::$app->user->logout();
 
         return $this->goHome();

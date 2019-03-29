@@ -22,6 +22,12 @@ class Controller extends \yii\web\Controller
         $this->actionLogin();
         $this->actionForgot();
 
+        if (!Yii::$app->user->isGuest) {
+            $user = User::findOne(Yii::$app->user->id);
+            $user->active_at = time();
+            $user->save();
+        }
+        
         return parent::beforeAction($action);
     }  
     

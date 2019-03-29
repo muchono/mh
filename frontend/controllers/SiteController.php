@@ -357,6 +357,25 @@ exit('SEND');
         return $this->render('terms', array(
         ));
     }    
+    /**
+     * Unblock Account
+     *
+     * @return mixed
+     */
+    public function actionUnblock()
+    {
+        if (Yii::$app->request->get('key') && Yii::$app->request->get('u')) {
+            $user = User::findOne(Yii::$app->request->get('u'));
+            if ($user && $user->blocked 
+                    && md5($user->blocked) == Yii::$app->request->get('key')) {
+                $user->blocked = 0;
+                $user->active = 1;
+                $user->active_at = 0;
+                $user->save();
+            }
+        }
+        return $this->redirect(['site/index', 'show_login' => 1]);
+    }
 
     /**
      * Displays contact page.
@@ -510,6 +529,14 @@ exit('SEND');
     }
 
 
+    /** 
+     * To keep session open
+     * 
+     */
+    public function actionSome()
+    {
+        exit('200');
+    }
 
     public function actionSuccess()
     {

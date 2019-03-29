@@ -293,6 +293,11 @@ AppAsset::register($this);
     );  
   }
   ?>
+<script>
+setInterval(function(){
+    $.get( "<?=Url::to(['site/some'])?>", function(data) {});
+}, 300000);
+</script>  
 </body>
 </html>
 <?php $this->endPage() ?>

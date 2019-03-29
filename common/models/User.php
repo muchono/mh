@@ -28,7 +28,12 @@ use common\models\OrderToProduct;
  * @property integer $registration_confirmed
  * @property integer $created_at
  * @property integer $updated_at
+ * @property integer $active_ip
+ * @property integer $blocked
+ * @property integer $active_at
+ * @property integer $block_amount
  */
+
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
@@ -77,6 +82,9 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function beforeSave($insert)
     {
         $this->password = Yii::$app->security->generatePasswordHash($password);
+        if ($this->active == 1) {
+            $this->blocked = 0;
+        }
         return parent::beforeSave($insert);
     }
     
@@ -94,7 +102,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         parent::delete();
     }
-    
+
     /**
      * @inheritdoc
      */
@@ -104,7 +112,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             [['email', 'name'], 'required'],
             [['email'], 'email'],
             [['email'], 'unique'],
-            [['subscribe', 'active', 'registration_confirmed', 'created_at', 'updated_at'], 'integer'],
+            [['subscribe', 'active', 'registration_confirmed', 'created_at', 'updated_at', 'active_ip', 'blocked', 'active_at', 'block_amount'], 'integer'],
             [['auth_key'], 'string', 'max' => 32],
             [['password_hash', 'password_reset_token', 'email', 'phone', 'name'], 'string', 'max' => 255],
             [['password'], 'string', 'max' => 50],
@@ -157,9 +165,13 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      * @param string $email
      * @return static|null
      */
-    public static function findByEmail($email)
+    public static function findByEmail($email, $active = self::STATUS_ACTIVE)
     {
-        return static::findOne(['email' => $email, 'active' => self::STATUS_ACTIVE]);
+        $filter = ['email' => $email];
+        if ($active) {
+            $filter['active'] = $active;
+        }
+        return static::findOne($filter);
     }
 
     /**
@@ -295,6 +307,77 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         }
         
         return $r;
+    }
+    
+    static public function getOS() 
+    { 
+
+        $user_agent = $_SERVER['HTTP_USER_AGENT'];
+
+        $os_platform  = "Unknown OS Platform";
+
+        $os_array     = array(
+                              '/windows nt 10/i'      =>  'Windows 10',
+                              '/windows nt 6.3/i'     =>  'Windows 8.1',
+                              '/windows nt 6.2/i'     =>  'Windows 8',
+                              '/windows nt 6.1/i'     =>  'Windows 7',
+                              '/windows nt 6.0/i'     =>  'Windows Vista',
+                              '/windows nt 5.2/i'     =>  'Windows Server 2003/XP x64',
+                              '/windows nt 5.1/i'     =>  'Windows XP',
+                              '/windows xp/i'         =>  'Windows XP',
+                              '/windows nt 5.0/i'     =>  'Windows 2000',
+                              '/windows me/i'         =>  'Windows ME',
+                              '/win98/i'              =>  'Windows 98',
+                              '/win95/i'              =>  'Windows 95',
+                              '/win16/i'              =>  'Windows 3.11',
+                              '/macintosh|mac os x/i' =>  'Mac OS X',
+                              '/mac_powerpc/i'        =>  'Mac OS 9',
+                              '/linux/i'              =>  'Linux',
+                              '/ubuntu/i'             =>  'Ubuntu',
+                              '/iphone/i'             =>  'iPhone',
+                              '/ipod/i'               =>  'iPod',
+                              '/ipad/i'               =>  'iPad',
+                              '/android/i'            =>  'Android',
+                              '/blackberry/i'         =>  'BlackBerry',
+                              '/webos/i'              =>  'Mobile'
+                        );
+
+        foreach ($os_array as $regex => $value) {
+            if (preg_match($regex, $user_agent)) {
+                $os_platform = $value;
+            }
+        }
+
+        return $os_platform;
+    }
+
+    static public function getBrowser() 
+    {
+
+        $user_agent = $_SERVER['HTTP_USER_AGENT'];
+
+        $browser        = "Unknown Browser";
+
+        $browser_array = array(
+                                '/msie/i'      => 'Internet Explorer',
+                                '/firefox/i'   => 'Firefox',
+                                '/safari/i'    => 'Safari',
+                                '/chrome/i'    => 'Chrome',
+                                '/edge/i'      => 'Edge',
+                                '/opera/i'     => 'Opera',
+                                '/netscape/i'  => 'Netscape',
+                                '/maxthon/i'   => 'Maxthon',
+                                '/konqueror/i' => 'Konqueror',
+                                '/mobile/i'    => 'Handheld Browser'
+                         );
+
+        foreach ($browser_array as $regex => $value) {
+            if (preg_match($regex, $user_agent)) {
+                $browser = $value;
+            }
+        }
+
+        return $browser;
     }
     
     /**
