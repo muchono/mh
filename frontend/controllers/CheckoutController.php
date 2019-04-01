@@ -70,6 +70,9 @@ class CheckoutController extends \frontend\controllers\Controller
      */
     public function actionIndex()
     {
+        $order = Order::findOne(61);
+        $this->generatePDFInvoice($order);
+        
         $cartInfo = Cart::getInfo(Yii::$app->user->id);
         $products = Product::findActive()->andWhere(['not in', 'id', $cartInfo['products_list']])->all();
         $user = User::findOne(Yii::$app->user->id);
@@ -210,7 +213,7 @@ class CheckoutController extends \frontend\controllers\Controller
                 Yii::$app->mailer->compose()
                             ->setTo($user->email)
                             ->setFrom(Yii::$app->params['adminEmail'])
-                            ->setSubject('MarketingHack Purchase')
+                            ->setSubject('Thank you for the purchase')
                             ->setTextBody($body)
                             ->attach($pdf_path)
                             ->send();

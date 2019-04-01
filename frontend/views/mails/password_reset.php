@@ -1,6 +1,3 @@
-Password Reset - MarketingHack.net<br/>
-<br/>
-<br/>
 Hello,<br/>
 <br/>
 We have received a request to reset the password for your MarketingHack account. <br/>

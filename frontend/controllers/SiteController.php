@@ -136,7 +136,6 @@ class SiteController extends \frontend\controllers\Controller
      */
     public function actionRegistration() 
     {
-
         if (Yii::$app->request->get('code') && Yii::$app->request->get('id')) {
             $user = User::findOne(Yii::$app->request->get('id'));
             
@@ -154,6 +153,7 @@ class SiteController extends \frontend\controllers\Controller
                 $body = Yii::$app->controller->renderPartial('@app/views/mails/special_offer.php', [
                     'link' => Url::to(['site/apply-special-offer', 'code' => $login_case->auth_key, 'id' => $login_case->id], true),
                     'products' => Product::findActive()->all(),
+                    'front_url' => Url::to('@web', true).'/',
                 ]);
                 
                 Yii::$app->mailer->compose()
@@ -195,7 +195,7 @@ class SiteController extends \frontend\controllers\Controller
                 Yii::$app->mailer->compose()
                             ->setTo($user->email)
                             ->setFrom(Yii::$app->params['adminEmail'])
-                            ->setSubject('MarketingHack Password Reset')
+                            ->setSubject('New Password - MarketingHack.net')
                             ->setTextBody($body)
                             ->send();
                         
@@ -306,7 +306,7 @@ class SiteController extends \frontend\controllers\Controller
                 Yii::$app->mailer->compose()
                             ->setTo($model->email)
                             ->setFrom(Yii::$app->params['adminEmail'])
-                            ->setSubject('MarketingHack Inquiry - #'.$ticket_id)
+                            ->setSubject('Thank you for your inquiry - '.$ticket_id)
                             ->setTextBody($body)
                             ->send();
                 

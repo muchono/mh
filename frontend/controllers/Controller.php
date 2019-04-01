@@ -58,7 +58,7 @@ class Controller extends \yii\web\Controller
                 Yii::$app->mailer->compose()
                             ->setTo($user->email)
                             ->setFrom(Yii::$app->params['adminEmail'])
-                            ->setSubject('MarketingHack Account Operation')
+                            ->setSubject('Password Reset - MarketingHack.net')
                             ->setTextBody($body)
                             ->send();                
                 echo 'The instructions were sent to your e-mail!';

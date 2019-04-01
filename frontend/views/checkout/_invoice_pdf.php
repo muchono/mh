@@ -34,7 +34,7 @@ table thead td { background-color: #EEEEEE;
     <td style="text-align: right;">Invoice No.<br /><span style="font-weight: bold; font-size: 12pt;"><?php echo $order->id; ?></span></td>
 </tr>
 <tr>
-<td><br />NETGERON d.o.o.<br />Tehnološki park 024<br />1000 Ljubljana<br />Slovenia <br /></td>
+<td><br />NETGERON d.o.o.<br />Stegne 27<br />1000 Ljubljana<br />Slovenia <br /></td>
 <td width="70%" style="text-align: right;"></td>
 </tr>
 

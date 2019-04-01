@@ -75,7 +75,7 @@ class SignupForm extends Model
         return Yii::$app->mailer->compose()
             ->setTo($this->email)
             ->setFrom(Yii::$app->params['adminEmail'])
-            ->setSubject('MarketingHack Registration Confirmation')
+            ->setSubject('Registration Confirmation - MarketingHack.net')
             ->setTextBody($body)
             ->send();
     }

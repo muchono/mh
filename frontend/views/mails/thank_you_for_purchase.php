@@ -1,6 +1,3 @@
-Thank you for the purchase<br/>
-<br/>
-<br/>
 Hello,<br/>
 <br/>
 Thank you for purchasing MarketingHack <?=join(', ', $products)?>.<br/>

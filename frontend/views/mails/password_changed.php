@@ -1,7 +1,3 @@
-New Password - MarketingHack.net<br/>
-<br/>
-<br/>
-<br/>
 Hello,<br/>
 <br/>
 Your password has been reset to: <?=$password?><br/>

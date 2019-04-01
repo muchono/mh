@@ -1,6 +1,3 @@
-Registration Confirmation - MarketingHack.net<br/>
-<br/>
-<br/>
 Hello,<br/>
 <br/>
 Welcome to MarketingHack!<br/>
