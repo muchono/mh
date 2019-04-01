@@ -135,6 +135,7 @@ use yii\helpers\ArrayHelper;
       <div class="payment-foot">
         <div class="total-payment">Total payment amount: $<span id="items_amount"><?=$cartInfo['total']?></span></div>
         <p class="terms-text">By passing to payment you confirm that you agree to the <a href="">Terms of Use</a> and <a href="">Privacy Policy</a></p>
+        <a href='#' data-fsc-action="Add,Checkout" data-fsc-item-path-value="my-first-product">Purchase "Product One"</a>
         <button class="btn-3">Accept and Pay</button>
       </div>
         <?php ActiveForm::end(); ?>      
@@ -147,5 +148,14 @@ $this->registerJs(
     "Cart.construct();",
     View::POS_READY,
     'cart-handler'
+);
+$this->registerJsFile(
+    'https://d1f8f9xcsvx3ha.cloudfront.net/sbl/0.7.9/fastspring-builder.min.js',
+    [
+        'id' => "fsc-api",
+        'data-storefront' => "nmsystems.test.onfastspring.com/popup-nmsystems",
+        'position' => View::POS_HEAD
+    ],
+    'fast-pay'
 );
 ?>
