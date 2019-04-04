@@ -77,7 +77,9 @@ AppAsset::register($this);
           <li class="main-nav__item"><a href="<?=Url::to(['site/index']);?>" class="main-nav__link <?=($this->params['page'] == 'home') ? 'main-nav__link--active' : ''?>">Home</a></li>
           <li class="main-nav__item"><a href="<?=Url::to(['site/hiw']);?>" class="main-nav__link <?=($this->params['page'] == 'hiw') ? 'main-nav__link--active' : ''?>">How It Works</a></li>
           <li class="main-nav__item"><a href="<?=Url::to(['site/products']);?>" class="main-nav__link <?=($this->params['page'] == 'products') ? 'main-nav__link--active' : ''?>">Products</a></li>
+        <?php if ($this->params['offer_menu']){?>          
           <li class="main-nav__item"><a href="<?=Url::to(['site/special-offer']);?>" class="main-nav__link <?=($this->params['page'] == 'special-offer') ? 'main-nav__link--active' : ''?>">Special Offers</a></li>
+          <?php }?>
           <li class="main-nav__item"><a href="<?=Url::to(['site/faq']);?>" class="main-nav__link <?=($this->params['page'] == 'faq') ? 'main-nav__link--active' : ''?>">F.A.Q.</a></li>
           <li class="main-nav__item"><a href="<?=Url::to(['site/support']);?>" class="main-nav__link <?=($this->params['page'] == 'support') ? 'main-nav__link--active' : ''?>">Support</a></li>
           <li class="main-nav__item"><a href="<?=Url::to(['blog/index']);?>" class="main-nav__link <?=($this->params['page'] == 'blog') ? 'main-nav__link--active' : ''?>">Blog</a></li>
@@ -186,22 +188,17 @@ AppAsset::register($this);
 <div class="social-pane">
       <ul class="sp__list">
         <li class="sp__item">
-          <a href="" class="sp__link">
+            <a href="https://www.facebook.com/MarketingHackNet/" class="sp__link" target="_blank">
             <i class="fb"></i>
           </a>
         </li>
         <li class="sp__item">
-          <a href="" class="sp__link">
+          <a href="https://twitter.com/MarketingHackTw" class="sp__link" target="_blank">
             <i class="tw"></i>
           </a>
         </li>
         <li class="sp__item">
-          <a href="" class="sp__link">
-            <i class="gp"></i>
-          </a>
-        </li>
-        <li class="sp__item">
-          <a href="" class="sp__link">
+          <a href="https://www.pinterest.com/MarketingHack/" class="sp__link" target="_blank">
             <i class="pt"></i>
           </a>
         </li>
@@ -252,7 +249,7 @@ AppAsset::register($this);
                   <a href="<?=Url::to(['site/support']);?>" class="mf__link">Support</a>
                 </li>
                 <li class="mf__item">
-                  <a href="" class="mf__link">Facebook</a>
+                  <a href="https://www.facebook.com/MarketingHackNet/" class="mf__link">Facebook</a>
                 </li>
               </ul>
             </div>

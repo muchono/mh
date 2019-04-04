@@ -114,7 +114,7 @@ $this->title = 'Home';
         </div>
       </div>
     </section>
-    
+    <!--
     <section class="statistics">
       <div class="container">
         <h2 class="title-3">MarketingHack Statistics</h2>
@@ -138,7 +138,8 @@ $this->title = 'Home';
         </div>
       </div>
     </section>
-    
+    -->
+    <?php if (!empty($aboutUsContent)) {?>
     <section class="press-about-us">
       <div class="container">
         <h2 class="title-1 text-center">Press About Us</h2>
@@ -161,7 +162,9 @@ $this->title = 'Home';
         </div>
       </div>
     </section>
+    <?php }?>
     
+    <?php if (!empty($aboutUsContent)) {?>
     <section class="testimonials">
       <div class="container">
         <h2 class="title-1 text-center">What People Think About Us</h2>
@@ -186,6 +189,8 @@ $this->title = 'Home';
         </div>
       </div>
     </section>
+    <?php }?>
+    
     <section class="create-account">
       <div class="container">
         <p class="ca__text-1">Get access to actual websites lists and step-by-step guides right now! </p>

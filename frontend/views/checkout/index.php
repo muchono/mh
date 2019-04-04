@@ -154,7 +154,9 @@ $this->registerJsFile(
     [
         'id' => "fsc-api",
         'data-storefront' => "nmsystems.test.onfastspring.com/popup-nmsystems",
-        'position' => View::POS_HEAD
+        'position' => View::POS_HEAD,
+        'data-debug' => "true",
+        'position' => View::POS_HEAD,
     ],
     'fast-pay'
 );
