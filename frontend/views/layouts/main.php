@@ -213,7 +213,7 @@ AppAsset::register($this);
               <div class="mf-logo">
                 <a href=""><img src="img/main-logo.png" alt="" class="img-fluid"></a>
               </div>
-              <p class="mf-copy">Copyright © 2017. MarketingHack.net. All rights reserved.</p>
+              <p class="mf-copy">Copyright © <?=date('Y')?>. MarketingHack.net. All rights reserved.</p>
               <p class="mf-text">We use electronic cookies as part of our normal business operations. By using this website, we assume you are happy with this. </p>
             </div>
             <div class="mf-menu">
@@ -260,12 +260,11 @@ AppAsset::register($this);
         <div class="container">
           <ul class="payment-list">
             <li class="payment-list__title">Secure Payment:</li>
-            <li><a href=""><i class="maestro-ic"></i></a></li>
-            <li><a href=""><i class="visa-ic"></i></a></li>
-            <li><a href=""><i class="ae-ic"></i></a></li>
-            <li><a href=""><i class="paypal-ic"></i></a></li>
-            <li><a href=""><i class="bitcoin-ic"></i></a></li>
-            <li><a href=""><i class="webmoney-ic"></i></a></li>
+            <li><i class="maestro-ic"></i></li>
+            <li><i class="visa-ic"></i></li>
+            <li><i class="ae-ic"></i></li>
+            <li><i class="bitcoin-ic"></i></li>
+            <li><i class="webmoney-ic"></i></li>
           </ul>
         </div>
       </div>

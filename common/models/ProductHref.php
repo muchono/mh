@@ -8,6 +8,8 @@ use yii\behaviors\BlameableBehavior;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 //use lhs\Yii2SaveRelationsBehavior\SaveRelationsTrait;
 
+use backend\extensions\AlexaRanking;
+
 require_once __DIR__ . DIRECTORY_SEPARATOR . '../../backend/extensions/SEOstats' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
 
@@ -110,7 +112,7 @@ class ProductHref extends \yii\db\ActiveRecord
 
             $seostats->setUrl($this->url);
             
-            $this->alexa_rank = \SEOstats\Services\Alexa::getGlobalRank();
+            $this->alexa_rank = $this->loadAlexaRank();
             $this->da_rank = round(\SEOstats\Services\Mozscape::getDomainAuthority(), 2);
         }
         return parent::beforeSave($insert);
@@ -154,6 +156,16 @@ class ProductHref extends \yii\db\ActiveRecord
         return preg_replace('/href=".*"/', 'href="#"', $this->about);
     }
 
+    /**
+     * Get Alexa Rank
+     * @return int Alexa Rank
+     */
+    public function loadAlexaRank()
+    {
+        $stat = new AlexaRanking();
+        return $stat->getRank($this->url);
+    }
+    
     public function getUrlCoded()
     {
         return preg_replace('/\w/i', '*', $this->url);
