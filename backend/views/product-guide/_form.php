@@ -15,7 +15,7 @@ use dosamigos\tinymce\TinyMce;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'product_id')->hiddenInput(['maxlength' => true, 'value' => $model->getProduct()->id])->label(false); ?>
+    <?= $form->field($model, 'product_id')->hiddenInput(['maxlength' => true, 'value' => $model->isNewRecord ? $model->getProduct()->id : $model->product_id])->label(false); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 

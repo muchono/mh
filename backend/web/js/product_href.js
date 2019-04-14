@@ -11,7 +11,7 @@ $().ready(function(){
         
         $("#block_hrefs table").append('<tr class="new">'+new_el+'</tr>');
         
-        tinymce.init({"branding":false,"menubar":false,"plugins":["link"],"toolbar":"bold link","selector":"#about" + d,"language_url":"/backend/web/assets/c81b3d9b/langs/en_GB.js"});
+        tinymce.init({"branding":false,"menubar":false,"plugins":["link"],"toolbar":"bold link","selector":"#about" + d,"language_url":"assets/c81b3d9b/langs/en_GB.js"});
         
         $('#about'+d).parents('form').on('beforeValidate', function() { tinymce.triggerSave(); });
         
