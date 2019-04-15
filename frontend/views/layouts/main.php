@@ -70,19 +70,19 @@ AppAsset::register($this);
         <span></span>
       </a>
       <div class="logo">
-        <a href="<?=Url::to(['site/index']);?>" class="logo__link"><img src="<?=Url::base()?>/img/main-logo.png" alt="" class="img-fluid"></a>
+        <a href="<?=Url::home();?>" class="logo__link"><img src="<?=Url::base()?>/img/main-logo.png" alt="" class="img-fluid"></a>
       </div>
       <nav class="main-nav">
         <ul class="main-nav__list">
-          <li class="main-nav__item"><a href="<?=Url::to(['site/index']);?>" class="main-nav__link <?=($this->params['page'] == 'home') ? 'main-nav__link--active' : ''?>">Home</a></li>
-          <li class="main-nav__item"><a href="<?=Url::to(['site/hiw']);?>" class="main-nav__link <?=($this->params['page'] == 'hiw') ? 'main-nav__link--active' : ''?>">How It Works</a></li>
-          <li class="main-nav__item"><a href="<?=Url::to(['site/products']);?>" class="main-nav__link <?=($this->params['page'] == 'products') ? 'main-nav__link--active' : ''?>">Products</a></li>
+          <li class="main-nav__item"><a href="<?=Url::home();?>" class="main-nav__link <?=($this->params['page'] == 'home') ? 'main-nav__link--active' : ''?>">Home</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['hiw/']);?>" class="main-nav__link <?=($this->params['page'] == 'hiw') ? 'main-nav__link--active' : ''?>">How It Works</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['products/']);?>" class="main-nav__link <?=($this->params['page'] == 'products') ? 'main-nav__link--active' : ''?>">Products</a></li>
         <?php if ($this->params['offer_menu']){?>          
-          <li class="main-nav__item"><a href="<?=Url::to(['site/special-offer']);?>" class="main-nav__link <?=($this->params['page'] == 'special-offer') ? 'main-nav__link--active' : ''?>">Special Offers</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['special-offer/']);?>" class="main-nav__link <?=($this->params['page'] == 'special-offer') ? 'main-nav__link--active' : ''?>">Special Offers</a></li>
           <?php }?>
-          <li class="main-nav__item"><a href="<?=Url::to(['site/faq']);?>" class="main-nav__link <?=($this->params['page'] == 'faq') ? 'main-nav__link--active' : ''?>">F.A.Q.</a></li>
-          <li class="main-nav__item"><a href="<?=Url::to(['site/support']);?>" class="main-nav__link <?=($this->params['page'] == 'support') ? 'main-nav__link--active' : ''?>">Support</a></li>
-          <li class="main-nav__item"><a href="<?=Url::to(['blog/index']);?>" class="main-nav__link <?=($this->params['page'] == 'blog') ? 'main-nav__link--active' : ''?>">Blog</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['faq/']);?>" class="main-nav__link <?=($this->params['page'] == 'faq') ? 'main-nav__link--active' : ''?>">F.A.Q.</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['support/']);?>" class="main-nav__link <?=($this->params['page'] == 'support') ? 'main-nav__link--active' : ''?>">Support</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['blog/']);?>" class="main-nav__link <?=($this->params['page'] == 'blog') ? 'main-nav__link--active' : ''?>">Blog</a></li>
         </ul>
       </nav>
 

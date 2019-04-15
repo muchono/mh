@@ -20,7 +20,7 @@ class ProductUrlRule extends Object implements UrlRuleInterface
     public function parseRequest($manager, $request)
     {
         $pathInfo = $request->getPathInfo();
-        if (preg_match('/^([\w-]+)?$/', $pathInfo, $matches)) {
+        if (preg_match('/^([\w-]+)?$/', $pathInfo, $matches) && trim($matches[0])) {
             $page = ProductPage::findOne(['link' => $matches[0]]);
             if ($page) {
                 return ['site/product', ['product_id' => $page->product_id]];

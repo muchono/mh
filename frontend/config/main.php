@@ -40,11 +40,17 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'enableStrictParsing' => false,            
+            'enableStrictParsing' => false,    
+            
             'rules' => [
                 [
                     'class' => 'app\components\ProductUrlRule',
                 ],
+                'hiw' => 'site/hiw',
+                'products' => 'site/products',
+                'special-offer' => 'site/special-offer',
+                'faq' => 'site/faq',
+                'support' => 'site/support',
             ],
         ],
     ],
