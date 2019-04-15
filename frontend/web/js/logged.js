@@ -1,6 +1,6 @@
 var Logged = (function() {
     var vars = {
-        list_url: '?r=content/list',
+        list_url: WEB_PATH+'content/list',
         product_id: 0,
         guide: '',
         list: '',
@@ -32,7 +32,7 @@ var Logged = (function() {
         $(".content-add-tocart").click(function(){
             var obj = $(this);
 			addToCart(obj.attr('for'), 1, obj, function(){
-				location.href = '?r=cart/index';
+				location.href = WEB_PATH+'cart/index';
 			});
         });
 		
@@ -110,7 +110,7 @@ var Logged = (function() {
     function markLink(link, available) {
         link.removeClass('icon-11').addClass('icon-10');
         if (available) {
-            $.post( "?r=content/mark-link",{'link': link.attr('for')});
+            $.post( WEB_PATH+"content/mark-link",{'link': link.attr('for')});
         }
     }
     
@@ -121,7 +121,7 @@ var Logged = (function() {
     function tabGuideFill(load_content) {
         $.ajax({
             type: 'POST',
-            url: '?r=content/guide',
+            url: WEB_PATH+'content/guide',
             data: {'project_id': vars.product_id},
             success:function(data){
                 vars.guide = data.c;
@@ -162,7 +162,7 @@ var Logged = (function() {
         var list = $('input[name="report[]"]:checked');
         if (list.length) {
             var data = list.serializeArray();
-            $.post("?r=content/send-report&for="+vars.report_for, data)
+            $.post(WEB_PATH+"content/send-report&for="+vars.report_for, data)
             .done(function(){
                 $('.report').hide();                
                 var dialog = $('#report_result');

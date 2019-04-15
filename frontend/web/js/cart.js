@@ -1,6 +1,6 @@
 var Cart = (function() {
     var vars = {
-        list_url: '?r=content/list',
+        list_url: WEB_PATH+'content/list',
     };
     var root = this;
     
@@ -45,7 +45,7 @@ var Cart = (function() {
     function deleteItem(product_id) {
         $.ajax({
             type: 'POST',
-            url: 'index.php?r=cart/delete-item',
+            url: WEB_PATH+'cart/delete-item',
             data: {'product_id': product_id},
             success:function(data){
                 updateList();
@@ -61,7 +61,7 @@ var Cart = (function() {
     function setMonths(product_id, months) {
         $.ajax({
             type: 'POST',
-            url: 'index.php?r=cart/set-months',
+            url: WEB_PATH+'cart/set-months',
             data: {'product_id': product_id, 'months': months},
             success:function(data){
                 updateList();

@@ -161,7 +161,7 @@
           </div>
           <div class="report__content">
             <figure class="report__img">
-              <img src="img/report-thank-img.jpg" alt="" class="img-fluid">
+              <img src="<?=Url::base()?>/img/report-thank-img.jpg" alt="" class="img-fluid">
             </figure>
           </div>
           <div class="report__foot">

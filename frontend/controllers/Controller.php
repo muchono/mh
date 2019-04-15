@@ -4,11 +4,13 @@ namespace frontend\controllers;
 
 use Yii;
 use yii\helpers\Url;
+use yii\web\View;
 use common\models\Discount;
 use common\models\User;
 use frontend\models\SignupForm;
 use frontend\models\LoginForm;
 use frontend\models\ForgotForm;
+
 
 use common\models\Cart;
 
@@ -28,6 +30,12 @@ class Controller extends \yii\web\Controller
             $user->active_at = time();
             $user->save();
         }
+
+        $this->view->registerJs(
+            "var WEB_PATH = '".URL::base(true)."/'",
+            View::POS_HEAD,
+            'global-script'
+         );
         
         return parent::beforeAction($action);
     }  

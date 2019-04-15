@@ -14,7 +14,7 @@ use yii\helpers\ArrayHelper;
       <div class="message-page">
         <h1 class="mp__title mp__title--success">Password changed successfully.</h1>
         <figure class="mp__img">
-          <img src="img/msg-success-img.jpg" alt="" class="img-fluid">
+          <img src="<?=Url::base()?>/img/msg-success-img.jpg" alt="" class="img-fluid">
         </figure>
       </div>          
           <?php } else {?>

@@ -1,6 +1,6 @@
 var Account = (function() {
     var vars = {
-        list_url: '?r=content/list',
+        list_url: WEB_PATH + 'content/list',
     };
     var root = this;
     
@@ -8,7 +8,7 @@ var Account = (function() {
         $('.renew-button').on('click', function(event) {
             event.preventDefault();
             addToCart($(this).attr('for'), 1, $(this), function(){
-                location.replace('?r=cart/index');
+                location.replace(WEB_PATH+'cart/index');
             });
         });
         $('#renew_all_button').on('click', function(event) {
@@ -20,7 +20,7 @@ var Account = (function() {
                     var callback = function(){};
                     if (i >= checked.length){
                         var callback = function(){
-                            location.replace('?r=cart/index');
+                            location.replace(WEB_PATH+'cart/index');
                         };
                     }
                     addToCart($(this).val(), 1, $(this), callback);

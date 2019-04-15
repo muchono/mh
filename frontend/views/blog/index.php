@@ -13,7 +13,7 @@ use yii\helpers\Url;
          <div class="post-list__item">
             <article class="post">
               <figure class="post__image">
-                <a href="<?=Url::to(['post', 'id'=>$p->id]);?>"><img src="images/blog/<?=$p->image?>" alt="" class="img-fluid"></a>
+                <a href="<?=Url::to(['post', 'id'=>$p->id]);?>"><img src="<?=Url::base()?>/images/blog/<?=$p->image?>" alt="" class="img-fluid"></a>
               </figure>
               <div class="post__content">
                 <h3 class="title-7 "><a href="<?=Url::to(['post', 'id'=>$p->id]);?>"><?=$p->title?></a></h3>

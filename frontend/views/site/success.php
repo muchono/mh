@@ -8,7 +8,7 @@ use yii\helpers\Url;
   <div class="message-page">
     <h1 class="mp__title mp__title--success"><?=$text?> </h1>
     <figure class="mp__img">
-      <img src="img/msg-success-img.jpg" alt="" class="img-fluid">
+      <img src="<?=Url::base()?>/img/msg-success-img.jpg" alt="" class="img-fluid">
     </figure>
     <a href="<?=Url::to(['site/index'])?>" class="btn-8">return to home</a>
   </div>

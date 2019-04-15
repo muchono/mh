@@ -149,7 +149,7 @@ $this->title = 'Home';
           <div>
             <div class="pas__item">
               <div class="pas__logo">
-                <img src="images/aboutus/<?=$i->image?>" class="img-fluid" alt="">
+                <img src="<?=Url::base()?>/images/aboutus/<?=$i->image?>" class="img-fluid" alt="">
               </div>
               <div class="pas__content">
                 <i class="icon-4"></i>
@@ -177,7 +177,7 @@ $this->title = 'Home';
                 <p class="tst__text"><?=$i->content?></p>
               </div>
               <div class="tst__user">
-                <img src="images/aboutus/<?=$i->image?>" class="tst__ava" alt="">
+                <img src="<?=Url::base()?>/images/aboutus/<?=$i->image?>" class="tst__ava" alt="">
                 <div class="tst__info">
                   <h3><?=$i->author_name?></h3>
                   <p><?=$i->author_bio?></p>

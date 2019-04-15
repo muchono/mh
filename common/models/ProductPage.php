@@ -10,6 +10,7 @@ use Yii;
  * @property string $id
  * @property string $product_id
  * @property string $title
+ * @property string $link
  * @property string $description
  * @property string $guide_description
  * @property string $list_description
@@ -42,10 +43,10 @@ class ProductPage extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['product_id','title','description','guide_description','list_description','content'], 'required'],
+            [['product_id','title','description','guide_description','list_description','content', 'link'], 'required'],
             [['product_id'], 'integer'],
             [['description', 'content'], 'string'],
-            [['title'], 'string', 'max' => 255],
+            [['title', 'link'], 'string', 'max' => 255],
             [['guide_description', 'list_description', 'feature1', 'feature2', 'feature3', 'feature4', 'feature5'], 'string', 'max' => 500],
         ];
     }
@@ -76,6 +77,7 @@ class ProductPage extends \yii\db\ActiveRecord
             'id' => 'ID',
             'product_id' => 'Product ID',
             'title' => 'Title',
+            'link' => 'Link',
             'description' => 'Description',
             'guide_description' => 'Guide Description',
             'list_description' => 'List Description',

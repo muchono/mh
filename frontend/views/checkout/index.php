@@ -30,7 +30,7 @@ use yii\helpers\ArrayHelper;
           <input type="radio" name="UserBilling[payment]" id="pay-<?=$k?>" value="<?=$pay?>" <?=$userBilling->payment == $pay ? 'checked' : ''?>>
           <label class="pay-btn" for="pay-<?=$k?>">
             <span class="pay-btn__icon">
-              <img src="img/pay-<?=$k?>-ic.png" alt="" class="img-fluid">
+              <img src="<?=Url::base()?>/img/pay-<?=$k?>-ic.png" alt="" class="img-fluid">
             </span>
             <span class="pay-btn__text"><?=$pay?></span>
           </label>

@@ -41,8 +41,8 @@ AppAsset::register($this);
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900|Open+Sans:300,400,600,700|PT+Sans:400,700" rel="stylesheet">
 
   <!-- Vendor CSS -->
-  <link rel="stylesheet" href="vendor/slick-carousel/slick/slick.css">
-  <link rel="stylesheet" href="vendor/magnific-popup/dist/magnific-popup.css">
+  <link rel="stylesheet" href="<?=Url::base()?>/vendor/slick-carousel/slick/slick.css">
+  <link rel="stylesheet" href="<?=Url::base()?>/vendor/magnific-popup/dist/magnific-popup.css">
 
   <!-- Head Libs -->
   <!-- <script src="bower_components/modernizr/modernizr.js"></script> -->    
@@ -60,7 +60,7 @@ AppAsset::register($this);
           <span></span>
         </a>
         <div class="logo">
-          <a href="" class="logo__link"><img src="img/main-logo.png" alt="" class="img-fluid"></a>
+          <a href="" class="logo__link"><img src="<?=Url::base()?>/img/main-logo.png" alt="" class="img-fluid"></a>
         </div>
         <nav class="main-nav">
           <ul class="main-nav__list">
@@ -82,7 +82,7 @@ AppAsset::register($this);
         
     <div class="side-menu js-side-menu">
       <div class="sm__logo">
-        <a href="<?=Url::to(['site/index'])?>" class="logo__link"><img src="img/main-logo.png" alt="" class="img-fluid"></a>
+        <a href="<?=Url::to(['site/index'])?>" class="logo__link"><img src="<?=Url::base()?>/img/main-logo.png" alt="" class="img-fluid"></a>
       </div>
       <div class="sm__top">
         <a href="" class="sm-btn"><i class="icon-5"></i></a>
@@ -234,10 +234,10 @@ AppAsset::register($this);
 <?= $this->renderFile('@frontend/views/layouts/_signup.php', []) ?>
 <?php $this->endBody() ?>
   <!-- Vendor -->
-  <script src="vendor/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
-  <script src="vendor/slick-carousel/slick/slick.min.js"></script>
+  <script src="<?=Url::base()?>/vendor/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
+  <script src="<?=Url::base()?>/vendor/slick-carousel/slick/slick.min.js"></script>
   <!-- Theme Base -->
-  <script src="js/main.js"></script>
+  <script src="<?=Url::base()?>/js/main.js"></script>
 <?php
 $this->registerJsFile(
     '@web/js/logged.js'

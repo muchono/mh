@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="<?=Url::base(true)?>/css/app.css" />
     <title>New Offer</title>
     <style>
     @media only screen {
