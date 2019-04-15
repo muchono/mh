@@ -53,7 +53,7 @@ $this->title = 'Special Offers';
                   <?php } else {?>
                   <span class="pd-try__price">$<?=$p->priceFinal?></span>
                   <?php } ?>
-                  <span class="pd-try__add" for="<?=$p->id?>">                
+                  <span class="pd-try__add add2cart" for="<?=$p->id?>">                
                     <i class="icon-3"></i>
                   </span>
                   <a href="<?=Url::to(['content/index','product_id'=>$p->id])?>" class="btn-sm-1">try demo</a>

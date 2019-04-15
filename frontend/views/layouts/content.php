@@ -212,8 +212,18 @@ AppAsset::register($this);
             </ul>
             <div class="tab-content"></div>
             <div class="tab-foot">
-            <?php if (Yii::$app->user->isGuest){?>
-            <a href="#signup-popup" class="btn-3 js-popups">Get Free Access</a>
+            <?php if (!$this->params['selected_product']->priceFinal){?>
+                <?php if (Yii::$app->user->isGuest){?>
+                <a href="#signup-popup" class="btn-3 js-popups">Get Free Access</a>
+                <?php } else {?>
+                <a href="#" class="btn-3 content-add-tocart" for="<?=$this->params['selected_product']->id?>">Get Free Access</a>
+                <?php }?>
+            <?php } else {?>
+                <?php if (Yii::$app->user->isGuest){?>
+                <a href="#signup-popup" class="btn-3 js-popups">Buy Full Version</a>
+                <?php } else {?>
+                <a href="#" class="btn-3 content-add-tocart" for="<?=$this->params['selected_product']->id?>">Buy Full Version</a>
+                <?php }?>
             <?php }?>
           </div>
           <div class="loader" style="display:none">&nbsp;</div>

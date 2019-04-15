@@ -46,12 +46,21 @@ var $body = $('body');
             $('.discount-line').hide(200);
         });
     });
-    
-    $('.pd-try__add').click(function(e){
+
+    $('.add2cart').click(function(e){
         e.preventDefault();
         addToCart($(this).attr('for'), 1, $(this));
     });
+	
+    $('.buy-full-btn').click(function(e){
+        e.preventDefault();
+        addToCart($(this).attr('for'), 1, $(this), function () {
+			location.replace("?r=cart/index");
+		});
+    });
 })();
+
+
 
 // Carousel
 (function() {
