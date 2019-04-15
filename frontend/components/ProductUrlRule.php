@@ -2,9 +2,10 @@
 namespace app\components;
 
 use yii\web\UrlRuleInterface;
-use yii\base\BaseObject;
+use yii\base\Object;
+use common\models\ProductPage;
 
-class ProductUrlRule extends BaseObject implements UrlRuleInterface
+class ProductUrlRule extends Object implements UrlRuleInterface
 {
     public function createUrl($manager, $route, $params)
     {
@@ -19,9 +20,11 @@ class ProductUrlRule extends BaseObject implements UrlRuleInterface
     public function parseRequest($manager, $request)
     {
         $pathInfo = $request->getPathInfo();
-        if (preg_match('%^(\w+)(/(\w+))?$%', $pathInfo, $matches)) {
-            print_r($matches);
-            exit;
+        if (preg_match('/^([\w-]+)?$/', $pathInfo, $matches)) {
+            $page = ProductPage::findOne(['link' => $matches[0]]);
+            if ($page) {
+                return ['site/product', ['product_id' => $page->product_id]];
+            }
         }
         return false;
     }
