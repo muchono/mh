@@ -51,6 +51,17 @@ class BlogController extends \frontend\controllers\Controller
         }
     }
     
+    public function actionUrl($url)
+    {
+        if (!empty($url)) {
+            $model = Post::find(['url_anckor' => trim($url)])->one();
+            if ($model) {
+                return $this->actionPost($model->id);
+            }
+        }
+        return $this->redirect(['index']);
+    }    
+    
     public function actionSubscribe()
     {
         $subscriber = new Subscriber;
