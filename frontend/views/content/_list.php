@@ -1,3 +1,6 @@
+<?php
+use yii\helpers\Url;
+?>
             <div class="table-view">
               <div class="table-info">
                 <div>Latest update: <strong><?=$last_update?></strong></div>

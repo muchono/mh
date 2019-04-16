@@ -3,6 +3,7 @@
 use yii\web\View;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 
 ?>
 <section class="simple-page sm">
