@@ -160,7 +160,7 @@ class SiteController extends \frontend\controllers\Controller
                             ->setTo($user->email)
                             ->setFrom(Yii::$app->params['adminEmail'])
                             ->setSubject('Special 40% off for new users')
-                            ->setTextBody($body)
+                            ->setHtmlBody($body)
                             ->send();                
                 
                 $this->layout= 'result';
@@ -196,7 +196,7 @@ class SiteController extends \frontend\controllers\Controller
                             ->setTo($user->email)
                             ->setFrom(Yii::$app->params['adminEmail'])
                             ->setSubject('New Password - MarketingHack.net')
-                            ->setTextBody($body)
+                            ->setHtmlBody($body)
                             ->send();
                         
                 $this->layout= 'result';
@@ -307,7 +307,7 @@ class SiteController extends \frontend\controllers\Controller
                             ->setTo($model->email)
                             ->setFrom(Yii::$app->params['adminEmail'])
                             ->setSubject('Thank you for your inquiry - '.$ticket_id)
-                            ->setTextBody($body)
+                            ->setHtmlBody($body)
                             ->send();
                 
                 return $this->redirect(['site/success']);
@@ -334,7 +334,7 @@ Yii::$app->mailer->compose()
             ->setTo('mailmuchenik@gmail.com')
             ->setFrom(Yii::$app->params['adminEmail'])
             ->setSubject('Registration confirmation')
-            ->setTextBody('body')
+            ->setHtmlBody('body')
             ->send();
 
 exit('SEND');
@@ -425,7 +425,7 @@ exit('SEND');
                             ->setTo($user->email)
                             ->setFrom(Yii::$app->params['adminEmail'])
                             ->setSubject('Subscription ends in 5 days')
-                            ->setTextBody($body)
+                            ->setHtmlBody($body)
                             ->send();
                 
                 $d->five_days_notify = 1;
@@ -462,7 +462,7 @@ exit('SEND');
                             ->setTo($user->email)
                             ->setFrom(Yii::$app->params['adminEmail'])
                             ->setSubject('Subscription has expired')
-                            ->setTextBody($body)
+                            ->setHtmlBody($body)
                             ->send();
                 
                 $d->expiration_notify = 1;

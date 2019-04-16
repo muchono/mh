@@ -80,7 +80,7 @@ class LoginForm extends Model
                                 ->setTo($user->email)
                                 ->setFrom(Yii::$app->params['adminEmail'])
                                 ->setSubject('Suspicious activity in your account')
-                                ->setTextBody($body)
+                                ->setHtmlBody($body)
                                 ->send();
 
                     $this->addError($attribute, 'Suspicious activity. Account was blocked. Check your e-mail for details.');

@@ -62,7 +62,7 @@ class SupportQuestion extends Model
             ->setTo($email)
             ->setFrom([$this->email => $this->name])
             ->setSubject($this->subject)
-            ->setTextBody('Ticket #' . $ticket_id . '<br><br>' . $this->short_question. '<br><br>' . $this->message)
+            ->setHtmlBody('Ticket #' . $ticket_id . '<br><br>' . $this->short_question. '<br><br>' . $this->message)
             ->send();
     }
 }

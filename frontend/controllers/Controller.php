@@ -68,7 +68,7 @@ class Controller extends \yii\web\Controller
                             ->setTo($user->email)
                             ->setFrom(Yii::$app->params['adminEmail'])
                             ->setSubject('Password Reset - MarketingHack.net')
-                            ->setTextBody($body)
+                            ->setHtmlBody($body)
                             ->send();                
                 echo 'The instructions were sent to your e-mail!';
                 exit;

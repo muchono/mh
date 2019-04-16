@@ -1,7 +1,7 @@
 <?php
 return [
-    'adminEmail' => 'admin@example.com',
-    'supportEmail' => 'support@example.com',
+    'adminEmail' => 'info@marketinghack.net',
+    'supportEmail' => 'support@marketinghack.net',
     'user.passwordResetTokenExpire' => 3600,
     'payments' => array(
         'Webmoney' => array(

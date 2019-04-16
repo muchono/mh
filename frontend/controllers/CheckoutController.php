@@ -214,7 +214,7 @@ class CheckoutController extends \frontend\controllers\Controller
                             ->setTo($user->email)
                             ->setFrom(Yii::$app->params['adminEmail'])
                             ->setSubject('Thank you for the purchase')
-                            ->setTextBody($body)
+                            ->setHtmlBody($body)
                             ->attach($pdf_path)
                             ->send();
                 

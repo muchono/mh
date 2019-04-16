@@ -53,7 +53,7 @@ class GetDemoForm extends Model
             ->setTo($email)
             ->setFrom([$this->email => $this->name])
             ->setSubject($this->subject)
-            ->setTextBody($this->short_question. '<br><br>' . $this->message)
+            ->setHtmlBody($this->short_question. '<br><br>' . $this->message)
             ->send();
     }
 }

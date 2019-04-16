@@ -158,7 +158,7 @@ class DiscountController extends Controller
                         ->setTo($user->email)
                         ->setFrom(Yii::$app->params['adminEmail'])
                         ->setSubject($offer->title.' from MarketingHack.net')
-                        ->setTextBody($body)
+                        ->setHtmlBody($body)
                         ->send();            
 
         }
@@ -180,7 +180,7 @@ class DiscountController extends Controller
                         ->setTo($s->email)
                         ->setFrom(Yii::$app->params['adminEmail'])
                         ->setSubject($offer->title.' from MarketingHack.net')
-                        ->setTextBody($body)
+                        ->setHtmlBody($body)
                         ->send();
         }
     }

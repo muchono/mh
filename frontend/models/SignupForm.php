@@ -76,7 +76,7 @@ class SignupForm extends Model
             ->setTo($this->email)
             ->setFrom(Yii::$app->params['adminEmail'])
             ->setSubject('Registration Confirmation - MarketingHack.net')
-            ->setTextBody($body)
+            ->setHtmlBody($body)
             ->send();
     }
 }

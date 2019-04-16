@@ -162,7 +162,7 @@ class PostController extends Controller
                         ->setTo($user->email)
                         ->setFrom(Yii::$app->params['adminEmail'])
                         ->setSubject('MarketingHack New Post')
-                        ->setTextBody($body)
+                        ->setHtmlBody($body)
                         ->send();            
 
         }
@@ -184,7 +184,7 @@ class PostController extends Controller
                         ->setTo($s->email)
                         ->setFrom(Yii::$app->params['adminEmail'])
                         ->setSubject('MarketingHack New Post')
-                        ->setTextBody($body)
+                        ->setHtmlBody($body)
                         ->send();            
         }
     }
