@@ -225,7 +225,7 @@ AppAsset::register($this);
                   <li class="mf__item"><a href="<?=Url::to(['site/special-offer']);?>" class="mf__link">Special Offers</a></li>
                   <li class="mf__item"><a href="<?=Url::to(['site/faq']);?>" class="mf__link">F.A.Q.</a></li>
                   <li class="mf__item"><a href="<?=Url::to(['site/terms']);?>" class="mf__link">Terms of Use</a></li>
-                  <li class="mf__item"><a href="<?=Url::to(['blog/index']);?>" class="mf__link">Blog</a></li>
+                  <li class="mf__item"><a href="<?=Url::to(['blog/']);?>" class="mf__link">Blog</a></li>
                 </ul>
               </nav>
             </div>
@@ -234,7 +234,7 @@ AppAsset::register($this);
               <ul class="mf__list">
                 <?php foreach (Product::find()->where(['status' => 1])->limit(5)->all() as $p) {?>
                 <li class="mf__item">
-                  <a href="<?=Url::to(['site/product','product_id'=>$p->id])?>" class="mf__link"><?=$p->links_available ? $p->getHrefsCount() : ''?>  <?=$p->title?></a>
+                  <a href="<?=Url::to(['site/product','link'=>$p->page->link])?>" class="mf__link"><?=$p->links_available ? $p->getHrefsCount() : ''?>  <?=$p->title?></a>
                 </li>
                 <?php }?>
               </ul>
@@ -242,9 +242,10 @@ AppAsset::register($this);
             <div class="mf-contacts">
               <h3 class="mf-title">Contact Info</h3>
               <ul class="mf__list">
+                  <!--
                 <li class="mf__item">
                   <a href="<?=Url::to(['site/contact']);?>" class="mf__link">Contact Us</a>
-                </li>
+                </li>-->
                 <li class="mf__item">
                   <a href="<?=Url::to(['site/support']);?>" class="mf__link">Support</a>
                 </li>
