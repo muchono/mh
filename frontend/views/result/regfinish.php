@@ -9,6 +9,6 @@ use yii\helpers\Url;
         </figure>
         <p class="mp__lg-text">We’ve sent you an email with instructions to: <span><?=$email?></span></p>
         <p class="mp__sm-text">This email sometimes ends up in the spam, bulk or junk <br>mail, so please check these folders as well.</p>
-        <a href="<?=Url::to(['site/index']);?>" class="btn-8">return to home</a>
+        <a href="<?=Url::home();?>" class="btn-8">return to home</a>
       </div>
     </section>
