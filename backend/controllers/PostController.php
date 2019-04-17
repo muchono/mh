@@ -147,10 +147,9 @@ class PostController extends Controller
     public function sendNotification(Post $post)
     {
         //send to registered users
-        $usersBilling = \common\models\UserBilling::find()->where(['subscribe_blog' => 1])->all();
-        foreach($usersBilling as $ub) {
-            $user = \common\models\User::findOne($ub->user_id);
-            
+        $users = \common\models\User::find()->where(['subscribe_blog' => 1, 'active' => 1])->all();
+        foreach($users as $user) {
+
             $body = Yii::$app->controller->renderPartial('@app/views/mails/post.php', [
                 'post' => $post,
                 'front_url' => Yii::$app->urlManagerFrontend->getHostInfo().Yii::$app->urlManagerFrontend->getBaseUrl('').'/',

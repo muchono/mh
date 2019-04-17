@@ -54,6 +54,7 @@ class SignupForm extends Model
         $this->user->email = $this->email;
         
         $this->user->active = $this->user->registration_confirmed = 0;
+        $this->user->subscribe_offers = $this->user->subscribe_blog = 1;
         
         $this->user->setPassword($this->password);
         $this->user->generateAuthKey();

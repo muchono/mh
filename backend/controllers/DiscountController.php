@@ -141,9 +141,8 @@ class DiscountController extends Controller
     public function sendNotification(Discount $offer)
     {
         //send to registered users
-        $usersBilling = \common\models\UserBilling::find()->where(['subscribe_offers' => 1])->all();
-        foreach($usersBilling as $ub) {
-            $user = \common\models\User::findOne($ub->user_id);
+        $users = \common\models\User::find()->where(['subscribe_offers' => 1, 'active' => 1])->all();
+        foreach($users as $user) {
             $products = [];
             foreach ($offer->products as $p) {
                 $products[] = $p->title;
@@ -157,17 +156,15 @@ class DiscountController extends Controller
                 'products' => join(', ', $products),
             ]);
             
-            print $user->email .' ';
-            /*
             Yii::$app->mailer->compose()
                         ->setTo($user->email)
                         ->setFrom(Yii::$app->params['adminEmail'])
                         ->setSubject($offer->title.' from MarketingHack.net')
                         ->setHtmlBody($body)
-                        ->send();            */
+                        ->send();
 
         }
-        exit;
+
         
         //send to subscribed users
         $slist = Subscriber::find()

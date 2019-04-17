@@ -30,7 +30,8 @@ use yii\widgets\ActiveForm;
     
     
 
-    <?= $form->field($model, 'subscribe')->checkbox() ?>
+    <?= $form->field($model, 'subscribe_offers')->checkbox() ?>
+    <?= $form->field($model, 'subscribe_blog')->checkbox() ?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
