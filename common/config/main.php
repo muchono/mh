@@ -1,6 +1,9 @@
 <?php
 $config = [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+    'aliases' => [
+        '@front_html' => '/var/www/html',
+    ],
     'components' => [
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',

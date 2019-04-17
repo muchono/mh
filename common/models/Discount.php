@@ -167,7 +167,7 @@ class Discount extends \yii\db\ActiveRecord
      */
     public function getImagesRootDir()
     {
-        return Yii::getAlias('@frontend') . '/web/images/discount/';
+        return Yii::getAlias('@front_html') . '/images/discount/';
     }
     
     /**
