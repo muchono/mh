@@ -147,9 +147,10 @@ class PostController extends Controller
     public function sendNotification(Post $post)
     {
         //send to registered users
-        $users = \common\models\User::find()->where(['subscribe_blog' => 1, 'active' => 1])->all();
+        $users = User::find()->where(['subscribe_blog' => 1, 'active' => 1])->all();
         foreach($users as $user) {
-
+            print $user->email.' '.Yii::$app->params['adminEmail'];
+            
             $body = Yii::$app->controller->renderPartial('@app/views/mails/post.php', [
                 'post' => $post,
                 'front_url' => Yii::$app->urlManagerFrontend->getHostInfo().Yii::$app->urlManagerFrontend->getBaseUrl('').'/',
@@ -162,7 +163,7 @@ class PostController extends Controller
                         ->setFrom(Yii::$app->params['adminEmail'])
                         ->setSubject('MarketingHack New Post')
                         ->setHtmlBody($body)
-                        ->send();            
+                        ->send();      
 
         }
         
