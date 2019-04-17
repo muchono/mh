@@ -19,8 +19,16 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'active')->dropDownList($model::$statuses)?>
+    
+    <div class="form-group">
+    <label class="control-label" >Password</label>
+    
+    <?= Html::input('text', 'password', '', ['class' => 'form-control']) ?>
 
-    <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+    <div class="help-block"></div>
+    </div>
+    
+    
 
     <?= $form->field($model, 'subscribe')->checkbox() ?>
     <div class="form-group">

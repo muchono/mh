@@ -53,7 +53,6 @@ class SignupForm extends Model
         $this->user->name = $this->name;
         $this->user->email = $this->email;
         
-        //temporary
         $this->user->active = $this->user->registration_confirmed = 0;
         
         $this->user->setPassword($this->password);

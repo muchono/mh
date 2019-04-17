@@ -81,7 +81,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function beforeSave($insert)
     {
-        $this->password = Yii::$app->security->generatePasswordHash($password);
         if ($this->active == 1) {
             $this->blocked = 0;
         }
@@ -113,9 +112,9 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             [['email'], 'email'],
             [['email'], 'unique'],
             [['subscribe', 'active', 'registration_confirmed', 'created_at', 'updated_at', 'active_ip', 'blocked', 'active_at', 'block_amount'], 'integer'],
-            [['auth_key'], 'string', 'max' => 32],
+            [['auth_key'], 'string', 'max' => 100],
             [['password_hash', 'password_reset_token', 'email', 'phone', 'name'], 'string', 'max' => 255],
-            [['password'], 'string', 'max' => 50],
+            [['password'], 'string', 'max' => 255],
             [['password_reset_token'], 'unique'],
             ['active', 'in', 'range' => array_keys(self::$statuses)],
         ];
@@ -406,7 +405,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function setPassword($password)
     {
-        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+        $this->password = $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
 
     /**
