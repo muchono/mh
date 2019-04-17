@@ -64,9 +64,6 @@ class SiteController extends \frontend\controllers\Controller
     public function actions()
     {
         return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
@@ -399,6 +396,17 @@ exit('SEND');
             ]);
         }
     }
+    
+    /**
+     * Displays contact page.
+     *
+     * @return mixed
+     */
+    public function actionError()
+    {
+        return $this->actionIndex();
+    }    
+    
     
     /**
      * Five days before product expiration notify
