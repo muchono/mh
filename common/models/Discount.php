@@ -46,7 +46,21 @@ class Discount extends \yii\db\ActiveRecord
     public static function find()
     {
         return new DiscountQuery(get_called_class());
-    }    
+    }
+    
+    /**
+     * find Active
+     * @return string
+     */
+    static public function findActive()
+    {
+        $time = time();
+        return self::find()
+                ->where(['status' => self::STATUS_ACTIVE])                 
+                ->andWhere(['<', 'date_from', $time])
+                ->andWhere(['>', 'date_to', $time])
+                ->andWhere(['!=', 'discount.id', self::SPECIAL40ID]);
+    }
     
     /**
      * @inheritdoc
