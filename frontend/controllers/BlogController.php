@@ -51,6 +51,17 @@ class BlogController extends \frontend\controllers\Controller
         }
     }
     
+    public function actionUrl($url)
+    {
+        if (!empty($url)) {
+            $model = Post::find(['url_anckor' => trim($url)])->one();
+            if ($model) {
+                return $this->actionPost($model->id);
+            }
+        }
+        return $this->redirect(['index']);
+    }    
+    
     public function actionSubscribe()
     {
         $subscriber = new Subscriber;
@@ -79,6 +90,7 @@ class BlogController extends \frontend\controllers\Controller
         if (Yii::$app->request->get('id') && Yii::$app->request->get('key')) {
             $who = substr(Yii::$app->request->get('id'), 0, 1);
             $id = substr(Yii::$app->request->get('id'), 1);
+            $type = Yii::$app->request->get('type');
             switch($who){
                 case 's': 
                     $user = Subscriber::findOne($id);
@@ -93,8 +105,18 @@ class BlogController extends \frontend\controllers\Controller
                     if (!empty($user) 
                             && Yii::$app->request->get('key') == md5($user->id.$user->created_at)) {
                         $billing = $user->billing;
-                        $billing->subscribe_blog = 0;
+                        switch($type) {
+                            case 'blog': 
+                                $billing->subscribe_blog = 0;
+                                $user->subscribe_blog = 0;
+                                break;
+                            case 'offer': 
+                                $billing->subscribe_offers = 0;
+                                $user->subscribe_offers = 0;
+                                break;
+                        }
                         $billing->save();
+                        $user->save();
                     }
                     break;
             }

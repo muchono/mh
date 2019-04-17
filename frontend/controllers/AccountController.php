@@ -91,6 +91,14 @@ class AccountController extends \frontend\controllers\Controller
             $userBilling->subscribe_offers = intval(Yii::$app->request->post('UserBilling')['subscribe_offers']);
             $userBilling->subscribe_blog = intval(Yii::$app->request->post('UserBilling')['subscribe_blog']);
             $userBilling->save();
+            
+            $user->subscribe_offers = $userBilling->subscribe_offers;
+            $user->subscribe_blog = $userBilling->subscribe_blog;
+            $user->save();
+            
+        } else {
+            $userBilling->subscribe_offers = $user->subscribe_offers;
+            $userBilling->subscribe_blog = $user->subscribe_blog;
         }
         
         return $this->render('profile', array(

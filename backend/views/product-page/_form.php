@@ -53,14 +53,14 @@ use yii\web\JsExpression;
             ],
             'setup' => new JsExpression("
                 function (editor) {
-                  editor.addButton('block', {
-                    text: 'block',
-                    icon: false,
-                    onclick: function () {
-                    var text = '<blockquote class=\"blockquote-1\">' + editor.selection.getContent() + '</blockquote>';
-                      editor.insertContent(text);
-                    }
-                  });
+                    editor.ui.registry.addButton('block', {
+                        text: 'block',
+                        onAction: (buttonApi) => {
+                            var text = '<blockquote class=\"blockquote-1\">' + editor.selection.getContent() + '</blockquote>';
+                            editor.insertContent(text);
+
+                        }
+                    });
                 }"),
             'toolbar' => "undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | block",
             'paste_data_images'=> new JsExpression('true'),

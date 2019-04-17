@@ -64,9 +64,6 @@ class SiteController extends \frontend\controllers\Controller
     public function actions()
     {
         return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
@@ -139,36 +136,33 @@ class SiteController extends \frontend\controllers\Controller
         if (Yii::$app->request->get('code') && Yii::$app->request->get('id')) {
             $user = User::findOne(Yii::$app->request->get('id'));
             
-            
-            $login_case = \frontend\models\LoginCase::addCase($user->id, 'special_offer');
-            
-            $link = Url::to(['site/apply-special-offer', 'code' => $login_case->auth_key, 'id' => $login_case->id], true);
             if ($user->auth_key == Yii::$app->request->get('code')
                     && !$user->registration_confirmed)
             {
                 $user->registration_confirmed = $user->active = 1;
                 $user->save();
-                
+
                 $login_case = \frontend\models\LoginCase::addCase($user->id, 'special_offer');
                 $body = Yii::$app->controller->renderPartial('@app/views/mails/special_offer.php', [
                     'link' => Url::to(['site/apply-special-offer', 'code' => $login_case->auth_key, 'id' => $login_case->id], true),
                     'products' => Product::findActive()->all(),
-                    'front_url' => Url::to('@web', true).'/',
+                    'front_url' => Url::home(true).'/',
+                    'user' => $user,
                 ]);
-                
+
                 Yii::$app->mailer->compose()
                             ->setTo($user->email)
                             ->setFrom(Yii::$app->params['adminEmail'])
                             ->setSubject('Special 40% off for new users')
                             ->setHtmlBody($body)
                             ->send();                
-                
+
                 $this->layout= 'result';
-                
+
                 return $this->render('success', [
                     'text' => 'Thank you. Your registration completed.',
                 ]);                
-            }
+            } 
         }
     }
     
@@ -399,6 +393,17 @@ exit('SEND');
             ]);
         }
     }
+    
+    /**
+     * Displays contact page.
+     *
+     * @return mixed
+     */
+    public function actionError()
+    {
+        return $this->actionIndex();
+    }    
+    
     
     /**
      * Five days before product expiration notify

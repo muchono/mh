@@ -70,6 +70,6 @@ class AboutUsContent extends \yii\db\ActiveRecord
      */
     public function getImagesRootDir()
     {
-        return Yii::getAlias('@frontend') . '/web/images/aboutus/';
+        return Yii::getAlias('@front_html') . '/images/aboutus/';
     }    
 }

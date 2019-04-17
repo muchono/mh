@@ -56,10 +56,10 @@ use yii\helpers\Url;
                 <li class="related-posts__item">
                   <article class="post">
                     <figure class="post__image">
-                      <a href="<?=Url::to(['post', 'id'=>$d->id]);?>"><img src="<?=Url::base()?>/images/blog/<?=$d->image?>" alt="" class="img-fluid"></a>
+                      <a href="<?=Url::to(['blog/url', 'url'=>$d->url_anckor]);?>"><img src="<?=Url::base()?>/images/blog/<?=$d->image?>" alt="" class="img-fluid"></a>
                     </figure>
                     <div class="post__content">
-                      <h3 class="title-13"><a href="<?=Url::to(['post', 'id'=>$d->id]);?>"><?=$d->title ?></a></h3>
+                      <h3 class="title-13"><a href="<?=Url::to(['blog/url', 'url'=>$d->url_anckor]);?>"><?=$d->title ?></a></h3>
                       <p class="post__text"><?=$d->meta_description ?>...</p>
                       <div class="post__meta">
                         <span class="post__author">by <?=$d->getAuthor() ?></span>
@@ -81,10 +81,10 @@ use yii\helpers\Url;
             <?php foreach ($model->getRecommended() as $d) {?>
             <article class="post">
               <figure class="post__image">
-                <a href="<?=Url::to(['post', 'id'=>$d->id]);?>"><img src="<?=Url::base()?>/images/blog/<?=$d->image?>" alt="" class="img-fluid"></a>
+                <a href="<?=Url::to(['blog/url', 'url'=>$d->url_anckor]);?>"><img src="<?=Url::base()?>/images/blog/<?=$d->image?>" alt="" class="img-fluid"></a>
               </figure>
               <div class="post__content">
-                <h3 class="title-7 "><a href="<?=Url::to(['post', 'id'=>$d->id]);?>"><?=$d->title ?></a></h3>
+                <h3 class="title-7 "><a href="<?=Url::to(['blog/url', 'url'=>$d->url_anckor]);?>"><?=$d->title ?></a></h3>
                 <p class="post__text"><?=$d->meta_description ?>...</p>
                 <div class="post__meta">
                   <span class="post__author">by <?=$d->getAuthor() ?></span>

@@ -74,7 +74,15 @@ class UserController extends Controller
     public function actionCreate()
     {
         $model = new User();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        
+        $model->registration_confirmed = 1;
+        
+        $loaded = $model->load(Yii::$app->request->post());
+        if ($loaded && Yii::$app->request->post('password')) {
+            $model->setPassword(Yii::$app->request->post('password'));
+        }
+        
+        if ($loaded && $model->save()) {
             return $this->redirect(['index']);
         } else {
             return $this->render('create', [
@@ -93,7 +101,11 @@ class UserController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $loaded = $model->load(Yii::$app->request->post());
+        if ($loaded && Yii::$app->request->post('password')) {
+            $model->setPassword(Yii::$app->request->post('password'));
+        }
+        if ($loaded && $model->save()) {
             return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('update', [

@@ -51,6 +51,7 @@ return [
                 'special-offer' => 'site/special-offer',
                 'faq' => 'site/faq',
                 'support' => 'site/support',
+                'post/<url:[\w-]+>' => 'blog/url',
             ],
         ],
     ],
