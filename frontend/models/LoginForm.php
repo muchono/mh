@@ -70,7 +70,7 @@ class LoginForm extends Model
                 if ($user->block_amount <= self::MAX_BLOCK_ATTEMPTS) {
                     $body = Yii::$app->controller->renderPartial('@app/views/mails/suspicious_activity_in_account.php', [
                         'user' => $user,
-                        'link' => Url::to(['site/unblock', ['key' => md5($user->blocked), 'u' => $user->id]], true),
+                        'link' => Url::to(['site/unblock', 'key' => md5($user->blocked), 'u' => $user->id], true),
                         'ip' => Yii::$app->request->userIP,
                         'os' => User::getOs(),
                         'browser' => User::getBrowser(),

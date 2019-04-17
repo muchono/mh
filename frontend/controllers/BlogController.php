@@ -107,16 +107,18 @@ class BlogController extends \frontend\controllers\Controller
                         $billing = $user->billing;
                         switch($type) {
                             case 'blog': 
-                                $billing->subscribe_blog = 0;
                                 $user->subscribe_blog = 0;
                                 break;
                             case 'offer': 
-                                $billing->subscribe_offers = 0;
                                 $user->subscribe_offers = 0;
                                 break;
                         }
-                        $billing->save();
                         $user->save();
+                        if ($billing) {
+                            $billing->subscribe_offers = $user->subscribe_blog;                            
+                            $billing->subscribe_blog = $user->subscribe_offers;                            
+                            $billing->save();
+                        }
                     }
                     break;
             }
