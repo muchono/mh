@@ -61,7 +61,7 @@ AppAsset::register($this);
         <?php if ($this->params['head_offer']){?>
       <div class="discount-line">
         <span><?=$this->params['head_offer']->title?></span>
-        <a href="<?=Url::to(['site/product', 'link'=>$this->params['head_offer']->products[0]->link]);?>" class="btn-7">Check now</a>
+        <a href="<?=Url::to(['site/product', 'link'=>$this->params['head_offer']->products[0]->page->link]);?>" class="btn-7">Check now</a>
         <a href="" class="dl__close" id="head_offer_close"><i class="icon-15"></i></a>
       </div>
         <?php }?>
