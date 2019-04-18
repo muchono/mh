@@ -77,7 +77,7 @@ var Cart = (function() {
     function updateList() {
         $.ajax({
             type: 'POST',
-            url: 'index.php?r=cart/get-list',
+            url: WEB_PATH+'cart/get-list',
             data: {},
             success:function(data){
                 if (data.content){
@@ -95,7 +95,7 @@ var Cart = (function() {
     function updateCheckoutList() {
         $.ajax({
             type: 'POST',
-            url: 'index.php?r=checkout/get-list',
+            url: WEB_PATH+'checkout/get-list',
             data: {},
             success:function(data){
                 if (data.content){

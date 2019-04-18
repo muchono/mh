@@ -35,8 +35,7 @@ use common\models\Cart;
                   <div class="cs__subtotal">Subtotal: <strong>$<?=$cartInfo['amount']?></strong></div>
                   <div class="cs__discount">Discount: <strong>$<?=$cartInfo['discount']?></strong></div>
                   <div class="cs__total">Order Total:  $<?=$cartInfo['total']?></div>
-                  <form action="">
-                      <input type="hidden" name="r" value="checkout/index">
+                  <form action="<?=Url::to(['checkout/index'])?>">
                   <?php if ($cartInfo['products']){?>
                   <button class="btn-9">Checkout Now</button>
                   <?php }?>
