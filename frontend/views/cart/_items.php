@@ -10,15 +10,9 @@ use common\models\Cart;
                       <?php foreach($cartInfo['products'] as $k=>$p){?>
                     <li class="sl__item">
                         <h4 class="sl__title"><?=$p->short_title?> <i class="sl__close" for="<?=$p->id?>"></i></h4>
-                      <p class="sl__text"><?=$p->full_title?></p>
+                      <p class="sl__text"><?=$p->short_title?></p>
                       <div class="sl__subscription">
-                        <div class="sl__col">Subscription on
-                          <select class="item-months" for="<?=$p->id?>">
-                              <?php foreach(Cart::$months as $m){?>
-                            <option <?=$cartInfo['cart'][$k]->months == $m ? 'selected' : ''?>><?=$m?></option>
-                            <?php }?>
-                          </select>
-                          year</div>
+                        <div class="sl__col">Subscription on 1 year</div>
                         <div class="sl__col">
                           <div class="sl__price <?=$p->priceFinal ? '' : 'sl__price--free'?>"><?=$p->priceFinal ? '$'.$cartInfo['prices'][$k] : 'Free'?></div>
                         </div>
@@ -33,7 +27,9 @@ use common\models\Cart;
                 </div>
                 <div class="cs__foot">
                   <div class="cs__subtotal">Subtotal: <strong>$<?=$cartInfo['amount']?></strong></div>
+                  <?php if ($cartInfo['discount']) {?>
                   <div class="cs__discount">Discount: <strong>$<?=$cartInfo['discount']?></strong></div>
+                  <?php }?>
                   <div class="cs__total">Order Total:  $<?=$cartInfo['total']?></div>
                   <form action="<?=Url::to(['checkout/index'])?>">
                   <?php if ($cartInfo['products']){?>

@@ -175,13 +175,7 @@ $this->title = $model->title;
                       
 
                   <div class="pp__content">
-                    <div class="pp__subscription">Subscription on
-                      <select>
-                        <option value="">1</option>
-                        <option value="">2</option>
-                        <option value="">3</option>
-                      </select>
-                      year
+                    <div class="pp__subscription">Subscription on 1 year
                     </div>
                     <h4 class="pp__title">Contains:</h4>
                     <ul class="pp__contains-list">

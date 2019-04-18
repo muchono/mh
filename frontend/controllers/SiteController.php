@@ -21,6 +21,7 @@ use common\models\ProductReview;
 use common\models\User;
 use common\models\AboutUsContent;
 use common\models\Faq;
+use common\models\Discount;
 
 /**
  * Site controller
@@ -148,6 +149,7 @@ class SiteController extends \frontend\controllers\Controller
                     'products' => Product::findActive()->all(),
                     'front_url' => Url::home(true).'/',
                     'user' => $user,
+                    'offer' => Discount::findOne(Discount::SPECIAL40ID),
                 ]);
 
                 Yii::$app->mailer->compose()
@@ -401,8 +403,10 @@ exit('SEND');
      */
     public function actionError()
     {
-        return $this->actionIndex();
-    }    
+        header("HTTP/1.1 301 Moved Permanently");
+        header('Location: '.Url::home());
+        exit;
+    }
     
     
     /**

@@ -147,7 +147,8 @@ use yii\helpers\Url;
                                                 <th class="small-12 large-12 columns first last" style="Margin:0 auto;color:#353535;font-family:Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:1.3;margin:0 auto;padding:0;padding-bottom:16px;padding-left:0;padding-right:0;text-align:left;width:648px">
                                                     <table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
                                                         <tr style="padding:0;text-align:left;vertical-align:top">
-                                                            <th style="Margin:0;color:#353535;font-family:Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left"><img src="<?=$front_url?>img/40off.jpg" class="float-center" style="-ms-interpolation-mode:bicubic;Margin:0 auto;clear:both;display:block;float:none;margin:0 auto;max-width:100%;outline:0;text-align:center;text-decoration:none;width:auto"></th>
+                                                            <th style="Margin:0;color:#353535;font-family:Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left">
+                                                                <h1 class="text-center" style="Margin:0;Margin-bottom:20px;color:inherit;font-family:Helvetica,Arial,sans-serif;font-size:32px;font-weight:400;line-height:1.3;margin:0;margin-bottom:20px;padding:0;text-align:center;word-wrap:normal"><?=$offer->title?></h1></th>
                                                             <th class="expander" style="Margin:0;color:#353535;font-family:Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:1.3;margin:0;padding:0!important;text-align:left;visibility:hidden;width:0"></th>
                                                         </tr>
                                                     </table>
@@ -162,6 +163,20 @@ use yii\helpers\Url;
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <table class="row collapse" style="border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%">
+                                        <tbody>
+                                            <tr style="padding:0;text-align:left;vertical-align:top">
+                                                <th class="small-12 large-12 columns first last" style="Margin:0 auto;color:#353535;font-family:Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:1.3;margin:0 auto;padding:0;padding-bottom:16px;padding-left:0;padding-right:0;text-align:left;width:648px">
+                                                    <table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+                                                        <tr style="padding:0;text-align:left;vertical-align:top">
+                                                            <th style="Margin:0;color:#353535;font-family:Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left"><img src="<?=$front_url?>img/40off.jpg" class="float-center" style="-ms-interpolation-mode:bicubic;Margin:0 auto;clear:both;display:block;float:none;margin:0 auto;max-width:100%;outline:0;text-align:center;text-decoration:none;width:auto"></th>
+                                                            <th class="expander" style="Margin:0;color:#353535;font-family:Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:1.3;margin:0;padding:0!important;text-align:left;visibility:hidden;width:0"></th>
+                                                        </tr>
+                                                    </table>
+                                                </th>
+                                            </tr>
+                                        </tbody>
+                                    </table>                                    
                                     <table class="spacer" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
                                         <tbody>
                                             <tr style="padding:0;text-align:left;vertical-align:top">
@@ -186,7 +201,7 @@ Hello,<br/>
 <br/>
 We're glad to let you know about unprecedented action - only within the next 24 hours you will have an opportunity to buy the subscription to all Marketing Hack products with 40% discount.<br/>
 <br/>
-For this please follow the link and make a purchase: <a href="<?=$link?>"><?=$link?></a><br/>
+For this please follow the link and make a purchase: <a href="<?=$link?>">link</a><br/>
 <br/>
 40% Off is a maximum discount available for only new users and only within 24 hours.<br/>
 Hurry up to purchase a subscription to:<br/>
