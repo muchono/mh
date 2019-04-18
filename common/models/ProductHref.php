@@ -79,6 +79,7 @@ class ProductHref extends \yii\db\ActiveRecord
             [[ 'url'], 'string', 'max' => 255],
             [['example_url', 'url'], 'url'],
             [['categories'], 'safe'],
+            [['url'], 'unique'],
         ];
     }
 

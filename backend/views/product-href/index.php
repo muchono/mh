@@ -141,8 +141,13 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>    
 </div>
 
-<?php $this->registerJsFile(
+<?php 
+$this->registerCss(".help-block {  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;}");
+$this->registerJsFile(
     '@web/js/product_href.js',
     ['depends' => [\yii\web\JqueryAsset::className()]]
 );
+
 ?>

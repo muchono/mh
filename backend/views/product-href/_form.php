@@ -16,7 +16,7 @@ use dosamigos\tinymce\TinyMce;
    <div class="row">
         <?= $form->field($model, 'product_id')->hiddenInput(['maxlength' => true, 
             'value' => $model->product_id, 
-            'name' => $field_container.'['.$id.'][product_id]'])->label(false); ?>       
+            'name' => $field_container.'['.$id.'][product_id]'])->label(false); ?>   
         <div class="col-md-3">
             <?= $form->field($model, 'url')->textInput(['maxlength' => true, 
                 'id' => 'url'.$id,
@@ -26,21 +26,33 @@ use dosamigos\tinymce\TinyMce;
                 'name' => $field_container.'['.$id.'][example_url]']) ?>
         </div>
         <div class="col-md-4">
-    <?= $form->field($model, 'about')->widget(TinyMce::className(), [
-     'options' => ['rows' => 5,
-         'cols' => 3,
-         'id' => 'about'.$id,
-        'name' => $field_container.'['.$id.'][about]'],
-     'language' => 'en_GB',
-     'clientOptions' => [
-         'branding' => false,
-         'menubar' => false,
-         'plugins' => [
-             "link",
-         ],
-         'toolbar' => "bold link",
-     ]
-     ]);?> 
+    <?php
+         if ($id == 'IIII') {
+            print $form->field($model, 'about')->textarea(['maxlength' => true, 
+                'id' => 'about'.$id,
+                'name' => $field_container.'['.$id.'][about]',
+                'rows' => 6,
+                ]);
+         } else {
+            print $form->field($model, 'about')->widget(TinyMce::className(), [
+                'options' => ['rows' => 5,
+                 'cols' => 3,
+                 'id' => 'about'.$id,
+                'name' => $field_container.'['.$id.'][about]'],
+             'language' => 'en_GB',
+             'clientOptions' => [
+                 'forced_root_block' => "",
+                 'branding' => false,
+                 'menubar' => false,
+                 'plugins' => [
+                     "link",
+                 ],
+                 'toolbar' => "bold link",
+             ]
+             ]);
+         
+         }
+         ?> 
             
         </div>
         <div class="col-md-3">

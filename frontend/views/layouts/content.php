@@ -108,9 +108,6 @@ AppAsset::register($this);
         <h3 class="sm-title">Menu</h3>
         <ul class="sm-list-2">
           <li class="sm-list-2__item">
-            <a href="" class="sm-list-2__link">Renew Subscriptions</a>
-          </li>
-          <li class="sm-list-2__item">
             <a href="<?=Url::to(['site/faq']);?>" class="sm-list-2__link">F.A.Q.</a>
           </li>
           <li class="sm-list-2__item">
@@ -134,7 +131,6 @@ AppAsset::register($this);
     <div class="content<?php if (!Yii::$app->user->isGuest){?> noselect<?php }?>">
       <div class="top-line">
         <ul class="tl__menu tl__menu--center">
-          <li class="tl__item"><a href="" class="tl__link">Renew&nbsp;<span>Subscriptions</span></a></li>
           <li class="tl__item"><a href="<?=Url::to(['site/faq']);?>" class="tl__link">F.A.Q.</a></li>
           <li class="tl__item"><a href="<?=Url::to(['blog/index']);?>" class="tl__link">Blog</a></li>
         </ul>

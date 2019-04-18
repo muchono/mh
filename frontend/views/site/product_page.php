@@ -222,7 +222,7 @@ $this->title = $model->title;
                     <div class="pp__contains-icon">
                       <i class="pp-icon-4"></i>
                     </div>
-                    <div class="pp__contains-text"><strong>Step-by-step guide</strong> - <?=$model->page->feature2?>.</div>
+                    <div class="pp__contains-text"><strong>Detailed guide</strong> - <?=$model->page->feature2?>.</div>
                   </li>
                   <?php }?>
                   <?php if ($model->page->feature3) {?>
