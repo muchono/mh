@@ -5673,6 +5673,15 @@ input[type="color"].search-questions__input, input[type="date"].search-questions
   .rp__price--free {
     color: #309402; }
 
+.cart-page-aside-long {
+	max-width: 100% !important;
+	margin: 0 0 0 0 !important;
+}
+
+.cart-page-aside-long .btn-9 {
+	min-width: 30%  !important;
+}
+
 /* line 3680, E:/GIT/marketinghack/public/scss/_theme_style.scss */
 .cart-page-aside {
   -webkit-box-ordinal-group: 0;

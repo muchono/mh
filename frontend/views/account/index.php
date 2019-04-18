@@ -1,5 +1,6 @@
 <?php
 use yii\web\View;
+use yii\helpers\Url;
 ?>
 <section class="simple-page sm">
       <h2 class="title-14">My Account</h2>
@@ -13,6 +14,7 @@ use yii\web\View;
             <th class="ot__product">Product</th>
             <th class="ot__expires">Expires</th>
             <th class="ot__renew">Renew</th>
+            <th class="ot__renew">Check</th>
           </tr>
         </thead>
         <tbody>
@@ -36,6 +38,9 @@ use yii\web\View;
             <td class="ot__renew">
               <a href="" class="btn-sm-2 renew-button" for="<?=$op->product_id?>">Renew</a>
             </td>
+            <td class="ot__renew">
+                <a href="<?=Url::to(['content/index', 'product_id' => $op->product_id])?>" class="btn-sm-2">Check</a>
+            </td>            
           </tr>
         <?php }?>
         </tbody>

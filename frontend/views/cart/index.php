@@ -7,6 +7,7 @@ use yii\web\View;
         <div class="page-pane">
           <h1 class="title-14 success">In Your Shopping Cart - <span id="items_count"><?=$cartInfo['count']?></span> Item(s)</h1>
           <div class="cart-page-wrap">
+            <?php if (!empty($products)) {?>              
             <div class="cart-page-content">
               <div class="recommended-items">
                 <h2 class="rci__title">Recommended Items:</h2>
@@ -30,7 +31,8 @@ use yii\web\View;
                 </ul>
               </div>
             </div>
-            <aside class="cart-page-aside">
+            <?php }?>
+            <aside class="cart-page-aside <?=empty($products) ? 'cart-page-aside-long' : ''?>">
                <?= $this->render('_items', [
                 'cartInfo' => $cartInfo,
                 ]) ?>

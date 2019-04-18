@@ -60,7 +60,7 @@ AppAsset::register($this);
           <span></span>
         </a>
         <div class="logo">
-          <a href="" class="logo__link"><img src="<?=Url::base()?>/img/main-logo.png" alt="" class="img-fluid"></a>
+          <a href="<?=Url::home()?>" class="logo__link"><img src="<?=Url::base()?>/img/main-logo.png" alt="" class="img-fluid"></a>
         </div>
         <nav class="main-nav">
           <ul class="main-nav__list">
@@ -82,7 +82,7 @@ AppAsset::register($this);
         
     <div class="side-menu js-side-menu">
       <div class="sm__logo">
-        <a href="<?=Url::to(['site/index'])?>" class="logo__link"><img src="<?=Url::base()?>/img/main-logo.png" alt="" class="img-fluid"></a>
+        <a href="<?=Url::home()?>" class="logo__link"><img src="<?=Url::base()?>/img/main-logo.png" alt="" class="img-fluid"></a>
       </div>
       <div class="sm__top">
         <a href="" class="sm-btn"><i class="icon-5"></i></a>
@@ -180,9 +180,11 @@ AppAsset::register($this);
                 <?php if (!$this->params['selected_product_accessible']){?>
                 <a href="#" class="btn-4 content-add-tocart" for="<?=$this->params['selected_product']->id?>">Buy now</a>
                 <?php } else {?>
-                <a href="#" class="btn-4 content-add-tocart" for="<?=$this->params['selected_product']->id?>">Renew</a>
+                <!--<a href="#" class="btn-4 content-add-tocart" for="<?=$this->params['selected_product']->id?>">Renew</a>-->
                 <?php } ?>
               <?php } ?>
+              
+              <?php if (!$this->params['selected_product_accessible']){?>                
               <div class="ic-price <?php if ($this->params['selected_product']->discount){?>ic-price--free-now<?php } ?>">
                   <span class="price__text"><?=$this->params['selected_product']->price?>$</span> 
                   <span class="free__text">
@@ -193,6 +195,7 @@ AppAsset::register($this);
                       <?php } ?>
                   </span>
               </div>
+             <?php } ?>
             </div>
           </div>
         </div>
@@ -217,7 +220,7 @@ AppAsset::register($this);
             <?php } else {?>
                 <?php if (Yii::$app->user->isGuest){?>
                 <a href="#signup-popup" class="btn-3 js-popups">Buy Full Version</a>
-                <?php } else {?>
+                <?php } else if (!$this->params['selected_product_accessible']) {?>
                 <a href="#" class="btn-3 content-add-tocart" for="<?=$this->params['selected_product']->id?>">Buy Full Version</a>
                 <?php }?>
             <?php }?>

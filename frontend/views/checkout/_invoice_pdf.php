@@ -33,11 +33,6 @@ table thead td { background-color: #EEEEEE;
 <td><img src="<?php echo \Yii::getAlias('@webroot') . '/img/BWlogo.jpg'; ?>"></td>
     <td style="text-align: right;">Invoice No.<br /><span style="font-weight: bold; font-size: 12pt;"><?php echo $order->id; ?></span></td>
 </tr>
-<tr>
-<td><br />NETGERON d.o.o.<br />Stegne 27<br />1000 Ljubljana<br />Slovenia <br /></td>
-<td width="70%" style="text-align: right;"></td>
-</tr>
-
 </table>
 </htmlpageheader>
 
@@ -54,7 +49,9 @@ mpdf-->
 
 <table width="100%" style="font-family: serif;" cellpadding="10">
 <tr>
-<td width="45%"></td>
+<td width="45%">
+NETGERON d.o.o.<br />Stegne 27<br />1000 Ljubljana<br />Slovenia        
+</td>
 <td width="10%">&nbsp;</td>
 <td width="45%" style="border: 0.1mm solid #888888;"><span style="font-size: 7pt; color: #555555; font-family: sans;">INVOICE TO:</span><br /><?php echo !empty($user->billing->company_name) ? $user->billing->company_name . "<br/>": ''; ?><?php echo !empty($user->billing->full_name) ? $user->billing->full_name . "<br/>": ''; ?> <?php echo $user->billing->address; ?>, <?php echo $user->billing->city; ?>, <?php echo $user->billing->country; ?><br /><?php echo $user->billing->zip; ?></td>
 </tr>

@@ -173,7 +173,7 @@ class CheckoutController extends \frontend\controllers\Controller
             $payment->setParams(Yii::$app->params['payments'][$payment_name]);
             $payed = $payment->finish($_REQUEST);
             if ($payed) {
-                $user = User::getInfo(Yii::$app->user->id);
+                $user = User::findOne(Yii::$app->user->id);
                 
                 $order_params = Cart::getInfo($user->id);
                 $order_params['payment_method'] = Yii::$app->request->get('payment');
@@ -212,7 +212,6 @@ class CheckoutController extends \frontend\controllers\Controller
                             ->setFrom(Yii::$app->params['adminEmail'])
                             ->setSubject('Thank you for the purchase')
                             ->setHtmlBody($body)
-                            ->attach($pdf_path)
                             ->send();
                 
                 return $this->redirect(array('checkout/success', 'o' => $order->id));
