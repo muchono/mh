@@ -291,7 +291,7 @@ class SiteController extends \frontend\controllers\Controller
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
                 $ticket_id = time() - 1553300000/* any value */;
                 //send to admin
-                $model->sendEmail(Yii::$app->params['adminEmail'], $ticket_id);
+                $model->sendEmail(Yii::$app->params['contactEmail'], $ticket_id);
                 
                 
                 //send to user

@@ -99,7 +99,7 @@ use yii\helpers\Url;
                     <?php foreach($hrefsProvider->getModels() as $i=>$link) {?>
                   <tr>
                     <td class="tb__1"><?=$i+1?></td>
-                    <td class="tb__2"><i class="icon-11 <?=$accessable ? '' : 'unclickable'?>" for="<?=$link->id?>"></i></td>
+                    <td class="tb__2"><i class="icon-<?=isset($marked[$link->id]) ? '10' : '11'?> <?=$accessable ? '' : 'unclickable'?>" for="<?=$link->id?>"></i></td>
                     <td class="tb__3"><a href="<?=$accessable ? $link->url : ''?>" class=" <?=$accessable ? '' : 'unclickable'?>" target="_blank"><?=$accessable ? $link->url : $link->urlCoded?></a></td>
                     <td class="tb__4"><?=$link->da_rank?></td>
                     <td class="tb__5"><?=$link->alexa_rank?></td>
