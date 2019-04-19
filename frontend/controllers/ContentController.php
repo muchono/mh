@@ -34,10 +34,14 @@ class ContentController extends \frontend\controllers\Controller
         
         if ($product_id && $product = Product::findOne($product_id)) {
             $this->view->params['selected_product'] = $product;
-            $this->view->params['selected_product_accessible'] = Yii::$app->user->id && OrderToProduct::isAccessible($product_id, Yii::$app->user->id);            
         } else {
             $this->view->params['selected_product'] = $this->view->params['products'][0];    
         }
+        
+        if ($this->view->params['selected_product']) {
+            $this->view->params['selected_product_accessible'] = Yii::$app->user->id && OrderToProduct::isAccessible($this->view->params['selected_product']->id, Yii::$app->user->id);
+        }
+        
         $this->view->params['selected_product_hrefs'] = $this->renderHrefs($this->view->params['selected_product']);
         $this->view->params['selected_product_guide'] = $this->renderGuide($this->view->params['selected_product']);
         

@@ -51,7 +51,7 @@ var Logged = (function() {
         });
         
         $('.tab-content').on('click', '.icon-11', function(event) {
-            markLink($(this), $(this).hasClass('unclickable'));
+            markLink($(this), !$(this).hasClass('unclickable'));
         });         
         
         $('.tab-content').on('click', '.icon-12', function(event) {
