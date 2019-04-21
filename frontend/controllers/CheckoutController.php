@@ -234,7 +234,7 @@ class CheckoutController extends \frontend\controllers\Controller
             $order = Order::findOne(Yii::$app->request->get('o'));
             if ($order && $order->user_id == Yii::$app->user->id) {
                 $user = User::findOne(Yii::$app->user->id);
-                return $this->render('success', ['order_id' => $order->id, 'email' => $user->email]);
+                return $this->render('success', ['order_id' => $order->id, 'email' => $user->email, 'order' => $order]);
             }
         }
         return '';

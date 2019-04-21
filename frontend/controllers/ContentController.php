@@ -213,6 +213,7 @@ class ContentController extends \frontend\controllers\Controller
             'sort' => $sort,
             'accessable' => $accessable,
             'marked' => $marked,
+            'product' => $product,
             ]);
     }
     

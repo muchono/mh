@@ -10,6 +10,6 @@
         </figure>
         <p class="mp__lg-text">We’ve sent you an email with instructions to: <span><?=$email?></span></p>
         <p class="mp__sm-text">This email sometimes ends up in the spam, bulk or junk <br>mail, so please check these folders as well.</p>
-        <a href="<?=Url::to(['content/index']);?>" class="btn-8">Check Products</a>
+        <a href="<?=Url::to(['content/index', 'product_id' => $order->products[0]->id]);?>" class="btn-8">Check Products</a>
       </div>
     </section>

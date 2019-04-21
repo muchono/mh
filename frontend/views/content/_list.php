@@ -89,7 +89,7 @@ use yii\helpers\Url;
                         </span>                          
                       </span>
                     </th>
-                    <th class="tb__8">Example</th>
+                    <th class="tb__8"><?=$product->link_name?></th>
                     <th class="tb__9">
                       R
                     </th>
@@ -113,7 +113,7 @@ use yii\helpers\Url;
                         <?php }?>
                         <?=$accessable ? $link->about : $link->aboutCoded?>
                     </td>
-                    <td class="tb__8"><a href="<?=$accessable ? $link->example_url : '#'?>" class=" <?=$accessable ? '' : 'unclickable'?>" target="_blank">Example</a></td>
+                    <td class="tb__8"><a href="<?=$accessable ? $link->example_url : '#'?>" class=" <?=$accessable ? '' : 'unclickable'?>" target="_blank"><?=$product->link_name?></a></td>
                     <td class="tb__9"><div><i class="icon-12" for="<?=$accessable ? $link->id:''?>"></i></div></td>
                   </tr>
                     <?php }?>
