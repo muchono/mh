@@ -60,7 +60,7 @@ AppAsset::register($this);
           <span></span>
         </a>
         <div class="logo">
-          <a href="<?=Url::home()?>" class="logo__link"><img src="<?=Url::base()?>/img/main-logo.png" alt="" class="img-fluid"></a>
+          <a href="<?=!Yii::$app->user->isGuest ? Url::to(['content/']) : Url::home()?>" class="logo__link"><img src="<?=Url::base()?>/img/main-logo.png" alt="" class="img-fluid"></a>
         </div>
         <nav class="main-nav">
           <ul class="main-nav__list">
@@ -82,7 +82,7 @@ AppAsset::register($this);
         
     <div class="side-menu js-side-menu">
       <div class="sm__logo">
-        <a href="<?=Url::home()?>" class="logo__link"><img src="<?=Url::base()?>/img/main-logo.png" alt="" class="img-fluid"></a>
+        <a href="<?=!Yii::$app->user->isGuest ? Url::to(['content/']) : Url::home()?>" class="logo__link"><img src="<?=Url::base()?>/img/main-logo.png" alt="" class="img-fluid"></a>
       </div>
       <div class="sm__top">
         <a href="" class="sm-btn"><i class="icon-5"></i></a>

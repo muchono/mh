@@ -85,13 +85,17 @@ class SiteController extends \frontend\controllers\Controller
         
         $getDemoModel = new GetDemoForm();
         if ($getDemoModel->load(Yii::$app->request->post()) && $getDemoModel->validate()) {
-            $subscriber = new \common\models\Subscriber();
-            $subscriber->name = $getDemoModel->name;
-            $subscriber->email = $getDemoModel->email;
-            $subscriber->ip =  ip2long(Yii::$app->request->userIP);
-            $subscriber->save(false);
-            
-            exit('<center>Thank you. <br/><br/>Instructions have been sent to your e-mail box.</center>');
+                $model = new SignupForm();
+                $model->name = $getDemoModel->name;
+                $model->email = $getDemoModel->email;
+                $model->password = rand(1000, 1000000).'pSap2dd123';
+        
+            if ($model->signup()) {
+                $model->sendEmail();
+                exit('<center>Thank you. <br/><br/>Instructions have been sent to your e-mail box.</center>');
+            } else {
+                exit('<center>'.join('<br/>', $model->getErrors()).'</center>');
+            }
         } else {
             return $this->render('index', array(
                 'products' => Product::findActive()->all(),

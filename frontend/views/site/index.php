@@ -33,7 +33,7 @@ $this->title = 'Home';
                 <div class="df__field">
                   <?= $form->field($getDemoModel, 'email')->textInput(['class' => 'df__input','placeholder' => 'E-mail'])->label(false) ?>
                 </div>
-                <div class="df__field" id="captcha_block" style="display:none">
+                <div class="df__field" id="captcha_block" style="display:<?=$getDemoModel->name ? 'block' : 'none'?>">
                 <?= $form->field($getDemoModel, 'verifyCode')->label(false)
                       ->widget(Captcha::className(), [
                     'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
