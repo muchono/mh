@@ -31,6 +31,7 @@ class Discount extends \yii\db\ActiveRecord
     const STATUS_ACTIVE = 1;
     const SPECIAL40ID = 10;
     const SPECIAL_AVAILABLE_TIME = 86400;//24 hours
+    const FREE = 100;
     public $imageFile1;
     
     public $imageFile2;

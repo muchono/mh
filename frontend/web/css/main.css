@@ -5651,6 +5651,10 @@ input[type="color"].search-questions__input, input[type="date"].search-questions
     color: #309402; }
 
 /* line 3680, E:/GIT/marketinghack/public/scss/_theme_style.scss */
+.cart-page-aside-long {
+	max-width: 100% !important;
+	margin: 0 0 0 0 !important;
+}
 .cart-page-aside {
   -webkit-box-ordinal-group: 0;
   -webkit-order: -1;

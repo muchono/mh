@@ -74,15 +74,20 @@ AppAsset::register($this);
       </div>
       <nav class="main-nav">
         <ul class="main-nav__list">
+         <?php if (Yii::$app->user->isGuest){?>
           <li class="main-nav__item"><a href="<?=Url::home();?>" class="main-nav__link <?=($this->params['page'] == 'home') ? 'main-nav__link--active' : ''?>">Home</a></li>
-          <li class="main-nav__item"><a href="<?=Url::to(['hiw/']);?>" class="main-nav__link <?=($this->params['page'] == 'hiw') ? 'main-nav__link--active' : ''?>">How It Works</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['how-it-works/']);?>" class="main-nav__link <?=($this->params['page'] == 'hiw') ? 'main-nav__link--active' : ''?>">How It Works</a></li>
+        <?php } else {?>
+          <li class="main-nav__item"><a href="<?=Url::to(['content/']);?>" class="main-nav__link <?=($this->params['page'] == 'content') ? 'main-nav__link--active' : ''?>">Check Products</a></li>
+        <?php }?>
           <li class="main-nav__item"><a href="<?=Url::to(['products/']);?>" class="main-nav__link <?=($this->params['page'] == 'products') ? 'main-nav__link--active' : ''?>">Products</a></li>
         <?php if ($this->params['offer_menu']){?>          
           <li class="main-nav__item"><a href="<?=Url::to(['special-offer/']);?>" class="main-nav__link <?=($this->params['page'] == 'special-offer') ? 'main-nav__link--active' : ''?>">Special Offers</a></li>
           <?php }?>
           <li class="main-nav__item"><a href="<?=Url::to(['faq/']);?>" class="main-nav__link <?=($this->params['page'] == 'faq') ? 'main-nav__link--active' : ''?>">F.A.Q.</a></li>
           <li class="main-nav__item"><a href="<?=Url::to(['support/']);?>" class="main-nav__link <?=($this->params['page'] == 'support') ? 'main-nav__link--active' : ''?>">Support</a></li>
-          <li class="main-nav__item"><a href="<?=Url::to(['blog/']);?>" class="main-nav__link <?=($this->params['page'] == 'blog') ? 'main-nav__link--active' : ''?>">Blog</a></li>
+          <!--
+          <li class="main-nav__item"><a href="<?=Url::to(['blog/']);?>" class="main-nav__link <?=($this->params['page'] == 'blog') ? 'main-nav__link--active' : ''?>">Blog</a></li>-->
         </ul>
       </nav>
 
@@ -136,46 +141,49 @@ AppAsset::register($this);
         <a href="" class="sm-btn"><i class="icon-5"></i></a>
       </div>
       <div class="sm__content">
-        <ul class="sm-list-1">
-          <li class="sm-list-1__item sm-list-1__item--unblock">
-            <a href="" class="sm-list-1__link">Forum Link Building Techniques</a>
-          </li>
-          <li class="sm-list-1__item sm-list-1__item--unblock sm-list-1__item--active">
-            <a href="" class="sm-list-1__link">Q&amp;A Link Building Techniques</a>
-          </li>
-          <li class="sm-list-1__item sm-list-1__item--unblock">
-            <a href="" class="sm-list-1__link">Guest Posting Marcketing </a>
-          </li>
-          <li class="sm-list-1__item sm-list-1__item--unblock">
-            <a href="" class="sm-list-1__link">Forum Link Building Techniques</a>
-          </li>
-          <li class="sm-list-1__item">
-            <a href="" class="sm-list-1__link">Q&amp;A Link Building Techniques</a>
-          </li>
-          <li class="sm-list-1__item">
-            <a href="" class="sm-list-1__link">Guest Posting Marcketing </a>
-          </li>
-          <li class="sm-list-1__item">
-            <a href="" class="sm-list-1__link">Forum Link Building Techniques</a>
-          </li>
-        </ul>
         <h3 class="sm-title">Menu</h3>
         <ul class="sm-list-2">
+         <?php if (Yii::$app->user->isGuest){?>
           <li class="sm-list-2__item">
-            <a href="" class="sm-list-2__link">Renew Subscriptions</a>
-          </li>
-          <li class="sm-list-2__item">
-            <a href="" class="sm-list-2__link">F.A.Q.</a>
-          </li>
-          <li class="sm-list-2__item sm-list-2__item--active">
-            <a href="" class="sm-list-2__link">Blog</a>
+            <a href="<?=Url::home();?>" class="sm-list-2__link">Home</a>
           </li>
           <li class="sm-list-2__item">
-            <a href="" class="sm-list-2__link">My Account</a>
+            <a href="<?=Url::to(['hiw/']);?>" class="sm-list-2__link">How It Works</a>
+          </li>
+        <?php } else {?>
+          <li class="sm-list-2__item">
+            <a href="<?=Url::to(['content/']);?>" class="sm-list-2__link">Check Products</a>
+          </li>          
+        <?php }?>
+          <li class="sm-list-2__item">
+            <a href="<?=Url::to(['products/']);?>" class="sm-list-2__link">Products</a>
+          </li>          
+        <?php if ($this->params['offer_menu']){?>          
+          <li class="main-nav__item"><a href="<?=Url::to(['special-offer/']);?>" class="main-nav__link <?=($this->params['page'] == 'special-offer') ? 'main-nav__link--active' : ''?>">Special Offers</a></li>
+          <li class="sm-list-2__item">
+            <a href="<?=Url::to(['special-offer/']);?>" class="sm-list-2__link">Special Offers</a>
+          </li>          
+          <?php }?>
+          <li class="sm-list-2__item">
+            <a href="<?=Url::to(['faq/']);?>" class="sm-list-2__link">F.A.Q.</a>
           </li>
           <li class="sm-list-2__item">
-            <a href="" class="sm-list-2__link">Logout</a>
+            <a href="<?=Url::to(['support/']);?>" class="sm-list-2__link">Support</a>
           </li>
+          <li class="sm-list-2__item">
+            <a href="<?=Url::to(['blog/']);?>" class="sm-list-2__link">Blog</a>
+          </li>
+          <?php if (!Yii::$app->user->isGuest){?>
+          <li class="sm-list-2__item">
+            <a href="<?=Url::to(['account/change']);?>" class="sm-list-2__link">My Account</a>
+          </li>
+          <li class="sm-list-2__item">
+            <a href="<?=Url::to(['cart/index']);?>" class="sm-list-2__link">Cart</a>
+          </li>          
+          <li class="sm-list-2__item">
+            <a href="<?=Url::to(['account/logout']);?>" class="sm-list-2__link">Logout</a>
+          </li>
+           <?php }?>
         </ul>
       </div>
       <div class="sm__bottom">
@@ -225,7 +233,7 @@ AppAsset::register($this);
                   <li class="mf__item"><a href="<?=Url::to(['site/special-offer']);?>" class="mf__link">Special Offers</a></li>
                   <li class="mf__item"><a href="<?=Url::to(['site/faq']);?>" class="mf__link">F.A.Q.</a></li>
                   <li class="mf__item"><a href="<?=Url::to(['site/terms']);?>" class="mf__link">Terms of Use</a></li>
-                  <li class="mf__item"><a href="<?=Url::to(['blog/']);?>" class="mf__link">Blog</a></li>
+                  <!--<li class="mf__item"><a href="<?=Url::to(['blog/']);?>" class="mf__link">Blog</a></li>-->
                 </ul>
               </nav>
             </div>

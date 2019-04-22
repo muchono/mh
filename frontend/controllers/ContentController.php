@@ -7,8 +7,13 @@ use common\models\Product;
 use common\models\ProductHref;
 use common\models\ProductGuide;
 use common\models\OrderToProduct;
+use common\models\User;
+use frontend\models\UserMark;
+
 use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
+
+use yii\filters\AccessControl;
 
 class ContentController extends \frontend\controllers\Controller
 {
@@ -18,6 +23,25 @@ class ContentController extends \frontend\controllers\Controller
         'requires_payment' => "Requires payment for guest posting",
         'ceased_to_exist' => "Site ceased to exist",
     ];
+    
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['mark-link', 'send-report'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],                     
+                ],
+            ],             
+        ];
+    }
     
     public function beforeAction($action)
     {
@@ -34,10 +58,14 @@ class ContentController extends \frontend\controllers\Controller
         
         if ($product_id && $product = Product::findOne($product_id)) {
             $this->view->params['selected_product'] = $product;
-            $this->view->params['selected_product_accessible'] = Yii::$app->user->id && OrderToProduct::isAccessible($product_id, Yii::$app->user->id);            
         } else {
             $this->view->params['selected_product'] = $this->view->params['products'][0];    
         }
+        
+        if ($this->view->params['selected_product']) {
+            $this->view->params['selected_product_accessible'] = Yii::$app->user->id && OrderToProduct::isAccessible($this->view->params['selected_product']->id, Yii::$app->user->id);
+        }
+        
         $this->view->params['selected_product_hrefs'] = $this->renderHrefs($this->view->params['selected_product']);
         $this->view->params['selected_product_guide'] = $this->renderGuide($this->view->params['selected_product']);
         
@@ -78,8 +106,15 @@ class ContentController extends \frontend\controllers\Controller
     
     public function actionMarkLink()
     {
-        $r = array('success' => 1);
-        
+        $r = array('success' => 0);
+        if (Yii::$app->request->post('link')) {
+            $mark = new UserMark;
+            $mark->user_id = Yii::$app->user->id;
+            $mark->href_id = (int) Yii::$app->request->post('link');
+            $mark->save();
+            
+            $r['success'] = 1;
+        }
         echo json_encode($r);
         exit;
     }   
@@ -87,7 +122,36 @@ class ContentController extends \frontend\controllers\Controller
     public function actionSendReport()
     {
         $r = array('success' => 1);
-        
+        if (Yii::$app->request->get('for') && Yii::$app->request->post('report')) {
+            $href = ProductHref::findOne((int) Yii::$app->request->get('for'));
+            if ($href 
+                    && OrderToProduct::isAccessible($href->product_id, Yii::$app->user->id)) {
+                
+                $product = Product::findOne($href->product_id);
+                $user = User::findOne(Yii::$app->user->id);
+                $items = [];
+                foreach (Yii::$app->request->post('report') as $ri) {
+                    $items[] = $this->reportValues[$ri];
+                }
+                
+                //send to user
+                $body = Yii::$app->controller->renderPartial('@app/views/mails/report.php', [
+                    'user' => $user,
+                    'product' => $product,
+                    'items' => $items,
+                    'href' => $href,
+                ]);
+                
+                Yii::$app->mailer->compose()
+                            ->setTo(Yii::$app->params['contactEmail'])
+                            ->setFrom(Yii::$app->params['adminEmail'])
+                            ->setSubject('MarketingHack URL Report')
+                            ->setHtmlBody($body)
+                            ->send();
+                $r['success'] = 1;                
+            }
+            
+        }
         echo json_encode($r);
         exit;
     }
@@ -139,6 +203,8 @@ class ContentController extends \frontend\controllers\Controller
         
         $accessable = OrderToProduct::isAccessible($product->id, Yii::$app->user->id);
         
+        $marked = UserMark::find(['user_id' => Yii::$app->user->id])->indexBy('href_id')->asArray()->all();
+        
         return $this->renderPartial('_list',['product' => $product,
             'hrefsProvider' => $dataProvider,
             'last_update' => ProductHref::getLastUpdate($product->id),
@@ -146,6 +212,8 @@ class ContentController extends \frontend\controllers\Controller
             'pages' => $pages,
             'sort' => $sort,
             'accessable' => $accessable,
+            'marked' => $marked,
+            'product' => $product,
             ]);
     }
     

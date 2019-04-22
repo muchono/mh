@@ -60,7 +60,7 @@ AppAsset::register($this);
           <span></span>
         </a>
         <div class="logo">
-          <a href="" class="logo__link"><img src="<?=Yii::$app->user->isGuest ? Url::to(['content/']) : Url::home()?>/img/main-logo.png" alt="" class="img-fluid"></a>
+          <a href="<?=!Yii::$app->user->isGuest ? Url::to(['content/']) : Url::home()?>" class="logo__link"><img src="<?=Url::base()?>/img/main-logo.png" alt="" class="img-fluid"></a>
         </div>
         <nav class="main-nav">
           <ul class="main-nav__list">
@@ -82,7 +82,7 @@ AppAsset::register($this);
         
     <div class="side-menu js-side-menu">
       <div class="sm__logo">
-        <a href="<?=Url::to(['site/index'])?>" class="logo__link"><img src="<?=Url::base()?>/img/main-logo.png" alt="" class="img-fluid"></a>
+        <a href="<?=!Yii::$app->user->isGuest ? Url::to(['content/']) : Url::home()?>" class="logo__link"><img src="<?=Url::base()?>/img/main-logo.png" alt="" class="img-fluid"></a>
       </div>
       <div class="sm__top">
         <a href="" class="sm-btn"><i class="icon-5"></i></a>
@@ -107,6 +107,9 @@ AppAsset::register($this);
         </ul>
         <h3 class="sm-title">Menu</h3>
         <ul class="sm-list-2">
+            <a href="<?=Url::to(['account/']);?>" class="sm-list-2__link">Renew Subscriptions</a>
+          </li>
+          <li class="sm-list-2__item">            
           <li class="sm-list-2__item">
             <a href="<?=Url::to(['site/faq']);?>" class="sm-list-2__link">F.A.Q.</a>
           </li>
@@ -131,6 +134,7 @@ AppAsset::register($this);
     <div class="content<?php if (!Yii::$app->user->isGuest){?> noselect<?php }?>">
       <div class="top-line">
         <ul class="tl__menu tl__menu--center">
+          <li class="tl__item"><a href="<?=Url::to(['account/']);?>" class="tl__link">Renew&nbsp;<span>Subscriptions</span></a></li>            
           <li class="tl__item"><a href="<?=Url::to(['site/faq']);?>" class="tl__link">F.A.Q.</a></li>
           <li class="tl__item"><a href="<?=Url::to(['blog/index']);?>" class="tl__link">Blog</a></li>
         </ul>
@@ -180,9 +184,11 @@ AppAsset::register($this);
                 <?php if (!$this->params['selected_product_accessible']){?>
                 <a href="#" class="btn-4 content-add-tocart" for="<?=$this->params['selected_product']->id?>">Buy now</a>
                 <?php } else {?>
-                <a href="#" class="btn-4 content-add-tocart" for="<?=$this->params['selected_product']->id?>">Renew</a>
+                <!--<a href="#" class="btn-4 content-add-tocart" for="<?=$this->params['selected_product']->id?>">Renew</a>-->
                 <?php } ?>
               <?php } ?>
+              
+              <?php if (!$this->params['selected_product_accessible']){?>                
               <div class="ic-price <?php if ($this->params['selected_product']->discount){?>ic-price--free-now<?php } ?>">
                   <span class="price__text"><?=$this->params['selected_product']->price?>$</span> 
                   <span class="free__text">
@@ -193,6 +199,7 @@ AppAsset::register($this);
                       <?php } ?>
                   </span>
               </div>
+             <?php } ?>
             </div>
           </div>
         </div>
@@ -217,7 +224,7 @@ AppAsset::register($this);
             <?php } else {?>
                 <?php if (Yii::$app->user->isGuest){?>
                 <a href="#signup-popup" class="btn-3 js-popups">Buy Full Version</a>
-                <?php } else {?>
+                <?php } else if (!$this->params['selected_product_accessible']) {?>
                 <a href="#" class="btn-3 content-add-tocart" for="<?=$this->params['selected_product']->id?>">Buy Full Version</a>
                 <?php }?>
             <?php }?>

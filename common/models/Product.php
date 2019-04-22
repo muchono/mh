@@ -9,6 +9,7 @@ use common\models\ProductGuide;
 use common\models\ProductReview;
 use common\models\ProductPage;
 use common\models\Discount;
+use common\models\OrderToProduct;
 
 /**
  * This is the model class for table "product".
@@ -124,18 +125,27 @@ class Product extends \yii\db\ActiveRecord
         if (Yii::$app->user->id) {
             $is_special_offer = Discount::isSpeacialAvailable(Yii::$app->user->id) && empty(Discount::getProductsNotInCart(Yii::$app->user->id));
         }
+        if ($is_special_offer){
+            $discount = Discount::findOne(Discount::SPECIAL40ID);
+        } else {
+            $discountQuery = Discount::find()
+           ->innerJoin('discount_to_product', '`discount`.`id` = `discount_to_product`.`discount_id`')
+           ->where(['status' => Discount::STATUS_ACTIVE])                 
+           ->andWhere(['<', 'date_from', $time])
+           ->andWhere(['>', 'date_to', $time])
+           ->andWhere(['product_id' => $this->id])
+           ->andWhere(['!=', 'discount.id', Discount::SPECIAL40ID])
+           ->orderBy('id DESC');
+           
+            if (Yii::$app->user->id && OrderToProduct::isAccessible($this->id, Yii::$app->user->id)) {
+                $discountQuery->andWhere(['!=', 'percent', Discount::FREE]);
+            }
         
-         return $is_special_offer 
-                 ? Discount::findOne(Discount::SPECIAL40ID)
-                 : Discount::find()
-                ->innerJoin('discount_to_product', '`discount`.`id` = `discount_to_product`.`discount_id`')
-                ->where(['status' => Discount::STATUS_ACTIVE])                 
-                ->andWhere(['<', 'date_from', $time])
-                ->andWhere(['>', 'date_to', $time])
-                ->andWhere(['product_id' => $this->id])
-                ->andWhere(['!=', 'discount.id', Discount::SPECIAL40ID])
-                ->orderBy('id DESC')
-                ->one();
+           $discount = $discountQuery->one();
+            
+        }
+        
+         return $discount;
     }
     
     /**

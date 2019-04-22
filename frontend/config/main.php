@@ -46,7 +46,7 @@ return [
                 [
                     'class' => 'app\components\ProductUrlRule',
                 ],
-                'hiw' => 'site/hiw',
+                'how-it-works' => 'site/hiw',
                 'products' => 'site/products',
                 'special-offer' => 'site/special-offer',
                 'faq' => 'site/faq',

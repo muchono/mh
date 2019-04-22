@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "product_guide".
@@ -42,7 +43,8 @@ class ProductGuide extends \yii\db\ActiveRecord
     public function getAboutCode()
     {
         $about = str_replace(array('&nbsp;'), array('####'), $this->about);
-        $about = preg_replace("/<img .*>/", '<img class="img-fluid pull-center" src="img/demo_img.jpg">', $about);
+        $about = preg_replace("/<img .*>/", '<img class="img-fluid pull-center" src="'.Url::home().'img/demo_img.jpg">', $about);
+        $about = preg_replace("/<a .*\>/", '<a href="#">', $about);
         
         $about = preg_replace_callback(
             '#.*?(<.+?>).*?#is',

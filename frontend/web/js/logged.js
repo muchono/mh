@@ -51,7 +51,7 @@ var Logged = (function() {
         });
         
         $('.tab-content').on('click', '.icon-11', function(event) {
-            markLink($(this), $(this).hasClass('unclickable'));
+            markLink($(this), !$(this).hasClass('unclickable'));
         });         
         
         $('.tab-content').on('click', '.icon-12', function(event) {
@@ -162,7 +162,7 @@ var Logged = (function() {
         var list = $('input[name="report[]"]:checked');
         if (list.length) {
             var data = list.serializeArray();
-            $.post(WEB_PATH+"content/send-report&for="+vars.report_for, data)
+            $.post(WEB_PATH+"content/send-report?for="+vars.report_for, data)
             .done(function(){
                 $('.report').hide();                
                 var dialog = $('#report_result');

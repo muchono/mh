@@ -61,7 +61,7 @@ class Controller extends \yii\web\Controller
                 $user->save();
                 
                 $body = Yii::$app->controller->renderPartial('@app/views/mails/password_reset.php', [
-                    'link' => Url::to(['site/restore', ['key' => $user->password_reset_token, 'u' => $user->id]], true),
+                    'link' => Url::to(['site/restore', 'key' => $user->password_reset_token, 'u' => $user->id], true),
                 ]);
                 //send to user
                 Yii::$app->mailer->compose()
@@ -88,7 +88,7 @@ class Controller extends \yii\web\Controller
         $model = new LoginForm();
         if (Yii::$app->request->post('login')) {
             if ($model->load(Yii::$app->request->post()) && $model->login()) {
-                echo 'Redirecting <script>location.reload();</script>';
+                echo 'Redirecting <script>location.replace("'.Url::to(['content/']).'");</script>';
                 exit;
             }
         }

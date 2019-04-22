@@ -108,14 +108,11 @@ class ProductHref extends \yii\db\ActiveRecord
      */
     public function beforeSave($insert)
     {
-        if ($insert) {
-            $seostats = new \SEOstats\SEOstats;
-
-            $seostats->setUrl($this->url);
-            
-            $this->alexa_rank = $this->loadAlexaRank();
-            $this->da_rank = round(\SEOstats\Services\Mozscape::getDomainAuthority(), 2);
-        }
+        $seostats = new \SEOstats\SEOstats;
+        $seostats->setUrl($this->url);
+        $this->alexa_rank = $this->loadAlexaRank();
+        $this->da_rank = round(\SEOstats\Services\Mozscape::getDomainAuthority(), 2);
+        
         return parent::beforeSave($insert);
     }
     

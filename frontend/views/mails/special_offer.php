@@ -148,7 +148,7 @@ use yii\helpers\Url;
                                                     <table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
                                                         <tr style="padding:0;text-align:left;vertical-align:top">
                                                             <th style="Margin:0;color:#353535;font-family:Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left">
-                                                                <h1 class="text-center" style="Margin:0;Margin-bottom:20px;color:inherit;font-family:Helvetica,Arial,sans-serif;font-size:32px;font-weight:400;line-height:1.3;margin:0;margin-bottom:20px;padding:0;text-align:center;word-wrap:normal"><?=$offer->title?></h1></th>
+                                                                <h1 class="text-center" style="Margin:0;Margin-bottom:20px;color:inherit;font-family:Helvetica,Arial,sans-serif;font-size:32px;font-weight:400;line-height:1.3;margin:0;margin-bottom:20px;padding:0;text-align:center;word-wrap:normal"><br>Last chance:<br><?=$offer->title?></h1></th>
                                                             <th class="expander" style="Margin:0;color:#353535;font-family:Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:1.3;margin:0;padding:0!important;text-align:left;visibility:hidden;width:0"></th>
                                                         </tr>
                                                     </table>
