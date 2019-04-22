@@ -135,7 +135,7 @@ use yii\helpers\Url;
       </table>
       <div class="payment-foot">
         <div class="total-payment">Total payment amount: $<span id="items_amount"><?=$cartInfo['total']?></span></div>
-        <p class="terms-text">By passing to payment you confirm that you agree to the <a href="">Terms of Use</a> and <a href="">Privacy Policy</a></p>
+        <p class="terms-text">By passing to payment you confirm that you agree to the <a href="<?=Url::to(['terms-of-use/']);?>" target="_blank">Terms of Use</a> and <a href="<?=Url::to(['privacy-policy/']);?>" target="_blank">Privacy Policy</a></p>
         <a href='#' data-fsc-action="Add,Checkout" data-fsc-item-path-value="my-first-product">Purchase "Product One"</a>
         <button class="btn-3">Accept and Pay</button>
       </div>

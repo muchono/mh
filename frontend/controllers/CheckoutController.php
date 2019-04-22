@@ -73,7 +73,13 @@ class CheckoutController extends \frontend\controllers\Controller
         $cartInfo = Cart::getInfo(Yii::$app->user->id);
         $products = Product::findActive()->andWhere(['not in', 'id', $cartInfo['products_list']])->all();
         $user = User::findOne(Yii::$app->user->id);
-        $userBilling = $user->billing ? $user->billing : new UserBilling;
+        $userBilling = null;
+        if ($user->billing) {
+            $userBilling = $user->billing;
+        } else {
+            $userBilling = new UserBilling;
+            $userBilling->payment = 'Webmoney';
+        }
         
         $userBilling->user_id = Yii::$app->user->id;
         $userBilling->scenario = 'billing';

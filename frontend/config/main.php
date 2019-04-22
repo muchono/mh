@@ -51,6 +51,8 @@ return [
                 'special-offer' => 'site/special-offer',
                 'faq' => 'site/faq',
                 'support' => 'site/support',
+                'terms-of-use' => 'site/terms',
+                'privacy-policy' => 'site/privacy',
                 'post/<url:[\w-]+>' => 'blog/url',
             ],
         ],

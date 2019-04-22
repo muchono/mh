@@ -10,6 +10,6 @@ use yii\helpers\Url;
     <figure class="mp__img">
       <img src="<?=Url::base()?>/img/msg-success-img.jpg" alt="" class="img-fluid">
     </figure>
-    <a href="<?=Url::home()?>" class="btn-8">return to home</a>
+    <a href="<?=$link ? $link : Url::home()?>" class="btn-8">return to home</a>
   </div>
 </section>

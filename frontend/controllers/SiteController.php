@@ -163,6 +163,7 @@ class SiteController extends \frontend\controllers\Controller
 
                 return $this->render('success', [
                     'text' => 'Thank you. Your registration completed.',
+                    'link' => Url::to(['content/']),
                 ]);                
             } 
         }
@@ -340,6 +341,19 @@ exit('SEND');
             'products' => Product::findActive()->limit(3)->all(),
         ));
     }    
+    
+    /**
+     * Displays Privacy
+     *
+     * @return mixed
+     */
+    public function actionPrivacy()
+    {
+        $this->view->params['page'] ='';
+        
+        return $this->render('terms', array(
+        ));
+    }  
     
     /**
      * Displays Terms
