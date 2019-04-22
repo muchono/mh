@@ -19,29 +19,12 @@ use yii\filters\VerbFilter;
  */
 class ProductHrefController extends Controller
 {
-    protected $form;
+
     /**
      * Base Product
      * @var Product 
      */
     private $product = null;
-    /**
-     * @inheritdoc
-     */
-    public function beforeAction($action)
-    {
-        $r = true;
-        if (!in_array($action->id, array('update', 'delete'))
-                && (empty(Yii::$app->request->queryParams['product_id'])
-                || (($this->product = Product::findOne(Yii::$app->request->queryParams['product_id'])) 
-                        === null))) {
-            
-             $this->redirect(['product/index']);
-             $r = false;
-        }
-        
-        return $r ? parent::beforeAction($action) : $r;
-    }
     
     /**
      * @inheritdoc
@@ -68,6 +51,24 @@ class ProductHrefController extends Controller
     }
 
     /**
+     * @inheritdoc
+     */
+    public function beforeAction($action)
+    {
+        $r = true;
+        if (!in_array($action->id, array('update', 'delete'))
+                && (empty(Yii::$app->request->queryParams['product_id'])
+                || (($this->product = Product::findOne(Yii::$app->request->queryParams['product_id'])) 
+                        === null))) {
+            
+             $this->redirect(['product/index']);
+             $r = false;
+        }
+        
+        return $r ? parent::beforeAction($action) : $r;
+    }
+    
+    /**
      * Lists all ProductHref models.
      * @return mixed
      */
@@ -75,6 +76,25 @@ class ProductHrefController extends Controller
     {
         $searchModel = new ProductHrefSearch();
         $searchModel->setProduct($this->product);
+        
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Creates a new ProductHref model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreate()
+    {
+        $searchModel = new ProductHrefSearch();
+        $searchModel->setProduct($this->product);
+        $first = 0;
         
         if (Yii::$app->request->post()) {
             $valid = true;
@@ -124,27 +144,44 @@ class ProductHrefController extends Controller
                 'pagination' => false,
             ]);            
         } else {
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $first = 1;
+            $one = new ProductHref;
+            $one->id = 'IIII';
+
+            $dataProvider = new ArrayDataProvider([
+                'allModels' => [$one],
+                'pagination' => false,
+            ]);            
         }
         
-        return $this->render('index', [
+        
+        return $this->render('create', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'first' => $first,
         ]);
     }
 
     /**
-     * Displays a single ProductHref model.
+     * Updates an existing ProductHref model.
+     * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
      */
-    public function actionView($id)
+    public function actionUpdate($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $model = $this->findModel($id);
+        
+        $model->setProduct(Product::findOne($model->product_id));
+        
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['update', 'id' => $model->id]);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
     }
-
 
     /**
      * Deletes an existing ProductHref model.
@@ -156,13 +193,11 @@ class ProductHrefController extends Controller
     {
         $model = $this->findModel($id);
         $product_id = $model->product_id;
-        
-        ProductHrefToCategory::deleteAll(['product_id' => $id]);
         $model->delete();
+
+        return $this->redirect(['index', 'product_id' => $product_id]);
     }
 
-
-    
     /**
      * Finds the ProductHref model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
