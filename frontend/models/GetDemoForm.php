@@ -26,6 +26,7 @@ class GetDemoForm extends Model
             [['name', 'email', 'verifyCode'], 'required'],
             // email has to be a valid email address
             ['email', 'email'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
             // verifyCode needs to be entered correctly
             ['verifyCode', 'captcha'],
         ];
