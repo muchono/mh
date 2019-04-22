@@ -66,11 +66,12 @@ class SignupForm extends Model
      * Sends an email to the specified email address using the information collected by this model.
      * @return bool whether the email was sent
      */
-    public function sendEmail()
+    public function sendEmail($params = [])
     {
         $link = Url::to(['site/registration', 'code' => $this->user->auth_key, 'id' => $this->user->id], true);
         $body = Yii::$app->controller->renderPartial('@app/views/mails/registration_confirmation.php', [
             'link' => $link,
+            'password' => $params['add_pass'] ? $this->password : '',
         ]);
         return Yii::$app->mailer->compose()
             ->setTo($this->email)

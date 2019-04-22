@@ -91,7 +91,7 @@ class SiteController extends \frontend\controllers\Controller
                 $model->password = rand(1000, 1000000).'pSap2dd123';
         
             if ($model->signup()) {
-                $model->sendEmail();
+                $model->sendEmail(['add_pass' => true]);
                 exit('<center>Thank you. <br/><br/>Instructions have been sent to your e-mail box.</center>');
             } else {
                 exit('<center>'.join('<br/>', $model->getErrors()).'</center>');
