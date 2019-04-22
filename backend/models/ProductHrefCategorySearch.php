@@ -70,6 +70,6 @@ class ProductHrefCategorySearch extends ProductHrefCategory
     
     static public function getArray()
     {
-        return yii\helpers\ArrayHelper::map(ProductHrefCategory::find()->select(['id','title'])->asArray()->all(), 'id', 'title');
+        return yii\helpers\ArrayHelper::map(ProductHrefCategory::find()->select(['id','title'])->orderBy(['title'=>SORT_ASC])->asArray()->all(), 'id', 'title');
     }
 }

@@ -76,7 +76,7 @@ AppAsset::register($this);
         <ul class="main-nav__list">
          <?php if (Yii::$app->user->isGuest){?>
           <li class="main-nav__item"><a href="<?=Url::home();?>" class="main-nav__link <?=($this->params['page'] == 'home') ? 'main-nav__link--active' : ''?>">Home</a></li>
-          <li class="main-nav__item"><a href="<?=Url::to(['hiw/']);?>" class="main-nav__link <?=($this->params['page'] == 'hiw') ? 'main-nav__link--active' : ''?>">How It Works</a></li>
+          <li class="main-nav__item"><a href="<?=Url::to(['how-it-works/']);?>" class="main-nav__link <?=($this->params['page'] == 'hiw') ? 'main-nav__link--active' : ''?>">How It Works</a></li>
         <?php } else {?>
           <li class="main-nav__item"><a href="<?=Url::to(['content/']);?>" class="main-nav__link <?=($this->params['page'] == 'content') ? 'main-nav__link--active' : ''?>">Check Products</a></li>
         <?php }?>
@@ -86,7 +86,8 @@ AppAsset::register($this);
           <?php }?>
           <li class="main-nav__item"><a href="<?=Url::to(['faq/']);?>" class="main-nav__link <?=($this->params['page'] == 'faq') ? 'main-nav__link--active' : ''?>">F.A.Q.</a></li>
           <li class="main-nav__item"><a href="<?=Url::to(['support/']);?>" class="main-nav__link <?=($this->params['page'] == 'support') ? 'main-nav__link--active' : ''?>">Support</a></li>
-          <li class="main-nav__item"><a href="<?=Url::to(['blog/']);?>" class="main-nav__link <?=($this->params['page'] == 'blog') ? 'main-nav__link--active' : ''?>">Blog</a></li>
+          <!--
+          <li class="main-nav__item"><a href="<?=Url::to(['blog/']);?>" class="main-nav__link <?=($this->params['page'] == 'blog') ? 'main-nav__link--active' : ''?>">Blog</a></li>-->
         </ul>
       </nav>
 
@@ -232,7 +233,7 @@ AppAsset::register($this);
                   <li class="mf__item"><a href="<?=Url::to(['site/special-offer']);?>" class="mf__link">Special Offers</a></li>
                   <li class="mf__item"><a href="<?=Url::to(['site/faq']);?>" class="mf__link">F.A.Q.</a></li>
                   <li class="mf__item"><a href="<?=Url::to(['site/terms']);?>" class="mf__link">Terms of Use</a></li>
-                  <li class="mf__item"><a href="<?=Url::to(['blog/']);?>" class="mf__link">Blog</a></li>
+                  <!--<li class="mf__item"><a href="<?=Url::to(['blog/']);?>" class="mf__link">Blog</a></li>-->
                 </ul>
               </nav>
             </div>

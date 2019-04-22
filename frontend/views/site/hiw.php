@@ -5,6 +5,8 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 
 $this->title = 'How it works';
+
+use common\models\PagesContent;
 ?>
 <section class="how-it-works">
       <div class="container-sm">
@@ -23,25 +25,7 @@ $this->title = 'How it works';
             </ul>
           </div>
           <h1 class="title-9">How It Works</h1>
-          <p>WordPress never stops growing in its popularity so it’s only natural that the number of available themes keeps growing year after year. WordPress developers and designers have been busy this year as well, bringing us tons of fresh, new themes for our marketplace. If you’ve been thinking about giving your site a makeover or if you’re planning to finally launch your website this year, don’t miss our roundup of the best WordPress themes in 2017.</p>
-          <p>Our roundup includes the best selling themes of the year as well as the top five themes from select categories. You’ll find themes for creatives, business and store owners, as well as the top trending themes of the year. WordPress never stops growing in its popularity so it’s only natural that the number of available themes keeps growing year after year. WordPress developers and designers have been busy this year as well, bringing us tons of fresh, new themes for our marketplace. </p>
-          <h2 class="title-11">Does Your Website Work Effectively and Efficiently?</h2>
-          <p>WordPress never stops growing in its popularity so it’s only natural that the number of available themes keeps growing year after year. WordPress developers and designers have been busy this year as well, bringing us tons of fresh, new themes for our marketplace. If you’ve been thinking about giving your site a makeover or if you’re planning to finally launch your website this year, don’t miss our roundup of the best WordPress themes in 2017.</p>
-          <p>Our roundup includes the best selling themes of the year as well as the top five themes from select categories. You’ll find themes for creatives, business and store owners, as well as the top trending themes of the year.</p>
-          <p>WordPress never stops growing in its popularity so it’s only natural that the number of available themes keeps growing year after year. WordPress developers and designers have been busy this year as well, bringing us tons of fresh, new themes for our marketplace. If you’ve been thinking about giving your site a makeover or if you’re planning to finally launch your website this year, don’t miss our roundup of the best WordPress themes in 2017.</p>
-          <p>Our roundup includes the best selling themes of the year as well as the top five themes from select categories. You’ll find themes for creatives, business and store owners, as well as the top trending themes of the year.</p>
-          <figure>
-            <img src="<?=Url::base()?>/img/hit-img.jpg" alt="" class="img-fluid">
-          </figure>
-          <p>WordPress never stops growing in its popularity so it’s only natural that the number of available themes keeps growing year after year. WordPress developers and designers have been busy this year as well, bringing us tons of fresh, new themes for our marketplace. If you’ve been thinking about giving your site a makeover or if you’re planning to finally launch your website this year, don’t miss our roundup of the best WordPress themes in 2017. Our roundup includes the best selling themes of the year as well as the top five themes from select categories. You’ll find themes for creatives, business and store owners, as well as the top trending themes of the year.</p>
-          <h2 class="title-11">Does Your Website Work Effectively and Efficiently?</h2>
-          <figure>
-            <img src="<?=Url::base()?>/img/hit-img-2.jpg" alt="" class="img-fluid">
-          </figure>
-          <p>WordPress never stops growing in its popularity so it’s only natural that the number of available themes keeps growing year after year. WordPress developers and designers have been busy this year as well, bringing us tons of fresh, new themes for our marketplace. If you’ve been thinking about giving your site a makeover or if you’re planning to finally launch your website this year, don’t miss our roundup of the best WordPress themes in 2017. Our roundup includes the best selling themes of the year as well as the top five themes from select categories. You’ll find themes for creatives, business and store owners, as well as the top trending themes of the year.</p>
-          <p>WordPress never stops growing in its popularity so it’s only natural that the number of available themes keeps growing year after year. WordPress developers and designers have been busy this year as well, bringing us tons of fresh, new themes for our marketplace. If you’ve been thinking about giving your site a makeover or if you’re planning to finally launch your website this year, don’t miss our roundup of the best WordPress themes in 2017. Our roundup includes the best selling themes of the year as well as the top five themes from select categories. You’ll find themes for creatives, business and store owners, as well as the top trending themes of the year.</p>
-          <p>WordPress never stops growing in its popularity so it’s only natural that the number of available themes keeps growing year after year. WordPress developers and designers have been busy this year as well, bringing us tons of fresh, new themes for our marketplace. If you’ve been thinking about giving your site a makeover or if you’re planning to finally launch your website this year, don’t miss our roundup of the best WordPress themes in 2017. Our roundup includes the best selling themes of the year as well as the top five themes from select categories. You’ll find themes for creatives, business and store owners, as well as the top trending themes of the year.</p>
-          <p>WordPress never stops growing in its popularity so it’s only natural that the number of available themes keeps growing year after year. WordPress developers and designers have been busy this year as well, bringing us tons of fresh, new themes for our marketplace. If you’ve been thinking about giving your site a makeover or if you’re planning to finally launch your website this year, don’t miss our roundup of the best WordPress themes in 2017. Our roundup includes the best selling themes of the year as well as the top five themes from select categories. You’ll find themes for creatives, business and store owners, as well as the top trending themes of the year.</p>
+          <?=PagesContent::findOne(4)->content?>
         </div>
 
     <?= $this->render('_recommend_items', [
