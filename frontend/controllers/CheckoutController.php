@@ -16,7 +16,7 @@ use common\models\OrderToProduct;
 class CheckoutController extends \frontend\controllers\Controller
 {
     const PDF_INVOICE_DIR = '/runtime/invoices/';
-    protected $_payments = array(3=>'Webmoney', /*2=>'PayPal' , 4=>'Bitcoin'*/);
+    protected $_payments = array(3=>'Webmoney', 1=>'FastSpring');
 
     /**
      * @inheritdoc
@@ -109,10 +109,6 @@ class CheckoutController extends \frontend\controllers\Controller
                 $order = self::cartToOrder(['payment' => '', 'transaction_id' => 0]);
                 return $this->redirect(array('checkout/success', 'o' => $order->id));
             }
-        }
-        
-        foreach() {
-            
         }
         
         return $this->render('index', array(

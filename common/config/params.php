@@ -8,7 +8,15 @@ return [
             'secretKey' => '',
             'mode' => '0', // 1 - test mode
             'wmz' => '',
-            'description'=>'NetGeron Payment',
+            'description'=>'MArketingHack Payment',
+        ),
+        //generate sertificate file
+        //add webhook link
+        'FastSpring' => array(
+            'secretKey' => '',
+            'mode' => '0', // 1 - test mode
+            'key_private_path' => '',
+            'description' => 'MarketingHack Payment',
         ),
     ),
     'mailchimp' => array(

@@ -171,6 +171,12 @@ $json_payload = json_encode([
 	]]
 ]);
 
+
+$this->registerJsFile(
+    '@web/js/cart.js'
+);
+
+
 $aes_key = openssl_random_pseudo_bytes(16);
 $cipher_text = openssl_encrypt($json_payload, 'AES-128-ECB', $aes_key, OPENSSL_RAW_DATA); //, $iv);
 $secure_payload = base64_encode($cipher_text);
@@ -181,9 +187,6 @@ $private_key = openssl_pkey_get_private($private_key_content);
 openssl_private_encrypt($aes_key, $aes_key_encrypted, $private_key);
 $secure_key = base64_encode($aes_key_encrypted);
 
-$this->registerJsFile(
-    '@web/js/cart.js'
-);
 $this->registerJs(
     "Cart.construct();",
     View::POS_READY,
@@ -199,7 +202,13 @@ $this->registerJs(
               'key': k
            }
       }
-          function fastSpringResult(obj) { alert('Calles'); console.log(obj);}",
+          function fastSpringResult(obj) { alert('Calles'); console.log(obj);
+            if (null === obj) {
+                console.log('no')
+            } else {
+                console.log(obj)
+            }
+          }",
     View::POS_HEAD,
     'fstsprng-handler'
 );
@@ -209,9 +218,10 @@ $this->registerJsFile(
         'id' => "fsc-api",
         'data-storefront' => "nmsystems.test.onfastspring.com/popup-nmsystems",
         'data-debug' => "false",
-        'data-popup-webhook-received' => 'fastSpringResult',
+        'data-popup-closed' => 'fastSpringResult',
         'data-access-key' => 'H5IAUDZYS1-EYIMTWKN0RQ',
     ],
     'fast-pay'
 );
+
 ?>
