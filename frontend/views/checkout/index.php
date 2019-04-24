@@ -4,6 +4,7 @@ use yii\web\View;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
+use common\models\User;
 
 ?>
 <section class="simple-page sm">
@@ -136,12 +137,50 @@ use yii\helpers\Url;
       <div class="payment-foot">
         <div class="total-payment">Total payment amount: $<span id="items_amount"><?=$cartInfo['total']?></span></div>
         <p class="terms-text">By passing to payment you confirm that you agree to the <a href="<?=Url::to(['terms-of-use/']);?>" target="_blank">Terms of Use</a> and <a href="<?=Url::to(['privacy-policy/']);?>" target="_blank">Privacy Policy</a></p>
-        <!--<a href='#' data-fsc-action="Add,Checkout" data-fsc-item-path-value="my-first-product">Purchase "Product One"</a>-->
+        <?php if (Yii::$app->user->id==20) {?>
+        <a href='#' data-fsc-action="Add,Checkout,Update" data-fsc-item-path-value="marketing-year-subscription">Purchase "Product One"</a>
+        <?php }?>
         <button class="btn-3">Accept and Pay</button>
       </div>
         <?php ActiveForm::end(); ?>      
     </section>
 <?php
+$user = User::findOne(Yii::$app->user->id);
+
+$json_payload = json_encode([
+	"accountCustomKey" => Yii::$app->user->id, // your customer User ID. Should be at least 4 chars. 
+    "contact" => [ // customer details.
+		"email" => $user->email,
+		"firstName" => $user->name,
+		"lastName" => "Customer"
+    ], 
+    "items" => [[
+		"path" => "marketing-year-subscription",
+		"pricing" => [
+			"trial" => 0,
+			"interval" => "year",
+			"intervalLength" => 1,
+			"intervalCount" => 0,
+			"intervalCount" => 0,
+			"quantityBehavior" => "hide",
+			"quantityDefault" => 1,
+			"price" => [
+				"USD" => $cartInfo['total'],
+			]
+		]
+	]]
+]);
+
+$aes_key = openssl_random_pseudo_bytes(16);
+$cipher_text = openssl_encrypt($json_payload, 'AES-128-ECB', $aes_key, OPENSSL_RAW_DATA); //, $iv);
+$secure_payload = base64_encode($cipher_text);
+
+$private_key_content = file_get_contents(Yii::getAlias('@webroot').'/../ssl/fastspring_pk.pem');
+
+$private_key = openssl_pkey_get_private($private_key_content);
+openssl_private_encrypt($aes_key, $aes_key_encrypted, $private_key);
+$secure_key = base64_encode($aes_key_encrypted);
+
 $this->registerJsFile(
     '@web/js/cart.js'
 );
@@ -150,14 +189,28 @@ $this->registerJs(
     View::POS_READY,
     'cart-handler'
 );
+$this->registerJs(
+    "     
+    var p = '".$secure_payload."';
+    var k = '".$secure_key."';
+    var fscSession = {
+          'secure': {
+              'payload': p,
+              'key': k
+           }
+      }
+          function fastSpringResult(obj) { alert('Calles'); console.log(obj);}",
+    View::POS_HEAD,
+    'fstsprng-handler'
+);
 $this->registerJsFile(
     'https://d1f8f9xcsvx3ha.cloudfront.net/sbl/0.7.9/fastspring-builder.min.js',
     [
         'id' => "fsc-api",
         'data-storefront' => "nmsystems.test.onfastspring.com/popup-nmsystems",
-        'position' => View::POS_HEAD,
-        'data-debug' => "true",
-        'position' => View::POS_HEAD,
+        'data-debug' => "false",
+        'data-popup-webhook-received' => 'fastSpringResult',
+        'data-access-key' => 'H5IAUDZYS1-EYIMTWKN0RQ',
     ],
     'fast-pay'
 );
