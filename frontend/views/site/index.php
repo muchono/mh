@@ -13,7 +13,7 @@ $this->title = 'Home';
       <div class="container">
         <div class="row">
           <div class="hh__hero">
-            <h1 class="hh__title"><span class="hh__title_orange">Get access to the data</span> <br>that will change your understanding <br>of Successful Marketing</h1>
+            <h1 class="hh__title"><span class="hh__title_orange">Get access to the data</span> <br>that will change your understanding <br>of Successful SEO</h1>
             <p class="hh__text">MarcketingHack.net contains step-by-step recommendations, cases, secrete methods and lists of proven websites. This information will allow a practicing marketers to leave far behind their competitors. </p>
           </div>
           <div class="hh__form">

@@ -11,6 +11,7 @@ use common\models\Product;
 use common\models\UserBilling;
 use common\models\User;
 use common\models\Order;
+use common\models\OrderToProduct;
 
 class CheckoutController extends \frontend\controllers\Controller
 {
@@ -108,6 +109,10 @@ class CheckoutController extends \frontend\controllers\Controller
                 $order = self::cartToOrder(['payment' => '', 'transaction_id' => 0]);
                 return $this->redirect(array('checkout/success', 'o' => $order->id));
             }
+        }
+        
+        foreach() {
+            
         }
         
         return $this->render('index', array(

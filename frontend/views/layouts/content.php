@@ -60,7 +60,7 @@ AppAsset::register($this);
           <span></span>
         </a>
         <div class="logo">
-          <a href="<?=!Yii::$app->user->isGuest ? Url::to(['content/']) : Url::home()?>" class="logo__link"><img src="<?=Url::base()?>/img/main-logo.png" alt="" class="img-fluid"></a>
+          <a href="<?= Url::home()?>" class="logo__link"><img src="<?=Url::base()?>/img/main-logo.png" alt="" class="img-fluid"></a>
         </div>
         <nav class="main-nav">
           <ul class="main-nav__list">
@@ -82,7 +82,7 @@ AppAsset::register($this);
         
     <div class="side-menu js-side-menu">
       <div class="sm__logo">
-        <a href="<?=!Yii::$app->user->isGuest ? Url::to(['content/']) : Url::home()?>" class="logo__link"><img src="<?=Url::base()?>/img/main-logo.png" alt="" class="img-fluid"></a>
+        <a href="<?=Url::home()?>" class="logo__link"><img src="<?=Url::base()?>/img/main-logo.png" alt="" class="img-fluid"></a>
       </div>
       <div class="sm__top">
         <a href="" class="sm-btn"><i class="icon-5"></i></a>
@@ -100,16 +100,19 @@ AppAsset::register($this);
           <?php } else {?>
             <?php foreach ($this->params['products'] as $p){ $acc = Yii::$app->user->id && OrderToProduct::isAccessible($p->id, Yii::$app->user->id); ?>
             <li class="sm-list-1__item <?=$this->params['selected_product']->id == $p->id ? 'sm-list-1__item--unblock sm-list-1__item--active' : ( $acc ? ' sm-list-1__item--unblock ' : 'sm-list-1__item--block')?>">
-              <a href="<?=$acc ? Url::to(['content/index','product_id'=>$p->id]): '#'?>" class="sm-list-1__link"><?=$p->title?></a>
+              <a href="<?=1 ? Url::to(['content/index','product_id'=>$p->id]): '#'?>" class="sm-list-1__link"><?=$p->title?></a>
             </li>
             <?php }?>
           <?php }?>
         </ul>
         <h3 class="sm-title">Menu</h3>
         <ul class="sm-list-2">
+          <li class="sm-list-2__item">             
+            <a href="<?=Url::to(['products/']);?>" class="sm-list-2__link">All Products</a>
+          </li>            
+          <li class="sm-list-2__item">             
             <a href="<?=Url::to(['account/']);?>" class="sm-list-2__link">Renew Subscriptions</a>
           </li>
-          <li class="sm-list-2__item">            
           <li class="sm-list-2__item">
             <a href="<?=Url::to(['site/faq']);?>" class="sm-list-2__link">F.A.Q.</a>
           </li>
@@ -134,6 +137,7 @@ AppAsset::register($this);
     <div class="content<?php if (!Yii::$app->user->isGuest){?> noselect<?php }?>">
       <div class="top-line">
         <ul class="tl__menu tl__menu--center">
+          <li class="tl__item"><a href="<?=Url::to(['products/']);?>" class="tl__link">All Products</a></li>            
           <li class="tl__item"><a href="<?=Url::to(['account/']);?>" class="tl__link">Renew&nbsp;<span>Subscriptions</span></a></li>            
           <li class="tl__item"><a href="<?=Url::to(['site/faq']);?>" class="tl__link">F.A.Q.</a></li>
           <li class="tl__item"><a href="<?=Url::to(['blog/index']);?>" class="tl__link">Blog</a></li>

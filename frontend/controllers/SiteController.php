@@ -355,7 +355,7 @@ exit('SEND');
     {
         $this->view->params['page'] ='';
         
-        return $this->render('terms', array(
+        return $this->render('privacy', array(
         ));
     }  
     

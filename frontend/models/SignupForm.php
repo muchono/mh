@@ -71,6 +71,7 @@ class SignupForm extends Model
         $link = Url::to(['site/registration', 'code' => $this->user->auth_key, 'id' => $this->user->id], true);
         $body = Yii::$app->controller->renderPartial('@app/views/mails/registration_confirmation.php', [
             'link' => $link,
+            'email' => $this->email,
             'password' => $params['add_pass'] ? $this->password : '',
         ]);
         return Yii::$app->mailer->compose()

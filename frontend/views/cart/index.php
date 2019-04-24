@@ -1,5 +1,6 @@
 <?php
 use common\models\Cart;
+use common\models\OrderToProduct;
 use yii\web\View;
 ?>
 <section class="cart-page">
@@ -17,11 +18,11 @@ use yii\web\View;
                     <div class="recommended-product">
                       <div class="rp__col-left">
                         <h3 class="rp__title"><?=$p->short_title?></h3>
-                        <p class="rp__text"><?=$p->full_title?></p>
+                        <p class="rp__text"><?=$p->title?></p>
                       </div>
                       <div class="rp__col-right">
                         <div class="rp__price <?=$p->priceFinal ? '' : 'rp__price--free'?>">$<?=$p->priceFinal?></div>
-                        <?php if(!in_array($p->id, $cartInfo['products_list'])) {?>
+                        <?php if(!in_array($p->id, $cartInfo['products_list']) && !OrderToProduct::isAccessible($p->id, Yii::$app->user->id)) {?>
                         <a href="" class="btn-sm-3 add-to-cart-button" for="<?=$p->id;?>">Add to Cart</a>
                         <?php }?>
                       </div>

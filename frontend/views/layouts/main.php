@@ -159,7 +159,6 @@ AppAsset::register($this);
             <a href="<?=Url::to(['products/']);?>" class="sm-list-2__link">Products</a>
           </li>          
         <?php if ($this->params['offer_menu']){?>          
-          <li class="main-nav__item"><a href="<?=Url::to(['special-offer/']);?>" class="main-nav__link <?=($this->params['page'] == 'special-offer') ? 'main-nav__link--active' : ''?>">Special Offers</a></li>
           <li class="sm-list-2__item">
             <a href="<?=Url::to(['special-offer/']);?>" class="sm-list-2__link">Special Offers</a>
           </li>          
@@ -192,7 +191,7 @@ AppAsset::register($this);
     </div>
     <?= $content ?>
 
-<?php if ($this->params['social-panel']) {?>
+<?php if (isset($this->params['social-panel']) && $this->params['social-panel']) {?>
 <div class="social-pane">
       <ul class="sp__list">
         <li class="sp__item">

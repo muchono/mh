@@ -2,7 +2,7 @@ Hello,<br/>
 <br/>
 Welcome to MarketingHack!<br/>
 <br/>
-Thank you for registering, your email: <email><br/>
+Thank you for registering, your email: <?=$email?><br/>
 <?php if ($password) {?>
 Password: <?=$password?><br/>
 <?php }?>
