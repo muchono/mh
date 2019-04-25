@@ -14,9 +14,13 @@ return [
         //add webhook link
         'FastSpring' => array(
             'secretKey' => '',
-            'mode' => '0', // 1 - test mode
-            'key_private_path' => '',
-            'description' => 'MarketingHack Payment',
+            'TEST_MODE' => 1, 
+            'DEBUG' => 1, //Payment side console debug
+            'PRIVATE_KEY_PATH' => '', //generates in payment controll panel
+            'ACCESS_KEY' => '', //generates in payment controll panel
+            'description' => '',
+            'API_NAAME' => '',
+            'API_PASSWORD' => '',
         ),
     ),
     'mailchimp' => array(

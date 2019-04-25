@@ -15,6 +15,7 @@ use Yii;
  * @property integer $success
  * @property string $response_details
  * @property string $time
+ * @property string $remote_id
  */
 class Transaction extends \yii\db\ActiveRecord
 {
@@ -29,7 +30,9 @@ class Transaction extends \yii\db\ActiveRecord
     public function beforeSave($insert)
     {
         if ($this->isNewRecord) {
-            $this->user_id = Yii::$app->user->id;
+            if (Yii::$app->user->id && !$this->user_id) {
+                $this->user_id = Yii::$app->user->id;
+            }
             $this->time = date('Y-m-d H:i:s');
         }
 
@@ -50,10 +53,10 @@ class Transaction extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order_id', 'user_id', 'success'], 'integer'],
+            [['order_id', 'user_id', 'success', 'used'], 'integer'],
             [['price'], 'number'],
             [['response_details'], 'string'],
-            [['time'], 'safe'],
+            [['time', 'remote_id'], 'safe'],
             [['payment'], 'string', 'max' => 40],
         ];
     }

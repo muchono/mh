@@ -79,7 +79,7 @@ class CheckoutController extends \frontend\controllers\Controller
             $userBilling = $user->billing;
         } else {
             $userBilling = new UserBilling;
-            $userBilling->payment = 'Webmoney';
+            $userBilling->payment = 'FastSpring';
         }
         
         $userBilling->user_id = Yii::$app->user->id;
@@ -181,10 +181,11 @@ class CheckoutController extends \frontend\controllers\Controller
         if ($payment_name 
                 && isset(Yii::$app->params['payments'][$payment_name])) {
             $n = '\frontend\extensions\\' . $payment_name. '\\' . $payment_name;
-
+        
             $payment = new $n();            
             $payment->setParams(Yii::$app->params['payments'][$payment_name]);
             $payed = $payment->finish($_REQUEST);
+
             if ($payed) {
                 $user = User::findOne(Yii::$app->user->id);
                 
