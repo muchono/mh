@@ -16,8 +16,8 @@ use common\models\OrderToProduct;
 class CheckoutController extends \frontend\controllers\Controller
 {
     const PDF_INVOICE_DIR = '/runtime/invoices/';
-    protected $_payments = array(3=>'Webmoney', 1=>'FastSpring');
-
+    protected $_payments = array(3=>'Webmoney' /*, 1=>'FastSpring'*/);
+    protected $default_payment = 'Webmoney';
     /**
      * @inheritdoc
      */
@@ -79,11 +79,17 @@ class CheckoutController extends \frontend\controllers\Controller
             $userBilling = $user->billing;
         } else {
             $userBilling = new UserBilling;
-            $userBilling->payment = 'FastSpring';
+            $userBilling->payment = $this->default_payment;
         }
         
         $userBilling->user_id = Yii::$app->user->id;
         $userBilling->scenario = 'billing';
+        
+        foreach ($products as $key => $p) {
+            if (OrderToProduct::isAccessible($p->id, Yii::$app->user->id)) {
+                unset($products[$key]);
+            }
+        }
         
         if ($userBilling->load(Yii::$app->request->post()) && $userBilling->save()) {
             //if it needs to pay

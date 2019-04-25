@@ -6,6 +6,7 @@ use Yii;
 use common\models\Cart;
 use common\models\Product;
 use common\models\Discount;
+use common\models\OrderToProduct;
 use yii\filters\AccessControl;
 
 class CartController extends \frontend\controllers\Controller
@@ -45,7 +46,7 @@ class CartController extends \frontend\controllers\Controller
         } elseif (Yii::$app->request->isAjax 
                && Yii::$app->request->post('product_id')) {
                 $product = Product::findOne(Yii::$app->request->post('product_id'));
-             if ($product && $product->status){
+             if ($product && $product->status && !OrderToProduct::isAccessible($product->id, Yii::$app->user->id)) {
                 $months = in_array(Yii::$app->request->post('months'), Cart::$months) ? Yii::$app->request->post('months') : 1;
                 $cart = new Cart;
                 $cart->product_id = $product->id;

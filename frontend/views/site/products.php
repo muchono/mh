@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Url;
 /* @var $this yii\web\View */
+use common\models\OrderToProduct;
 
 $this->title = 'Products';
 ?>
@@ -29,6 +30,9 @@ $this->title = 'Products';
                 <a href="<?=Url::to(['site/product','link'=>$p->page->link])?>" class="pd__more">Learn more</a>
               </div>
               <div class="pd__foot">
+                  <?php if (OrderToProduct::isAccessible($p->id, Yii::$app->user->id)) {?>
+                <div class="pd__available">Available</div>
+                <?php } else {?>                  
                 <?php if (!$p->priceFinal){?>
                 <div class="pd-on">
                   FREE Now
@@ -57,6 +61,7 @@ $this->title = 'Products';
                   </span>
                   <a href="<?=Url::to(['content/index','product_id'=>$p->id])?>" class="btn-sm-1">try demo</a>
                 </div>
+                 <?php } ?>
               </div>
             </div>
           </div>

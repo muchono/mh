@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Url;
-
+use common\models\OrderToProduct;
 use yii\widgets\ActiveForm;
 use yii\captcha\Captcha;
 use yii\web\View;
@@ -36,11 +36,13 @@ $this->title = $model->title;
                 <div class="reset-this">
                 <?=$model->page->content?>
                 </div>
+                  <?php if (!OrderToProduct::isAccessible($model->id, Yii::$app->user->id)) {?>
                 <div class="buy-try-pane">
                   <a href="" class="btn-3 buy-full-btn" for="<?=$model->id?>">Buy Full Version</a>
                   <span class="btp__or">or</span>
                   <a href="<?=Url::to(['content/index','product_id'=>$model->id])?>" class="btn-6">Try Demo</a>
-                </div>                  
+                </div>   
+                  <?php }?>
               </article>
               <div class="under-post-pane">
                 <div class="customer-reviews">
@@ -194,8 +196,12 @@ $this->title = $model->title;
                     </ul>
                   </div>
                   <div class="pp__foot">
+                      <?php if (OrderToProduct::isAccessible($model->id, Yii::$app->user->id)) {?>
+                       <div class="pp__available">Available</div>
+                      <?php }else {?>
                     <a href="" class="btn-5 add2cart"  for="<?=$model->id?>">Add to cart</a>
                     <span class="pp__or">or <a href="<?=Url::to(['content/index','product_id'=>$model->id])?>">check demo</a></span>
+                    <?php }?>
                   </div>
                 </div>
               </div>

@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Url;
-
+use common\models\OrderToProduct;
 ?>
         <div class="recommend-items">
           <h2 class="ri__title">Recommend Items</h2>
@@ -23,6 +23,7 @@ use yii\helpers\Url;
                   <a href="<?=Url::to(['site/product','link'=>$p->page->link])?>" class="pd__more">Learn more</a>
                 </div>
                 <div class="pd__foot">
+                    <?php if (!OrderToProduct::isAccessible($p->id, Yii::$app->user->id)) {?>
                 <div class="pd-try">
                   <?php if ($p->discount){?>
                   <span class="pd-try__price pd-try__price--discount">$<?=$p->price?></span>
@@ -37,6 +38,7 @@ use yii\helpers\Url;
                   </span>
                   <a href="<?=Url::to(['content/index','product_id'=>$p->id])?>" class="btn-sm-1">try demo</a>
                 </div>
+                    <?php } ?>
                 </div>
               </div>
             </div>

@@ -7,6 +7,8 @@ use yii\captcha\Captcha;
 use yii\web\View;
 use yii\widgets\Pjax;
 
+use common\models\OrderToProduct;
+
 $this->title = 'Home';
 ?>
 <header class="home-header">
@@ -76,34 +78,38 @@ $this->title = 'Home';
                 <a href="<?=Url::to(['site/product','link'=>$p->page->link])?>" class="pd__more">Learn more</a>
               </div>
               <div class="pd__foot">
-                <?php if (!$p->priceFinal){?>
-                <div class="pd-on">
-                  FREE Now
-                </div>
-                <?php } elseif ($p->discount){?>
-                <div class="pd-off">
-                  <strong><?=$p->discount->percent?><sup>%</sup></strong>
-                  Discount
-                </div>
-                <?php } else {?>                  
-                <div class="pd__foot-item">
-                </div>
+                  <?php if (OrderToProduct::isAccessible($p->id, Yii::$app->user->id)) {?>
+                <div class="pd__available">Available</div>
+                <?php } else {?>
+                    <?php if (!$p->priceFinal){?>
+                  <div class="pd-on">
+                    FREE Now
+                  </div>
+                  <?php } elseif ($p->discount){?>
+                  <div class="pd-off">
+                    <strong><?=$p->discount->percent?><sup>%</sup></strong>
+                    Discount
+                  </div>
+                  <?php } else {?>                  
+                  <div class="pd__foot-item">
+                  </div>
+                  <?php }?>
+
+                  <div class="pd-try">
+                    <?php if ($p->discount){?>
+                    <span class="pd-try__price pd-try__price--discount">$<?=$p->price?></span>
+                        <?php if ($p->priceFinal){?>
+                    <span class="pd-try__discount-price">$<?=$p->priceFinal?></span>
+                        <?php }?>
+                    <?php } else {?>
+                    <span class="pd-try__price">$<?=$p->priceFinal?></span>
+                    <?php } ?>
+                    <span class="pd-try__add add2cart" for="<?=$p->id?>">                
+                      <i class="icon-3"></i>
+                    </span>
+                    <a href="<?=Url::to(['content/index','product_id'=>$p->id])?>" class="btn-sm-1">try demo</a>
+                  </div>
                 <?php }?>
-                  
-                <div class="pd-try">
-                  <?php if ($p->discount){?>
-                  <span class="pd-try__price pd-try__price--discount">$<?=$p->price?></span>
-                      <?php if ($p->priceFinal){?>
-                  <span class="pd-try__discount-price">$<?=$p->priceFinal?></span>
-                      <?php }?>
-                  <?php } else {?>
-                  <span class="pd-try__price">$<?=$p->priceFinal?></span>
-                  <?php } ?>
-                  <span class="pd-try__add add2cart" for="<?=$p->id?>">                
-                    <i class="icon-3"></i>
-                  </span>
-                  <a href="<?=Url::to(['content/index','product_id'=>$p->id])?>" class="btn-sm-1">try demo</a>
-                </div>
               </div>
             </div>
           </div>
