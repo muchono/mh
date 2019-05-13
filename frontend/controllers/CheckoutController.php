@@ -16,7 +16,8 @@ use common\models\OrderToProduct;
 class CheckoutController extends \frontend\controllers\Controller
 {
     const PDF_INVOICE_DIR = '/runtime/invoices/';
-    protected $_payments = array(3=>'Webmoney' /*, 1=>'FastSpring'*/);
+    protected $_payments = array(3=>'Webmoney', 1=>'FastSpring');
+    protected $_payments_names = array(3=>'Webmoney', 1=>'Bank Cards');
     protected $default_payment = 'Webmoney';
     /**
      * @inheritdoc
@@ -25,6 +26,12 @@ class CheckoutController extends \frontend\controllers\Controller
     {            
         if (in_array($action->id, ['payment-result', 'payment-pre-result'])) {
             $this->enableCsrfValidation = false;
+        }
+        
+        //temporary disabling payment
+        if (!Yii::$app->user->isGuest  
+                && !in_array(Yii::$app->user->id, [1,27])) {
+            unset($this->_payments[1]);
         }
 
         return parent::beforeAction($action);
@@ -122,6 +129,7 @@ class CheckoutController extends \frontend\controllers\Controller
             'cartInfo' => $cartInfo,
             'userBilling' => $userBilling,
             'payments' => $this->_payments,
+            'payments_names' => $this->_payments_names,
         ));
     }
     

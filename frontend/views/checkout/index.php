@@ -34,7 +34,7 @@ use common\models\User;
             <span class="pay-btn__icon">
               <img src="<?=Url::base()?>/img/pay-<?=$k?>-ic.png" alt="" class="img-fluid">
             </span>
-            <span class="pay-btn__text"><?=$pay?></span>
+            <span class="pay-btn__text"><?=$payments_names[$k]?></span>
           </label>
         </li>
         <?php }?>

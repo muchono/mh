@@ -34,12 +34,12 @@ class FastSpring extends \frontend\components\CPayment
         $r = 0;
         if (!empty($params['order'])) {
             $data = $this->getOrder($params['order']);
-            if ($data->completed) {
+            if (!empty($data) && $data->completed) {
                 $t = Transaction::find()
                         ->where(['remote_id' => $data->id, 'user_id' => Yii::$app->user->id])
                         ->one();
 
-                if (empty($t)) {
+                if (empty($t) && !$t->used) {
                     $user = User::findOne(Yii::$app->user->id);
                     
                     $cartInfo = Cart::getInfo($user->id);
