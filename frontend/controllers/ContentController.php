@@ -131,7 +131,7 @@ class ContentController extends \frontend\controllers\Controller
                 $user = User::findOne(Yii::$app->user->id);
                 $items = [];
                 foreach (Yii::$app->request->post('report') as $ri) {
-                    $items[] = $this->reportValues[$ri];
+                    $items[] = \common\models\ProductReport::findOne($ri)->title;
                 }
                 
                 //send to user
@@ -208,7 +208,7 @@ class ContentController extends \frontend\controllers\Controller
         return $this->renderPartial('_list',['product' => $product,
             'hrefsProvider' => $dataProvider,
             'last_update' => ProductHref::getLastUpdate($product->id),
-            'report_list' => $this->reportValues,
+            'report_list' => $product->reports,
             'pages' => $pages,
             'sort' => $sort,
             'accessable' => $accessable,

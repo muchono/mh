@@ -39,13 +39,13 @@ class FastSpring extends \frontend\components\CPayment
      */
     protected function apiCall($path)
     {
-		$ch = curl_init($this->getUrl().$path);
-		
-		curl_setopt($ch, CURLOPT_USERPWD, $this->_params['API_NAAME'] . ":" . $this->_params['API_PASSWORD']);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-		
-		$response = curl_exec($ch);
-		$this->call_result = curl_getinfo($ch);
+        $ch = curl_init($this->getUrl().$path);
+
+        curl_setopt($ch, CURLOPT_USERPWD, $this->_params['API_NAAME'] . ":" . $this->_params['API_PASSWORD']);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+
+        $response = curl_exec($ch);
+        $this->call_result = curl_getinfo($ch);
         
         return empty($response) ? '' : json_decode($response);        
     }

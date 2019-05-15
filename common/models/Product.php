@@ -10,6 +10,7 @@ use common\models\ProductReview;
 use common\models\ProductPage;
 use common\models\Discount;
 use common\models\OrderToProduct;
+use common\models\ProductReport;
 
 /**
  * This is the model class for table "product".
@@ -193,6 +194,15 @@ class Product extends \yii\db\ActiveRecord
     public function getPage()
     {
         return ProductPage::find()->where(['product_id' => $this->id])->one();
+    }
+    
+    /**
+     * Get Reports
+     * @return array
+     */
+    public function getReports()
+    {
+        return $this->hasMany(ProductReport::className(), ['product_id' => 'id']);
     }
     
     /**

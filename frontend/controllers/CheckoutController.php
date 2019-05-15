@@ -23,8 +23,8 @@ class CheckoutController extends \frontend\controllers\Controller
      * @inheritdoc
      */
     public function beforeAction($action)
-    {            
-        if (in_array($action->id, ['payment-result', 'payment-pre-result'])) {
+    {
+        if (in_array($action->id, ['payment-result', 'payment-pre-result', 'subscription-result'])) {
             $this->enableCsrfValidation = false;
         }
         
@@ -51,7 +51,7 @@ class CheckoutController extends \frontend\controllers\Controller
                         'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['payment-pre-result'],
+                        'actions' => ['payment-pre-result', 'subscription-result'],
                         'allow' => true,
                         'roles' => ['?'],                        
                     ],                    
@@ -84,8 +84,8 @@ class CheckoutController extends \frontend\controllers\Controller
     {
         $this->layout = 'result';
         
-        $p = new \frontend\extensions\FastSpring\FastSpring;
-        $p->setParams(Yii::$app->params['payments']['FastSpring']);
+        $payment = new \frontend\extensions\FastSpring\FastSpring;
+        $payment->setParams(Yii::$app->params['payments']['FastSpring']);
         //$data = $p->getOrder('ElqvPPozTLy9xdOPaDGBOw');
         //$data = $p->getOrder('9AY5WrdxTUOpuxHu_w6dEQ');
         //$data = $p->getSubscription('-uHwm3TMQoWZeOTcmbXXfQ');
@@ -95,11 +95,27 @@ class CheckoutController extends \frontend\controllers\Controller
         //$order = Order::findOne(['transaction_id' => $data['transaction_id']]);
         
         //print $order->id;
-        if ($p->subscriptionResult(['subscription' => '-uHwm3TMQoWZeOTcmbXXfQ',
+        
+        
+        
+        Order::copyFrom(Order::findOne(1), [
+            'transaction_id' => 111,
+        ]);
+        
+        exit(' create order');
+        
+        if ($payment->subscriptionResult(['subscription' => '-uHwm3TMQoWZeOTcmbXXfQ',
             'order' => 'ElqvPPozTLy9xdOPaDGBOw',
             'status'=> 'successful'])) {
-            
-            
+                $order = self::performSubscription(['payment_method' => Yii::$app->request->get('payment'), 
+                    'transaction_id' => $payment->getID(),
+                    'subscription_transaction_id' => $payment->getSubscriptionID()
+                    ]);
+                
+                if ($order) {
+                    $this->generatePDFInvoice($order);
+                }
+                
         }
         
         print_r($data);
@@ -360,5 +376,12 @@ class CheckoutController extends \frontend\controllers\Controller
         $order->createByCart($order_params);
         
         return $order;
+    }
+    
+    static function performSubscription($params = array())
+    {
+        $order = Order::findOne(['transaction_id' => $params['subscription_transaction_id']]);
+        
+        return Order::copyFrom($order, $params);
     }
 }
