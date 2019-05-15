@@ -12,12 +12,19 @@ use frontend\controllers\CheckoutController;
 
 class FastSpring extends \frontend\components\CPayment
 {
+    protected $_transaction_table = 'transaction_fastspring';
     protected $_action_url = 'https://merchant.webmoney.ru/lmi/payment.asp';
     protected $_wm_ip_masks = array(
         
     );
     
-   
+    protected $call_result = null;
+
+
+    /**
+     * Add Log String
+     * @param string $string
+     */   
     public function addLog($string)
     {
         $fh = fopen($this->_logFileName, 'a+');
@@ -25,6 +32,24 @@ class FastSpring extends \frontend\components\CPayment
         fclose($fh);
     }
 
+    /**
+     * Request API
+     * @param string $path
+     * @return mixed
+     */
+    protected function apiCall($path)
+    {
+		$ch = curl_init($this->getUrl().$path);
+		
+		curl_setopt($ch, CURLOPT_USERPWD, $this->_params['API_NAAME'] . ":" . $this->_params['API_PASSWORD']);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+		
+		$response = curl_exec($ch);
+		$this->call_result = curl_getinfo($ch);
+        
+        return empty($response) ? '' : json_decode($response);        
+    }
+    
     protected function afterConfirm($params) {}
     
     protected function beforePay(){}
@@ -56,6 +81,15 @@ class FastSpring extends \frontend\components\CPayment
 
                         $this->setID($this->_transaction->id);
                         
+                        foreach ($data->items as $item) {
+                            Yii::$app->db->createCommand()->insert($this->_transaction_table, [
+                                'order_id' => $data->id,
+                                'subscription_id' => $item->subscription,
+                                'transaction_id' => $this->_transaction->id,
+                                'price' => $data->total,
+                                'time' => date('Y-m-d H:i:s'),
+                            ])->execute();
+                        }
                         $r = 1;
                     }
                 }
@@ -119,17 +153,81 @@ class FastSpring extends \frontend\components\CPayment
          */
     }
     
+    public function subscriptionResult($params = array()) {
+        $r = false;
+        
+        $this->addLog(json_encode($params));
+        if (!empty($params['subscription']) && !empty($params['order']) && $params['status'] == 'successful') {
+            $data = $this->getOrder($params['order']);
+            if (!empty($data) && $data->completed) {
+                $t = Transaction::find()
+                        ->where(['remote_id' => $data->id])
+                        ->one();
+                if (empty($t)) {
+                    $this->addLog('Checked');
+                    
+                    $historyInfo = $this->getSubscriptionTransaction($params['subscription']);
+                    $this->_subscription_id = $historyInfo['transaction_id'];
+                    
+                    $user = User::findOne(['email' => $data->customer->email]);
+                    $this->_transaction = new Transaction;
+                    $this->_transaction->price = $data->total;
+                    $this->_transaction->payment = $this->_name;
+                    $this->_transaction->user_id = $user->id;
+                    $this->_transaction->success = $data->completed;
+                    $this->_transaction->remote_id = $data->id;
+                    $this->_transaction->used = 1;
+                    $this->_transaction->insert();
+
+                    $this->setID($this->_transaction->id);
+                    
+                    $this->addLog('Checked. Subscription ID:'.$this->getSubscriptionID().', ID:'.$this->getID());
+                    foreach ($data->items as $item) {
+                        Yii::$app->db->createCommand()->insert($this->_transaction_table, [
+                            'order_id' => $data->id,
+                            'subscription_id' => $item->subscription,
+                            'transaction_id' => $this->_transaction->id,
+                            'price' => $data->total,
+                            'time' => date('Y-m-d H:i:s'),
+                        ])->execute();
+                    }
+                    $r = 1;
+                }
+            }
+        }
+        return $r;
+    }    
+    
+    public function getAccount($id)
+    {
+        return $this->apiCall('accounts/'.$id);
+    }
+    
+    public function getEvents($path = 'events/processed?days=1')
+    {
+        //subscription.charge.completed
+        $r = $this->apiCall($path);
+        
+        print_r((array) $r);
+        return $r;
+    }
+    
     public function getOrder($id)
     {
-		$ch = curl_init($this->getUrl().'orders/'.$id);
-		
-		curl_setopt($ch, CURLOPT_USERPWD, $this->_params['API_NAAME'] . ":" . $this->_params['API_PASSWORD']);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-		
-		$response = curl_exec($ch);
-		$info = curl_getinfo($ch);
-        
-        return empty($response) ? '' : json_decode($response);
+        return $this->apiCall('orders/'.$id);
+    }
+    
+    public function getSubscription($id)
+    {
+        return $this->apiCall('subscriptions/'.$id);
+    }
+    
+    public function getSubscriptionTransaction($id)
+    {
+        return (new \yii\db\Query())
+            ->from($this->_transaction_table)
+            ->where(['subscription_id' => $id])
+            ->one();
     }
     
     protected function getWebhookHash($data)

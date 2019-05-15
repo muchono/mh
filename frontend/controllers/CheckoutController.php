@@ -69,8 +69,46 @@ class CheckoutController extends \frontend\controllers\Controller
     public function actionFail()
     {
         $this->layout = 'result';
+        
+        $p = new \frontend\extensions\FastSpring\FastSpring;
+        
         return $this->render('fail');
     }    
+    
+    /**
+     * Displays fail page.
+     * @return mixed
+     */
+
+    public function actionFailt()
+    {
+        $this->layout = 'result';
+        
+        $p = new \frontend\extensions\FastSpring\FastSpring;
+        $p->setParams(Yii::$app->params['payments']['FastSpring']);
+        //$data = $p->getOrder('ElqvPPozTLy9xdOPaDGBOw');
+        //$data = $p->getOrder('9AY5WrdxTUOpuxHu_w6dEQ');
+        //$data = $p->getSubscription('-uHwm3TMQoWZeOTcmbXXfQ');
+        //$data = $p->getAccount('-JORXtjJR6mNpp2US8BZzw');
+        
+        ////$data = $p->getSubscriptionTransaction('-uHwm3TMQoWZeOTcmbXXfQ');
+        //$order = Order::findOne(['transaction_id' => $data['transaction_id']]);
+        
+        //print $order->id;
+        if ($p->subscriptionResult(['subscription' => '-uHwm3TMQoWZeOTcmbXXfQ',
+            'order' => 'ElqvPPozTLy9xdOPaDGBOw',
+            'status'=> 'successful'])) {
+            
+            
+        }
+        
+        print_r($data);
+        print 'OK';
+        exit;
+        
+        
+        return $this->render('fail');
+    }      
     
     /**
      * Displays homepage.
@@ -187,6 +225,20 @@ class CheckoutController extends \frontend\controllers\Controller
             $payment->result($_REQUEST);
         }
     }
+    
+    public function actionSubscriptionResult()
+    {
+        $payment_name = Yii::$app->request->get('payment');
+        if ($payment_name
+                && isset(Yii::$app->params['payments'][$payment_name])) {
+            
+            $n = '\frontend\extensions\\' . $payment_name. '\\' . $payment_name;
+           
+            $payment = new $n();            
+            $payment->setParams(Yii::$app->params['payments'][$payment_name]);
+            $payment->subscriptionResult($_REQUEST);
+        }
+    }    
     
     public function actionPaymentResult()
     {

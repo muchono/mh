@@ -20,6 +20,7 @@ class CPayment
     protected $_payment_result = 0;
     protected $_id = 0;
     protected $_transaction = null;
+    protected $_subscription_id = 0;
     protected $_params;
     protected $_payment_details = null;
     protected $_logFileName = '';
@@ -93,6 +94,11 @@ class CPayment
         
     }
     
+    public function subscriptionResult($params = array()) {
+        
+        return false;
+    }
+    
     public function finish($params = array())
     {
         $this->beforeConfirm($params);
@@ -129,6 +135,11 @@ class CPayment
     public function getID()
     {
         return $this->_id;
+    }
+    
+    public function getSubscriptionID()
+    {
+        return $this->_subscription_id;
     }
     
     public function getHTML()
