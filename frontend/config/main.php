@@ -41,6 +41,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'enableStrictParsing' => false,    
+            'suffix' => '/',
             
             'rules' => [
                 [
@@ -53,7 +54,7 @@ return [
                 'support' => 'site/support',
                 'terms-of-use' => 'site/terms',
                 'privacy-policy' => 'site/privacy',
-                'post/<url:[\w-]+>' => 'blog/url',
+                'blog/<url:[\w-]+>' => 'blog/url',
             ],
         ],
     ],
