@@ -1,3 +1,18 @@
+ALTER TABLE `order` ADD INDEX (`transaction_id`);
+
+CREATE TABLE IF NOT EXISTS `transaction_fasts*pring` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,    
+  `order_id` varchar(50) NOT NULL,
+  `subscription_id` varchar(50) NOT NULL DEFAULT '',
+  `transaction_id` int(11) unsigned NOT NULL,
+  `price` float unsigned NOT NULL DEFAULT '0',
+  `time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  key(`order_id`),
+  key(`subscription_id`),
+  key(`transaction_id`)
+);
+
 ALTER TABLE `product` ADD `links_available` int(2) unsigned NOT NULL DEFAULT '1';
 
 ALTER TABLE `product` ADD `questions` TEXT;
