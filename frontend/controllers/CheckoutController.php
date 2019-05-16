@@ -97,13 +97,6 @@ class CheckoutController extends \frontend\controllers\Controller
         //print $order->id;
         
         
-        
-        Order::copyFrom(Order::findOne(1), [
-            'transaction_id' => 111,
-        ]);
-        
-        exit(' create order');
-        
         if ($payment->subscriptionResult(['subscription' => '-uHwm3TMQoWZeOTcmbXXfQ',
             'order' => 'ElqvPPozTLy9xdOPaDGBOw',
             'status'=> 'successful'])) {
@@ -252,9 +245,18 @@ class CheckoutController extends \frontend\controllers\Controller
            
             $payment = new $n();            
             $payment->setParams(Yii::$app->params['payments'][$payment_name]);
-            $payment->subscriptionResult($_REQUEST);
+            if ($payment->subscriptionResult($_REQUEST)) {
+                $order = self::performSubscription(['payment_method' => $payment_name, 
+                    'transaction_id' => $payment->getID(),
+                    'subscription_transaction_id' => $payment->getSubscriptionID()
+                    ]);
+
+                if ($order) {
+                    $this->generatePDFInvoice($order);
+                }
+            }            
         }
-    }    
+    }
     
     public function actionPaymentResult()
     {

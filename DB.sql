@@ -1,7 +1,7 @@
 
 ALTER TABLE `order` ADD INDEX (`transaction_id`);
 
-CREATE TABLE IF NOT EXISTS `transaction_fasts*pring` (
+CREATE TABLE IF NOT EXISTS `transaction_fastspring` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,    
   `order_id` varchar(50) NOT NULL,
   `subscription_id` varchar(50) NOT NULL DEFAULT '',
