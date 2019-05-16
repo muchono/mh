@@ -16,9 +16,9 @@ use common\models\OrderToProduct;
 class CheckoutController extends \frontend\controllers\Controller
 {
     const PDF_INVOICE_DIR = '/runtime/invoices/';
-    protected $_payments = array(3=>'Webmoney', 1=>'FastSpring');
-    protected $_payments_names = array(3=>'Webmoney', 1=>'Bank Cards');
-    protected $default_payment = 'Webmoney';
+    protected $_payments = array(1=>'FastSpring', 3=>'Webmoney');
+    protected $_payments_names = array( 1=>'Bank Cards', 3=>'Webmoney');
+    protected $default_payment = 'FastSpring';
     /**
      * @inheritdoc
      */
@@ -29,10 +29,11 @@ class CheckoutController extends \frontend\controllers\Controller
         }
         
         //temporary disabling payment
+        /*
         if (!Yii::$app->user->isGuest  
                 && !in_array(Yii::$app->user->id, [1,27])) {
             unset($this->_payments[1]);
-        }
+        }*/
 
         return parent::beforeAction($action);
     }
@@ -83,7 +84,7 @@ class CheckoutController extends \frontend\controllers\Controller
     public function actionFailt()
     {
         $this->layout = 'result';
-        
+         exit;
         $payment = new \frontend\extensions\FastSpring\FastSpring;
         $payment->setParams(Yii::$app->params['payments']['FastSpring']);
         //$data = $p->getOrder('ElqvPPozTLy9xdOPaDGBOw');
@@ -113,7 +114,7 @@ class CheckoutController extends \frontend\controllers\Controller
         
         print_r($data);
         print 'OK';
-        exit;
+       
         
         
         return $this->render('fail');

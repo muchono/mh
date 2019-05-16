@@ -18,11 +18,6 @@ use yii\filters\AccessControl;
 class ContentController extends \frontend\controllers\Controller
 {
     public $layout = 'content';
-    public $reportValues = [
-        'not_provide' => "Doesn't provide guest posting",
-        'requires_payment' => "Requires payment for guest posting",
-        'ceased_to_exist' => "Site ceased to exist",
-    ];
     
     /**
      * @inheritdoc
@@ -208,7 +203,7 @@ class ContentController extends \frontend\controllers\Controller
         return $this->renderPartial('_list',['product' => $product,
             'hrefsProvider' => $dataProvider,
             'last_update' => ProductHref::getLastUpdate($product->id),
-            'report_list' => $product->reports,
+            'report_list' => $product->getReports()->orderBy('title')->all(),
             'pages' => $pages,
             'sort' => $sort,
             'accessable' => $accessable,

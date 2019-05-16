@@ -175,43 +175,46 @@ class FastSpring extends \frontend\components\CPayment
             
             $this->addLog($json_str);
             $webhook_data = json_decode($json_str);
-     
-            if (!empty($webhook_data['subscription']) && !empty($webhook_data['order']) && $webhook_data['status'] == 'successful') {
-                $data = $this->getOrder($webhook_data['order']);
-                $this->addLog(json_encode($data));
-                if (!empty($data) && $data->completed) {
-                    $t = Transaction::find()
-                            ->where(['remote_id' => $data->id])
-                            ->one();
-                    if (empty($t)) {
-                        $this->addLog('Checked');
+            
+            foreach($webhook_data->events as $e) {
+                if ($e->type == 'subscription.charge.completed' 
+                        && !empty($e->data->subscription) && !empty($e->data->order) && $e->data->status == 'successful') {
+                    $data = $this->getOrder($e->data->order);
+                    $this->addLog('Process Order: ' . json_encode($data));
+                    if (!empty($data) && $data->completed) {
+                        $t = Transaction::find()
+                                ->where(['remote_id' => $data->id])
+                                ->one();
+                        if (empty($t)) {
+                            $this->addLog('Checked');
 
-                        $historyInfo = $this->getSubscriptionTransaction($webhook_data['subscription']);
-                        $this->_subscription_id = $historyInfo['transaction_id'];
+                            $historyInfo = $this->getSubscriptionTransaction($e->data->subscription);
+                            $this->_subscription_id = $historyInfo['transaction_id'];
 
-                        $user = User::findOne(['email' => $data->customer->email]);
-                        $this->_transaction = new Transaction;
-                        $this->_transaction->price = $data->total;
-                        $this->_transaction->payment = $this->_name;
-                        $this->_transaction->user_id = $user->id;
-                        $this->_transaction->success = $data->completed;
-                        $this->_transaction->remote_id = $data->id;
-                        $this->_transaction->used = 1;
-                        $this->_transaction->insert();
+                            $user = User::findOne(['email' => $data->customer->email]);
+                            $this->_transaction = new Transaction;
+                            $this->_transaction->price = $data->total;
+                            $this->_transaction->payment = $this->_name;
+                            $this->_transaction->user_id = $user->id;
+                            $this->_transaction->success = $data->completed;
+                            $this->_transaction->remote_id = $data->id;
+                            $this->_transaction->used = 1;
+                            $this->_transaction->insert();
 
-                        $this->setID($this->_transaction->id);
+                            $this->setID($this->_transaction->id);
 
-                        $this->addLog('Checked. Subscription ID:'.$this->getSubscriptionID().', ID:'.$this->getID());
-                        foreach ($data->items as $item) {
-                            Yii::$app->db->createCommand()->insert($this->_transaction_table, [
-                                'order_id' => $data->id,
-                                'subscription_id' => $item->subscription,
-                                'transaction_id' => $this->_transaction->id,
-                                'price' => $data->total,
-                                'time' => date('Y-m-d H:i:s'),
-                            ])->execute();
+                            $this->addLog('Checked. Subscription ID:'.$this->getSubscriptionID().', ID:'.$this->getID());
+                            foreach ($data->items as $item) {
+                                Yii::$app->db->createCommand()->insert($this->_transaction_table, [
+                                    'order_id' => $data->id,
+                                    'subscription_id' => $item->subscription,
+                                    'transaction_id' => $this->_transaction->id,
+                                    'price' => $data->total,
+                                    'time' => date('Y-m-d H:i:s'),
+                                ])->execute();
+                            }
+                            $r = 1;
                         }
-                        $r = 1;
                     }
                 }
             }
