@@ -120,7 +120,7 @@ class OrderToProduct extends \yii\db\ActiveRecord
      */
     static public function isAccessible($product_id, $user_id)
     {
-        return self::getLatestExpirationDate($product_id, $user_id) > time();
+        return true;//self::getLatestExpirationDate($product_id, $user_id) > time();
     }    
     
     /**

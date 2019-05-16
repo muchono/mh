@@ -142,10 +142,10 @@ use yii\helpers\Url;
           </div>
           <div class="report__content">
             <ul class="report-list">
-              <?php foreach($report_list as $k=>$r) { ?>
+              <?php foreach($report_list as $r) { ?>
               <li class="report-list__item">
-                  <input type="checkbox" id="input-<?=$k?>" name="report[]" value="<?=$k?>">
-                <label for="input-<?=$k?>"><?=$r?></label>
+                  <input type="checkbox" id="input-<?=$r->id?>" name="report[]" value="<?=$r->id?>">
+                <label for="input-<?=$r->id?>"><?=$r->title?></label>
               </li>
               <?php }?>
             </ul>

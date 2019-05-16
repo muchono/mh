@@ -43,7 +43,7 @@ class Order extends \yii\db\ActiveRecord
             [['payment_method'], 'string', 'max' => 50],
         ];
     }
-
+    
     /**
      * @inheritdoc
      */
@@ -71,6 +71,36 @@ class Order extends \yii\db\ActiveRecord
         ];
     }
     
+    static public function copyFrom(Order $order, $params = []) {
+        $new_order = new Order();
+        
+        $new_order->total = $order->total;
+        $new_order->user_id = $order->user_id;
+        $new_order->payment_method = $params['payment_method'] ? $params['payment_method'] : $order->payment_method;
+        $new_order->payment_status = $params['payment_status'] ? $params['payment_status'] : $order->payment_status;
+        $new_order->transaction_id = $params['transaction_id'] ? $params['transaction_id'] : $order->transaction_id;
+        $new_order->status = 1;
+        
+        if (!$new_order->save()) {
+            print_r($this->getErrors());
+            exit;
+        }
+        
+        foreach (OrderToProduct::findAll(['order_id' => $order->id]) as $p2copy) {
+            $o2p = new OrderToProduct;
+
+            $o2p->order_id = $new_order->id;
+            $o2p->product_id = $p2copy->product_id;
+            $o2p->user_id = $new_order->user_id;
+            $o2p->price = $p2copy->price;
+            $o2p->months = $p2copy->months;
+
+            $o2p->expires = $o2p->calcExpirationDate();
+            $o2p->save();
+        }
+        
+        return $new_order;
+    }
     /**
      * Create bt Cart information
      * @param array $params

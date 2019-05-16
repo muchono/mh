@@ -1,3 +1,4 @@
+
 ALTER TABLE `order` ADD INDEX (`transaction_id`);
 
 CREATE TABLE IF NOT EXISTS `transaction_fasts*pring` (
@@ -12,6 +13,17 @@ CREATE TABLE IF NOT EXISTS `transaction_fasts*pring` (
   key(`subscription_id`),
   key(`transaction_id`)
 );
+
+
+CREATE TABLE IF NOT EXISTS `product_report` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) unsigned NOT NULL,
+  `title` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `product_id` (`product_id`)  
+);
+
+
 
 ALTER TABLE `product` ADD `links_available` int(2) unsigned NOT NULL DEFAULT '1';
 
