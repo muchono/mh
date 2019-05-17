@@ -254,8 +254,9 @@ class CheckoutController extends \frontend\controllers\Controller
 
                 if ($order) {
                     $this->generatePDFInvoice($order);
+                    self::orderNotify($order);
                 }
-            }            
+            }
         }
     }
     
@@ -306,6 +307,8 @@ class CheckoutController extends \frontend\controllers\Controller
                             ->setSubject('Thank you for the purchase')
                             ->setHtmlBody($body)
                             ->send();
+                
+                self::orderNotify($order);
                 
                 return $this->redirect(array('checkout/success', 'o' => $order->id));
             }
@@ -379,6 +382,30 @@ class CheckoutController extends \frontend\controllers\Controller
         $order->createByCart($order_params);
         
         return $order;
+    }
+    
+    static function orderNotify(Order $order)
+    {
+        if ($order->payment_method != 'free') {
+            $products = [];
+            foreach ($order->products as $p) {
+                $products[] = $p->short_title;
+            }
+            $body = 'New Order Details '.'<br/>'
+                    . 'Date:'.date('d-m-y H:i', $order->created_at) .'<br/>'
+                    . 'Total:'.$order->total .'<br/>'
+                    . 'Payment: ' . $order->payment_method.'<br/>'
+                    . 'Products:' . join(', ', $products).'<br/>'
+                    . 'User:' .$order->user->name . ' ('.$order->user->email.')'.'<br/>'
+                    . 'Thanks';
+
+            Yii::$app->mailer->compose()
+                        ->setTo(Yii::$app->params['adminEmail'])
+                        ->setFrom('transaction@marketinghack.net')
+                        ->setSubject('MarketingHack New Order #'.$order->id)
+                        ->setHtmlBody($body)
+                        ->send();        
+        }
     }
     
     static function performSubscription($params = array())
