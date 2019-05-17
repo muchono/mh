@@ -17,7 +17,7 @@ $this->title = 'Special Offers';
             <div class="product">
               <div class="pd__head">
                 <div class="pd__text-1"><?=$p->short_title?></div>
-                <a href="<?=Url::to(['site/product','product_id'=>$p->id])?>"><h3 class="title-2"><?=$p->links_available ? $p->getHrefsCount() : ''?> <?=$p->title?></h3></a>
+                <a href="<?=Url::to(['site/product','link'=>$p->page->link])?>"><h3 class="title-2"><?=$p->links_available ? $p->getHrefsCount() : ''?> <?=$p->title?></h3></a>
                 <div class="pd__text-2"><?=$p->full_title?></div>
                 <i class="icon-<?=($p->priceFinal) ? 1 : 2?>"></i>
               </div>
@@ -27,7 +27,7 @@ $this->title = 'Special Offers';
                   <li><?=$g?></li>
                 <?php }?>
                 </ul>
-                <a href="<?=Url::to(['site/product','product_id'=>$p->id])?>" class="pd__more">Learn more</a>
+                <a href="<?=Url::to(['site/product','link'=>$p->page->link])?>" class="pd__more">Learn more</a>
               </div>
               <div class="pd__foot">
                 <?php if (OrderToProduct::isAccessible($p->id, Yii::$app->user->id)) {?>

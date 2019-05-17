@@ -1,6 +1,6 @@
 var Cart = (function() {
     var vars = {
-        list_url: WEB_PATH+'content/list',
+        list_url: WEB_PATH+'content/list/',
     };
     var root = this;
     
@@ -45,7 +45,7 @@ var Cart = (function() {
     function deleteItem(product_id) {
         $.ajax({
             type: 'POST',
-            url: WEB_PATH+'cart/delete-item',
+            url: WEB_PATH+'cart/delete-item/',
             data: {'product_id': product_id},
             success:function(data){
                 updateList();
@@ -61,7 +61,7 @@ var Cart = (function() {
     function setMonths(product_id, months) {
         $.ajax({
             type: 'POST',
-            url: WEB_PATH+'cart/set-months',
+            url: WEB_PATH+'cart/set-months/',
             data: {'product_id': product_id, 'months': months},
             success:function(data){
                 updateList();
@@ -77,7 +77,7 @@ var Cart = (function() {
     function updateList() {
         $.ajax({
             type: 'POST',
-            url: WEB_PATH+'cart/get-list',
+            url: WEB_PATH+'cart/get-list/',
             data: {},
             success:function(data){
                 if (data.content){
@@ -95,7 +95,7 @@ var Cart = (function() {
     function updateCheckoutList() {
         $.ajax({
             type: 'POST',
-            url: WEB_PATH+'checkout/get-list',
+            url: WEB_PATH+'checkout/get-list/',
             data: {},
             success:function(data){
                 if (data.content){

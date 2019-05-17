@@ -15,7 +15,7 @@ function subscribe(email, callback)
     var data = 'email='+email;
     $.ajax({
         type: 'POST',
-        url: WEB_PATH+'blog/subscribe',
+        url: WEB_PATH+'blog/subscribe/',
         data: data,
         success:function(data){
                 callback(data);
