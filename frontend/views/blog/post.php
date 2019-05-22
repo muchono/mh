@@ -10,7 +10,7 @@ use yii\helpers\Url;
             <ul class="breadcrumbs__list">
                 <?php foreach($model->categories as $c) {?>
               <li class="breadcrumbs__item">
-                <a href="<?=Url::to(['index', 'cid'=>$c->id]);?>" class="breadcrumbs__link"><?=$c->title?></a>
+                <a href="<?=Url::to(['blog/', 'cid'=>$c->id]);?>" class="breadcrumbs__link"><?=$c->title?></a>
               </li>
                 <?php }?>
             </ul>
@@ -23,10 +23,10 @@ use yii\helpers\Url;
               <figure><img width="50" height="50" src="<?=Url::base()?>/images/blog/<?=$model->avatar_image?>" alt=""></figure>
               <?php }?>
               <div>
-                  by <a href=""><?=$model->getAuthor() ?></a>
+                  by <?=$model->getAuthor() ?>
               </div>
             </div>
-            <div class="post-page-head__comments"><a href=""><i class="icon-13"></i> 0 Comments</a></div>
+            <div class="post-page-head__comments" style="display:none"><a href=""><i class="icon-13"></i> 0 Comments</a></div>
           </div>
         </div>
         <div class="post-page-wrap">

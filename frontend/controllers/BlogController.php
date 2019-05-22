@@ -16,7 +16,7 @@ class BlogController extends \frontend\controllers\Controller
     
     public function actionIndex()
     {
-        $query = Post::find()->where(['active' => '1']);
+        $query = Post::find()->where(['active' => '1'])->orderBy('id DESC');
         if (Yii::$app->request->get('cid') && $cmodel = PostCategory::findOne(Yii::$app->request->get('cid'))){
             $query=$query->innerJoinWith([
                 'postCategories' => function ($query) use ($cmodel) {
@@ -39,7 +39,7 @@ class BlogController extends \frontend\controllers\Controller
         $this->view->params['social-panel'] = true;
         
         $a = Discount::find()->active()->latest();
-        $special_offer = Discount::find()->active()->latest();
+        $special_offer = Discount::findActive()->latest();
 
         if (($model = Post::findOne($id)) !== null) {
             return $this->render('post', array(
@@ -54,7 +54,7 @@ class BlogController extends \frontend\controllers\Controller
     public function actionUrl($url)
     {
         if (!empty($url)) {
-            $model = Post::find(['url_anckor' => trim($url)])->one();
+            $model = Post::find()->where(['url_anckor' => $url])->one();
             if ($model) {
                 return $this->actionPost($model->id);
             }
