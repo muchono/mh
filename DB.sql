@@ -1,3 +1,5 @@
+ALTER TABLE post CHANGE `image` `image` varchar(255) NOT NULL default '';
+ALTER TABLE post CHANGE `avatar_image` `avatar_image` varchar(255) NOT NULL default '';
 
 ALTER TABLE `order` ADD INDEX (`transaction_id`);
 

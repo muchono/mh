@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => '{update} {page} {links} {guide} {review} {delete} ',
+                'template' => '{update} {page} {links} {guide} {review} {report_items} {delete} ',
                 'buttons' => [
                     'page' => function ($url, $model) {
                         return \yii\helpers\Html::a('<span class="glyphicon glyphicon glyphicon-file"></span>',
@@ -74,6 +74,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         return \yii\helpers\Html::a('<span class="glyphicon glyphicon-registration-mark"></span>',
                             yii\helpers\Url::to(['product-review/index', 'product_id' => $model['id']]), [
                                 'title' => Yii::t('yii', 'Reviews'),
+                                'data-pjax' => 0,
+                            ]);
+                    },                         
+                    'report_items' => function ($url, $model) {
+                        return \yii\helpers\Html::a('<span class="glyphicon glyphicon-list-alt"></span>',
+                            yii\helpers\Url::to(['product-report/index', 'product_id' => $model['id']]), [
+                                'title' => Yii::t('yii', 'Report Items'),
                                 'data-pjax' => 0,
                             ]);
                     },                         

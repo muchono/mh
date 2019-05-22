@@ -422,7 +422,11 @@ exit('SEND');
     public function actionError()
     {
         header("HTTP/1.1 301 Moved Permanently");
-        header('Location: '.Url::home());
+        if (substr(Yii::$app->request->absoluteUrl, -1, 1) !== '/') {
+            header('Location: '.Yii::$app->request->absoluteUrl.'/');
+        } else {
+            header('Location: '.Url::home());            
+        }
         exit;
     }
     
