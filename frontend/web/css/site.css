@@ -298,6 +298,7 @@ video {
 .icon-10 {
   background-image: url(../img/sprite.png);
   background-position: -251px 0px;
+  cursor: pointer;  
   width: 19px;
   height: 18px;
   display: inline-block;

@@ -54,6 +54,10 @@ var Logged = (function() {
             markLink($(this), !$(this).hasClass('unclickable'));
         });         
         
+        $('.tab-content').on('click', '.icon-10', function(event) {
+            unMarkLink($(this), !$(this).hasClass('unclickable'));
+        });         
+        
         $('.tab-content').on('click', '.icon-12', function(event) {
             showReport($(this));
         });
@@ -108,11 +112,18 @@ var Logged = (function() {
     }
     
     function markLink(link, available) {
-        link.removeClass('icon-11').addClass('icon-10');
         if (available) {
+            link.removeClass('icon-11').addClass('icon-10');
             $.post( WEB_PATH+"content/mark-link/",{'link': link.attr('for')});
         }
     }
+    
+    function unMarkLink(link, available) {
+        if (available) {
+            link.removeClass('icon-10').addClass('icon-11');
+            $.post( WEB_PATH+"content/mark-link/",{'link': link.attr('for'), 'deselect' : 1});
+        }
+    }    
     
     function disableTabs() {
         $(".tab-list__link").removeClass('tab-list__link--active');

@@ -104,9 +104,13 @@ class ContentController extends \frontend\controllers\Controller
         $r = array('success' => 0);
         if (Yii::$app->request->post('link')) {
             $mark = new UserMark;
-            $mark->user_id = Yii::$app->user->id;
-            $mark->href_id = (int) Yii::$app->request->post('link');
-            $mark->save();
+            if (Yii::$app->request->post('deselect')) {
+                $mark->findOne(['user_id' => Yii::$app->user->id, 'href_id' => (int) Yii::$app->request->post('link')])->delete();
+            } else {
+                $mark->user_id = Yii::$app->user->id;
+                $mark->href_id = (int) Yii::$app->request->post('link');
+                $mark->save();
+            }
             
             $r['success'] = 1;
         }

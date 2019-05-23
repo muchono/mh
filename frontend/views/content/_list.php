@@ -43,7 +43,7 @@ use yii\helpers\Url;
                 <thead>
                   <tr>
                     <th class="tb__1">#</th>
-                    <th class="tb__2"><i class="icon-10"></i></th>
+                    <th class="tb__2"><i class="icon-10 unclickable"></i></th>
                     <th class="tb__3">
                       URL
                       <span class="table-filter">
