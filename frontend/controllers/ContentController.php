@@ -130,23 +130,13 @@ class ContentController extends \frontend\controllers\Controller
                 $user = User::findOne(Yii::$app->user->id);
                 $items = [];
                 foreach (Yii::$app->request->post('report') as $ri) {
-                    $items[] = \common\models\ProductReport::findOne($ri)->title;
+                    $report_item = new \common\models\ProductReportItem;
+                    $report_item->user_id = Yii::$app->user->id;
+                    $report_item->product_report_id = (int) $ri;
+                    $report_item->product_href_id = $href->id;
+                    $report_item->save();
                 }
                 
-                //send to user
-                $body = Yii::$app->controller->renderPartial('@app/views/mails/report.php', [
-                    'user' => $user,
-                    'product' => $product,
-                    'items' => $items,
-                    'href' => $href,
-                ]);
-                
-                Yii::$app->mailer->compose()
-                            ->setTo(Yii::$app->params['contactEmail'])
-                            ->setFrom(Yii::$app->params['adminEmail'])
-                            ->setSubject('MarketingHack URL Report')
-                            ->setHtmlBody($body)
-                            ->send();
                 $r['success'] = 1;                
             }
             

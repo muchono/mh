@@ -28,7 +28,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Administration',
+        'brandLabel' => 'Backend',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -39,7 +39,7 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-        //$menuItems[] = ['label' => 'Home', 'url' => ['/site/index']];
+        $menuItems[] = ['label' => 'Reports', 'url' => ['/product-report-item/index']];
         $menuItems[] = ['label' => 'Products', 'url' => ['/product/index']];
         $menuItems[] = ['label' => 'Discounts', 'url' => ['/discount/index']];
         $menuItems[] = ['label' => 'Users', 'url' => ['/user/index']];

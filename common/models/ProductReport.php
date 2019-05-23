@@ -32,6 +32,15 @@ class ProductReport extends \yii\db\ActiveRecord
             [['title'], 'string', 'max' => 255],
         ];
     }
+    
+    /**
+     * Get product 
+     * @return Product
+     */
+    public function getProduct()
+    {
+        return $this->hasOne(\common\models\Product::className(), ['id' => 'product_id']);
+    }
 
     /**
      * @inheritdoc

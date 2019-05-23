@@ -1,3 +1,13 @@
+DROP TABLE product_report_item;
+CREATE TABLE IF NOT EXISTS `product_report_item` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,   
+  `product_href_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `product_report_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`),  
+  key(`product_href_id`, `product_report_id`)
+);
+
 ALTER TABLE post CHANGE `image` `image` varchar(255) NOT NULL default '';
 ALTER TABLE post CHANGE `avatar_image` `avatar_image` varchar(255) NOT NULL default '';
 
