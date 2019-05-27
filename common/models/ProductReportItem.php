@@ -24,7 +24,17 @@ class ProductReportItem extends \yii\db\ActiveRecord
     }
 
     public static function findIndex() {
-        return self::find()->groupBy(['product_href_id', 'product_report_id']);
+        return self::find()
+                    ->select([
+        '*',
+        'product_image' => \yii\db\Expression('CONCAT(product_image, :suffix)', [
+            ':suffix' => '_250x250',
+        ]),
+    ])
+                ->select('*, (SELECT COUNT(*) FROM '.self::tableName().' st '
+                . 'WHERE st.product_href_id = 1product_href_id '
+                . 'AND st.product_report_id = product_report_id) as cases_count')
+                ->groupBy(['product_href_id', 'product_report_id']);
     }
     /**
      * @inheritdoc
@@ -70,28 +80,10 @@ class ProductReportItem extends \yii\db\ActiveRecord
      */
     public function getCases()
     {
-        $r =  self::find()
-                ->select(['*, COUNT(*) AS cases_count'])
-                ->where(['product_href_id' => $this->product_href_id, 'product_report_id' => $this->product_report_id])
-                ->groupBy('user_id')->createCommand()->sql;
-        
-        print $r.'<br/>';
-        
-        
         return self::find()
-                ->select(['*, COUNT(*) AS cases_count'])
                 ->where(['product_href_id' => $this->product_href_id, 'product_report_id' => $this->product_report_id])
                 ->groupBy('user_id');
     }
-    
-    /**
-     * Get cases count
-     * @return array
-     */
-    public function getCasesCount()
-    {
-        return $this->getCases()->count();
-    }    
     
     /**
      * @inheritdoc
