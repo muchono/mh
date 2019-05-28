@@ -25,16 +25,11 @@ class ProductReportItem extends \yii\db\ActiveRecord
 
     public static function findIndex() {
         return self::find()
-                    ->select([
-        '*',
-        'product_image' => \yii\db\Expression('CONCAT(product_image, :suffix)', [
-            ':suffix' => '_250x250',
-        ]),
-    ])
                 ->select('*, (SELECT COUNT(*) FROM '.self::tableName().' st '
-                . 'WHERE st.product_href_id = 1product_href_id '
-                . 'AND st.product_report_id = product_report_id) as cases_count')
-                ->groupBy(['product_href_id', 'product_report_id']);
+                . 'WHERE st.product_href_id = '.self::tableName().'.product_href_id '
+                . 'AND st.product_report_id = '.self::tableName().'.product_report_id) as cases_count')
+                ->groupBy(['product_href_id', 'product_report_id'])
+                ->orderBy('cases_count DESC');
     }
     /**
      * @inheritdoc

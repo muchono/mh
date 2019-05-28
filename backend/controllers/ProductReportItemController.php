@@ -34,7 +34,7 @@ class ProductReportItemController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    //'delete' => ['POST'],
                 ],
             ],
         ];
@@ -49,7 +49,15 @@ class ProductReportItemController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => ProductReportItem::findIndex(),
         ]);
-
+        
+        if (!empty(Yii::$app->request->post('selection'))) {
+            foreach(Yii::$app->request->post('selection') as $id) {
+                $d = ProductReportItem::findOne($id);
+                if (!empty($d)) {
+                    ProductReportItem::deleteAll(['product_href_id' => $d->product_href_id, 'product_report_id' => $d->product_report_id]);
+                }
+            }
+        }
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
@@ -61,9 +69,10 @@ class ProductReportItemController extends Controller
      * @param string $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete()
     {
-        $this->findModel($id)->delete();
+        print_r($_POST);
+        exit;
 
         return $this->redirect(['index']);
     }
