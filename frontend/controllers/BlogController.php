@@ -42,6 +42,16 @@ class BlogController extends \frontend\controllers\Controller
         $special_offer = Discount::findActive()->latest();
 
         if (($model = Post::findOne($id)) !== null) {
+            $this->view->title = $model->title;
+            \Yii::$app->view->registerMetaTag([
+                'name' => 'keywords',
+                'content' => $model->meta_keywords
+            ]);
+            \Yii::$app->view->registerMetaTag([
+                'name' => 'description',
+                'content' => $model->meta_description
+            ]);            
+    
             return $this->render('post', array(
                 'model' => $model,
                 'special_offer' => $special_offer,
