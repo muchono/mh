@@ -15,7 +15,7 @@ use yii\helpers\Url;
                 <?php }?>
             </ul>
           </div>
-          <h2 class="title-9"><?=$model->title?></h2>
+          <h1 class="title-9"><?=$model->title?></h1>
           <p class="post-page-head__text"><?=$model->meta_description?></p>
           <div class="post-page-head__meta">
             <div class="post-page-head__author">
@@ -33,7 +33,6 @@ use yii\helpers\Url;
           <div class="post-page-content">
             <article class="post-article">
               <figure class="post-page__img"><img src="<?=Url::base()?>/images/blog/<?=$model->image?>" alt="" class="img-fluid"></figure>
-              <h2 class="title-11"><?=$model->title?></h2>
               <span class="reset-this">
               <?=$model->content?>
               </span>

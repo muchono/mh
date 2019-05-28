@@ -250,6 +250,11 @@ class SiteController extends \frontend\controllers\Controller
                     if ($review->load(Yii::$app->request->post()) && $review->save()) {
                         return $this->redirect(['site/product', 'product_id' => $model->id, 'review_added'=>'1', '#' => 'under_post']);
                     }
+                    $this->view->title = $model->page->title;
+                    \Yii::$app->view->registerMetaTag([
+                        'name' => 'description',
+                        'content' => $model->page->description
+                    ]);                     
                     return $this->render('product_page', array(
                         'model' => $model,
                         'review' => $review,

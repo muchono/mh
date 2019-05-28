@@ -30,9 +30,6 @@ AppAsset::register($this);
   <?= Html::csrfMetaTags() ?>
   <title><?= Html::encode($this->title) ?></title>
 
-  <meta name="keywords" content="HTML5 Template" />
-  <meta name="description" content="Responsive HTML5 Template">
-
   <!-- Favicon -->
   <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png"> -->

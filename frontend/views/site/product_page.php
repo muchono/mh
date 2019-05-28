@@ -8,7 +8,6 @@ use yii\web\View;
 /* @var $this yii\web\View */
 /* @var $model \common\models\Product */
 
-$this->title = $model->title;
 ?>
 <section class="product-page">
       <div class="container-md">

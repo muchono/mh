@@ -3970,6 +3970,14 @@ button.sbsc-form__botton, input[type="button"].sbsc-form__botton, input[type="re
   /* line 2110, E:/GIT/marketinghack/public/scss/_theme_style.scss */
   .post-article .blockquote-2 {
     margin: 50px 0; }
+  
+  .post-article a {
+    text-decoration: underline;
+  }
+  
+  .post-article h2 a {
+    text-decoration: none;
+  }  
 
 /* line 2115, E:/GIT/marketinghack/public/scss/_theme_style.scss */
 .post-page__img {
