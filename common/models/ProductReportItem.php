@@ -25,7 +25,8 @@ class ProductReportItem extends \yii\db\ActiveRecord
 
     public static function findIndex() {
         return self::find()
-                ->select('*, (SELECT COUNT(*) FROM '.self::tableName().' st '
+                ->select('MAX('.self::tableName().'.id) as id, '.self::tableName().'.product_href_id, '.self::tableName().'.product_report_id,'
+                . '(SELECT COUNT(*) FROM '.self::tableName().' st '
                 . 'WHERE st.product_href_id = '.self::tableName().'.product_href_id '
                 . 'AND st.product_report_id = '.self::tableName().'.product_report_id) as cases_count')
                 ->groupBy(['product_href_id', 'product_report_id'])
@@ -76,6 +77,7 @@ class ProductReportItem extends \yii\db\ActiveRecord
     public function getCases()
     {
         return self::find()
+                ->select(['MAX(id), product_href_id, product_report_id, user_id'])
                 ->where(['product_href_id' => $this->product_href_id, 'product_report_id' => $this->product_report_id])
                 ->groupBy('user_id');
     }

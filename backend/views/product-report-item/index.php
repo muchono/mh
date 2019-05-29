@@ -42,7 +42,7 @@ $form = ActiveForm::begin([
                 'attribute'=>'Product',
                 'format' => 'raw',
                 'value' => function ($data) {
-                    return Html::a($data->report->product->short_title, ['product/update', 'id' => $data->report->product->id], ['target'=>'_blank']);
+                    return Html::a($data->report->product->title, ['product/update', 'id' => $data->report->product->id], ['target'=>'_blank']);
                 }
             ],
             [
