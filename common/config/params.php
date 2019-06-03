@@ -1,6 +1,7 @@
 <?php
 return [
-    'adminEmail' => 'info@marketinghack.net',
+    'adminEmail' => ['info@marketinghack.net' => 'MarketingHack'], // from e-mail
+    'toAdminEmail' => 'manituforever@gmail.com', // to admin e-mail
     'supportEmail' => 'support@marketinghack.net',
     'user.passwordResetTokenExpire' => 3600,
     'payments' => array(

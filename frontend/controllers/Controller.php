@@ -21,6 +21,7 @@ class Controller extends \yii\web\Controller
         $this->view->params['head_offer'] = Yii::$app->session->get('head_offer_closed') ? null : Discount::findActive()->latest();
         $this->view->params['offer_menu'] = Discount::findActive()->count();
         $this->view->params['cart_items'] = !Yii::$app->user->isGuest ? Cart::getCountByUser(Yii::$app->user->id) : 0;
+            
         $this->actionSignup();
         $this->actionLogin();
         $this->actionForgot();
@@ -37,6 +38,25 @@ class Controller extends \yii\web\Controller
             'global-script'
          );
         
+        
+        if (!empty(Yii::$app->params['meta'][$action->controller->id.'/'.$action->id])) {
+            $meta = Yii::$app->params['meta'][$action->controller->id.'/'.$action->id];
+            if (!empty($meta['title'])) {
+                $this->view->title = $meta['title'];
+            }
+            if (!empty($meta['keywords'])) {
+                \Yii::$app->view->registerMetaTag([
+                    'name' => 'keywords',
+                    'content' => $meta['title']
+                ]);                
+            }
+            if (!empty($meta['description'])) {
+                \Yii::$app->view->registerMetaTag([
+                    'name' => 'description',
+                    'content' => $meta['description']
+                ]);                
+            }            
+        }        
         return parent::beforeAction($action);
     }  
     

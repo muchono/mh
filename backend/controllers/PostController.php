@@ -158,7 +158,6 @@ class PostController extends Controller
         //send to registered users
         $users = User::find()->where(['subscribe_blog' => 1, 'active' => 1])->all();
         foreach($users as $user) {
-            print $user->email.' '.Yii::$app->params['adminEmail'];
             
             $body = Yii::$app->controller->renderPartial('@app/views/mails/post.php', [
                 'post' => $post,

@@ -192,7 +192,8 @@ class ContentController extends \frontend\controllers\Controller
         
         $accessable = OrderToProduct::isAccessible($product->id, Yii::$app->user->id);
         
-        $marked = UserMark::find(['user_id' => Yii::$app->user->id])->indexBy('href_id')->asArray()->all();
+        $marked = Yii::$app->user->id 
+                ? UserMark::find(['user_id' => Yii::$app->user->id])->indexBy('href_id')->asArray()->all() : [];
         
         return $this->renderPartial('_list',['product' => $product,
             'hrefsProvider' => $dataProvider,

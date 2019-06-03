@@ -334,18 +334,7 @@ class SiteController extends \frontend\controllers\Controller
     public function actionHiw()
     {
         $this->view->params['page'] ='hiw';
-        /*
-        print Yii::$app->params['adminEmail'];
-Yii::$app->mailer->compose()
-            ->setTo('mailmuchenik@gmail.com')
-            ->setFrom(Yii::$app->params['adminEmail'])
-            ->setSubject('Registration confirmation')
-            ->setHtmlBody('body')
-            ->send();
 
-exit('SEND');
-         * 
-         */
         return $this->render('hiw', array(
             'products' => Product::findActive()->limit(3)->all(),
         ));
@@ -405,7 +394,7 @@ exit('SEND');
     {
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
+            if ($model->sendEmail(Yii::$app->params['toAdminEmail'])) {
                 Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
             } else {
                 Yii::$app->session->setFlash('error', 'There was an error sending your message.');

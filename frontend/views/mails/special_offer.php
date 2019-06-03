@@ -199,19 +199,18 @@ use yii\helpers\Url;
                                                                             <p style="Margin:0;Margin-bottom:20px;color:#353535;font-family:Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:1.3;margin:0;margin-bottom:20px;padding:0;text-align:left">
 Hello,<br/>
 <br/>
-We're glad to let you know about unprecedented action - only within the next 24 hours you will have an opportunity to buy the subscription to all Marketing Hack products with 40% discount.<br/>
+We would like to inform you about special offer - only within the next 24 hours you will have an opportunity to buy the subscription to all MarketingHack products with 40% discount.
 <br/>
-For this please follow the link and make a purchase: <a href="<?=$link?>">link</a><br/>
+<br/>
+To participate the offer <a href="<?=$link?>">use the purchase link</a><br/>
 <br/>
 40% Off is a maximum discount available for only new users and only within 24 hours.<br/>
-Hurry up to purchase a subscription to:<br/>
 <?php foreach($products as $p) {?>
-<?=$p->title;?><br/>
+* <?=$p->title;?><br/>
 <?php }?>
 <br/>
-and save a considerable budget.<br/>
 <br/>
-Please note, that in the future you will be able to renew this subscription at the same price with a 40% discount.<br/>
+Please note, that in the future you will be able to renew this subscription by the same price with a 40% discount.<br/>
 <br/>
 If you have any questions - you can always contact our technical support.<br/>
 <br/>
