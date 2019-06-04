@@ -1,3 +1,8 @@
+CREATE TABLE IF NOT EXISTS `product_to_category` (
+  `product_id` int(11) unsigned NOT NULL,
+  `category_id` int(11) unsigned NOT NULL
+) ENGINE=InnoDB;
+
 DROP TABLE product_report_item;
 CREATE TABLE IF NOT EXISTS `product_report_item` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,   

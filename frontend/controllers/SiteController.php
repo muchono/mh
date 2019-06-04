@@ -155,11 +155,11 @@ class SiteController extends \frontend\controllers\Controller
                     'user' => $user,
                     'offer' => Discount::findOne(Discount::SPECIAL40ID),
                 ]);
-
+                
                 Yii::$app->mailer->compose()
                             ->setTo($user->email)
                             ->setFrom(Yii::$app->params['adminEmail'])
-                            ->setSubject('Special 40% off for new users')
+                            ->setSubject('40% Off - For All Our Products - Only The Next 24 Hours!')
                             ->setHtmlBody($body)
                             ->send();                
 
@@ -255,6 +255,8 @@ class SiteController extends \frontend\controllers\Controller
                         'name' => 'description',
                         'content' => $model->page->description
                     ]);                     
+                    
+                    $this->view->params['social-panel-text']= urlencode($model->page->title);
                     return $this->render('product_page', array(
                         'model' => $model,
                         'review' => $review,

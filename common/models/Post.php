@@ -151,7 +151,12 @@ class Post extends \yii\db\ActiveRecord
      */
     public function getRelated()
     {
-        return self::find()->where(['<>', 'id', $this->id])->limit(3)->all();
+        return self::find()
+                ->joinWith('postCategories')
+                ->where(['<>', 'id', $this->id])
+                ->andWhere(['in', 'post_to_category.category_id', $this->getPostCategories()->select('category_id')])
+                ->orderBy('id DESC')
+                ->limit(3)->all();
     }
     
     /**

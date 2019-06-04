@@ -3409,8 +3409,14 @@ input[type="color"], input[type="date"], input[type="datetime"], input[type="dat
   width: 36px; }
 
 /* line 1583, E:/GIT/marketinghack/public/scss/_theme_style.scss */
+.tb__3 {
+  width: 425px; }
+
 .tb__4 {
   width: 60px; }
+
+.tb__6 {
+  width: 270px; }
 
 /* line 1587, E:/GIT/marketinghack/public/scss/_theme_style.scss */
 .tb__5,

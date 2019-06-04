@@ -193,17 +193,17 @@ AppAsset::register($this);
 <div class="social-pane">
       <ul class="sp__list">
         <li class="sp__item">
-            <a href="https://www.facebook.com/MarketingHackNet/" class="sp__link" target="_blank">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=<?=urlencode(Url::canonical())?>&t=<?=$this->params['social-panel-text']?>" class="sp__link" target="_blank">
             <i class="fb"></i>
           </a>
         </li>
         <li class="sp__item">
-          <a href="https://twitter.com/MarketingHackTw" class="sp__link" target="_blank">
+          <a href="https://twitter.com/share?url=<?=urlencode(Url::canonical())?>&text=<?=$this->params['social-panel-text']?>" class="sp__link" target="_blank">
             <i class="tw"></i>
           </a>
         </li>
         <li class="sp__item">
-          <a href="https://www.pinterest.com/MarketingHack/" class="sp__link" target="_blank">
+          <a href="https://telegram.me/share/url?url=<?=urlencode(Url::canonical())?>&text=<?=$this->params['social-panel-text']?>" class="sp__link" target="_blank">
             <i class="pt"></i>
           </a>
         </li>

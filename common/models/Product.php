@@ -150,6 +150,25 @@ class Product extends \yii\db\ActiveRecord
     }
     
     /**
+     * Get categories
+     * @return array
+     */
+    public function getCategories()
+    {
+        return $this->hasMany(PostCategory::className(), ['id' => 'category_id'])
+                    ->via('productCategories');
+    }
+    
+    /**
+     * Get categories
+     * @return array
+     */
+    public function getProductCategories()
+    {
+        return $this->hasMany(ProductToCategory::className(), ['post_id' => 'id']);
+    }
+    
+    /**
      * Get Status Name
      * @return string
      */
@@ -250,6 +269,7 @@ class Product extends \yii\db\ActiveRecord
         return $price;
     }
     
+    
     /**
      * @inheritdoc
      */
@@ -260,6 +280,10 @@ class Product extends \yii\db\ActiveRecord
                 'class' => \kotchuprik\sortable\behaviors\Sortable::className(),
                 'query' => self::find(),
             ],
+            'saveRelations' => [
+                'class'     => SaveRelationsBehavior::className(),
+                'relations' => ['categories']
+            ],            
         ];
     }
 }
