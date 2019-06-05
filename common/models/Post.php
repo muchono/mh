@@ -152,10 +152,13 @@ class Post extends \yii\db\ActiveRecord
     public function getRelated()
     {
         return self::find()
+                ->select('post.*, COUNT(*) cnt')
                 ->joinWith('postCategories')
                 ->where(['<>', 'id', $this->id])
-                ->andWhere(['in', 'post_to_category.category_id', $this->getPostCategories()->select('category_id')])
-                ->orderBy('id DESC')
+                ->andWhere(['in', 'post_to_category.category_id', 
+                        \yii\helpers\ArrayHelper::getColumn($this->postCategories, 'category_id')])
+                ->groupBy('id')
+                ->orderBy('cnt DESC, id DESC')
                 ->limit(3)->all();
     }
     
@@ -166,11 +169,14 @@ class Post extends \yii\db\ActiveRecord
     public function getRelatedProducts()
     {
         return Product::find()
+                ->select('product.*, COUNT(*) cnt')
                 ->joinWith('productCategories')
-                ->andWhere(['in', 'product_to_category.category_id', $this->getPostCategories()->select('category_id')])
-                ->orderBy('id DESC')
-                ->limit(3)->all();
-    }    
+                ->where(['in', 'product_to_category.category_id',
+                        \yii\helpers\ArrayHelper::getColumn($this->postCategories, 'category_id')])
+                ->groupBy('id')
+                ->orderBy('cnt DESC, id DESC')
+                ->limit(3)->all();        
+    }
     
     /**
      * Get Status Name
