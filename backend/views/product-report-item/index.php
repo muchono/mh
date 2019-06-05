@@ -35,14 +35,14 @@ $form = ActiveForm::begin([
                 'attribute'=>'URL',
                 'format' => 'raw',
                 'value' => function ($data) {
-                    return Html::a($data->href->url, $data->href->url, ['target'=>'_blank']);
+                    return empty($data->href) ? '' : Html::a($data->href->url, $data->href->url, ['target'=>'_blank']);
                 }
             ], 
             [
                 'attribute'=>'Product',
                 'format' => 'raw',
                 'value' => function ($data) {
-                    return Html::a($data->report->product->title, ['product/update', 'id' => $data->report->product->id], ['target'=>'_blank']);
+                    return empty($data->report) ? '' : Html::a($data->report->product->title, ['product/update', 'id' => $data->report->product->id], ['target'=>'_blank']);
                 }
             ],
             [
@@ -50,7 +50,10 @@ $form = ActiveForm::begin([
                 'value' => function ($data) {
                     $r=[];
                     foreach($data->getCases()->all() as $c){
-                        $r[] = $c->user->email;
+                        if (!empty($c->user)) {
+                            $r[] = $c->user->email;
+                        }
+                        
                     }
                     return join(',', $r);
                 }
@@ -58,7 +61,7 @@ $form = ActiveForm::begin([
             [
                 'attribute'=>'Report Status',
                 'value' => function ($data) {
-                    return $data->report->title;
+                    return empty($data->report) ? '' : $data->report->title;
                 }
             ],        
             [
