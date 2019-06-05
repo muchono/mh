@@ -400,7 +400,7 @@ class CheckoutController extends \frontend\controllers\Controller
                     . 'Thanks';
 
             Yii::$app->mailer->compose()
-                        ->setTo(Yii::$app->params['adminEmail'])
+                        ->setTo(Yii::$app->params['toAdminEmail'])
                         ->setFrom('transaction@marketinghack.net')
                         ->setSubject('MarketingHack New Order #'.$order->id)
                         ->setHtmlBody($body)

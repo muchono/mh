@@ -9,7 +9,6 @@ use yii\widgets\Pjax;
 
 use common\models\OrderToProduct;
 
-$this->title = 'Home';
 ?>
 <header class="home-header">
       <div class="container">

@@ -51,7 +51,9 @@ class BlogController extends \frontend\controllers\Controller
                 'name' => 'description',
                 'content' => $model->meta_description
             ]);            
-    
+            
+            $this->view->params['social-panel-text']= urlencode($model->title);
+            
             return $this->render('post', array(
                 'model' => $model,
                 'special_offer' => $special_offer,

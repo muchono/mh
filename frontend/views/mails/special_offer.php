@@ -148,7 +148,7 @@ use yii\helpers\Url;
                                                     <table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
                                                         <tr style="padding:0;text-align:left;vertical-align:top">
                                                             <th style="Margin:0;color:#353535;font-family:Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left">
-                                                                <h1 class="text-center" style="Margin:0;Margin-bottom:20px;color:inherit;font-family:Helvetica,Arial,sans-serif;font-size:32px;font-weight:400;line-height:1.3;margin:0;margin-bottom:20px;padding:0;text-align:center;word-wrap:normal"><br>Last chance:<br><?=$offer->title?></h1></th>
+                                                                <h1 class="text-center" style="Margin:0;Margin-bottom:20px;color:inherit;font-family:Helvetica,Arial,sans-serif;font-size:32px;font-weight:400;line-height:1.3;margin:0;margin-bottom:20px;padding:0;text-align:center;word-wrap:normal"><br><?=$offer->title?></h1></th>
                                                             <th class="expander" style="Margin:0;color:#353535;font-family:Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:1.3;margin:0;padding:0!important;text-align:left;visibility:hidden;width:0"></th>
                                                         </tr>
                                                     </table>
@@ -169,7 +169,7 @@ use yii\helpers\Url;
                                                 <th class="small-12 large-12 columns first last" style="Margin:0 auto;color:#353535;font-family:Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:1.3;margin:0 auto;padding:0;padding-bottom:16px;padding-left:0;padding-right:0;text-align:left;width:648px">
                                                     <table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
                                                         <tr style="padding:0;text-align:left;vertical-align:top">
-                                                            <th style="Margin:0;color:#353535;font-family:Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left"><img src="<?=$front_url?>img/40off.jpg" class="float-center" style="-ms-interpolation-mode:bicubic;Margin:0 auto;clear:both;display:block;float:none;margin:0 auto;max-width:100%;outline:0;text-align:center;text-decoration:none;width:auto"></th>
+                                                            <th style="Margin:0;color:#353535;font-family:Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left"><a href="<?=$link?>"><img src="<?=$front_url?>img/40off.jpg" class="float-center" style="-ms-interpolation-mode:bicubic;Margin:0 auto;clear:both;display:block;float:none;margin:0 auto;max-width:100%;outline:0;text-align:center;text-decoration:none;width:auto"></a></th>
                                                             <th class="expander" style="Margin:0;color:#353535;font-family:Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:1.3;margin:0;padding:0!important;text-align:left;visibility:hidden;width:0"></th>
                                                         </tr>
                                                     </table>
@@ -199,19 +199,18 @@ use yii\helpers\Url;
                                                                             <p style="Margin:0;Margin-bottom:20px;color:#353535;font-family:Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:1.3;margin:0;margin-bottom:20px;padding:0;text-align:left">
 Hello,<br/>
 <br/>
-We're glad to let you know about unprecedented action - only within the next 24 hours you will have an opportunity to buy the subscription to all Marketing Hack products with 40% discount.<br/>
+We would like to inform you about special offer - only within the next 24 hours you will have an opportunity to buy the subscription to all MarketingHack products with 40% discount.
 <br/>
-For this please follow the link and make a purchase: <a href="<?=$link?>">link</a><br/>
+<br/>
+To participate the offer <a href="<?=$link?>">use the purchase link</a><br/>
 <br/>
 40% Off is a maximum discount available for only new users and only within 24 hours.<br/>
-Hurry up to purchase a subscription to:<br/>
 <?php foreach($products as $p) {?>
-<?=$p->title;?><br/>
+* <?=$p->title;?><br/>
 <?php }?>
 <br/>
-and save a considerable budget.<br/>
 <br/>
-Please note, that in the future you will be able to renew this subscription at the same price with a 40% discount.<br/>
+Please note, that in the future you will be able to renew this subscription by the same price with a 40% discount.<br/>
 <br/>
 If you have any questions - you can always contact our technical support.<br/>
 <br/>
@@ -277,7 +276,7 @@ Team MarketingHack.net<br/>																			<br/>
                                                                                                 <tr style="padding:0;text-align:left;vertical-align:top">
                                                                                                     <th class="menu-item float-center" style="Margin:0 auto;color:#353535;float:none;font-family:Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:1.3;margin:0 auto;padding:4px;padding-right:4px;text-align:center"><a href="https://www.facebook.com/MarketingHackNet" style="Margin:0;color:#338cff;font-family:Helvetica,Arial,sans-serif;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left;text-decoration:none"><img src="<?=$front_url?>img/fb.png" alt="" style="-ms-interpolation-mode:bicubic;border:none;clear:both;display:block;max-width:100%;outline:0;text-decoration:none;width:auto"></a></th>
                                                                                                     <th class="menu-item float-center" style="Margin:0 auto;color:#353535;float:none;font-family:Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:1.3;margin:0 auto;padding:4px;padding-right:4px;text-align:center"><a href="https://twitter.com/MarketingHackTw" style="Margin:0;color:#338cff;font-family:Helvetica,Arial,sans-serif;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left;text-decoration:none"><img src="<?=$front_url?>img/tw.png" alt="" style="-ms-interpolation-mode:bicubic;border:none;clear:both;display:block;max-width:100%;outline:0;text-decoration:none;width:auto"></a></th>
-                                                                                                    <th class="menu-item float-center" style="Margin:0 auto;color:#353535;float:none;font-family:Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:1.3;margin:0 auto;padding:4px;padding-right:4px;text-align:center"><a href="https://www.pinterest.com/MarketingHack" style="Margin:0;color:#338cff;font-family:Helvetica,Arial,sans-serif;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left;text-decoration:none"><img src="<?=$front_url?>img/in.png" alt="" style="-ms-interpolation-mode:bicubic;border:none;clear:both;display:block;max-width:100%;outline:0;text-decoration:none;width:auto"></a></th>
+                                                                                                    <th class="menu-item float-center" style="Margin:0 auto;color:#353535;float:none;font-family:Helvetica,Arial,sans-serif;font-size:18px;font-weight:400;line-height:1.3;margin:0 auto;padding:4px;padding-right:4px;text-align:center"><a href="https://web.telegram.org/#/im?p=@MarketingHackNet" style="Margin:0;color:#338cff;font-family:Helvetica,Arial,sans-serif;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left;text-decoration:none"><img src="<?=$front_url?>img/in.png" alt="" style="-ms-interpolation-mode:bicubic;border:none;clear:both;display:block;max-width:100%;outline:0;text-decoration:none;width:auto"></a></th>
                                                                                                 </tr>
                                                                                             </table>
                                                                                         </td>

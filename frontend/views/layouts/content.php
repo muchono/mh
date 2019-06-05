@@ -93,14 +93,14 @@ AppAsset::register($this);
             
             <?php foreach ($this->params['products'] as $p){ ?>
             <li class="sm-list-1__item <?=$this->params['selected_product']->id == $p->id ? 'sm-list-1__item--unblock sm-list-1__item--active' : ' sm-list-1__item--unblock '?>">
-              <a href="<?=Url::to(['content/index','product_id'=>$p->id])?>" class="sm-list-1__link"><?=$p->title?></a>
+              <a href="<?=Url::to(['content/','product_id'=>$p->id])?>" class="sm-list-1__link"><?=$p->title?></a>
             </li>
             <?php }?>
                         
           <?php } else {?>
             <?php foreach ($this->params['products'] as $p){ $acc = Yii::$app->user->id && OrderToProduct::isAccessible($p->id, Yii::$app->user->id); ?>
             <li class="sm-list-1__item <?=$this->params['selected_product']->id == $p->id ? 'sm-list-1__item--unblock sm-list-1__item--active' : ( $acc ? ' sm-list-1__item--unblock ' : 'sm-list-1__item--block')?>">
-              <a href="<?=1 ? Url::to(['content/index','product_id'=>$p->id]): '#'?>" class="sm-list-1__link"><?=$p->title?></a>
+              <a href="<?=1 ? Url::to(['content/','product_id'=>$p->id]): '#'?>" class="sm-list-1__link"><?=$p->title?></a>
             </li>
             <?php }?>
           <?php }?>
@@ -117,11 +117,11 @@ AppAsset::register($this);
             <a href="<?=Url::to(['site/faq']);?>" class="sm-list-2__link">F.A.Q.</a>
           </li>
           <li class="sm-list-2__item">
-            <a href="<?=Url::to(['blog/index']);?>" class="sm-list-2__link">Blog</a>
+            <a href="<?=Url::to(['blog/']);?>" class="sm-list-2__link">Blog</a>
           </li>
           <?php if (!Yii::$app->user->isGuest){?>
           <li class="sm-list-2__item">
-            <a href="<?=Url::to(['account/index']);?>" class="sm-list-2__link">My Account</a>
+            <a href="<?=Url::to(['account/']);?>" class="sm-list-2__link">My Account</a>
           </li>
           <li class="sm-list-2__item">
             <a href="<?=Url::to(['account/logout']);?>" class="sm-list-2__link">Logout</a>
@@ -140,13 +140,13 @@ AppAsset::register($this);
           <li class="tl__item"><a href="<?=Url::to(['products/']);?>" class="tl__link">All Products</a></li>            
           <li class="tl__item"><a href="<?=Url::to(['account/']);?>" class="tl__link">Renew&nbsp;<span>Subscriptions</span></a></li>            
           <li class="tl__item"><a href="<?=Url::to(['site/faq']);?>" class="tl__link">F.A.Q.</a></li>
-          <li class="tl__item"><a href="<?=Url::to(['blog/index']);?>" class="tl__link">Blog</a></li>
+          <li class="tl__item"><a href="<?=Url::to(['blog/']);?>" class="tl__link">Blog</a></li>
         </ul>
          
         <ul class="tl__menu">
             <?php if (!Yii::$app->user->isGuest){?> 
           <li class="tl__item">
-            <a href="<?=Url::to(['account/index']);?>" class="tl__link"><i class="icon-8"></i> <span>My Account</span></a>
+            <a href="<?=Url::to(['account/']);?>" class="tl__link"><i class="icon-8"></i> <span>My Account</span></a>
           </li>
           <li class="tl__item">
             <a href="<?=Url::to(['account/logout']);?>" class="tl__link"><i class="icon-9"></i> <span>Logout</span></a>
