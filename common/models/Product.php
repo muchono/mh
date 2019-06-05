@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use himiklab\sortablegrid\SortableGridBehavior;
+use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use common\models\ProductHref;
 use common\models\ProductGuide;
 use common\models\ProductReview;
@@ -56,6 +57,8 @@ class Product extends \yii\db\ActiveRecord
             [['title', 'short_title', 'link_name'], 'string', 'max' => 255],
             [['full_title'], 'string', 'max' => 1000],
             [['questions'], 'string', 'max' => 3000],
+            [['categories'], 'safe'],
+
         ];
     }
 
@@ -75,6 +78,7 @@ class Product extends \yii\db\ActiveRecord
             'link_name' => 'Link Name',
             'questions' => 'Questions',
             'links_available' => 'Show List Tab',
+            'categories' => 'Post Tags',            
         ];
     }
     
@@ -165,7 +169,7 @@ class Product extends \yii\db\ActiveRecord
      */
     public function getProductCategories()
     {
-        return $this->hasMany(ProductToCategory::className(), ['post_id' => 'id']);
+        return $this->hasMany(ProductToCategory::className(), ['product_id' => 'id']);
     }
     
     /**

@@ -160,6 +160,19 @@ class Post extends \yii\db\ActiveRecord
     }
     
     /**
+     * Get Related Products
+     * @return array
+     */
+    public function getRelatedProducts()
+    {
+        return Product::find()
+                ->joinWith('productCategories')
+                ->andWhere(['in', 'product_to_category.category_id', $this->getPostCategories()->select('category_id')])
+                ->orderBy('id DESC')
+                ->limit(3)->all();
+    }    
+    
+    /**
      * Get Status Name
      * @return string
      */
