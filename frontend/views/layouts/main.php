@@ -47,7 +47,7 @@ AppAsset::register($this);
 
   <!-- Head Libs -->
   <!-- <script src="bower_components/modernizr/modernizr.js"></script> -->    
-  <link rel="canonical" href="<?=Url::canonical()?>">
+  <link rel="canonical" href="<?=Yii::$app->request->absoluteUrl?>">
    <?php $this->head() ?>
    <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/8752e8f12b6b871d82830d027/712da38dc210c72b9987101eb.js");</script>
 </head>
@@ -193,17 +193,17 @@ AppAsset::register($this);
 <div class="social-pane">
       <ul class="sp__list">
         <li class="sp__item">
-            <a href="https://www.facebook.com/sharer/sharer.php?u=<?=urlencode(Url::canonical())?>&t=<?=$this->params['social-panel-text']?>" class="sp__link" target="_blank">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=<?=urlencode(Yii::$app->request->absoluteUrl)?>&t=<?=$this->params['social-panel-text']?>" class="sp__link" target="_blank">
             <i class="fb"></i>
           </a>
         </li>
         <li class="sp__item">
-          <a href="https://twitter.com/share?url=<?=urlencode(Url::canonical())?>&text=<?=$this->params['social-panel-text']?>" class="sp__link" target="_blank">
+          <a href="https://twitter.com/share?url=<?=urlencode(Yii::$app->request->absoluteUrl)?>&text=<?=$this->params['social-panel-text']?>" class="sp__link" target="_blank">
             <i class="tw"></i>
           </a>
         </li>
         <li class="sp__item">
-          <a href="https://telegram.me/share/url?url=<?=urlencode(Url::canonical())?>&text=<?=$this->params['social-panel-text']?>" class="sp__link" target="_blank">
+          <a href="https://telegram.me/share/url?url=<?=urlencode(Yii::$app->request->absoluteUrl)?>&text=<?=$this->params['social-panel-text']?>" class="sp__link" target="_blank">
             <i class="pt"></i>
           </a>
         </li>
