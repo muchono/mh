@@ -12,6 +12,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use yii\filters\AccessControl;
+use yii\helpers\Json;
 
 /**
  * PostController implements the CRUD actions for Post model.
@@ -197,6 +198,38 @@ class PostController extends Controller
         }
     }
     
+    
+    /**
+     * Upload Image
+     */
+    public function actionUploadImage()
+    {
+        if (!empty($_FILES)) {
+            $model = new Post();
+            
+            reset ($_FILES);
+            $temp = current($_FILES);
+            if (is_uploaded_file($temp['tmp_name'])){
+                // Sanitize input
+                if (preg_match("/([^\w\s\d\-_~,;:\[\]\(\).])|([\.]{2,})/", $temp['name'])) {
+                    header("HTTP/1.0 500 Invalid file name.");
+                    return;
+                }
+
+                // Verify extension
+                if (!in_array(strtolower(pathinfo($temp['name'], PATHINFO_EXTENSION)), array("gif", "jpg", "png"))) {
+                    header("HTTP/1.0 500 Invalid extension.");
+                    return;
+                }
+                $fname = 'post'.microtime(1) . '.' . pathinfo($temp['name'], PATHINFO_EXTENSION);
+                move_uploaded_file($temp['tmp_name'], $model->imagesRootDir. $fname);
+
+                echo Json::encode(array('location' => Yii::$app->urlManagerFrontend->getHostInfo().Yii::$app->urlManagerFrontend->getBaseUrl('').'/images/blog/' . $fname));
+            } else {
+              header("HTTP/1.0 500 Server Error");
+            }        
+        }
+    }
     
     /**
      * Finds the Post model based on its primary key value.

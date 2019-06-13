@@ -51,21 +51,64 @@ use yii\web\JsExpression;
         'relative_urls'=> new JsExpression('false'),
         'remove_script_host'=> new JsExpression('false'),        
         'image_dimensions'=> new JsExpression('false'),        
-        'file_picker_callback'=> new JsExpression("function(callback, value, meta) {
-            if (meta.filetype == 'image') {
-                $('#upload').trigger('click');
-                $('#upload').on('change', function() {
-                  var file = this.files[0];
-                  var reader = new FileReader();
-                  reader.onload = function(e) {
-                    callback(e.target.result, {
-                      alt: ''
-                    });
-                  };
-                  reader.readAsDataURL(file);
-                });
+        'file_picker_callback' => new JsExpression("
+            function(callback, value, meta) {
+                var input = document.createElement('input');
+                input.setAttribute('type', 'file');
+                input.setAttribute('accept', 'image/*');
+
+
+                input.onchange = function() {
+                    var file = this.files[0];
+
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = function () {
+                      var id = 'blobid' + (new Date()).getTime();
+                      var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+                      var blobInfo = blobCache.create(id, file, reader.result);
+                      blobCache.add(blobInfo);
+                      
+                        callback(blobInfo.blobUri(), { title: file.name });
+                    };
+                };
+
+                input.click();
             }
-        }"),
+        "),
+        
+        'images_upload_handler' => new JsExpression("function (blobInfo, success, failure) {
+            var xhr, formData;
+
+            xhr = new XMLHttpRequest();
+            xhr.withCredentials = false;
+            xhr.open('POST', '".Url::to(['post/upload-image'], true)."');
+
+            xhr.onload = function() {
+              var json;
+
+              if (xhr.status != 200) {
+                failure('HTTP Error: ' + xhr.status);
+                return;
+              }
+
+              json = JSON.parse(xhr.responseText);
+
+              if (!json || typeof json.location != 'string') {
+                failure('Invalid JSON: ' + xhr.responseText);
+                return;
+              }
+
+              success(json.location);
+            };
+
+            formData = new FormData();
+            formData.append('".Yii::$app->request->csrfParam."', '".Yii::$app->request->csrfToken."');
+            formData.append('file', blobInfo.blob(), blobInfo.filename());
+ 
+            xhr.send(formData);
+        }
+      ")
     ]
     ]);?>       
      <input name="image" type="file" id="upload" class="hidden" onchange="">
