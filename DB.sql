@@ -1,3 +1,6 @@
+ALTER TABLE product_page ADD updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+UPDATE product_page SET updated_at = now();
+
 CREATE TABLE IF NOT EXISTS `product_to_category` (
   `product_id` int(11) unsigned NOT NULL,
   `category_id` int(11) unsigned NOT NULL
@@ -90,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `user_billing` (
 )
 
 --
--- Структура таблицы `countries`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `countries`
 --
 
 CREATE TABLE IF NOT EXISTS `countries` (
@@ -100,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `countries` (
 ) ENGINE=MyISAM AUTO_INCREMENT=243 DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `countries`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `countries`
 --
 
 INSERT INTO `countries` (`id`, `country_code`, `country_name`) VALUES
@@ -348,21 +351,21 @@ INSERT INTO `countries` (`id`, `country_code`, `country_name`) VALUES
 (242, 'ZW', 'Zimbabwe');
 
 --
--- Индексы сохранённых таблиц
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 --
 
 --
--- Индексы таблицы `countries`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `countries`
 --
 ALTER TABLE `countries`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT для сохранённых таблиц
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 --
 
 --
--- AUTO_INCREMENT для таблицы `countries`
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `countries`
 --
 ALTER TABLE `countries`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=243;
@@ -396,22 +399,22 @@ ALTER TABLE product_href ADD `timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON 
 -- version 4.4.15.7
 -- http://www.phpmyadmin.net
 --
--- Хост: 127.0.0.1:3306
--- Время создания: Июл 25 2017 г., 00:10
--- Версия сервера: 5.5.50
--- Версия PHP: 5.4.45
+-- пїЅпїЅпїЅпїЅ: 127.0.0.1:3306
+-- пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: пїЅпїЅпїЅ 25 2017 пїЅ., 00:10
+-- пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ: 5.5.50
+-- пїЅпїЅпїЅпїЅпїЅпїЅ PHP: 5.4.45
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- База данных: `mh`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ: `mh`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `about_us_content`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `about_us_content`
 --
 
 CREATE TABLE IF NOT EXISTS `about_us_content` (
@@ -426,7 +429,7 @@ CREATE TABLE IF NOT EXISTS `about_us_content` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `about_us_content`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `about_us_content`
 --
 
 INSERT INTO `about_us_content` (`id`, `title`, `content`, `href`, `author_name`, `author_bio`, `avatar_image`, `image`) VALUES
@@ -442,7 +445,7 @@ INSERT INTO `about_us_content` (`id`, `title`, `content`, `href`, `author_name`,
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `discount`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `discount`
 --
 
 CREATE TABLE IF NOT EXISTS `discount` (
@@ -457,7 +460,7 @@ CREATE TABLE IF NOT EXISTS `discount` (
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `discount`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `discount`
 --
 
 INSERT INTO `discount` (`id`, `date_from`, `date_to`, `title`, `status`, `percent`, `file1`, `file2`) VALUES
@@ -469,7 +472,7 @@ INSERT INTO `discount` (`id`, `date_from`, `date_to`, `title`, `status`, `percen
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `discount_to_product`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `discount_to_product`
 --
 
 CREATE TABLE IF NOT EXISTS `discount_to_product` (
@@ -479,7 +482,7 @@ CREATE TABLE IF NOT EXISTS `discount_to_product` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `discount_to_product`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `discount_to_product`
 --
 
 INSERT INTO `discount_to_product` (`id`, `discount_id`, `product_id`) VALUES
@@ -494,7 +497,7 @@ INSERT INTO `discount_to_product` (`id`, `discount_id`, `product_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `faq`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `faq`
 --
 
 CREATE TABLE IF NOT EXISTS `faq` (
@@ -506,7 +509,7 @@ CREATE TABLE IF NOT EXISTS `faq` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `faq`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `faq`
 --
 
 INSERT INTO `faq` (`id`, `title`, `answer`, `popular_question`, `order`) VALUES
@@ -516,7 +519,7 @@ INSERT INTO `faq` (`id`, `title`, `answer`, `popular_question`, `order`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `faq_category`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `faq_category`
 --
 
 CREATE TABLE IF NOT EXISTS `faq_category` (
@@ -525,7 +528,7 @@ CREATE TABLE IF NOT EXISTS `faq_category` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `faq_category`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `faq_category`
 --
 
 INSERT INTO `faq_category` (`id`, `title`) VALUES
@@ -535,7 +538,7 @@ INSERT INTO `faq_category` (`id`, `title`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `faq_to_category`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `faq_to_category`
 --
 
 CREATE TABLE IF NOT EXISTS `faq_to_category` (
@@ -545,7 +548,7 @@ CREATE TABLE IF NOT EXISTS `faq_to_category` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `faq_to_category`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `faq_to_category`
 --
 
 INSERT INTO `faq_to_category` (`faq_id`, `category_id`, `id`) VALUES
@@ -556,7 +559,7 @@ INSERT INTO `faq_to_category` (`faq_id`, `category_id`, `id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `migration`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `migration`
 --
 
 CREATE TABLE IF NOT EXISTS `migration` (
@@ -565,7 +568,7 @@ CREATE TABLE IF NOT EXISTS `migration` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `migration`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `migration`
 --
 
 INSERT INTO `migration` (`version`, `apply_time`) VALUES
@@ -576,7 +579,7 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `order`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `order`
 --
 
 CREATE TABLE IF NOT EXISTS `order` (
@@ -592,7 +595,7 @@ CREATE TABLE IF NOT EXISTS `order` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `order`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `order`
 --
 
 INSERT INTO `order` (`id`, `created_at`, `updated_at`, `status`, `user_id`, `total`, `payment_method`, `payment_status`, `transaction_id`) VALUES
@@ -613,7 +616,7 @@ CREATE TABLE IF NOT EXISTS `order_to_product` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `order_to_product`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `order_to_product`
 --
 
 INSERT INTO `order_to_product` (`id`, `order_id`, `product_id`, `price`, `months`) VALUES
@@ -623,7 +626,7 @@ INSERT INTO `order_to_product` (`id`, `order_id`, `product_id`, `price`, `months
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `pages_content`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `pages_content`
 --
 
 CREATE TABLE IF NOT EXISTS `pages_content` (
@@ -636,7 +639,7 @@ CREATE TABLE IF NOT EXISTS `pages_content` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `pages_content`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `pages_content`
 --
 
 INSERT INTO `pages_content` (`id`, `name`, `content`, `href`, `static`, `submenu`) VALUES
@@ -647,7 +650,7 @@ INSERT INTO `pages_content` (`id`, `name`, `content`, `href`, `static`, `submenu
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `post`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `post`
 --
 
 CREATE TABLE IF NOT EXISTS `post` (
@@ -670,7 +673,7 @@ CREATE TABLE IF NOT EXISTS `post` (
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `post`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `post`
 --
 
 INSERT INTO `post` (`id`, `title`, `image`, `content`, `meta_description`, `meta_keywords`, `url_anckor`, `views`, `created_at`, `updated_at`, `sent`, `active`, `author_name`, `author_bio`, `avatar_image`, `about_us_content`) VALUES
@@ -685,7 +688,7 @@ INSERT INTO `post` (`id`, `title`, `image`, `content`, `meta_description`, `meta
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `post_category`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `post_category`
 --
 
 CREATE TABLE IF NOT EXISTS `post_category` (
@@ -694,7 +697,7 @@ CREATE TABLE IF NOT EXISTS `post_category` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `post_category`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `post_category`
 --
 
 INSERT INTO `post_category` (`id`, `title`) VALUES
@@ -705,7 +708,7 @@ INSERT INTO `post_category` (`id`, `title`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `post_to_category`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `post_to_category`
 --
 
 CREATE TABLE IF NOT EXISTS `post_to_category` (
@@ -714,7 +717,7 @@ CREATE TABLE IF NOT EXISTS `post_to_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `post_to_category`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `post_to_category`
 --
 
 INSERT INTO `post_to_category` (`post_id`, `category_id`) VALUES
@@ -745,7 +748,7 @@ INSERT INTO `post_to_category` (`post_id`, `category_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `product`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product`
 --
 
 CREATE TABLE IF NOT EXISTS `product` (
@@ -760,7 +763,7 @@ CREATE TABLE IF NOT EXISTS `product` (
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `product`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product`
 --
 
 INSERT INTO `product` (`id`, `title`, `price`, `status`, `order`, `short_title`, `full_title`, `link_name`) VALUES
@@ -773,7 +776,7 @@ INSERT INTO `product` (`id`, `title`, `price`, `status`, `order`, `short_title`,
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `product_guide`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_guide`
 --
 
 CREATE TABLE IF NOT EXISTS `product_guide` (
@@ -786,7 +789,7 @@ CREATE TABLE IF NOT EXISTS `product_guide` (
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `product_guide`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_guide`
 --
 
 INSERT INTO `product_guide` (`id`, `product_id`, `title`, `status`, `about`, `order`) VALUES
@@ -803,7 +806,7 @@ INSERT INTO `product_guide` (`id`, `product_id`, `title`, `status`, `about`, `or
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `product_href`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_href`
 --
 
 CREATE TABLE IF NOT EXISTS `product_href` (
@@ -819,7 +822,7 @@ CREATE TABLE IF NOT EXISTS `product_href` (
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `product_href`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_href`
 --
 
 INSERT INTO `product_href` (`id`, `product_id`, `url`, `status`, `alexa_rank`, `da_rank`, `about`, `example_url`, `type_links`) VALUES
@@ -838,7 +841,7 @@ INSERT INTO `product_href` (`id`, `product_id`, `url`, `status`, `alexa_rank`, `
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `product_href_category`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_href_category`
 --
 
 CREATE TABLE IF NOT EXISTS `product_href_category` (
@@ -847,7 +850,7 @@ CREATE TABLE IF NOT EXISTS `product_href_category` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `product_href_category`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_href_category`
 --
 
 INSERT INTO `product_href_category` (`id`, `title`) VALUES
@@ -859,7 +862,7 @@ INSERT INTO `product_href_category` (`id`, `title`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `product_href_to_category`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_href_to_category`
 --
 
 CREATE TABLE IF NOT EXISTS `product_href_to_category` (
@@ -868,7 +871,7 @@ CREATE TABLE IF NOT EXISTS `product_href_to_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `product_href_to_category`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_href_to_category`
 --
 
 INSERT INTO `product_href_to_category` (`product_id`, `category_id`) VALUES
@@ -889,7 +892,7 @@ INSERT INTO `product_href_to_category` (`product_id`, `category_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `product_page`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_page`
 --
 
 CREATE TABLE IF NOT EXISTS `product_page` (
@@ -908,7 +911,7 @@ CREATE TABLE IF NOT EXISTS `product_page` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `product_page`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_page`
 --
 
 INSERT INTO `product_page` (`id`, `product_id`, `title`, `description`, `guide_description`, `list_description`, `feature1`, `feature2`, `feature3`, `feature4`, `feature5`, `content`) VALUES
@@ -917,7 +920,7 @@ INSERT INTO `product_page` (`id`, `product_id`, `title`, `description`, `guide_d
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `product_review`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_review`
 --
 
 CREATE TABLE IF NOT EXISTS `product_review` (
@@ -933,7 +936,7 @@ CREATE TABLE IF NOT EXISTS `product_review` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `product_review`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_review`
 --
 
 INSERT INTO `product_review` (`id`, `product_id`, `user_id`, `name`, `email`, `raiting`, `content`, `active`, `created_at`) VALUES
@@ -947,7 +950,7 @@ INSERT INTO `product_review` (`id`, `product_id`, `user_id`, `name`, `email`, `r
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `subscriber`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `subscriber`
 --
 
 CREATE TABLE IF NOT EXISTS `subscriber` (
@@ -961,7 +964,7 @@ CREATE TABLE IF NOT EXISTS `subscriber` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `subscriber`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `subscriber`
 --
 
 INSERT INTO `subscriber` (`id`, `name`, `email`, `created_at`, `updated_at`, `ip`, `active`) VALUES
@@ -970,7 +973,7 @@ INSERT INTO `subscriber` (`id`, `name`, `email`, `created_at`, `updated_at`, `ip
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `user`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `user`
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
@@ -990,7 +993,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `user`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `user`
 --
 
 INSERT INTO `user` (`id`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `phone`, `name`, `subscribe`, `active`, `password`, `registration_confirmed`, `created_at`, `updated_at`) VALUES
@@ -999,7 +1002,7 @@ INSERT INTO `user` (`id`, `auth_key`, `password_hash`, `password_reset_token`, `
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `user_backend`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `user_backend`
 --
 
 CREATE TABLE IF NOT EXISTS `user_backend` (
@@ -1015,25 +1018,25 @@ CREATE TABLE IF NOT EXISTS `user_backend` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Дамп данных таблицы `user_backend`
+-- пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `user_backend`
 --
 
 INSERT INTO `user_backend` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'admin', '', '$2y$13$C0fkgk3txcpzrEcgo.sUzuMnRW8lXJ6RDrYL1.o/Tem7iO5Wm4VJS', NULL, '', 10, 1493838079, 1493838079);
 
 --
--- Индексы сохранённых таблиц
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 --
 
 --
--- Индексы таблицы `about_us_content`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `about_us_content`
 --
 ALTER TABLE `about_us_content`
   ADD PRIMARY KEY (`id`),
   ADD KEY `href` (`href`);
 
 --
--- Индексы таблицы `discount`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `discount`
 --
 ALTER TABLE `discount`
   ADD PRIMARY KEY (`id`),
@@ -1041,25 +1044,25 @@ ALTER TABLE `discount`
   ADD KEY `date_to` (`date_to`);
 
 --
--- Индексы таблицы `discount_to_product`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `discount_to_product`
 --
 ALTER TABLE `discount_to_product`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `faq`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `faq`
 --
 ALTER TABLE `faq`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `faq_category`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `faq_category`
 --
 ALTER TABLE `faq_category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `faq_to_category`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `faq_to_category`
 --
 ALTER TABLE `faq_to_category`
   ADD PRIMARY KEY (`id`),
@@ -1067,13 +1070,13 @@ ALTER TABLE `faq_to_category`
   ADD KEY `category_id` (`category_id`);
 
 --
--- Индексы таблицы `migration`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `migration`
 --
 ALTER TABLE `migration`
   ADD PRIMARY KEY (`version`);
 
 --
--- Индексы таблицы `order`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `order`
 --
 ALTER TABLE `order`
   ADD PRIMARY KEY (`id`),
@@ -1082,7 +1085,7 @@ ALTER TABLE `order`
   ADD KEY `created_at` (`created_at`);
 
 --
--- Индексы таблицы `order_to_product`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `order_to_product`
 --
 ALTER TABLE `order_to_product`
   ADD PRIMARY KEY (`id`),
@@ -1090,14 +1093,14 @@ ALTER TABLE `order_to_product`
   ADD KEY `product_id` (`product_id`);
 
 --
--- Индексы таблицы `pages_content`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `pages_content`
 --
 ALTER TABLE `pages_content`
   ADD PRIMARY KEY (`id`),
   ADD KEY `href` (`href`);
 
 --
--- Индексы таблицы `post`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `post`
 --
 ALTER TABLE `post`
   ADD PRIMARY KEY (`id`),
@@ -1105,20 +1108,20 @@ ALTER TABLE `post`
   ADD KEY `url_anckor` (`url_anckor`);
 
 --
--- Индексы таблицы `post_category`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `post_category`
 --
 ALTER TABLE `post_category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `post_to_category`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `post_to_category`
 --
 ALTER TABLE `post_to_category`
   ADD KEY `post_id` (`post_id`),
   ADD KEY `category_id` (`category_id`);
 
 --
--- Индексы таблицы `product`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`),
@@ -1127,47 +1130,47 @@ ALTER TABLE `product`
   ADD KEY `title` (`title`);
 
 --
--- Индексы таблицы `product_guide`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_guide`
 --
 ALTER TABLE `product_guide`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `product_href`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_href`
 --
 ALTER TABLE `product_href`
   ADD PRIMARY KEY (`id`),
   ADD KEY `status` (`product_id`);
 
 --
--- Индексы таблицы `product_href_category`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_href_category`
 --
 ALTER TABLE `product_href_category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `product_href_to_category`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_href_to_category`
 --
 ALTER TABLE `product_href_to_category`
   ADD KEY `product_id` (`product_id`),
   ADD KEY `category_id` (`category_id`);
 
 --
--- Индексы таблицы `product_page`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_page`
 --
 ALTER TABLE `product_page`
   ADD PRIMARY KEY (`id`),
   ADD KEY `product_id` (`product_id`);
 
 --
--- Индексы таблицы `product_review`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_review`
 --
 ALTER TABLE `product_review`
   ADD PRIMARY KEY (`id`),
   ADD KEY `product_id` (`product_id`);
 
 --
--- Индексы таблицы `subscriber`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `subscriber`
 --
 ALTER TABLE `subscriber`
   ADD PRIMARY KEY (`id`),
@@ -1175,7 +1178,7 @@ ALTER TABLE `subscriber`
   ADD KEY `ip` (`ip`);
 
 --
--- Индексы таблицы `user`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
@@ -1184,7 +1187,7 @@ ALTER TABLE `user`
   ADD KEY `name` (`name`);
 
 --
--- Индексы таблицы `user_backend`
+-- пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `user_backend`
 --
 ALTER TABLE `user_backend`
   ADD PRIMARY KEY (`id`),
@@ -1193,106 +1196,106 @@ ALTER TABLE `user_backend`
   ADD UNIQUE KEY `password_reset_token` (`password_reset_token`);
 
 --
--- AUTO_INCREMENT для сохранённых таблиц
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 --
 
 --
--- AUTO_INCREMENT для таблицы `about_us_content`
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `about_us_content`
 --
 ALTER TABLE `about_us_content`
   MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
--- AUTO_INCREMENT для таблицы `discount`
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `discount`
 --
 ALTER TABLE `discount`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
--- AUTO_INCREMENT для таблицы `discount_to_product`
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `discount_to_product`
 --
 ALTER TABLE `discount_to_product`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
--- AUTO_INCREMENT для таблицы `faq`
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `faq`
 --
 ALTER TABLE `faq`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT для таблицы `faq_category`
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `faq_category`
 --
 ALTER TABLE `faq_category`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT для таблицы `faq_to_category`
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `faq_to_category`
 --
 ALTER TABLE `faq_to_category`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT для таблицы `order`
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `order`
 --
 ALTER TABLE `order`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT для таблицы `order_to_product`
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `order_to_product`
 --
 ALTER TABLE `order_to_product`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT для таблицы `pages_content`
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `pages_content`
 --
 ALTER TABLE `pages_content`
   MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT для таблицы `post`
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `post`
 --
 ALTER TABLE `post`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
--- AUTO_INCREMENT для таблицы `post_category`
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `post_category`
 --
 ALTER TABLE `post_category`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT для таблицы `product`
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product`
 --
 ALTER TABLE `product`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
--- AUTO_INCREMENT для таблицы `product_guide`
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_guide`
 --
 ALTER TABLE `product_guide`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
--- AUTO_INCREMENT для таблицы `product_href`
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_href`
 --
 ALTER TABLE `product_href`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
 --
--- AUTO_INCREMENT для таблицы `product_href_category`
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_href_category`
 --
 ALTER TABLE `product_href_category`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT для таблицы `product_page`
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_page`
 --
 ALTER TABLE `product_page`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT для таблицы `product_review`
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `product_review`
 --
 ALTER TABLE `product_review`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT для таблицы `subscriber`
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `subscriber`
 --
 ALTER TABLE `subscriber`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT для таблицы `user`
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT для таблицы `user_backend`
+-- AUTO_INCREMENT пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ `user_backend`
 --
 ALTER TABLE `user_backend`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;

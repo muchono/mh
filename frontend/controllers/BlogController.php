@@ -9,6 +9,7 @@ use common\models\Discount;
 use common\models\Subscriber;
 use common\models\User;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Url;
 
 class BlogController extends \frontend\controllers\Controller
 {
@@ -46,22 +47,15 @@ class BlogController extends \frontend\controllers\Controller
             \Yii::$app->view->registerMetaTag(['name' => 'keywords', 'content' => $model->meta_keywords ]);
             \Yii::$app->view->registerMetaTag(['name' => 'description', 'content' => $model->meta_description ]);            
             
+            \Yii::$app->view->registerMetaTag(['name' => 'og:locale', 'content' => "en_US" ]);
+            \Yii::$app->view->registerMetaTag(['name' => 'og:type', 'content' => "article" ]);
+            \Yii::$app->view->registerMetaTag(['name' => 'og:title', 'content' => $model->title ]);
+            \Yii::$app->view->registerMetaTag(['name' => 'og:description', 'content' => $model->meta_description ]);
+            \Yii::$app->view->registerMetaTag(['name' => 'og:url', 'content' => Yii::$app->request->absoluteUrl ]);
+            \Yii::$app->view->registerMetaTag(['name' => 'og:updated_time', 'content' => date('Y-m-d H:i:s', $model->updated_at) ]);
+            \Yii::$app->view->registerMetaTag(['name' => 'og:image', 'content' => Url::base(true).'/images/blog/'.$model->image ]);            
+            \Yii::$app->view->registerMetaTag(['name' => 'og:site_name', 'content' => "Marketing Hack" ]);
             
-            \Yii::$app->view->registerMetaTag(['name' => 'og:locale', 'content' => "en_US" ]);            
-            \Yii::$app->view->registerMetaTag(['name' => 'og:type', 'content' => "article" ]);            
-            \Yii::$app->view->registerMetaTag(['name' => 'og:title', 'content' => $model->title ]);            
-            \Yii::$app->view->registerMetaTag(['name' => 'og:description', 'content' => $model->meta_description ]);            
-            \Yii::$app->view->registerMetaTag(['name' => 'og:url', 'content' => $model->meta_description ]);            
-            \Yii::$app->view->registerMetaTag(['name' => 'og:updated_time', 'content' => $model->meta_description ]);            
-            \Yii::$app->view->registerMetaTag(['name' => 'og:image', 'content' => Url::base().'/images/blog/'.$model->avatar_image ]);            
-            \Yii::$app->view->registerMetaTag(['name' => 'og:site_name', 'content' => "Marketing Hack" ]);            
-            
-<meta property="og:description" content="What do you know about free online courses for marketing? If you decide to become a marketer or to further deepen your knowledge - check out these 10 best free courses on digital marketing, at the end of which you will receive not only knowledge but also a certificate of passage. This is a great opportunity to level up your marketing skills and become more efficient."/>
-<meta property="og:url" content=" https://marketinghack.net/blog/best-free-online-digital-marketing-courses/"/>
-<meta property="og:updated_time" content="2019-06-07T14:20:23+00:00"/>
-<meta property="og:image" content=" https://marketinghack.net/images/blog/main_18.jpg"/>
-        
-        
             $this->view->params['social-panel-text']= urlencode($model->title);
             
             return $this->render('post', array(

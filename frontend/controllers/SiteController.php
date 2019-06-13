@@ -254,7 +254,15 @@ class SiteController extends \frontend\controllers\Controller
                     \Yii::$app->view->registerMetaTag([
                         'name' => 'description',
                         'content' => $model->page->description
-                    ]);                     
+                    ]);
+                    
+                    \Yii::$app->view->registerMetaTag(['name' => 'og:locale', 'content' => "en_US" ]);
+                    \Yii::$app->view->registerMetaTag(['name' => 'og:type', 'content' => "article" ]);
+                    \Yii::$app->view->registerMetaTag(['name' => 'og:title', 'content' => $model->page->title ]);
+                    \Yii::$app->view->registerMetaTag(['name' => 'og:description', 'content' => $model->page->description ]);
+                    \Yii::$app->view->registerMetaTag(['name' => 'og:url', 'content' => Yii::$app->request->absoluteUrl ]);
+                    \Yii::$app->view->registerMetaTag(['name' => 'og:updated_time', 'content' => date('Y-m-d H:i:s', $model->page->updated_at) ]);
+                    \Yii::$app->view->registerMetaTag(['name' => 'og:site_name', 'content' => "Marketing Hack" ]);                    
                     
                     $this->view->params['social-panel-text']= urlencode($model->page->title);
                     return $this->render('product_page', array(
