@@ -50,6 +50,7 @@ use yii\web\JsExpression;
         'convert_urls'=> new JsExpression('true'),
         'relative_urls'=> new JsExpression('false'),
         'remove_script_host'=> new JsExpression('false'),        
+        'image_dimensions'=> new JsExpression('false'),        
         'file_picker_callback'=> new JsExpression("function(callback, value, meta) {
             if (meta.filetype == 'image') {
                 $('#upload').trigger('click');

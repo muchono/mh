@@ -98,33 +98,33 @@ AppAsset::register($this);
             <span class="up__btn">My Account</span>
             <ul class="drop-list">
               <li class="drop-list__item">
-                <a href="<?=Url::to(['account/index']);?>" class="drop-list__link">
+                <a href="<?=Url::to(['account/']);?>" class="drop-list__link">
                 <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                 My Products</a>
               </li>
               <li class="drop-list__item">
-                <a href="<?=Url::to(['account/profile']);?>" class="drop-list__link">
+                <a href="<?=Url::to(['account/profile/']);?>" class="drop-list__link">
                 <i class="fa fa-cog" aria-hidden="true" style="font-size: 16px;"></i>
                 Edit Profile</a>
               </li>
               <li class="drop-list__item">
-                <a href="<?=Url::to(['account/orders']);?>" class="drop-list__link">
+                <a href="<?=Url::to(['account/orders/']);?>" class="drop-list__link">
                 <i class="fa fa-file-text" aria-hidden="true"></i>
                 Order History</a>
               </li>
               <li class="drop-list__item">
-                <a href="<?=Url::to(['account/change']);?>" class="drop-list__link">
+                <a href="<?=Url::to(['account/change/']);?>" class="drop-list__link">
                 <i class="fa fa-lock" aria-hidden="true" style="font-size: 15px;"></i>
                 Change Password</a>
               </li>
               <li class="drop-list__item">
-                <a href="<?=Url::to(['account/logout']);?>" class="drop-list__link">
+                <a href="<?=Url::to(['account/logout/']);?>" class="drop-list__link">
                 <i class="fa fa-sign-out" aria-hidden="true" style="font-size: 14px;"></i>
                 Logout</a>
               </li>
             </ul>
           </div>
-          <a href="<?=Url::to(['cart/index']);?>" class="up__btn up__btn--cart">
+          <a href="<?=Url::to(['cart/']);?>" class="up__btn up__btn--cart">
             <i class="icon-17"></i>
             <span id="cart_items"><?=$this->params['cart_items']?></span>
           </a>
@@ -146,7 +146,7 @@ AppAsset::register($this);
             <a href="<?=Url::home();?>" class="sm-list-2__link">Home</a>
           </li>
           <li class="sm-list-2__item">
-            <a href="<?=Url::to(['hiw/']);?>" class="sm-list-2__link">How It Works</a>
+            <a href="<?=Url::to(['how-it-works/']);?>" class="sm-list-2__link">How It Works</a>
           </li>
         <?php } else {?>
           <li class="sm-list-2__item">
@@ -172,13 +172,13 @@ AppAsset::register($this);
           </li>
           <?php if (!Yii::$app->user->isGuest){?>
           <li class="sm-list-2__item">
-            <a href="<?=Url::to(['account/change']);?>" class="sm-list-2__link">My Account</a>
+            <a href="<?=Url::to(['account/change/']);?>" class="sm-list-2__link">My Account</a>
           </li>
           <li class="sm-list-2__item">
-            <a href="<?=Url::to(['cart/index']);?>" class="sm-list-2__link">Cart</a>
+            <a href="<?=Url::to(['cart/']);?>" class="sm-list-2__link">Cart</a>
           </li>          
           <li class="sm-list-2__item">
-            <a href="<?=Url::to(['account/logout']);?>" class="sm-list-2__link">Logout</a>
+            <a href="<?=Url::to(['account/logout/']);?>" class="sm-list-2__link">Logout</a>
           </li>
            <?php }?>
         </ul>
@@ -225,10 +225,10 @@ AppAsset::register($this);
               <h3 class="mf-title">Company</h3>
               <nav class="mf-nav">
                 <ul class="mf__list">
-                  <li class="mf__item"><a href="<?=Url::to(['site/hiw']);?>" class="mf__link">How it Works</a></li>
-                  <li class="mf__item"><a href="<?=Url::to(['site/products']);?>" class="mf__link">Products</a></li>
-                  <li class="mf__item"><a href="<?=Url::to(['site/special-offer']);?>" class="mf__link">Special Offers</a></li>
-                  <li class="mf__item"><a href="<?=Url::to(['site/faq']);?>" class="mf__link">F.A.Q.</a></li>
+                  <li class="mf__item"><a href="<?=Url::to(['how-it-works/']);?>" class="mf__link">How it Works</a></li>
+                  <li class="mf__item"><a href="<?=Url::to(['products/']);?>" class="mf__link">Products</a></li>
+                  <li class="mf__item"><a href="<?=Url::to(['special-offer/']);?>" class="mf__link">Special Offers</a></li>
+                  <li class="mf__item"><a href="<?=Url::to(['faq/']);?>" class="mf__link">F.A.Q.</a></li>
                   <li class="mf__item"><a href="<?=Url::to(['terms-of-use/']);?>" class="mf__link">Terms of Use</a></li>
                   <li class="mf__item"><a href="<?=Url::to(['privacy-policy/']);?>" class="mf__link">Privacy Policy</a></li>
                   <!--<li class="mf__item"><a href="<?=Url::to(['blog/']);?>" class="mf__link">Blog</a></li>-->
