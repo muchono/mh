@@ -3955,6 +3955,11 @@ button.sbsc-form__botton, input[type="button"].sbsc-form__botton, input[type="re
   .post-article .blockquote-2 {
     margin: 50px 0; }
 
+  .post-article img {
+    display: block;
+    max-width: 100%;
+    height: auto;    
+  }
 /* line 2115, E:/GIT/marketinghack/public/scss/_theme_style.scss */
 .post-page__img {
   margin-bottom: 42px; }

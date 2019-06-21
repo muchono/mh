@@ -54,6 +54,8 @@ return [
                 'support' => 'site/support',
                 'terms-of-use' => 'site/terms',
                 'privacy-policy' => 'site/privacy',
+                'blog/subscribe' => 'blog/subscribe',
+                'blog/unsubscribe' => 'blog/unsubscribe',
                 'blog/<url:[\w-]+>' => 'blog/url',
             ],
         ],

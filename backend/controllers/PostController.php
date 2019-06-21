@@ -166,15 +166,20 @@ class PostController extends Controller
                 'user' => $user,
                 'subscriber' => 0,                
             ]);
-
+            
+            
+//            if (!in_array($user->email, ['mailmuchenik@gmail.com', 'manituforever@gmail.com'])) continue;
+//            print 'User ' . $user->email;
+            
             Yii::$app->mailer->compose()
                         ->setTo($user->email)
                         ->setFrom(Yii::$app->params['adminEmail'])
-                        ->setSubject('MarketingHack New Post')
+                        ->setSubject($post->title)
                         ->setHtmlBody($body)
-                        ->send();      
+                        ->send();
 
         }
+        
         
         //send to subscribed users
         $slist = Subscriber::find()
@@ -188,13 +193,14 @@ class PostController extends Controller
                 'user' => $s,
                 'subscriber' => 1,
             ]);
-    
+
             Yii::$app->mailer->compose()
                         ->setTo($s->email)
                         ->setFrom(Yii::$app->params['adminEmail'])
-                        ->setSubject('MarketingHack New Post')
+                        ->setSubject($post->title)
                         ->setHtmlBody($body)
                         ->send();            
+
         }
     }
     

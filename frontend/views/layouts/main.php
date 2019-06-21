@@ -84,8 +84,7 @@ AppAsset::register($this);
           <?php }?>
           <li class="main-nav__item"><a href="<?=Url::to(['faq/']);?>" class="main-nav__link <?=($this->params['page'] == 'faq') ? 'main-nav__link--active' : ''?>">F.A.Q.</a></li>
           <li class="main-nav__item"><a href="<?=Url::to(['support/']);?>" class="main-nav__link <?=($this->params['page'] == 'support') ? 'main-nav__link--active' : ''?>">Support</a></li>
-          <!--
-          <li class="main-nav__item"><a href="<?=Url::to(['blog/']);?>" class="main-nav__link <?=($this->params['page'] == 'blog') ? 'main-nav__link--active' : ''?>">Blog</a></li>-->
+          <li class="main-nav__item"><a href="<?=Url::to(['blog/']);?>" class="main-nav__link <?=($this->params['page'] == 'blog') ? 'main-nav__link--active' : ''?>">Blog</a></li>
         </ul>
       </nav>
 
@@ -231,7 +230,7 @@ AppAsset::register($this);
                   <li class="mf__item"><a href="<?=Url::to(['faq/']);?>" class="mf__link">F.A.Q.</a></li>
                   <li class="mf__item"><a href="<?=Url::to(['terms-of-use/']);?>" class="mf__link">Terms of Use</a></li>
                   <li class="mf__item"><a href="<?=Url::to(['privacy-policy/']);?>" class="mf__link">Privacy Policy</a></li>
-                  <!--<li class="mf__item"><a href="<?=Url::to(['blog/']);?>" class="mf__link">Blog</a></li>-->
+                  <li class="mf__item"><a href="<?=Url::to(['blog/']);?>" class="mf__link">Blog</a></li>
                 </ul>
               </nav>
             </div>

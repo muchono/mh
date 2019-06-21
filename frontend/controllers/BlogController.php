@@ -75,7 +75,7 @@ class BlogController extends \frontend\controllers\Controller
                 return $this->actionPost($model->id);
             }
         }
-        return $this->redirect(['index']);
+        return $this->redirect(['blog/']);
     }    
     
     public function actionSubscribe()
@@ -95,7 +95,7 @@ class BlogController extends \frontend\controllers\Controller
         } elseif ($subscriber->save()) {
             Yii::$app->session['subscribed'] = true;
         }
-        $r = array('errors'=>join(' ', $subscriber->getErrors('email')));
+        $r = array('errors'=>join(' ', $subscriber->getFirstErrors()));
         
         echo json_encode($r);
         Yii::$app->end();
