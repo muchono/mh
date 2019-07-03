@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use dosamigos\tinymce\TinyMce;
-
+use yii\helpers\Url;
 use yii\web\JsExpression;
 
 /* @var $this yii\web\View */
@@ -61,25 +61,73 @@ use yii\web\JsExpression;
 
                         }
                     });
-                }"),
-            'toolbar' => "undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | block",
+                }"),            
+            'toolbar' => "undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | block",            
+
             'paste_data_images'=> new JsExpression('true'),
             'image_advtab'=> new JsExpression('true'),
-            'file_picker_callback'=> new JsExpression("function(callback, value, meta) {
-                if (meta.filetype == 'image') {
-                    $('#upload').trigger('click');
-                    $('#upload').on('change', function() {
-                      var file = this.files[0];
-                      var reader = new FileReader();
-                      reader.onload = function(e) {
-                        callback(e.target.result, {
-                          alt: ''
-                        });
-                      };
-                      reader.readAsDataURL(file);
-                    });
+            'image_dimensions'=> new JsExpression('false'),
+            'convert_urls'=> new JsExpression('true'),
+            'relative_urls'=> new JsExpression('false'),
+            'remove_script_host'=> new JsExpression('false'), 
+            
+            'file_picker_callback' => new JsExpression("
+                function(callback, value, meta) {
+                    var input = document.createElement('input');
+                    input.setAttribute('type', 'file');
+                    input.setAttribute('accept', 'image/*');
+
+
+                    input.onchange = function() {
+                        var file = this.files[0];
+
+                        var reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function () {
+                          var id = 'blobid' + (new Date()).getTime();
+                          var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+                          var blobInfo = blobCache.create(id, file, reader.result);
+                          blobCache.add(blobInfo);
+
+                            callback(blobInfo.blobUri(), { title: file.name });
+                        };
+                    };
+
+                    input.click();
                 }
-            }"),
+            "),
+            'images_upload_handler' => new JsExpression("function (blobInfo, success, failure) {
+                 var xhr, formData;
+
+                 xhr = new XMLHttpRequest();
+                 xhr.withCredentials = false;
+                 xhr.open('POST', '".Url::to(['product-page/upload-image'], true)."');
+
+                 xhr.onload = function() {
+                   var json;
+
+                   if (xhr.status != 200) {
+                     failure('HTTP Error: ' + xhr.status);
+                     return;
+                   }
+
+                   json = JSON.parse(xhr.responseText);
+
+                   if (!json || typeof json.location != 'string') {
+                     failure('Invalid JSON: ' + xhr.responseText);
+                     return;
+                   }
+
+                   success(json.location);
+                 };
+
+                 formData = new FormData();
+                 formData.append('".Yii::$app->request->csrfParam."', '".Yii::$app->request->csrfToken."');
+                 formData.append('file', blobInfo.blob(), blobInfo.filename());
+
+                 xhr.send(formData);
+             }
+           ")            
         ]
         ]);?> 
     <input name="image" type="file" id="upload" class="hidden" onchange="">
