@@ -161,7 +161,7 @@ class ProductPageController extends Controller
         }
     }
     
-    /**    
+
 
     public function beforeAction($action)
     {
