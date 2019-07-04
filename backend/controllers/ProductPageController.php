@@ -166,7 +166,7 @@ class ProductPageController extends Controller
     public function beforeAction($action)
     {
         $r = true;
-        if (!in_array($action->id, array('update', 'delete', 'sorting'))
+        if (!in_array($action->id, array('update', 'delete', 'sorting', 'upload-image'))
                 && (empty(Yii::$app->request->queryParams['product_id'])
                 || (($this->product = Product::findOne(Yii::$app->request->queryParams['product_id'])) 
                         === null))) {
