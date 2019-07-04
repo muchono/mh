@@ -138,6 +138,7 @@ class Product extends \yii\db\ActiveRecord
            ->where(['status' => Discount::STATUS_ACTIVE])                 
            ->andWhere(['<', 'date_from', $time])
            ->andWhere(['>', 'date_to', $time])
+           ->andWhere(['apply_code' => ''])
            ->andWhere(['product_id' => $this->id])
            ->andWhere(['!=', 'discount.id', Discount::SPECIAL40ID])
            ->orderBy('id DESC');

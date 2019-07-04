@@ -64,6 +64,17 @@ class Discount extends \yii\db\ActiveRecord
     }
     
     /**
+     * find Showable
+     * @return string
+     */
+    static public function findShowable()
+    {
+        return self::findActive()
+                ->andWhere(['show_on_page' => self::STATUS_ACTIVE])
+                ->andWhere(['apply_code' => '']);
+    }
+    
+    /**
      * @inheritdoc
      */
     public static function tableName()
@@ -79,9 +90,10 @@ class Discount extends \yii\db\ActiveRecord
         return [
             [['date_from', 'date_to', 'title', 'status', 'percent', 'products'], 'required'],
             [['file1','file2'], 'string'],
-            [['status'], 'integer'],
+            [['status', 'show_on_page'], 'integer'],
             [['percent'], 'integer', 'max' => 100, 'min' => 1],
             [['title'], 'string', 'max' => 255],
+            [['apply_code'], 'string', 'max' => 50],
             [['date_from', 'date_to'], 'date', 'format' => 'php:d-m-Y'],
             [['imageFile1', 'imageFile2'], 'file', 'skipOnEmpty' => !$this->isNewRecord, 'extensions' => 'png,jpg,jpeg,gif'],
             [['products'], 'safe'],
@@ -104,6 +116,8 @@ class Discount extends \yii\db\ActiveRecord
             'imageFile2' => 'Image 2',
             'file1' => 'Image 1',
             'file2' => 'Image 2',
+            'apply_code' => 'Discount Code',
+            'show_on_page' => 'Show on special offer page ',
         ];
     }
     

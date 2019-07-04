@@ -18,8 +18,8 @@ class Controller extends \yii\web\Controller
 {
     public function beforeAction($action)
     {
-        $this->view->params['head_offer'] = Yii::$app->session->get('head_offer_closed') ? null : Discount::findActive()->latest();
-        $this->view->params['offer_menu'] = Discount::findActive()->count();
+        $this->view->params['head_offer'] = Yii::$app->session->get('head_offer_closed') ? null : Discount::findShowable()->latest();
+        $this->view->params['offer_menu'] = Discount::findShowable()->count();
         $this->view->params['cart_items'] = !Yii::$app->user->isGuest ? Cart::getCountByUser(Yii::$app->user->id) : 0;
             
         $this->actionSignup();

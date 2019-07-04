@@ -39,8 +39,7 @@ class BlogController extends \frontend\controllers\Controller
     {
         $this->view->params['social-panel'] = true;
         
-        $a = Discount::find()->active()->latest();
-        $special_offer = Discount::findActive()->latest();
+        $special_offer = Discount::findShowable()->latest();
 
         if (($model = Post::findOne($id)) !== null) {
             $this->view->title = $model->title;

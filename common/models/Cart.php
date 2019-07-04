@@ -69,7 +69,7 @@ class Cart extends \yii\db\ActiveRecord
      * @param integer $user_id User ID
      * @return integer
      */
-    static public function getInfo($user_id)
+    static public function getInfo($user_id, $params = ['discount_code' => ''])
     {
         $r['count'] = self::getCountByUser($user_id);
         $items = self::find()->where(['user_id' => $user_id])->all();

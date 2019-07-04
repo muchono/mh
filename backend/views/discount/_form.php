@@ -57,12 +57,18 @@ use backend\models\ProductSearch;
     <?php }?> 
      <?= $form->field($model, 'imageFile2')->fileInput() ?>
     
+    <?= $form->field($model, 'apply_code')->textInput(['maxlength' => true]) ?>
+    
+    <?= $form->field($model, 'show_on_page')->dropDownList($model::$statuses)?>
+    
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         <?php if (!$model->isNewRecord){ ?>
         <?= Html::submitButton('Send E-mail To Users', ['class' => 'btn btn-success','name' => 'send', 'value' => 1]) ?>
         <?php }?>
     </div>
+    
+
 
     <?php ActiveForm::end(); ?>
 

@@ -12,7 +12,7 @@ $this->title = 'Special Offers';
         </div>
         <div class="bs-list">
           <?php foreach($products as $p) 
-              if ($p->discount || !$p->priceFinal) {?>
+              if ($p->discount && $p->discount->show_on_page || !$p->priceFinal) {?>
           <div class="bs-list__item">
             <div class="product">
               <div class="pd__head">

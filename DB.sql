@@ -1,3 +1,6 @@
+ALTER TABLE discount ADD show_on_page tinyint UNSIGNED NOT NULL default 0;
+ALTER TABLE discount ADD code varchar UNSIGNED(50) NOT NULL default '';
+
 ALTER TABLE product_page ADD updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
 UPDATE product_page SET updated_at = now();
 
