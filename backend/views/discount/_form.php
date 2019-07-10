@@ -47,12 +47,12 @@ use backend\models\ProductSearch;
 
     <?= $form->field($model, 'percent')->textInput(['maxlength' => true]) ?>
 
-    <?php if (!$model->isNewRecord) {?>
+    <?php if (!$model->isNewRecord && $model->file1) {?>
         <?= Html::img(Yii::$app->urlManagerFrontend->getHostInfo().'/'.'images/discount/'.$model->file1, ['style' => 'max-width:500px'])?>
     <?php }?> 
     <?= $form->field($model, 'imageFile1')->fileInput() ?>
     
-    <?php if (!$model->isNewRecord) {?>
+    <?php if (!$model->isNewRecord && $model->file2) {?>
         <?= Html::img(Yii::$app->urlManagerFrontend->getHostInfo().'/'.'images/discount/'.$model->file2, ['style' => 'max-width:500px'])?>
     <?php }?> 
      <?= $form->field($model, 'imageFile2')->fileInput() ?>

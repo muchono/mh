@@ -12,6 +12,8 @@ use common\models\UserBilling;
 use common\models\User;
 use common\models\Order;
 use common\models\OrderToProduct;
+use common\models\Discount;
+
 
 class CheckoutController extends \frontend\controllers\Controller
 {
@@ -61,6 +63,42 @@ class CheckoutController extends \frontend\controllers\Controller
         ];
     }
     
+    /**
+     * Apply Discount
+     *
+     * @return mixed
+     */
+    public function actionApplyDiscount()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        $r = array('success' => 0);
+        $code = trim(Yii::$app->request->post('code'));
+        if ($code
+                && $discount = Discount::findActive()->andWhere(['apply_code' => $code])->one())
+        {
+            $r['success'] = 1;
+            Cart::saveDiscountID($discount->id);
+        }
+        
+        return $r;
+    }
+    
+    /**
+     * Disable Discount
+     *
+     * @return mixed
+     */
+    public function actionDisableDiscount()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        
+        $r = array('success' => 1);
+        
+        Cart::saveDiscountID(0);
+        
+        return $r;
+    }
     
     /**
      * Displays fail page.
@@ -126,7 +164,7 @@ class CheckoutController extends \frontend\controllers\Controller
      */
     public function actionIndex()
     {
-        $cartInfo = Cart::getInfo(Yii::$app->user->id);
+        $cartInfo = Cart::getInfo(Yii::$app->user->id, ['discount_id'=> Cart::getDiscountID()]);
         $products = Product::findActive()->andWhere(['not in', 'id', $cartInfo['products_list']])->all();
         $user = User::findOne(Yii::$app->user->id);
         $userBilling = null;
@@ -191,7 +229,7 @@ class CheckoutController extends \frontend\controllers\Controller
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         
         $r = array('success' => 1);
-        $cartInfo = Cart::getInfo(Yii::$app->user->id);
+        $cartInfo = Cart::getInfo(Yii::$app->user->id, ['discount_id'=> Cart::getDiscountID()]);
         $r['items_amount'] = $cartInfo['total'];
         $r['content'] = $this->renderPartial('_items',[
            'cartInfo' => $cartInfo,

@@ -4,6 +4,6 @@
                 &nbsp;
               </td>
               <td class="ot__product"><?=$p->short_title?>: list + guide (subscription on <?=$cartInfo['cart'][$k]->months?> year<?=$cartInfo['cart'][$k]->months > 1 ? 's' : ''?>)</td>
-              <td class="ot__cost"><?=$p->priceFinal ? '$'.$p->priceFinal : 'Free'?></td>
+              <td class="ot__cost"><?=$cartInfo['prices_final'][$k] ? '$'.$cartInfo['prices_final'][$k] : 'Free'?></td>
             </tr>
             <?php }?>

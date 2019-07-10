@@ -36,12 +36,68 @@ var Cart = (function() {
             }, 200);            
 
         });
+
+        $('#apply_discount').click(function(e){
+            e.preventDefault();
+            applyDiscountCode($('input[name=discount_code]'));
+        });
+        
+        $('#disable_discount').click(function(e){
+            e.preventDefault();
+            disableDiscountCode($('input[name=discount_code]'));
+        });
     }
     
     this.setActive = function(el) {
 
     }
     
+    function applyDiscountCode(code) {
+        $.ajax({
+            type: 'POST',
+            url: WEB_PATH+'checkout/apply-discount/',
+            data: {'code': code.val()},
+            success:function(data){
+                if (data.success) {
+                    updateCheckoutList();
+                    code.removeClass('discount_error');
+                    code.addClass('discount_applied');
+                    $('#disable_discount').removeClass('hide');
+                    $('#apply_discount').addClass('hide');                    
+                } else {
+                    code.addClass('discount_error');
+                }
+            },
+            error: function(data) { // if error occured
+                //alert("Error occured. Please try again");
+            },
+            dataType:'json'
+        });
+    }
+    
+    function disableDiscountCode(code) {
+        $.ajax({
+            type: 'POST',
+            url: WEB_PATH+'checkout/disable-discount/',
+            data: {'code': code.val()},
+            success:function(data){
+                if (data.success) {
+                    updateCheckoutList();
+                    code.removeClass('discount_error');
+                    code.removeClass('discount_applied');
+                    code.val('');
+                    
+                    $('#apply_discount').removeClass('hide');
+                    $('#disable_discount').addClass('hide');
+                }
+            },
+            error: function(data) { // if error occured
+                //alert("Error occured. Please try again");
+            },
+            dataType:'json'
+        });
+    }    
+	
     function deleteItem(product_id) {
         $.ajax({
             type: 'POST',

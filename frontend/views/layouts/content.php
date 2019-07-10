@@ -169,7 +169,9 @@ AppAsset::register($this);
           </div>
           <div class="ic-head__get">
             <?php if ($this->params['selected_product']->priceFinal 
-                    && $this->params['selected_product']->discount){?>
+                    && $this->params['selected_product']->discount
+                    && !$this->params['selected_product_accessible']
+                    ){?>
             <div class="ic-head-off">
               <strong><?=$this->params['selected_product']->discount->percent?><sup>%</sup></strong>
               Discount

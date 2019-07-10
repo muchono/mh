@@ -69,6 +69,13 @@ input[type="search"]::-webkit-search-results-decoration {
   margin-left: auto;
   margin-right: auto; }
 
+.discount_applied {
+    border: 3px solid yellowgreen !important;
+}
+
+.discount_error {
+    border: 1px solid tomato !important;
+}
 /* line 20, E:/GIT/marketinghack/public/scss/_helper.scss */
 .img-fluid {
   display: block;

@@ -4,6 +4,7 @@ namespace common\models;
 
 use common\models\Product;
 use common\models\Discount;
+use yii\helpers\ArrayHelper;
 
 use Yii;
 
@@ -19,6 +20,16 @@ use Yii;
 class Cart extends \yii\db\ActiveRecord
 {
     static public $months = [1,2,3];
+
+    public static function saveDiscountID($id)
+    {
+        Yii::$app->session->set('discount', $id);
+    }
+    
+    public static function getDiscountID()
+    {
+        return Yii::$app->session->get('discount') ? Yii::$app->session->get('discount') : 0;
+    }
 
     /**
      * @inheritdoc
@@ -69,7 +80,7 @@ class Cart extends \yii\db\ActiveRecord
      * @param integer $user_id User ID
      * @return integer
      */
-    static public function getInfo($user_id, $params = ['discount_code' => ''])
+    static public function getInfo($user_id, $params = ['discount_id' => ''])
     {
         $r['count'] = self::getCountByUser($user_id);
         $items = self::find()->where(['user_id' => $user_id])->all();
@@ -79,15 +90,24 @@ class Cart extends \yii\db\ActiveRecord
         $r['amount'] = 0;
         $r['discount'] = 0;
         $r['cart_items'] = $items;
-        
+        $r['discountByCode'] = null;
+        if ($params['discount_id']) {
+            
+            $r['discountByCode'] = Discount::findActive()->andWhere(['id' => $params['discount_id']])->one();
+        }
         foreach($items as $k=>$i) {
             $p = Product::findOne($i->product_id);
             if ($p->status) {
-                $discount = $p->discount;
+                $discount = $r['discountByCode'] 
+                        && in_array($p->id, ArrayHelper::getColumn($r['discountByCode']->products, ['id'])) 
+                        && $r['discountByCode']->percent > $p->discount->percent 
+                        ? $r['discountByCode'] : $p->discount;
+                
                 $r['products_list'][$p->id] = $p->id;
                 $r['products'][$k] = $p;
                 $r['prices'][$k] = $p->price * $i->months;
                 $r['offers_discount'][$i->product_id] = !empty($discount) ? round(($r['prices'][$k] * $discount->percent/100)): 0;
+                $r['prices_final'][$k] = $r['prices'][$k] - $r['offers_discount'][$i->product_id];
                 $r['offers'][$i->product_id] = $discount;
                 
                 $r['cart'][$k] = $i;

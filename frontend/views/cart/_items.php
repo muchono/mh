@@ -32,12 +32,10 @@ use yii\widgets\ActiveForm;
                   <div class="cs__discount">Discount: <strong>$<?=$cartInfo['discount']?></strong></div>
                   <?php }?>
                   <div class="cs__total">Order Total:  $<?=$cartInfo['total']?></div>
-                  <?php $form = ActiveForm::begin(['id' => 'cart-form', 'action' => Url::to(['checkout/'])]); ?>
+                  <form action="<?=Url::to(['checkout/index'])?>">
                   <?php if ($cartInfo['products']){?>
-                  <p><?= Html::input('text', 'code', '', ['class' => 'bf__input', 'placeholder'=>"Discount Code"]) ?></p>
-                  <br/>
                   <button class="btn-9">Checkout Now</button>
                   <?php }?>
-                  <?php ActiveForm::end(); ?>
+                  </form>
                 </div>
               </div>

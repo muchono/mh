@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use common\models\User;
+use yii\helpers\Html;
 
 ?>
 <section class="simple-page sm">
@@ -112,9 +113,18 @@ use common\models\User;
                 ]) ?>              
           </tbody>
       </table>
+      <br/>
+    <div class="billing-field-row">
+        <div style="width: 100%; text-align: right">
+            <?= Html::input('text', 'discount_code', ($cartInfo['discountByCode'] ? $cartInfo['discountByCode']->apply_code : ''), ['class' => 'bf__input '.($cartInfo['discountByCode'] ? 'discount_applied': ''), 'placeholder'=>"Discount Code",'style' => 'width: 200px']) ?> 
+            <a href="" id="disable_discount" class="btn-sm-2 <?php echo $cartInfo['discountByCode'] ? '' : 'hide'?>">Disable</a>
+            <a href="" id="apply_discount" class="btn-sm-2 <?php echo !$cartInfo['discountByCode'] ? '' : 'hide'?>">Apply</a>
+      </div>
+    </div>      
       <?php if($products) {?>
       <p class="int-text">but perhaps you'll also be interested in:</p>
       <?php }?>
+      
       <table class="order-table order-table--separate">
           <tbody>
               <?php foreach($products as $p) {?>
