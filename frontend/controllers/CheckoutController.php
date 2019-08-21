@@ -410,7 +410,8 @@ class CheckoutController extends \frontend\controllers\Controller
     
     static function cartToOrder($params = array())
     {
-        $order_params = Cart::getInfo(Yii::$app->user->id);
+        $order_params = Cart::getInfo(Yii::$app->user->id, ['discount_id'=> Cart::getDiscountID()]);
+        
         $order_params['payment_method'] = empty($params['payment']) ? 'free' : $params['payment'];
         $order_params['payment_status'] = 1;
         $order_params['id'] = Order::genID();

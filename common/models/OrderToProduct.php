@@ -33,8 +33,8 @@ class OrderToProduct extends \yii\db\ActiveRecord
     {
         return [
             [['order_id', 'product_id'], 'required'],
-            [['order_id', 'product_id', 'months', 'expires', 'five_days_notify', 'expiration_notify'], 'integer'],
-            [['price'], 'number'],
+            [['order_id', 'product_id', 'months', 'expires', 'five_days_notify', 'expiration_notify', 'discount_id'], 'integer'],
+            [['price', 'discount'], 'number'],
         ];
     }
 

@@ -1,3 +1,4 @@
+ALTER TABLE order_to_product ADD `discount_id` int(11) unsigned NOT NULL default 0;
 ALTER TABLE discount ADD show_on_page tinyint UNSIGNED NOT NULL default 0;
 ALTER TABLE discount ADD code varchar UNSIGNED(50) NOT NULL default '';
 

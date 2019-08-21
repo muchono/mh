@@ -31,7 +31,7 @@ class SupportQuestion extends Model
     {
         return [
             // name, email, subject and body are required
-            [['name', 'email', 'subject', 'message', 'short_question', 'verifyCode'], 'required'],
+            [['name', 'email', 'message', 'short_question', 'verifyCode'], 'required'],
             // email has to be a valid email address
             ['email', 'email'],
             // verifyCode needs to be entered correctly
@@ -59,10 +59,14 @@ class SupportQuestion extends Model
     public function sendEmail($email, $ticket_id)
     {
         return Yii::$app->mailer->compose()
-            ->setTo($email)
-            ->setFrom([$this->email => $this->name])
-            ->setSubject($this->subject)
-            ->setHtmlBody('Ticket #' . $ticket_id . '<br><br>' . $this->short_question. '<br><br>' . $this->message)
+            ->setTo([$email, Yii::$app->params['additionalEmail']])
+            ->setFrom(Yii::$app->params['adminEmail'])
+            ->setSubject($this->short_question)
+            ->setHtmlBody('Ticket #' . $ticket_id . ''
+                    . '<br><br>Name: ' . $this->name. ''
+                    . '<br><br>E-mail:' . $this->email. ''
+                    . '<br><br>Short question: ' . $this->short_question. ''
+                    . '<br><br>Message: ' . $this->message)
             ->send();
     }
 }

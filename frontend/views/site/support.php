@@ -44,11 +44,6 @@ $this->title = 'Support';
           <?= $form->field($model, 'email')->textInput(['class' => 'ask-form__input'])->label(false) ?>
         </div>
         <div class="ask-form__field">
-          <label for="" class="ask-form__label">Subject</label>
-        <?= $form->field($model, 'subject')
-              ->dropDownList(frontend\models\SupportQuestion::$subjects, ['class'=>'ask-form__input'])->label(false);?>         
-        </div>
-        <div class="ask-form__field">
           <label for="" class="ask-form__label">Short question (in a few words)</label>
           <?= $form->field($model, 'short_question')->textInput(['class' => 'ask-form__input ask-form__input--full'])->label(false) ?>
         </div>

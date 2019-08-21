@@ -130,6 +130,8 @@ class Order extends \yii\db\ActiveRecord
                 $o2p->user_id = $this->user_id;
                 $o2p->price = $params['prices'][$k];
                 $o2p->months = $params['cart_items'][$k]->months;
+                $o2p->discount_id = isset($params['offers'][$product->id]->id) ? $params['offers'][$product->id]->id : 0;                
+                $o2p->discount = isset($params['offers_discount'][$product->id]) ? $params['offers_discount'][$product->id] : 0;                
                 
                 $o2p->expires = $o2p->calcExpirationDate();
                 $o2p->save();
