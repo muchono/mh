@@ -145,7 +145,7 @@ class CheckoutController extends \frontend\controllers\Controller
                     ]);
                 
                 if ($order) {
-                    $this->generatePDFInvoice($order);
+                    self::generatePDFInvoice($order);
                 }
                 
         }
@@ -291,7 +291,7 @@ class CheckoutController extends \frontend\controllers\Controller
                     ]);
 
                 if ($order) {
-                    $this->generatePDFInvoice($order);
+                    self::generatePDFInvoice($order);
                     self::orderNotify($order);
                 }
             }
@@ -315,7 +315,7 @@ class CheckoutController extends \frontend\controllers\Controller
                 
                 $order = self::cartToOrder(['payment' => Yii::$app->request->get('payment'), 'transaction_id' => $payment->getID()]);
         
-                $this->generatePDFInvoice($order);
+                self::generatePDFInvoice($order);
                 
                 $products_list = [];
                 $discount = 0;
@@ -379,14 +379,15 @@ class CheckoutController extends \frontend\controllers\Controller
         return \Yii::getAlias('@frontend'). self::PDF_INVOICE_DIR;
     }
     
-    public function generatePDFInvoice(Order $order)
+    static function generatePDFInvoice(Order $order)
     {
         if (!is_dir(self::invoicePDFDir())) {
             throw new Exception('PDF Invoice direactory not found');
         }
         $user = User::findOne($order->user_id);
         
-        $html = $this->renderPartial('_invoice_pdf', array('order'=>$order, 'user'=> $user), true);
+        $totalDiff = $order->getProductsTotal() - $order->total;
+        $html = $this->renderPartial('_invoice_pdf', array('order'=>$order, 'user'=> $user, 'total_diff' => $totalDiff), true);
         
         include(Yii::$app->getBasePath()."/extensions/mpdf60/mpdf.php");
         

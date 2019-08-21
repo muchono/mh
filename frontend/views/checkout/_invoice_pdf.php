@@ -75,6 +75,13 @@ NETGERON d.o.o.<br />Stegne 27<br />1000 Ljubljana<br />Slovenia
 <td align="center" valign="middle">$<?php echo $p->price; ?></td>
 </tr>
 <?php }?>
+<?php if ($totalDiff) {?>
+<tr>
+<td align="center" valign="middle"></td>
+<td align="right"><b>DISCOUNT</b></td>
+<td align="center" valign="middle">$<?php echo $totalDiff; ?></td>
+</tr>
+<?php }?>
 <!-- END ITEMS HERE -->
 <tr>
 <td class="totals"></td>

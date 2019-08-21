@@ -124,6 +124,9 @@ class OrderController extends Controller
      */
     public function actionGetInvoice($id)
     {
+        
+        \frontend\controllers\CheckoutController::generatePDFInvoice($this->findModel($id));
+        
         $fname = \frontend\controllers\CheckoutController::invoicePDFDir() . $id . '.pdf';
         
         if (file_exists($fname)) {

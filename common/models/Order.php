@@ -171,11 +171,23 @@ class Order extends \yii\db\ActiveRecord
     }
     
     /**
+     * Get products price
+     */
+    public function getProductsTotal()
+    {
+        $total = 0;
+        foreach($this->products as $p) {
+            $total += $p->price;
+        }
+        return $total;
+    }
+    
+    /**
      * Get user
      * @return User
      */
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
-    }    
+    }
 }
