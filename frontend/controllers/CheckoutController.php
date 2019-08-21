@@ -164,6 +164,7 @@ class CheckoutController extends \frontend\controllers\Controller
      */
     public function actionIndex()
     {
+        //self::generatePDFInvoice(Order::findOne(154));
         $cartInfo = Cart::getInfo(Yii::$app->user->id, ['discount_id'=> Cart::getDiscountID()]);
         $products = Product::findActive()->andWhere(['not in', 'id', $cartInfo['products_list']])->all();
         $user = User::findOne(Yii::$app->user->id);
@@ -387,7 +388,8 @@ class CheckoutController extends \frontend\controllers\Controller
         $user = User::findOne($order->user_id);
         
         $totalDiff = $order->getProductsTotal() - $order->total;
-        $html = $this->renderPartial('_invoice_pdf', array('order'=>$order, 'user'=> $user, 'total_diff' => $totalDiff), true);
+        
+        $html = Yii::$app->controller->renderPartial('@frontend/views/checkout/_invoice_pdf', array('order'=>$order, 'user'=> $user, 'totalDiff' => $totalDiff), true);
         
         include(Yii::$app->getBasePath()."/extensions/mpdf60/mpdf.php");
         
