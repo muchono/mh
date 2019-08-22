@@ -207,6 +207,8 @@ class CheckoutController extends \frontend\controllers\Controller
                 return '';
             } else {
                 $order = self::cartToOrder(['payment' => '', 'transaction_id' => 0]);
+                
+                self::generatePDFInvoice($order);
                 return $this->redirect(array('checkout/success', 'o' => $order->id));
             }
         }
