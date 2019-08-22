@@ -29,13 +29,6 @@ class CheckoutController extends \frontend\controllers\Controller
         if (in_array($action->id, ['payment-result', 'payment-pre-result', 'subscription-result'])) {
             $this->enableCsrfValidation = false;
         }
-        
-        //temporary disabling payment
-        /*
-        if (!Yii::$app->user->isGuest  
-                && !in_array(Yii::$app->user->id, [1,27])) {
-            unset($this->_payments[1]);
-        }*/
 
         return parent::beforeAction($action);
     }
@@ -122,38 +115,6 @@ class CheckoutController extends \frontend\controllers\Controller
     public function actionFailt()
     {
         $this->layout = 'result';
-         exit;
-        $payment = new \frontend\extensions\FastSpring\FastSpring;
-        $payment->setParams(Yii::$app->params['payments']['FastSpring']);
-        //$data = $p->getOrder('ElqvPPozTLy9xdOPaDGBOw');
-        //$data = $p->getOrder('9AY5WrdxTUOpuxHu_w6dEQ');
-        //$data = $p->getSubscription('-uHwm3TMQoWZeOTcmbXXfQ');
-        //$data = $p->getAccount('-JORXtjJR6mNpp2US8BZzw');
-        
-        ////$data = $p->getSubscriptionTransaction('-uHwm3TMQoWZeOTcmbXXfQ');
-        //$order = Order::findOne(['transaction_id' => $data['transaction_id']]);
-        
-        //print $order->id;
-        
-        
-        if ($payment->subscriptionResult(['subscription' => '-uHwm3TMQoWZeOTcmbXXfQ',
-            'order' => 'ElqvPPozTLy9xdOPaDGBOw',
-            'status'=> 'successful'])) {
-                $order = self::performSubscription(['payment_method' => Yii::$app->request->get('payment'), 
-                    'transaction_id' => $payment->getID(),
-                    'subscription_transaction_id' => $payment->getSubscriptionID()
-                    ]);
-                
-                if ($order) {
-                    self::generatePDFInvoice($order);
-                }
-                
-        }
-        
-        print_r($data);
-        print 'OK';
-       
-        
         
         return $this->render('fail');
     }      
@@ -164,7 +125,6 @@ class CheckoutController extends \frontend\controllers\Controller
      */
     public function actionIndex()
     {
-        //self::generatePDFInvoice(Order::findOne(154));
         $cartInfo = Cart::getInfo(Yii::$app->user->id, ['discount_id'=> Cart::getDiscountID()]);
         $products = Product::findActive()->andWhere(['not in', 'id', $cartInfo['products_list']])->all();
         $user = User::findOne(Yii::$app->user->id);
