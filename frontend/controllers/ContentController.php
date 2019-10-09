@@ -167,13 +167,6 @@ class ContentController extends \frontend\controllers\Controller
                 . 'LIMIT 1 ) categoryFirst '])->where($where),
             'pagination' => array('pageSize' => $page_size),
         ];
-        /*
-        $params = [
-            'query' => $product->getHrefs()->where($where),
-            'pagination' => array('pageSize' => $page_size),
-        ];
-         * 
-         */
 
         $params['sort'] = ['defaultOrder' => ['da_rank' =>  SORT_DESC]];
         $sort_attributes = ['url','da_rank','alexa_rank','type_links', 'categoryFirst'];
@@ -192,8 +185,8 @@ class ContentController extends \frontend\controllers\Controller
         
         $accessable = OrderToProduct::isAccessible($product->id, Yii::$app->user->id);
         
-        $marked = Yii::$app->user->id 
-                ? UserMark::find(['user_id' => Yii::$app->user->id])->indexBy('href_id')->asArray()->all() : [];
+        $marked = Yii::$app->user->id && $accessable
+                ? UserMark::find()->where(['user_id' => Yii::$app->user->id])->indexBy('href_id')->asArray()->all() : [];
         
         return $this->renderPartial('_list',['product' => $product,
             'hrefsProvider' => $dataProvider,

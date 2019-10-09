@@ -45,6 +45,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             [
                 'attribute' => 'content',
+                'value' => function ($data) {
+                    return substr(strip_tags($data->content),0, 150);
+                },
                 'headerOptions' => ['style' => 'width:50%'],                                
             ],            
             [

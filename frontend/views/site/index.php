@@ -66,7 +66,7 @@ use common\models\OrderToProduct;
                 <div class="pd__text-1"><?=$p->short_title?></div>
                 <a href="<?=Url::to(['site/product','link'=>$p->page->link])?>"><h3 class="title-2"><?=$p->links_available ? $p->getHrefsCount() : ''?> <?=$p->title?></h3></a>
                 <div class="pd__text-2"><?=$p->full_title?></div>
-                <i class="icon-<?=($p->priceFinal) ? 1 : 2?>"></i>
+                <i class="icon-<?=OrderToProduct::isAccessible($p->id, Yii::$app->user->id) ? 2 : 1?>"></i>
               </div>
               <div class="pd__content">
                 <ul class="list-1">

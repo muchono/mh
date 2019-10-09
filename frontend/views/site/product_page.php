@@ -116,7 +116,7 @@ use yii\web\View;
                     </div>
                     <div class="war-form__field">
                       <label for="" class="war-form__label">Review</label>
-                      <?= $form->field($review, 'content')->textInput(['class' => 'war-form__textarea'])->label(false) ?>
+                      <?= $form->field($review, 'content')->textarea(['class' => 'war-form__textarea'])->label(false) ?>
                       <div class="war-form__info">Write your opinion about our product (public)</div>
                     </div>
                     <div class="war-form__field">

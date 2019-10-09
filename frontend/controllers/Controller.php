@@ -31,9 +31,15 @@ class Controller extends \yii\web\Controller
             $user->active_at = time();
             $user->save();
         }
-
+        
+        $this->view->registerJsFile('https://www.googletagmanager.com/gtag/js?id=UA-146531295-1', ['position' => View::POS_HEAD]);
         $this->view->registerJs(
-            "var WEB_PATH = '".URL::base(true)."/'",
+            "var WEB_PATH = '".URL::base(true)."/';
+                window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-146531295-1');",
             View::POS_HEAD,
             'global-script'
          );

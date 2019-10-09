@@ -63,13 +63,6 @@ class AccountController extends \frontend\controllers\Controller
         ->innerJoin(['res' => $subQuery], 'order_to_product.`product_id` = res.`product_id` AND order_to_product.expires = res.expires')
         ->all();
         
-        /*
-        foreach ($orderedProducts as $op) {
-            $op->expires = $op->calcExpirationDate();
-            $op->save(false);
-        }
-         * 
-         */
         return $this->render('index', array(
             'orderedProducts' => $orderedProducts,
         ));
