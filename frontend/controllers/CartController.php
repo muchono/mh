@@ -41,22 +41,21 @@ class CartController extends \frontend\controllers\Controller
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $r = ['result' => 0, 'show_signup' => 0];
         
-        if (Yii::$app->user->isGuest){
-            $r['show_signup'] = 1;
-        } elseif (Yii::$app->request->isAjax 
-               && Yii::$app->request->post('product_id')) {
-                $product = Product::findOne(Yii::$app->request->post('product_id'));
-             if ($product && $product->status && !OrderToProduct::isAccessible($product->id, Yii::$app->user->id)) {
-                $months = in_array(Yii::$app->request->post('months'), Cart::$months) ? Yii::$app->request->post('months') : 1;
-                $cart = new Cart;
-                $cart->product_id = $product->id;
-                $cart->months = $months;
-                $cart->user_id = Yii::$app->user->id;
-                
-                if (Cart::isAdded($product->id, Yii::$app->user->id)
-                        || $cart->save()) {
-                    $r['result'] = 1;
-                    $r['cart_items_count'] = Cart::getCountByUser(Yii::$app->user->id);
+        if (Yii::$app->request->post('product_id')){
+            if (Yii::$app->user->isGuest){
+                $r['show_signup'] = 1;
+                Cart::saveTemporary(Yii::$app->request->post('product_id'));
+            } elseif (Yii::$app->request->isAjax) {
+                    $product = Product::findOne(Yii::$app->request->post('product_id'));
+                 if ($product) {
+                    $months = in_array(Yii::$app->request->post('months'), Cart::$months) ? Yii::$app->request->post('months') : 1;
+
+                    $cart = new Cart;
+                    if (Cart::isAdded($product->id, Yii::$app->user->id)
+                            || $cart->addProduct($product, Yii::$app->user->id, $months)) {
+                        $r['result'] = 1;
+                        $r['cart_items_count'] = Cart::getCountByUser(Yii::$app->user->id);
+                    }
                 }
             }
         }
