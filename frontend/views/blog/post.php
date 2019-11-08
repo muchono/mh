@@ -73,7 +73,7 @@ use common\models\OrderToProduct;
           <aside class="post-page-side-bar">
             <?php if ($special_offer){?>
             <div class="advertising-block">
-                <a href="<?=Url::to(['site/product', 'product_id'=>$special_offer->getProducts()->one()->id]);?>"><img src="<?=Url::base()?>/images/discount/<?=$special_offer->file1?>" alt=""></a>
+                <a href="<?=Url::to(['site/special-offer']);?>"><img src="<?=Url::base()?>/images/discount/<?=$special_offer->file1?>" alt=""></a>
             </div>
             <?php }?>
             <h2 class="title-10">Recommended for you:</h2>
