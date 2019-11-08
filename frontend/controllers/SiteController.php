@@ -68,6 +68,10 @@ class SiteController extends \frontend\controllers\Controller
             'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+                'offset' => 4,
+                'testLimit' => 0,
+                'maxLength' => 3,
+                'minLength' => 3,
             ],
         ];
     }
@@ -146,7 +150,8 @@ class SiteController extends \frontend\controllers\Controller
             {
                 $user->registration_confirmed = $user->active = 1;
                 $user->save();
-
+                Yii::$app->user->login($user, 0);
+                
                 $login_case = \frontend\models\LoginCase::addCase($user->id, 'special_offer');
                 $body = Yii::$app->controller->renderPartial('@app/views/mails/special_offer.php', [
                     'link' => Url::to(['site/apply-special-offer', 'code' => $login_case->auth_key, 'id' => $login_case->id], true),
@@ -162,13 +167,18 @@ class SiteController extends \frontend\controllers\Controller
                             ->setSubject('40% Off - For All Our Products - Only The Next 24 Hours!')
                             ->setHtmlBody($body)
                             ->send();                
-
-                $this->layout= 'result';
-
-                return $this->render('success', [
-                    'text' => 'Thank you. Your registration completed.',
-                    'link' => Url::to(['content/']),
-                ]);                
+                
+                if (\common\models\Cart::getTemporary()){
+                    \common\models\Cart::addTemporary();
+                    
+                    return $this->redirect(['site/products']);
+                } else {
+                    $this->layout= 'result';
+                    return $this->render('success', [
+                        'text' => 'Thank you. Your registration completed.',
+                        'link' => Url::to(['content/']),
+                    ]);
+                }
             } 
         }
     }

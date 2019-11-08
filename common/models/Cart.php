@@ -4,6 +4,7 @@ namespace common\models;
 
 use common\models\Product;
 use common\models\Discount;
+use common\models\OrderToProduct;
 use yii\helpers\ArrayHelper;
 
 use Yii;
@@ -20,16 +21,56 @@ use Yii;
 class Cart extends \yii\db\ActiveRecord
 {
     static public $months = [1,2,3];
-
+    
+    /**
+     * Add to cart
+     */
+    public function addProduct(Product $product, $user_id, $months = 1)
+    {
+        $r = false;
+        if ($product && $product->status && !OrderToProduct::isAccessible($product->id, $user_id)
+                && !self::isAdded($product->id, $user_id)){
+            $this->product_id = $product->id;
+            $this->months = $months;
+            $this->user_id = $user_id;
+            $r = $this->save();
+        }
+        return $r;
+    }
+    
+    public static function addTemporary()
+    {
+        $r = false;
+        if (self::getTemporary()) {
+            $product = Product::findOne(self::getTemporary());
+            if ($product) {
+                $cart = new Cart;
+                $r = $cart->addProduct($product, Yii::$app->user->id);
+                self::saveTemporary(0);
+            }
+        }
+        return $r;
+    }
+    
     public static function saveDiscountID($id)
     {
         Yii::$app->session->set('discount', $id);
+    }
+    
+    public static function saveTemporary($id)
+    {
+        Yii::$app->session->set('add_to_cart', (int) $id);
     }
     
     public static function getDiscountID()
     {
         return Yii::$app->session->get('discount') ? Yii::$app->session->get('discount') : 0;
     }
+    
+    public static function getTemporary()
+    {
+        return Yii::$app->session->get('add_to_cart') ? Yii::$app->session->get('add_to_cart') : 0;
+    }    
 
     /**
      * @inheritdoc

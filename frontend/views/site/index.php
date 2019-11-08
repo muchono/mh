@@ -37,7 +37,7 @@ use common\models\OrderToProduct;
                 <div class="df__field" id="captcha_block" style="display:<?=$getDemoModel->name ? 'block' : 'none'?>">
                 <?= $form->field($getDemoModel, 'verifyCode')->label(false)
                       ->widget(Captcha::className(), [
-                    'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
+                    'template' => '<div class="row"><div class="col-lg-3">{image} <div class="captcha-info-text">press to update</div></div><div class="col-lg-6">{input}</div></div>',
                     'options' => ['placeholder' => 'code', 'class' => 'df__input']
                 ]) ?>    
                 </div>
@@ -207,7 +207,8 @@ use common\models\OrderToProduct;
 <?php
 $this->registerJs(
     "$('#getdemoform-name').change(function(event){"
-        . "$('#captcha_block').show();"
+        . "$('#captcha_block').show(); "
+        . "$('#getdemoform-verifycode-image').click(); "
         . "})",
     View::POS_READY,
     'get-demo-handler'
