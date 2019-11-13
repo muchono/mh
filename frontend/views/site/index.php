@@ -209,7 +209,18 @@ $this->registerJs(
     "$('#getdemoform-name').change(function(event){"
         . "$('#captcha_block').show(); "
         . "$('#getdemoform-verifycode-image').click(); "
-        . "})",
+        . "});"
+        . "
+$('.demo-form').on('pjax:send', function() {
+  $('.demo-form .btn-1').hide();
+});
+$('.demo-form').on('pjax:complete', function() {
+  $('.demo-form .btn-1').show();
+  $('#getdemoform-verifycode-image').click();
+  $('#getdemoform-verifycode').val('');
+});
+
+",
     View::POS_READY,
     'get-demo-handler'
 );
