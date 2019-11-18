@@ -7,8 +7,19 @@ $this->title = 'Special Offers';
     <section class="bestsellers">
       <div class="container">
         <div class="bs-head">
-          <h2 class="title-1">Special Offers</h2>
-          <p class="bs-head__text">Each product consists of <strong>Guide</strong> + <strong>Digital Subscription</strong> for 1 year.</p>
+          <h2 class="title-1"><?php if ($offer) { echo $offer->title; } else {?>Special Offers<?php }?></h2>
+          <p class="bs-head__text">
+              <?php if ($offer) { ?> 
+              
+              starts <?php echo date('d M', $offer->date_from)?> and runs to <?php echo date('d M', $offer->date_to) ?>
+             
+             <?php } else {?>
+              
+              Each product consists of <strong>Guide</strong> + <strong>Digital Subscription</strong> for 1 year.
+                  
+             <?php }?>
+              
+          </p>
         </div>
         <div class="bs-list">
           <?php foreach($products as $p) 

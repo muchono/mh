@@ -294,8 +294,10 @@ class SiteController extends \frontend\controllers\Controller
     public function actionSpecialOffer()
     {
         $this->view->params['page'] ='special-offer';
+        $offer = Discount::findShowable()->latest();
         return $this->render('special_offer', array(
             'products' => Product::findActive()->all(),
+            'offer' => $offer,
         ));
     }
     
