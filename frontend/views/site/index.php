@@ -55,7 +55,7 @@ use common\models\OrderToProduct;
     <section class="bestsellers">
       <div class="container">
         <div class="bs-head">
-          <h2 class="title-1">MarketngHack Bestsellers</h2>
+          <h2 class="title-1">MarketingHack Bestsellers</h2>
           <p class="bs-head__text">Each product consists of <strong>Guide</strong> + <strong>Digital Subscription</strong> for 1 year.</p>
         </div>
         <div class="bs-list">
