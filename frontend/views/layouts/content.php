@@ -163,8 +163,8 @@ AppAsset::register($this);
                 <span class="list_header hide"><?=$this->params['selected_product']->getHrefsCount()?> <?=$this->params['selected_product']->title?></span>
                 <span class="guide_header hide"><?=$this->params['selected_product']->short_title?></span>
             </h2>
-            <?php if (Yii::$app->user->isGuest){?>
-            <p class="ic-head__text">This is demo version - full version will be available after <a href="#signup-popup" class="js-popups">purchase</a></p>
+            <?php if (!$this->params['selected_product_accessible']){?>
+            <p class="ic-head__text">This is demo version - full version will be available after <a href="#" class="content-add-tocart" for="<?=$this->params['selected_product']->id?>">purchase</a></p>
             <?php }?>
           </div>
           <div class="ic-head__get">

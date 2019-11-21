@@ -67,13 +67,6 @@ use yii\helpers\Html;
         </div>
         <div class="billing-field-row">
           <div class="billing-field">
-            <label for="" class="bf__label">Phone Number</label>
-            <?= $form->field($userBilling, 'phone_number')->textInput(['class' => 'bf__input'])->label(false) ?>
-            <span class="bf__info">(to this phone number you will get SMS code)</span>
-          </div>
-        </div>
-        <div class="billing-field-row">
-          <div class="billing-field">
             <label for="" class="bf__label">Country</label>
             <?= $form->field($userBilling, 'country')
               ->dropDownList(ArrayHelper::map(common\models\Countries::find()->all(), 'id', 'country_name'), ['class'=>'bf__input'])->label(false);?>

@@ -38,7 +38,7 @@ class UserBilling extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'country', 'email', 'phone_number', 'address', 'zip', 'city'], 'required'],
+            [['user_id', 'country', 'email', 'address', 'zip', 'city'], 'required'],
             [['payment'], 'required', 'on'=>'billing'],
             [['full_name'], 'required', 'when' => function ($model) {
                 return empty($model->company_name);
