@@ -168,10 +168,10 @@ class SiteController extends \frontend\controllers\Controller
                             ->setHtmlBody($body)
                             ->send();                
                 
-                if (\common\models\Cart::getTemporary()){
+                if (\common\models\Cart::getTemporary()) {
                     \common\models\Cart::addTemporary();
                     
-                    return $this->redirect(['site/products']);
+                    return $this->redirect(['cart/']);
                 } else {
                     $this->layout= 'result';
                     return $this->render('success', [
