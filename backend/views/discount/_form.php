@@ -50,12 +50,7 @@ use backend\models\ProductSearch;
     <?php if (!$model->isNewRecord && $model->file1) {?>
         <?= Html::img(Yii::$app->urlManagerFrontend->getHostInfo().'/'.'images/discount/'.$model->file1, ['style' => 'max-width:500px'])?>
     <?php }?> 
-    <?= $form->field($model, 'imageFile1')->fileInput() ?>
-    
-    <?php if (!$model->isNewRecord && $model->file2) {?>
-        <?= Html::img(Yii::$app->urlManagerFrontend->getHostInfo().'/'.'images/discount/'.$model->file2, ['style' => 'max-width:500px'])?>
-    <?php }?> 
-     <?= $form->field($model, 'imageFile2')->fileInput() ?>
+    <?= $form->field($model, 'imageFile1')->fileInput()->label('Image for blog post page (Width: 300px, height:  424px)'); ?>
     
     <?= $form->field($model, 'apply_code')->textInput(['maxlength' => true]) ?>
     

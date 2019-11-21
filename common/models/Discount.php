@@ -95,7 +95,7 @@ class Discount extends \yii\db\ActiveRecord
             [['title'], 'string', 'max' => 255],
             [['apply_code'], 'string', 'max' => 50],
             [['date_from', 'date_to'], 'date', 'format' => 'php:d-m-Y'],
-            [['imageFile1', 'imageFile2'], 'file', 'skipOnEmpty' => !$this->isNewRecord || !$this->show_on_page, 'extensions' => 'png,jpg,jpeg,gif'],
+            [['imageFile1'], 'file', 'skipOnEmpty' => !$this->isNewRecord || !$this->show_on_page, 'extensions' => 'png,jpg,jpeg,gif'],
             [['products'], 'safe'],
         ];
     }
