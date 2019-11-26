@@ -6231,3 +6231,7 @@ input[type="color"].search-questions__input, input[type="date"].search-questions
 	margin: -16px 0 0 28px;	
 	position: relative;	
 }
+
+#signup-popup .aut-link, #signup-popup-link {
+    color: #015fd8;
+}

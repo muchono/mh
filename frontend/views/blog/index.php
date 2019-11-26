@@ -5,7 +5,7 @@ use yii\helpers\Url;
 <section class="blog-page">
       <div class="container-lg">
         <div class="blog-head">
-          <h2 class="title-1">MarketngHack Blog</h2>
+          <h2 class="title-1">MarketingHack Blog</h2>
           <p class="head-text">All about digital marketing: SEO, SEM, SMM, Linkbuilding</p>
         </div>
         <div class="post-list">
