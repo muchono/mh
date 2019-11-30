@@ -592,4 +592,20 @@ class SiteController extends \frontend\controllers\Controller
             'text' => 'Thank you for contacting MarketingHack.',
         ]);
     }
+    
+    public function actionRemoveBots()
+    {
+        $minus_date = time() - 3600*24;
+        $users = User::find()->where(['registration_confirmed' => 0])
+                ->andWhere(['active' => 0])
+                ->andWhere(["<", "created_at", $minus_date])
+                ->all();
+        $u_emails = [];
+        foreach ($users as $u){
+            $u_emails[] = $u->email;
+            $u->delete();
+        }
+        $m = date('d-m-Y H:i ') . join($u_emails)."\n";
+        exit($m);
+    }
 }
