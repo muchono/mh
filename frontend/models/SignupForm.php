@@ -12,10 +12,13 @@ use common\models\User;
  */
 class SignupForm extends Model
 {
+    const SCENARIO_REGISTER = 'register';
+    
     public $name;
     public $email;
     public $password;
     public $user = null;
+    public $verifyCode;    
 
     /**
      * @inheritdoc
@@ -35,9 +38,23 @@ class SignupForm extends Model
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
+            
+            // verifyCode needs to be entered correctly
+            ['verifyCode', 'required', 'on' => self::SCENARIO_REGISTER],
+            ['verifyCode', 'captcha', 'on' => self::SCENARIO_REGISTER],            
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'verifyCode' => 'Verification Code',
+        ];
+    }
+    
     /**
      * Signs user up.
      *

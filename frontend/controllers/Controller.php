@@ -131,10 +131,11 @@ class Controller extends \yii\web\Controller
     public function actionSignup()
     {
         $model = new SignupForm();
-
+        $model->scenario = SignupForm::SCENARIO_REGISTER;
+        
         if (Yii::$app->request->post('register') && $model->load(Yii::$app->request->post())) {
             
-            if ($user = $model->signup()) {
+            if ($model->signup()) {
                 $model->sendEmail();
                 echo '<script>location.replace("'.Url::to(['result/reg-finish', 'email' => $model->email]).'");</script>';
                 exit;

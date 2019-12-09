@@ -6221,7 +6221,7 @@ input[type="color"].search-questions__input, input[type="date"].search-questions
 	margin: 15px 0 15px 0;
 }
 
-#getdemoform-verifycode-image {
+#getdemoform-verifycode-image, #signupform-verifycode-image {
 	cursor: pointer;
 }
 

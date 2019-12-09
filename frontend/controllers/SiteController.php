@@ -98,6 +98,7 @@ class SiteController extends \frontend\controllers\Controller
                 $model->sendEmail(['add_pass' => true]);
                 exit('<center>Thank you. <br/><br/>Instructions have been sent to your e-mail box.</center>');
             } else {
+                print_r($model->getErrors());
                 exit('<center>'.join('<br/>', $model->getErrors()).'</center>');
             }
         } else {

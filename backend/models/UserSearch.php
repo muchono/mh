@@ -42,7 +42,7 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        $query = User::find();
+        $query = User::find()->orderBy('id DESC');
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

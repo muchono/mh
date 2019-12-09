@@ -3,7 +3,7 @@ use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
 use yii\helpers\Url;
 use yii\captcha\Captcha;
-
+use yii\web\View;
 ?>
 <div class="mh-popup mfp-hide aut-popup" id="forgot-popup">
     <h2 class="aut-title">Forgot Password</h2>
@@ -78,6 +78,14 @@ use yii\captcha\Captcha;
       <div class="aut-field">
         <?= $form->field($this->params['user'], 'password')->passwordInput(['class' => 'aut-input','placeholder' => 'Password'])->label(false) ?>
       </div>
+      <div class="aut-field" id="captcha_reg_block" style="display:<?=$this->params['user']->name ? 'block' : 'none'?>">
+            <?= $form->field($this->params['user'], 'verifyCode')->label(false)
+                  ->widget(Captcha::className(), [
+                'template' => '<div class="row"><div class="col-lg-3">{image} <div class="captcha-info-text">press to update</div></div><div class="aut-field">{input}</div></div>',
+                'options' => ['placeholder' => 'code', 'class' => 'aut-input']
+            ]) ?> 
+      </div>        
+        
         <input type="hidden" name="register" value="new-user"/>
     </div>
     <button class="btn-5">Register</button>
@@ -85,3 +93,14 @@ use yii\captcha\Captcha;
     <?php ActiveForm::end(); 
     Pjax::end();?>    
   </div>
+<?php
+$this->registerJs(
+    "$('#signupform-name').change(function(event){"
+        . "$('#captcha_reg_block').show(); "
+        . "$('#signupform-verifycode').click(); "
+        . "});"
+,
+    View::POS_READY,
+    'register-handler'
+);
+?>
