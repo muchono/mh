@@ -274,6 +274,15 @@ AppAsset::register($this);
           </ul>
         </div>
       </div>
+      
+      <div class="bot-alert-box" style="bottom: 0px;">BOT
+        <div class="bot-alert-box-body">
+            <p class="optanon-alert-box-title legacy-banner-title sr-only" id="alert-box-title" role="heading" aria-level="2">Cookie Notice</p>
+            <p class="banner-content" id="alert-box-message">This site uses cookies and other tracking technologies to assist with navigation and your ability to provide 
+                feedback, analyse your use of our products and services, assist with our promotional and marketing efforts, and provide content 
+                from third parties.<a href="https://www.cookielaw.org/how-we-use-cookies/" >Cookie Policy</a></p>
+        </div>      
+      </div>
     </footer>
   </div>
 

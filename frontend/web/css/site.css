@@ -6235,3 +6235,21 @@ input[type="color"].search-questions__input, input[type="date"].search-questions
 #signup-popup .aut-link, #signup-popup-link {
     color: #015fd8;
 }
+.bot-alert-box {
+    position: fixed;
+    width: 100%;
+    border: none;
+    background-color: rgba(0,0,0,0.85);
+    bottom: -145px;
+    z-index: 2147483644;
+    min-height: 50px;
+}
+
+.bot-alert-box-body {
+    color: #FFF;
+    margin-right: 450px;
+    margin-left: 50px;
+    padding-top: 6px;
+
+
+}
