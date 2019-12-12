@@ -13,11 +13,6 @@ use frontend\controllers\CheckoutController;
 class FastSpring extends \frontend\components\CPayment
 {
     protected $_transaction_table = 'transaction_fastspring';
-    protected $_action_url = 'https://merchant.webmoney.ru/lmi/payment.asp';
-    protected $_wm_ip_masks = array(
-        
-    );
-    
     protected $call_result = null;
 
 
@@ -57,19 +52,25 @@ class FastSpring extends \frontend\components\CPayment
     protected function confirm($params)
     {
         $r = 0;
+        
+        $this->addLog('------------- Payment Confirm for user ID:'. Yii::$app->user->id);
         if (!empty($params['order'])) {
             $data = $this->getOrder($params['order']);
+            $this->addLog('Order to check:'. $params['order']);
             if (!empty($data) && $data->completed) {
+                $this->addLog('Order valid');
                 $t = Transaction::find()
                         ->where(['remote_id' => $data->id, 'user_id' => Yii::$app->user->id])
                         ->one();
 
                 if (empty($t) && !$t->used) {
+                    $this->addLog('Create Order');
                     $user = User::findOne(Yii::$app->user->id);
                     
                     $cartInfo = Cart::getInfo($user->id);
                     
                     if ($cartInfo['total'] <= $data->total) {
+                        $this->addLog('Sum is correct');
                         $this->_transaction = new Transaction;
                         $this->_transaction->price = $data->total;
                         $this->_transaction->payment = $this->_name;
@@ -77,8 +78,10 @@ class FastSpring extends \frontend\components\CPayment
                         $this->_transaction->success = $data->completed;
                         $this->_transaction->remote_id = $data->id;
                         $this->_transaction->used = 1;
-                        $this->_transaction->insert();                        
-
+                        $this->_transaction->insert();
+                        
+                        $this->addLog('Transaction created ID:'. $this->_transaction->id);
+                        
                         $this->setID($this->_transaction->id);
                         
                         foreach ($data->items as $item) {
