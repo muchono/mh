@@ -583,7 +583,15 @@ class SiteController extends \frontend\controllers\Controller
      */
     public function actionSome()
     {
-        exit('200');
+        if (Yii::$app->request->post('accept_cookies')) {
+            $cookies = Yii::$app->response->cookies;
+
+            $cookies->add(new \yii\web\Cookie([
+                'name' => 'accept_cookies',
+                'value' => '1',
+                'expire' => time() + (10 * 365 * 24 * 60 * 60) /* 10 years*/,
+            ]));
+        } 
     }
 
     public function actionSuccess()

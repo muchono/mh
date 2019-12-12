@@ -58,6 +58,14 @@ var $body = $('body');
 			location.replace(WEB_PATH+"cart/index/");
 		});
     });
+    
+    $('#btn-accept-cookies').click(function(e){
+        e.preventDefault();
+        $('.bot-alert-box').hide(300);
+        $.post(WEB_PATH+"site/some/", {'accept_cookies': 1}, function( res ) {
+            
+        });          
+    });
 })();
 
 

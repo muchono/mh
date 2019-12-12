@@ -274,16 +274,17 @@ AppAsset::register($this);
           </ul>
         </div>
       </div>
-      
+      <?php if (Yii::$app->request->cookies->get('accept_cookies') != 1) {?>
       <div class="bot-alert-box" style="bottom: 0px;">
-        <div class="bot-alert-box-body pull-center">
+        <div class="bot-alert-box-body center-block">
             <div class="bot-alert-box-title">Cookies</div>
             <div class="bot-alert-box-desc">This website uses cookies to offer you a better browsing experience. Find out more on <a href="<?=Url::to(['privacy-policy/']);?>" target="_blank">how we use cookies and how you can change your settings</a>.</div>
-            <span class="bot-alert-box-btn align-left">
-                <a href="/frontend/web/content/index/?product_id=5" class="btn-alert-box">I accept cookies</a>
+            <span class="btn-alert-box pull-left">
+                <a href="#" id="btn-accept-cookies" class="btn-alert">I accept cookies</a>
             </span>            
         </div>
       </div>
+     <?php }?>
     </footer>
   </div>
 
