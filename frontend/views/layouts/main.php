@@ -275,13 +275,14 @@ AppAsset::register($this);
         </div>
       </div>
       
-      <div class="bot-alert-box" style="bottom: 0px;">BOT
-        <div class="bot-alert-box-body">
-            <p class="optanon-alert-box-title legacy-banner-title sr-only" id="alert-box-title" role="heading" aria-level="2">Cookie Notice</p>
-            <p class="banner-content" id="alert-box-message">This site uses cookies and other tracking technologies to assist with navigation and your ability to provide 
-                feedback, analyse your use of our products and services, assist with our promotional and marketing efforts, and provide content 
-                from third parties.<a href="https://www.cookielaw.org/how-we-use-cookies/" >Cookie Policy</a></p>
-        </div>      
+      <div class="bot-alert-box" style="bottom: 0px;">
+        <div class="bot-alert-box-body pull-center">
+            <div class="bot-alert-box-title">Cookies</div>
+            <div class="bot-alert-box-desc">This website uses cookies to offer you a better browsing experience. Find out more on <a href="<?=Url::to(['privacy-policy/']);?>" target="_blank">how we use cookies and how you can change your settings</a>.</div>
+            <span class="bot-alert-box-btn align-left">
+                <a href="/frontend/web/content/index/?product_id=5" class="btn-alert-box">I accept cookies</a>
+            </span>            
+        </div>
       </div>
     </footer>
   </div>
