@@ -295,7 +295,7 @@ class CheckoutController extends \frontend\controllers\Controller
                     'products' => $products_list,
                 ]);
                 
-                if ($discount) {
+                if (0) {
                     $body = Yii::$app->controller->renderPartial('@app/views/mails/thank_you_for_purchase_discount.php', [
                         'products' => $products_list,
                         'discount' => $discount,

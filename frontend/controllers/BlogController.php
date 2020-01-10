@@ -26,7 +26,7 @@ class BlogController extends \frontend\controllers\Controller
         }
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => array('pageSize' => 9),
+            'pagination' => array('pageSize' => 15),
         ]);
         return $this->render('index', array(
             'posts' => $dataProvider,

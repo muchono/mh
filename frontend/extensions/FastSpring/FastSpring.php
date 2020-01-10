@@ -59,6 +59,7 @@ class FastSpring extends \frontend\components\CPayment
             $this->addLog('Order to check:'. $params['order']);
             if (!empty($data) && $data->completed) {
                 $this->addLog('Order valid');
+                $this->addLog('Order Data:'.  json_encode($data));
                 $t = Transaction::find()
                         ->where(['remote_id' => $data->id, 'user_id' => Yii::$app->user->id])
                         ->one();
@@ -67,7 +68,7 @@ class FastSpring extends \frontend\components\CPayment
                     $this->addLog('Create Order');
                     $user = User::findOne(Yii::$app->user->id);
                     
-                    $cartInfo = Cart::getInfo($user->id);
+                    $cartInfo = Cart::getInfo($user->id, ['discount_id'=> Cart::getDiscountID()]);
                     
                     if ($cartInfo['total'] <= $data->total) {
                         $this->addLog('Sum is correct');

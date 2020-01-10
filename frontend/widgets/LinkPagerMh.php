@@ -25,6 +25,13 @@ class LinkPagerMh extends \yii\widgets\LinkPager {
      */
     protected function renderPageButtons()
     {
+        $this->pagination->route = Yii::$app->controller->getRoute();
+        list($c, $a) = explode('/', $this->pagination->route);
+        //remove index from route name
+        if ($a === 'index') {
+            $this->pagination->route = $c . '/';
+        }
+        
         $pageCount = $this->pagination->getPageCount();
         if ($pageCount < 2 && $this->hideOnSinglePage) {
             return '';
