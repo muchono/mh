@@ -18,6 +18,7 @@ use yii\widgets\ActiveForm;
     
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'affiliate')->dropDownList($model::$statuses)?>
     <?= $form->field($model, 'active')->dropDownList($model::$statuses)?>
     
     <div class="form-group">

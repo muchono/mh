@@ -18,7 +18,7 @@ class UserSearch extends User
     public function rules()
     {
         return [
-            [['id', 'subscribe', 'active', 'registration_confirmed'], 'integer'],
+            [['id', 'subscribe', 'active', 'registration_confirmed', 'affiliate'], 'integer'],
             [['auth_key', 'password_hash', 'password_reset_token', 'email', 'phone', 'name', 'password'], 'safe'],
             [['created_at', 'updated_at'], 'date', 'format'=>'dd-MM-yyyy', 'message'=>'{attribute} must be DD-MM-YYYY format.'],
         ];
@@ -62,8 +62,8 @@ class UserSearch extends User
             'id' => $this->id,
             'subscribe' => $this->subscribe,
             'active' => $this->active,
+            'affiliate' => $this->affiliate,
             'registration_confirmed' => $this->registration_confirmed,
-            
         ]);
         
         $query->andFilterWhere(['like', 

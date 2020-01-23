@@ -62,9 +62,12 @@ class Controller extends \yii\web\Controller
                     'content' => $meta['description']
                 ]);                
             }            
-        }        
+        }
+        
+        \common\models\UserAffiliate::setAffiliateCode();
+        
         return parent::beforeAction($action);
-    }  
+    }
     
     static public function isSubscribed()
     {

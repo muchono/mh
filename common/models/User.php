@@ -32,13 +32,21 @@ use common\models\OrderToProduct;
  * @property integer $blocked
  * @property integer $active_at
  * @property integer $block_amount
+ * @property integer $affiliate
+ * @property integer $driven_affiliate_id
  */
 
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 1;
-    
+    /**
+     *
+     * @var UserAffiliate
+     */
+    public $userAffiliate = null;
+
+
     /**
      * statuses values
      */
@@ -57,6 +65,12 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         'buyed_not_active' => 'One Product Expired',
         'nothing_buyed' => 'Leads',
     );
+
+    public function __construct($config = array()) {
+        $this->userAffiliate = new \common\models\UserAffiliate($this);
+        
+        parent::__construct($config);
+    }
     
     /**
      * @inheritdoc
@@ -84,6 +98,12 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         if ($this->active == 1) {
             $this->blocked = 0;
         }
+        
+        $aff = \common\models\UserAffiliate::getCookieUserID();
+        if ($aff) {
+            $this->driven_affiliate_id = $aff;
+        }
+        
         return parent::beforeSave($insert);
     }
     
@@ -111,7 +131,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             [['email', 'name'], 'required'],
             [['email'], 'email'],
             [['email'], 'unique'],
-            [['subscribe', 'subscribe_blog', 'subscribe_offers','active', 'registration_confirmed', 'created_at', 'updated_at', 'active_ip', 'blocked', 'active_at', 'block_amount'], 'integer'],
+            [['subscribe', 'subscribe_blog', 'subscribe_offers','active', 'registration_confirmed', 'created_at', 'updated_at', 'active_ip', 'blocked', 'active_at', 'block_amount', 'affiliate', 'driven_affiliate_id'], 'integer'],
             [['auth_key'], 'string', 'max' => 100],
             [['password_hash', 'password_reset_token', 'email', 'phone', 'name'], 'string', 'max' => 255],
             [['password'], 'string', 'max' => 255],
@@ -141,6 +161,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'registration_confirmed' => 'Registration Confirmed',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'affiliate' => 'Affiliate Account',
+            'driven_affiliate_id' => 'Driven Affiliate Account ID',
         ];
     }
     
@@ -225,6 +247,16 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return $this->auth_key;
     }
+
+    /**
+     * Get Affiliate Status Name
+     * @return string
+     */
+    public function getAffiliateStatusName()
+    {
+        return self::$statuses[$this->affiliate];
+    }    
+
     
     /**
      * Get Status Name
@@ -417,7 +449,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         $this->auth_key = Yii::$app->security->generateRandomString();
     }
-
+    
     /**
      * Get Billing Information
      * @return UserBilling

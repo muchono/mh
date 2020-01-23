@@ -100,7 +100,7 @@ class UserController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        
         $loaded = $model->load(Yii::$app->request->post());
         if ($loaded && Yii::$app->request->post('password')) {
             $model->setPassword(Yii::$app->request->post('password'));
