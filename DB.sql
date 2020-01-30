@@ -1,3 +1,39 @@
+CREATE TABLE user_affiliate_pay(
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,   
+  `user_id` int(11) unsigned NOT NULL,
+  `total` float unsigned NOT NULL DEFAULT '0',
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+   PRIMARY KEY (`id`),  
+  key(`user_id`, `created_at`)
+);
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) unsigned NOT NULL,
+  `auth_key` varchar(32) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `password_hash` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `password_reset_token` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `subscribe` int(1) unsigned NOT NULL DEFAULT '0',
+  `active` int(1) unsigned NOT NULL DEFAULT '0',
+  `password` varchar(50) NOT NULL DEFAULT '',
+  `registration_confirmed` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` int(11) NOT NULL,
+  `updated_at` int(11) NOT NULL,
+  `active_ip` int(11) unsigned NOT NULL DEFAULT '0',
+  `blocked` int(11) unsigned NOT NULL DEFAULT '0',
+  `active_at` int(11) unsigned NOT NULL DEFAULT '0',
+  `block_amount` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `subscribe_offers` int(1) unsigned NOT NULL DEFAULT '0',
+  `subscribe_blog` int(1) unsigned NOT NULL DEFAULT '0',
+  `affiliate` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `driven_affiliate_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `affiliate_comission` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `affiliate_payment` varchar(500) NOT NULL DEFAULT ''
+);
+
+
 ALTER TABLE order_to_product ADD `discount_id` int(11) unsigned NOT NULL default 0;
 ALTER TABLE discount ADD show_on_page tinyint UNSIGNED NOT NULL default 0;
 ALTER TABLE discount ADD code varchar UNSIGNED(50) NOT NULL default '';

@@ -12,6 +12,7 @@ use common\models\Order;
 use common\models\OrderToProduct;
 
 
+
 /**
  * This is the model class for table "user".
  *
@@ -34,6 +35,8 @@ use common\models\OrderToProduct;
  * @property integer $block_amount
  * @property integer $affiliate
  * @property integer $driven_affiliate_id
+ * @property integer $affiliate_comission
+ * @property string $affiliate_payment
  */
 
 class User extends \yii\db\ActiveRecord implements IdentityInterface
@@ -68,7 +71,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 
     public function __construct($config = array()) {
         $this->userAffiliate = new \common\models\UserAffiliate($this);
-        
+         
         parent::__construct($config);
     }
     
@@ -104,6 +107,9 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             $this->driven_affiliate_id = $aff;
         }
         
+        if ($insert) {
+            $this->affiliate_comission = UserAffiliate::DEFAULT_COMISSION;
+        }
         return parent::beforeSave($insert);
     }
     
@@ -131,9 +137,10 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             [['email', 'name'], 'required'],
             [['email'], 'email'],
             [['email'], 'unique'],
-            [['subscribe', 'subscribe_blog', 'subscribe_offers','active', 'registration_confirmed', 'created_at', 'updated_at', 'active_ip', 'blocked', 'active_at', 'block_amount', 'affiliate', 'driven_affiliate_id'], 'integer'],
+            [['subscribe', 'subscribe_blog', 'subscribe_offers','active', 'registration_confirmed', 'created_at', 'updated_at', 'active_ip', 'blocked', 'active_at', 'block_amount', 'affiliate', 'driven_affiliate_id', 'affiliate_comission'], 'integer'],
             [['auth_key'], 'string', 'max' => 100],
             [['password_hash', 'password_reset_token', 'email', 'phone', 'name'], 'string', 'max' => 255],
+            [['affiliate_payment'], 'string', 'max' => 500],
             [['password'], 'string', 'max' => 255],
             [['password_reset_token'], 'unique'],
             ['active', 'in', 'range' => array_keys(self::$statuses)],
@@ -163,6 +170,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'updated_at' => 'Updated At',
             'affiliate' => 'Affiliate Account',
             'driven_affiliate_id' => 'Driven Affiliate Account ID',
+            'affiliate_comission' => 'Affiliate Comission (%)',
+            'affiliate_payment' => 'Affiliate Payment Info',
         ];
     }
     
@@ -255,8 +264,17 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function getAffiliateStatusName()
     {
         return self::$statuses[$this->affiliate];
-    }    
-
+    }
+    
+    
+    /**
+     * Get Orders
+     * @return array
+     */
+    public function getOrders()
+    {
+        return $this->hasMany(Order::className(), ['user_id' => 'id']);
+    }
     
     /**
      * Get Status Name

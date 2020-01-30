@@ -2,6 +2,11 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\helpers\Url;
+
+use yii\data\ArrayDataProvider;
+use yii\bootstrap\Tabs;
+
 
 /* @var $this yii\web\View */
 /* @var $model common\models\User */
@@ -18,7 +23,6 @@ use yii\widgets\ActiveForm;
     
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'affiliate')->dropDownList($model::$statuses)?>
     <?= $form->field($model, 'active')->dropDownList($model::$statuses)?>
     
     <div class="form-group">
@@ -33,6 +37,36 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'subscribe_offers')->checkbox() ?>
     <?= $form->field($model, 'subscribe_blog')->checkbox() ?>
+    
+    <hr/>
+    <?= $form->field($model, 'affiliate')->dropDownList($model::$statuses)?>   
+    
+    <?php if ($model->affiliate) { ?>
+    <?= $form->field($model, 'affiliate_payment')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'affiliate_comission')->textInput(['maxlength' => true]) ?>
+
+
+    <?php 
+    echo Tabs::widget([
+        'items' => [
+            [
+                'label' => 'Common',
+                'content' => $this->render('_affiliate_common_tab', ['model' => $model]),
+                'active' => true
+            ],
+            [
+                'label' => 'Users',
+                'content' => $this->render('_affiliate_users_tab', ['model' => $model]),
+            ],
+            [
+                'label' => 'Payed',
+                'content' => $this->render('_affiliate_users_payed.php', ['model' => $model]),
+            ],
+        ],
+    ]);
+    ?>    
+    
+<?php }?> 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

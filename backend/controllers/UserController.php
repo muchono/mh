@@ -100,12 +100,15 @@ class UserController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        
+
         $loaded = $model->load(Yii::$app->request->post());
         if ($loaded && Yii::$app->request->post('password')) {
             $model->setPassword(Yii::$app->request->post('password'));
         }
         if ($loaded && $model->save()) {
+            if (Yii::$app->request->post('add_payment') && (int) Yii::$app->request->post('add_payment_amount')) {
+                $model->userAffiliate->addPayment(Yii::$app->request->post('add_payment_amount'));
+            }
             return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('update', [

@@ -185,6 +185,15 @@ class Order extends \yii\db\ActiveRecord
     }
     
     /**
+     * Get total by user ID
+     * @return array
+     */
+    public static function getUserTotal($user_id)
+    {
+        return self::find()->where(['user_id' => $user_id])->sum('total');
+    }    
+    
+    /**
      * Get user
      * @return User
      */
