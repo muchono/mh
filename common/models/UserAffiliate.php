@@ -14,6 +14,8 @@ class UserAffiliate
 {
     const GET_PARAM_NAME = 'me';
     const DEFAULT_COMISSION = 15;
+    const MIN_TO_PAY = 50;
+    
     /**
      * User
      * @var User
@@ -46,6 +48,39 @@ class UserAffiliate
         $payment->user_id = $this->user->id;
         $payment->total = (int) $total;
         return $payment->save();
+    }
+    
+    /**
+     * Get Affiliates information
+     * @return array
+     */
+    public static function findAffiliates()
+    {
+        $users = User::find()->where(['affiliate' => 1, 'active' => 1])->all();
+        $affiliates = [];
+        foreach($users as $u) {
+            $payed = $u->userAffiliate->getPaymentsAmount();
+            $purchased = $u->userAffiliate->getUsersPurchasedTotal();
+            $comission = floor($purchased * $u->affiliate_comission / 100  - $payed);
+
+            $affiliates[] = [
+                'user' => $u,
+                'users_quantity' => count($u->userAffiliate->getUsers()),
+                'comission' => $comission,
+                'payed' => $payed ? $payed : 0,
+                'purchased' => $purchased ? $purchased : 0,
+            ];
+            
+        }
+
+        usort($affiliates, (function ($a, $b) {
+                if ($a['comission'] == $b['comission']) {
+                    return 0;
+                }
+            return ($a['comission'] < $b['comission']) ? 1 : -1;
+        }));
+            
+        return $affiliates;
     }
     
     /**
@@ -117,7 +152,7 @@ class UserAffiliate
      */
     public function getAffiliatePayments()
     {
-        return UserAffiliatePay::find(['user_id' => $this->user->id])->orderBy('id DESC')->all();
+        return UserAffiliatePay::find()->where(['user_id' => $this->user->id])->orderBy('id DESC')->all();
     }    
     
     public function getLink()
@@ -131,7 +166,7 @@ class UserAffiliate
      */
     public function getPayments()
     {
-        return UserAffiliatePay::find(['user_id' => $this->user->id])->orderBy('id DESC')->all();
+        return UserAffiliatePay::find()->where(['user_id' => $this->user->id])->orderBy('id DESC')->all();
     }
     
     /**
@@ -140,7 +175,7 @@ class UserAffiliate
      */
     public function getPaymentsAmount()
     {
-        return UserAffiliatePay::find(['user_id' => $this->user->id])->sum('total');
+        return UserAffiliatePay::find()->where(['user_id' => $this->user->id])->sum('total');
     }    
     
     /**

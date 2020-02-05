@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\ProductReportItem;
+use common\models\UserAffiliate;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -58,8 +59,18 @@ class ProductReportItemController extends Controller
                 }
             }
         }
+        
+        $affiliates = UserAffiliate::findAffiliates();
+        $aff_count = 0;
+        foreach ($affiliates as $a) {
+            if ($a['comission'] >= UserAffiliate::MIN_TO_PAY) {
+                $aff_count++;
+            }
+        }
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'affiliates' => $affiliates,
+            'aff_count' => $aff_count,
         ]);
     }
 

@@ -1,3 +1,4 @@
+UPDATE user SET affiliate_comission = 15;
 CREATE TABLE user_affiliate_pay(
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,   
   `user_id` int(11) unsigned NOT NULL,

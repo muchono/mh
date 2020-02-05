@@ -69,6 +69,18 @@ class AccountController extends \frontend\controllers\Controller
     }
     
     /**
+     * Displays homepage.
+     *
+     * @return mixed
+     */
+    public function actionAffiliate()
+    {
+        return $this->render('affiliate', array(
+            //'orderedProducts' => $orderedProducts,
+        ));
+    }    
+    
+    /**
      *
      * @return mixed
      */

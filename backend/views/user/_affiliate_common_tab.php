@@ -11,7 +11,7 @@ $am = floor($model->userAffiliate->getUsersPurchasedTotal() * $model->affiliate_
     
     <b>Users Purchase Amount ($):</b> <?=$model->userAffiliate->getUsersPurchasedTotal()?>
     
-    <b>Amount Payed($):</b> <?=$pa?>
+    <b>Amount Payed($):</b> <?=$pa ? $pa : 0?>
     
     <b>Amount To Pay($):</b> <?=$am?>
     <?= Html::checkbox("add_payment")?> - add amount as payed

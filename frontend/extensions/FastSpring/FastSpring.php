@@ -30,13 +30,19 @@ class FastSpring extends \frontend\components\CPayment
     /**
      * Request API
      * @param string $path
+     * @param array $post Post Data
      * @return mixed
      */
-    protected function apiCall($path)
+    protected function apiCall($path, array $post = [])
     {
         $ch = curl_init($this->getUrl().$path);
 
         curl_setopt($ch, CURLOPT_USERPWD, $this->_params['API_NAAME'] . ":" . $this->_params['API_PASSWORD']);
+        if ($post) {
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post));
+        }
+
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
 
         $response = curl_exec($ch);
@@ -44,6 +50,49 @@ class FastSpring extends \frontend\components\CPayment
         
         return empty($response) ? '' : json_decode($response);        
     }
+    
+    /* 
+     * !!!! NOT ALL DATA IS VALID AND GOTS API ERROR
+     */
+    public function createAccount()
+    {
+        exit;
+        $r = $this->apiCall('accounts', [
+            "contact" => [
+                "email" => 'd'.$this->_params['user']->email,
+                "firstName" => $this->_params['user']->billing->full_name ? $this->_params['user']->billing->full_name : $this->_params['user']->name,
+                "lastName" => "Customer"
+            ],
+            "language"=>"en",             //ISO valid language code
+            "country" => $this->_params['user']->billing->country,            
+            "lookup" => [
+               "custom" => $this->_params['user']->id,
+            ],
+            ]);
+        $this->addLog('Account creation :' . json_encode($r));
+        return isset($r->account) ? $r->account : '';
+    }
+    
+    public function getAccountByEmail($email)
+    {
+        $id = false;
+        $r = $this->apiCall('accounts?email='.$email);
+        if (!empty($r->accounts)) {
+            $id = $r->accounts[0]->account;
+            $this->addLog('E-mail "'.$email.'" was found. ID:' . $id);
+        } else {
+            $this->addLog(json_encode($r));
+        }
+        
+        return $id;
+    }
+    
+    public function getSession($payload)
+    {
+        $r = $this->apiCall('sessions', $payload);
+        $this->addLog('Get session :' . json_encode($r));
+        return empty($r->id) ? '' : $r->id;
+    }    
     
     protected function afterConfirm($params) {}
     
@@ -236,7 +285,6 @@ class FastSpring extends \frontend\components\CPayment
         //subscription.charge.completed
         $r = $this->apiCall($path);
         
-        print_r((array) $r);
         return $r;
     }
     
@@ -278,9 +326,9 @@ class FastSpring extends \frontend\components\CPayment
 		return $url;
 	}
     
-    public function getHTML()
+    public function getPayload()
     {
-        $json_payload = json_encode([
+        return [
             "accountCustomKey" => $this->_params['user']->id, 
             "contact" => [
                 "email" => $this->_params['user']->email,
@@ -293,17 +341,75 @@ class FastSpring extends \frontend\components\CPayment
                     "trial" => 0,
                     "interval" => "year",
                     "intervalLength" => 1,
-                    "intervalCount" => 0,
-                    "intervalCount" => 0,
+                    //"intervalCount" => 3,
                     "quantityBehavior" => "hide",
                     "quantityDefault" => 1,
-                    "price" => [
-                        "USD" => $this->_total,
-                    ]
+                    "price" => ["USD" => $this->_total,]
                 ]
             ]]
-        ]);
+        ];
+    }
+    
+    public function getPayloadSession($params)
+    {
+        return [
+            "account" => $params['account'], 
+            "items" => [[
+                "product" => "marketing-year-subscription",
+                "pricing" => [
+                    "trial" => 0,
+                    "interval" => "year",
+                    "intervalLength" => 1,
+                    //"intervalCount" => 3,
+                    "quantityBehavior" => "hide",
+                    "quantityDefault" => 1,
+                    "price" => ["USD" => $this->_total,]
+                ]
+            ]]
+        ];
+    }    
 
+    public function getSessionHtml()
+    {
+        $accid = $this->getAccountByEmail('d'.$this->_params['user']->email);
+        $accid = $accid ? $accid : $this->createAccount();
+        
+        $payload = $this->getPayloadSession(['account' => $accid]);
+        $session = $this->getSession($payload);
+        return '
+        <html>
+        <head>
+        <script type="text/javascript">
+            function fastSpringResult(obj) { 
+                if (null === obj) {
+                    location.replace("'.Url::to(['checkout/fail']).'");
+                } else {
+                    location.replace("'.Url::to(['checkout/payment-result']).'?payment=FastSpring&order="+obj.id);
+                }
+            };
+        </script>        
+        <script id="fsc-api" src="https://d1f8f9xcsvx3ha.cloudfront.net/sbl/0.8.2/fastspring-builder.min.js" '
+                .'data-storefront="nmsystems.'.($this->_params['TEST_MODE'] ? 'test.' : '').'onfastspring.com/popup-nmsystems" '
+                . 'data-debug="'.($this->_params['DEBUG'] ? 'true' : 'false').'" '
+                . 'data-popup-closed="fastSpringResult" '
+                . 'data-access-key="'.$this->_params['ACCESS_KEY'].'"></script>
+                   
+        </head>
+        <body>
+        <script type="text/javascript">
+        fastspring.builder.checkout("'.$session.'");
+        </script>
+        </body>
+        </html>
+        ';
+    }
+    
+    public function getHTML()
+    {
+        //return $this->getSessionHtml();
+        //exit;
+        
+        $json_payload = json_encode($this->getPayload());
 
         $aes_key = openssl_random_pseudo_bytes(16);
         $cipher_text = openssl_encrypt($json_payload, 'AES-128-ECB', $aes_key, OPENSSL_RAW_DATA); //, $iv);
@@ -336,7 +442,7 @@ class FastSpring extends \frontend\components\CPayment
                 }
             };
         </script>        
-        <script id="fsc-api" src="https://d1f8f9xcsvx3ha.cloudfront.net/sbl/0.7.9/fastspring-builder.min.js" '
+        <script id="fsc-api" src="https://d1f8f9xcsvx3ha.cloudfront.net/sbl/0.8.2/fastspring-builder.min.js" '
                 .'data-storefront="nmsystems.'.($this->_params['TEST_MODE'] ? 'test.' : '').'onfastspring.com/popup-nmsystems" '
                 . 'data-debug="'.($this->_params['DEBUG'] ? 'true' : 'false').'" '
                 . 'data-popup-closed="fastSpringResult" '
