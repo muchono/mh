@@ -96,6 +96,14 @@ AppAsset::register($this);
           <div class="user-pane__drop js-toggle" data-toggle="user-pane__drop--open">
             <span class="up__btn">My Account</span>
             <ul class="drop-list">
+              <?php 
+              if ($this->params['active_user'] && $this->params['active_user']->affiliate){?>
+              <li class="drop-list__item">
+                <a href="<?=Url::to(['account/affiliate/']);?>" class="drop-list__link">
+                
+                Affiliate Information</a>
+              </li>
+              <?php }?>
               <li class="drop-list__item">
                 <a href="<?=Url::to(['account/']);?>" class="drop-list__link">
                 <i class="fa fa-shopping-basket" aria-hidden="true"></i>

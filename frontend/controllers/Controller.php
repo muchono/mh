@@ -21,7 +21,8 @@ class Controller extends \yii\web\Controller
         $this->view->params['head_offer'] = Yii::$app->session->get('head_offer_closed') ? null : Discount::findShowable()->latest();
         $this->view->params['offer_menu'] = Discount::findShowable()->count();
         $this->view->params['cart_items'] = !Yii::$app->user->isGuest ? Cart::getCountByUser(Yii::$app->user->id) : 0;
-            
+        $this->view->params['active_user'] = null; 
+        
         $this->actionSignup();
         $this->actionLogin();
         $this->actionForgot();
@@ -30,6 +31,8 @@ class Controller extends \yii\web\Controller
             $user = User::findOne(Yii::$app->user->id);
             $user->active_at = time();
             $user->save();
+            
+            $this->view->params['active_user'] = $user;
         }
         
         $this->view->registerJsFile('https://www.googletagmanager.com/gtag/js?id=UA-146531295-1', ['position' => View::POS_HEAD]);

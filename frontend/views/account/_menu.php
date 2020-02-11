@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Url;
 ?>
+<h2 class="title-14">My Account</h2>
 <ul class="account-list">
         <li class="account-list__item <?=($this->context->action->id == 'index' ? 'account-list__item--active' : '')?>">
           <a href="<?=Url::to(['account/index']);?>" class="account-btn">

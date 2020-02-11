@@ -1,5 +1,4 @@
 <section class="simple-page sm">
-      <h2 class="title-14">My Account</h2>
           <?= $this->render('_menu', [
     ]) ?>
       <h2 class="title-14">Order History:</h2>

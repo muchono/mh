@@ -11,6 +11,7 @@ use common\models\OrderToProduct;
 use common\models\Order;
 use common\models\User;
 use common\models\UserBilling;
+use common\models\Product;
 
 use frontend\models\ChangePasswordForm;
 
@@ -75,8 +76,12 @@ class AccountController extends \frontend\controllers\Controller
      */
     public function actionAffiliate()
     {
+        $user = User::findOne(Yii::$app->user->id);
+        
         return $this->render('affiliate', array(
             //'orderedProducts' => $orderedProducts,
+            'products' => Product::findActive()->all(),
+            'user' => $user,
         ));
     }    
     

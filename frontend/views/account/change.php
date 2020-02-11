@@ -7,7 +7,6 @@ use yii\helpers\Url;
 
 ?>
 <section class="simple-page sm">
-      <h2 class="title-14">My Account</h2>
           <?= $this->render('_menu', [
     ]) ?>      
       

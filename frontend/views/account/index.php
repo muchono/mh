@@ -4,7 +4,6 @@ use yii\helpers\Url;
 use common\models\OrderToProduct;
 ?>
 <section class="simple-page sm">
-      <h2 class="title-14">My Account</h2>
     <?= $this->render('_menu', [
     ]) ?>
       <h2 class="title-14">My Products:</h2>
