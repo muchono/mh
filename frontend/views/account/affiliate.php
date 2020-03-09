@@ -42,7 +42,7 @@ $am = floor($user->userAffiliate->getUsersPurchasedTotal() * $user->affiliate_co
              <td class="ot__product"><a href="<?=Url::to(['site/product','link'=>$p->page->link])?>" target="_blank"><?=$p->title?></a></td>
                 <td class="ot__expires"><?=Url::to(['site/product','link'=>$p->page->link], true).'?'.$user->userAffiliate->getLink()?></td>
            </tr> 
-    <?}?>     
+    <?php }?>     
         </tbody>
       </table>    
       

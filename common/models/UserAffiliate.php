@@ -175,7 +175,8 @@ class UserAffiliate
      */
     public function getPaymentsAmount()
     {
-        return UserAffiliatePay::find()->where(['user_id' => $this->user->id])->sum('total');
+        $p = UserAffiliatePay::find()->where(['user_id' => $this->user->id])->sum('total');
+        return $p ? $p : 0;
     }    
     
     /**
