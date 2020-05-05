@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => $searchModel::$statuses,
             ],
+/*                        
             [
                 'attribute'=>'affiliate',
                 'value' => function ($data) {
@@ -40,6 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => $searchModel::$statuses,
             ],                        
+ * 
+ */
             [
                 'attribute' => 'created_at',
                 'filter' => DatePicker::widget([

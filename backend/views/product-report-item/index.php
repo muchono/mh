@@ -16,10 +16,12 @@ $this->title = 'Reports';
     <h1><?= Html::encode($this->title) ?></h1>
     
     <?php 
-    echo Tabs::widget([
+    echo $this->render('_error_report', ['dataProvider' => $dataProvider]);
+/*    
+    Tabs::widget([
         'items' => [
             [
-                'label' => 'Errors Reporting',
+                'label' => 'Reports List',
                 'content' => $this->render('_error_report', ['dataProvider' => $dataProvider]),
                 'active' => true
             ],
@@ -29,5 +31,7 @@ $this->title = 'Reports';
             ]
         ],
     ]);
+ * 
+ */
     ?>      
 </div>
