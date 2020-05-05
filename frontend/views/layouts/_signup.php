@@ -88,6 +88,9 @@ use yii\web\View;
         
         <input type="hidden" name="register" value="new-user"/>
     </div>
+    <div style="margin-left:110px">
+        <div class="loader hide"></div>
+    </div>
     <button class="btn-5">Register</button>
     <p class="aut-text">By clicking Register you agree <br>to our <a href="<?=Url::to(['site/terms']);?>">terms and conditions</a></p>
     <?php ActiveForm::end(); 
@@ -98,7 +101,12 @@ $this->registerJs(
     "$('#signupform-name').change(function(event){"
         . "$('#captcha_reg_block').show(); "
         . "$('#signupform-verifycode').click(); "
-        . "});"
+        . "});
+    $('#signup-popup').on('pjax:beforeSend', function() {
+        $('#signup-popup button').hide();
+        $('.loader').show();
+    });
+    "
 ,
     View::POS_READY,
     'register-handler'

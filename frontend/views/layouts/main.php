@@ -314,11 +314,31 @@ AppAsset::register($this);
     );  
   }
   ?>
+
+<?php 
+/* Keep user alive */
+if (!Yii::$app->user->isGuest){?>
 <script>
+let active = 0
 setInterval(function(){
+  if (active) {
     $.get( "<?=Url::to(['site/some'])?>", function(data) {});
-}, 300000);
-</script>  
+    active = 0;
+  } else {
+      location.replace("<?=Url::to(['account/logout'])?>");
+  }
+}, 5 * 1000 * 60 /* 5 minutes */);
+$(document).on('scroll', function(){
+  active = 1;
+});
+$(document).on('mousemove', function(){
+  active = 1;
+});
+$(window).on('beforeunload', function(){
+    $.get( "<?=Url::to(['account/logout'])?>", function(data) {});
+});
+</script>
+<?php }?>
 </body>
 </html>
 <?php $this->endPage() ?>

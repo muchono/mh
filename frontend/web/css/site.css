@@ -6098,6 +6098,15 @@ input[type="color"].search-questions__input, input[type="date"].search-questions
     animation: spin 1s linear infinite;
 }
 
+@keyframes spin {
+	0% {
+		transform: rotateZ(0);
+	}
+	100% {
+		transform: rotateZ(360deg);
+	}
+}
+
 .loader_container {
 	text-align: center;
 	width: 100%;

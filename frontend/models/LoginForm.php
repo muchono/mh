@@ -61,7 +61,7 @@ class LoginForm extends Model
                 $this->addError($attribute, 'Account deactivated.');
             }elseif($user->active_at 
                     && ip2long(Yii::$app->request->userIP) != $user->active_ip
-                    && (time() - $user->active_at) < 24 * 3600 /* 24 hours */) {
+                    && (time() - $user->active_at) < 1200 /* 20 minutes */) {
                 $user->active = 0;
                 $user->blocked = time();
                 $user->block_amount++;
