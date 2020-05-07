@@ -284,9 +284,6 @@ $(".content").on('scroll', function(){
 $(document).on('mousemove', function(){
   active = 1;
 });
-$(window).on('beforeunload', function(){
-  $.get( "<?=Url::to(['account/logout'])?>", function(data) {});
-});
 </script>
 <?php }?>  
 </body>
