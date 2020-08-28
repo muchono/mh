@@ -258,7 +258,11 @@ class SiteController extends \frontend\controllers\Controller
                 && $model = Product::findOne(Yii::$app->request->get('product_id'))) {
                     $review = new ProductReview(['scenario' => 'front']);
                     
-                    if ($review->load(Yii::$app->request->post()) && $review->save()) {
+                    if ($review->load(Yii::$app->request->post())) {
+                        $user = User::findByEmail($review->email);
+                        if ($user && count($user->orders) > 0) {
+                            $review->save();
+                        }
                         return $this->redirect(['site/product', 'product_id' => $model->id, 'review_added'=>'1', '#' => 'under_post']);
                     }
                     $this->view->title = $model->page->title;
