@@ -67,6 +67,7 @@ class ProductReviewSearch extends ProductReview
         $query->andFilterWhere([
             'active' => $this->active,
             'raiting' => $this->raiting,
+            'product_id' => $this->product->id,
         ]);
 
         $query->andFilterWhere(['like', 
