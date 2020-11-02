@@ -56,6 +56,7 @@ class Webmoney extends \frontend\components\CPayment
     public function exitByError($string, $step, $id) 
     {
         $this->addLog($string . ", step: $step, payment_no: ". $id);
+        exit;
     }
 
     
