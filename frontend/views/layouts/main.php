@@ -97,7 +97,7 @@ AppAsset::register($this);
             <span class="up__btn">My Account</span>
             <ul class="drop-list">
               <?php 
-              if ($this->params['active_user'] && $this->params['active_user']->affiliate){?>
+              if (0 && $this->params['active_user'] && $this->params['active_user']->affiliate){?>
               <li class="drop-list__item">
                 <a href="<?=Url::to(['account/affiliate/']);?>" class="drop-list__link">
                 
